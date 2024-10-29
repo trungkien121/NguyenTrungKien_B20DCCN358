@@ -166,7 +166,7 @@ CREATE TABLE hoa_don (
     don_hang_id INT,
     khach_hang_id INT,
     nguoi_dung_id INT,
-    ngay_lap DATE DEFAULT CURRENT_DATE,
+    ngay_lap DATE DEFAULT NOW(),
     tong_tien DECIMAL(10, 2),
     tien_thue DECIMAL(10, 2),
     giam_gia DECIMAL(10, 2),
@@ -254,9 +254,9 @@ CREATE TABLE chi_tiet_khuyen_mai (
 
 
 -- Bảng phan_quyen
-CREATE TABLE phan_quyen (
+CREATE TABLE nhom_quyen (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    ten_vai_tro VARCHAR(255) NOT NULL,
+    ten_nhom_quyen VARCHAR(255) NOT NULL,
     mo_ta TEXT
 );
 
@@ -264,9 +264,9 @@ CREATE TABLE phan_quyen (
 CREATE TABLE nguoi_dung_vai_tro (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nguoi_dung_id INT,
-    vai_tro_id INT,
+    nhom_quyen_id INT,
     FOREIGN KEY (nguoi_dung_id) REFERENCES nguoi_dung(id),
-    FOREIGN KEY (vai_tro_id) REFERENCES phan_quyen(id)
+    FOREIGN KEY (nhom_quyen_id) REFERENCES nhom_quyen(id)
 );
 
 -- Bảng chuc_nang
