@@ -277,10 +277,10 @@ CREATE TABLE chuc_nang (
 );
 
 -- Bảng phan_quyen_chuc_nang
-CREATE TABLE phan_quyen_chuc_nang (
+CREATE TABLE nhom_quyen_chuc_nang (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    phan_quyen_id INT,
+    nhom_quyen_id INT,
     chuc_nang_id INT,
-    FOREIGN KEY (phan_quyen_id) REFERENCES phan_quyen(id),
+    FOREIGN KEY (nhom_quyen_id) REFERENCES nhom_quyen(id),
     FOREIGN KEY (chuc_nang_id) REFERENCES chuc_nang(id)
 );
