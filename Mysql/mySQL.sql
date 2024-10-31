@@ -260,8 +260,8 @@ CREATE TABLE nhom_quyen (
     mo_ta TEXT
 );
 
--- Bảng chi_tiet_nguoi_dung
-CREATE TABLE chi_tiet_nguoi_dung (
+-- Bảng chi_tiet_nhom_quyen
+CREATE TABLE chi_tiet_nhom_quyen(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nguoi_dung_id INT,
     nhom_quyen_id INT,
