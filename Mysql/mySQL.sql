@@ -260,8 +260,8 @@ CREATE TABLE nhom_quyen (
     mo_ta TEXT
 );
 
--- Bảng nguoi_dung_vai_tro
-CREATE TABLE nguoi_dung_vai_tro (
+-- Bảng chi_tiet_nguoi_dung
+CREATE TABLE chi_tiet_nguoi_dung (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nguoi_dung_id INT,
     nhom_quyen_id INT,
@@ -276,8 +276,8 @@ CREATE TABLE chuc_nang (
     mo_ta TEXT
 );
 
--- Bảng phan_quyen_chuc_nang
-CREATE TABLE nhom_quyen_chuc_nang (
+-- Bảng chi_tiet_chuc_nang
+CREATE TABLE chi_tiet_chuc_nang (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nhom_quyen_id INT,
     chuc_nang_id INT,
