@@ -1,0 +1,149 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Product</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+
+      <!-- search -->
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header border-0 align-items-center justify-content-end"
+            >
+              <div
+                class="align-items-center p-3 justify-content-between d-flex"
+              >
+                <div class="d-flex flex-column col-xl-2 pl-2">
+                  <label for="statusDropdown"> Status</label>
+                  <app-select-common
+                    [optionValue]="'value'"
+                    [options]="statusOptions"
+                    [isOptionSelectType]="true"
+                    (selectionChange)="onStatusChange($event)"
+                  ></app-select-common>
+                </div>
+
+                <div class="d-flex flex-column col-xl-2 pl-2">
+                  <label for="statusDropdown"> Visibility</label>
+                  <app-select-common
+                    [optionValue]="'value'"
+                    [options]="visibilityOptions"
+                    [isOptionSelectType]="true"
+                    (selectionChange)="onVisibilityChange($event)"
+                  ></app-select-common>
+                </div>
+
+                <div class="d-flex flex-column col-xl-2 pl-2">
+                  <label for="visibilityDropdown"> Category</label>
+                  <app-select-common
+                    [optionValue]="'value'"
+                    [options]="categoryOption"
+                    [isOptionSelectType]="true"
+                    (selectionChange)="onCategoryChange($event)"
+                  ></app-select-common>
+                </div>
+
+                <div class="d-flex flex-column col-xl-3">
+                  <label for="titleDropdown">Title </label>
+                  <input
+                    type="text"
+                    pInputText
+                    [(ngModel)]="modelSearch.keySearch"
+                  />
+                </div>
+
+                <div class="d-flex align-items-end col-xl-2">
+                  <button
+                    type="button"
+                    class="btn btn-info shadow-none mt-3"
+                    (click)="search()"
+                  >
+                    <i class="ri-search-line align-middle me-1"></i>
+                    Search
+                  </button>
+                </div>
+              </div>
+
+              <!-- <div class="col-auto mb-3"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- content   -->
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header border-0 align-items-center justify-content-end"
+            >
+              <div
+                class="align-items-center p-3 justify-content-between d-flex"
+              >
+                <div class="flex-shrink-0">
+                  <div class="text-muted">
+                    <span class="fw-semibold">Total: </span>
+                    <span class="fw-semibold">{{ products.length }}</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-success shadow-none"
+                  [routerLink]="['/sys/product-create']"
+                >
+                  <i class="ri-add-circle-line align-middle me-1"></i>
+                  Add
+                </button>
+              </div>
+              <div class="col-auto mb-3"></div>
+
+              <div class="col-auto">
+                <p-table
+                  [value]="products"
+                  [rowHover]="true"
+                  dataKey="id"
+                  [showCurrentPageReport]="true"
+                  [rows]="10"
+                  [alwaysShowPaginator]="true"
+                  [paginator]="true"
+                  currentPageReportTemplate=""
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>Code</th>
+                      <th>Name</th>
+                      <th>Category</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-product
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr [style]="{ cursor: 'pointer' }">
+                      <td>{{ product.code }}</td>
+                      <td>{{ product.name }}</td>
+                      <td>{{ product.category }}</td>
+                      <td>{{ product.quantity }}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

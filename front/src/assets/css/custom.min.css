@@ -1,0 +1,14 @@
+/*# sourceMappingURL=custom.min.css.map */
+
+body.fullscreen-enable::backdrop {
+  background-color: rgba(242, 242, 247);
+}
+
+.language-setting-item {
+  display: none;
+}
+
+/* Chỉ hiển thị nút có class `active` */
+.language-setting-item.active {
+  display: inline-block;
+}
