@@ -120,10 +120,30 @@
                 >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th>Code</th>
-                      <th>Name</th>
-                      <th>Category</th>
-                      <th>Quantity</th>
+                      <th>ID</th>
+                      <th>Tên Thuốc</th>
+                      <th>Mã Thuốc</th>
+                      <th>Mã Vạch</th>
+                      <th>Loại Thuốc ID</th>
+                      <th>Nhà Sản Xuất ID</th>
+                      <th>Danh Mục Thuốc ID</th>
+                      <th>Đơn Vị</th>
+                      <th>Che Bao</th>
+                      <th>Quy Cách</th>
+                      <th>Số Đăng Ký</th>
+                      <th>Hạn Sử Dụng</th>
+                      <th>Giá Nhập</th>
+                      <th>Giá Bán</th>
+                      <th>Số Lượng Tồn</th>
+                      <th>Ngưỡng Cảnh Báo</th>
+                      <th>Hình Ảnh</th>
+                      <th>Công Dụng</th>
+                      <th>Chỉ Định</th>
+                      <th>Chống Chỉ Định</th>
+                      <th>Hướng Dẫn Sử Dụng</th>
+                      <th>Mô Tả Ngắn</th>
+                      <th>Trạng Thái</th>
+                      <th>Ghi Chú</th>
                     </tr>
                   </ng-template>
                   <ng-template
@@ -131,12 +151,32 @@
                     let-product
                     let-rowIndex="rowIndex"
                   >
-                    <tr [style]="{ cursor: 'pointer' }">
-                      <td>{{ product.code }}</td>
-                      <td>{{ product.name }}</td>
-                      <td>{{ product.category }}</td>
-                      <td>{{ product.quantity }}</td>
-                    </tr>
+                  <tr *ngFor="let product of products" [style]="{ cursor: 'pointer' }">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.tenThuoc }}</td>
+                    <td>{{ product.maThuoc }}</td>
+                    <td>{{ product.maVach }}</td>
+                    <td>{{ product.loaiThuocId }}</td>
+                    <td>{{ product.nhaSanXuatId }}</td>
+                    <td>{{ product.danhMucThuocId }}</td>
+                    <td>{{ product.donVi }}</td>
+                    <td>{{ product.cheBao }}</td>
+                    <td>{{ product.quyCach }}</td>
+                    <td>{{ product.soDangKy }}</td>
+                    <td>{{ product.hanSuDung | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ product.giaNhap }}</td>
+                    <td>{{ product.giaBan }}</td>
+                    <td>{{ product.soLuongTon }}</td>
+                    <td>{{ product.nguongCanhBao }}</td>
+                    <td><img [src]="product.hinhAnh" [alt]="product.tenThuoc" width="50"></td>
+                    <td>{{ product.congDung }}</td>
+                    <td>{{ product.chiDinh }}</td>
+                    <td>{{ product.chongChiDinh }}</td>
+                    <td>{{ product.huongDanSuDung }}</td>
+                    <td>{{ product.moTaNgan }}</td>
+                    <td>{{ product.trangThai ? 'Có' : 'Không' }}</td>
+                    <td>{{ product.ghiChu }}</td>
+                  </tr>
                   </ng-template>
                 </p-table>
               </div>

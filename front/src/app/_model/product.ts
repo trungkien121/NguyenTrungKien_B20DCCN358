@@ -1,12 +1,28 @@
+import { WeekDay } from "@angular/common";
+
 export class Product {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-  quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
+  id?: String;
+  tenThuoc?: String;
+  maThuoc?: String;
+  maVach?: String;
+  loaiThuocId?: String;
+  nhaSanXuatId?: String;
+  danhMucThuocId?: String;
+  donVi?: String;
+  cheBao?: String;
+  quyCach?: String;
+  soDangKy?: String;
+  hanSuDung?: Date;
+  giaNhap?: number;
+  giaBan?: number;
+  soLuongTon?: number;
+  nguongCanhBao?: number;
+  hinhAnh?: String;
+  congDung?: String;
+  chiDinh?: String;
+  chongChiDinh?: String;
+  huongDanSuDung?: String;
+  moTaNgan?: String;
+  trangThai?: boolean;
+  ghiChu?: String;
 }

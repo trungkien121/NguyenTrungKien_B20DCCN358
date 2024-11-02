@@ -7,16 +7,7 @@
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Create Product</h4>
-
-            <div class="page-title-right">
-              <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item">
-                  <a href="javascript: void(0);">Ecommerce</a>
-                </li>
-                <li class="breadcrumb-item active">Create Product</li>
-              </ol>
-            </div>
+            <h4 class="mb-sm-0">Thêm Sản Phẩm</h4>
           </div>
         </div>
       </div>
@@ -33,65 +24,206 @@
             <div class="card">
               <div class="card-body">
                 <div class="mb-3">
-                  <label class="form-label" for="product-title-input"
-                    >Product Title</label
-                  >
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="formAction"
-                    name="formAction"
-                    value="add"
-                  />
-                  <input
-                    type="text"
-                    class="form-control d-none"
-                    id="product-id-input"
-                  />
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="product-title-input"
-                    value=""
-                    placeholder="Enter product title"
-                    required
-                  />
+                  <label class="form-label" for="product-id-input">ID</label>
+                  <input type="text" class="form-control" id="product-id-input" placeholder="Enter product ID" required />
                   <div class="invalid-feedback">
-                    Please Enter a product title.
+                    Please enter a product ID.
                   </div>
                 </div>
-                <div>
-                  <label>Product Description</label>
-
-                  <div id="ckeditor-classic">
-                    <p>
-                      Tommy Hilfiger men striped pink sweatshirt. Crafted with
-                      cotton. Material composition is 100% organic cotton. This
-                      is one of the world’s leading designer lifestyle brands
-                      and is internationally recognized for celebrating the
-                      essence of classic American cool style, featuring preppy
-                      with a twist designs.
-                    </p>
-                    <ul>
-                      <li>Full Sleeve</li>
-                      <li>Cotton</li>
-                      <li>All Sizes available</li>
-                      <li>4 Different Color</li>
-                    </ul>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-title-input">Tên Thuốc</label>
+                  <input type="text" class="form-control" id="product-title-input" placeholder="Enter product title" required />
+                  <div class="invalid-feedback">
+                    Please enter a product title.
                   </div>
                 </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-code-input">Mã Thuốc</label>
+                  <input type="text" class="form-control" id="product-code-input" placeholder="Enter product code" required />
+                  <div class="invalid-feedback">
+                    Please enter a product code.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-barcode-input">Mã Vạch</label>
+                  <input type="text" class="form-control" id="product-barcode-input" placeholder="Enter barcode" required />
+                  <div class="invalid-feedback">
+                    Please enter a barcode.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-type-input">Loại Thuốc ID</label>
+                  <input type="text" class="form-control" id="product-type-input" placeholder="Enter product type ID" required />
+                  <div class="invalid-feedback">
+                    Please enter a product type ID.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-manufacturer-input">Nhà Sản Xuất ID</label>
+                  <input type="text" class="form-control" id="product-manufacturer-input" placeholder="Enter manufacturer ID" required />
+                  <div class="invalid-feedback">
+                    Please enter a manufacturer ID.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-category-input">Danh Mục Thuốc ID</label>
+                  <input type="text" class="form-control" id="product-category-input" placeholder="Enter category ID" required />
+                  <div class="invalid-feedback">
+                    Please enter a category ID.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-unit-input">Đơn Vị</label>
+                  <input type="text" class="form-control" id="product-unit-input" placeholder="Enter unit" required />
+                  <div class="invalid-feedback">
+                    Please enter a unit.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-packaging-input">Chế Bào</label>
+                  <input type="text" class="form-control" id="product-packaging-input" placeholder="Enter packaging" required />
+                  <div class="invalid-feedback">
+                    Please enter packaging.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-specification-input">Quy Cách</label>
+                  <input type="text" class="form-control" id="product-specification-input" placeholder="Enter specification" required />
+                  <div class="invalid-feedback">
+                    Please enter a specification.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-registration-input">Số Đăng Ký</label>
+                  <input type="text" class="form-control" id="product-registration-input" placeholder="Enter registration number" required />
+                  <div class="invalid-feedback">
+                    Please enter a registration number.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-expiration-input">Hạn Sử Dụng</label>
+                  <input type="date" class="form-control" id="product-expiration-input" required />
+                  <div class="invalid-feedback">
+                    Please enter an expiration date.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-cost-input">Giá Nhập</label>
+                  <input type="number" class="form-control" id="product-cost-input" placeholder="Enter cost price" required />
+                  <div class="invalid-feedback">
+                    Please enter a cost price.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-price-input">Giá Bán</label>
+                  <input type="number" class="form-control" id="product-price-input" placeholder="Enter selling price" required />
+                  <div class="invalid-feedback">
+                    Please enter a selling price.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-quantity-input">Số Lượng Tồn</label>
+                  <input type="number" class="form-control" id="product-quantity-input" placeholder="Enter stock quantity" required />
+                  <div class="invalid-feedback">
+                    Please enter stock quantity.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-warning-input">Ngưỡng Cảnh Báo</label>
+                  <input type="number" class="form-control" id="product-warning-input" placeholder="Enter warning threshold" required />
+                  <div class="invalid-feedback">
+                    Please enter a warning threshold.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-function-input">Công Dụng</label>
+                  <input type="text" class="form-control" id="product-function-input" placeholder="Enter function" required />
+                  <div class="invalid-feedback">
+                    Please enter a function.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-indication-input">Chỉ Định</label>
+                  <input type="text" class="form-control" id="product-indication-input" placeholder="Enter indications" required />
+                  <div class="invalid-feedback">
+                    Please enter indications.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-contraindication-input">Chống Chỉ Định</label>
+                  <input type="text" class="form-control" id="product-contraindication-input" placeholder="Enter contraindications" required />
+                  <div class="invalid-feedback">
+                    Please enter contraindications.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-usage-input">Hướng Dẫn Sử Dụng</label>
+                  <input type="text" class="form-control" id="product-usage-input" placeholder="Enter usage instructions" required />
+                  <div class="invalid-feedback">
+                    Please enter usage instructions.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-short-description-input">Mô Tả Ngắn</label>
+                  <input type="text" class="form-control" id="product-short-description-input" placeholder="Enter short description" required />
+                  <div class="invalid-feedback">
+                    Please enter a short description.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-status-input">Trạng Thái</label>
+                  <select class="form-select" id="product-status-input" required>
+                    <option value="">Choose status</option>
+                    <option value="true">Có</option>
+                    <option value="false">Không</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a status.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-note-input">Ghi Chú</label>
+                  <input type="text" class="form-control" id="product-note-input" placeholder="Enter notes" required />
+                  <div class="invalid-feedback">
+                    Please enter notes.
+                  </div>
+                </div>
+                
+                
               </div>
             </div>
             <!-- end card -->
 
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title mb-0">Product Gallery</h5>
+                <h5 class="card-title mb-0">Hình ảnh</h5>
               </div>
               <div class="card-body">
                 <div class="mb-4">
-                  <h5 class="fs-14 mb-1">Product Image</h5>
-                  <p class="text-muted">Add Product main Image.</p>
+                  <h5 class="fs-14 mb-1">Hình ảnh sản phẩm</h5>
+                  <p class="text-muted">Thêm hình ảnh sản phẩm vào đây.</p>
                   <div class="text-center">
                     <div class="position-relative d-inline-block">
                       <div
@@ -133,8 +265,6 @@
                   </div>
                 </div>
                 <div>
-                  <h5 class="fs-14 mb-1">Product Gallery</h5>
-                  <p class="text-muted">Add Product Gallery Images.</p>
 
                   <div class="dropzone">
                     <div class="fallback">
