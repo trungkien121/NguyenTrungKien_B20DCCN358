@@ -33,7 +33,34 @@
                 
                 <div class="mb-3">
                   <label class="form-label" for="product-title-input">Tên Thuốc</label>
-                  <input type="text" class="form-control" id="product-title-input" placeholder="Enter product title" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-title-input"
+                    placeholder="Enter product title"
+                    required
+                    [(ngModel)]="product.tenThuoc"
+                    name="tenThuoc"
+                    value="product.tenThuoc"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a product title.
+                  </div>
+                </div>
+                
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-title-input">Tên Thuốc</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-title-input"
+                    placeholder="Enter product title"
+                    required
+                    [(ngModel)]="product.tenThuoc"
+                    name="tenThuoc"
+                    value="{{ product.tenThuoc }}"
+                  />
                   <div class="invalid-feedback">
                     Please enter a product title.
                   </div>
@@ -41,7 +68,16 @@
                 
                 <div class="mb-3">
                   <label class="form-label" for="product-code-input">Mã Thuốc</label>
-                  <input type="text" class="form-control" id="product-code-input" placeholder="Enter product code" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-code-input"
+                    placeholder="Enter product code"
+                    required
+                    [(ngModel)]="product.maThuoc"
+                    name="maThuoc"
+                    value="{{ product.maThuoc }}"
+                  />
                   <div class="invalid-feedback">
                     Please enter a product code.
                   </div>
@@ -49,309 +85,100 @@
                 
                 <div class="mb-3">
                   <label class="form-label" for="product-barcode-input">Mã Vạch</label>
-                  <input type="text" class="form-control" id="product-barcode-input" placeholder="Enter barcode" required />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-barcode-input"
+                    placeholder="Enter barcode"
+                    required
+                    [(ngModel)]="product.maVach"
+                    name="maVach"
+                    value="{{ product.maVach }}"
+                  />
                   <div class="invalid-feedback">
                     Please enter a barcode.
                   </div>
                 </div>
                 
                 <div class="mb-3">
-                  <label class="form-label" for="product-type-input">Loại Thuốc ID</label>
-                  <input type="text" class="form-control" id="product-type-input" placeholder="Enter product type ID" required />
-                  <div class="invalid-feedback">
-                    Please enter a product type ID.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-manufacturer-input">Nhà Sản Xuất ID</label>
-                  <input type="text" class="form-control" id="product-manufacturer-input" placeholder="Enter manufacturer ID" required />
-                  <div class="invalid-feedback">
-                    Please enter a manufacturer ID.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-category-input">Danh Mục Thuốc ID</label>
-                  <input type="text" class="form-control" id="product-category-input" placeholder="Enter category ID" required />
-                  <div class="invalid-feedback">
-                    Please enter a category ID.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-unit-input">Đơn Vị</label>
-                  <input type="text" class="form-control" id="product-unit-input" placeholder="Enter unit" required />
-                  <div class="invalid-feedback">
-                    Please enter a unit.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-packaging-input">Chế Bào</label>
-                  <input type="text" class="form-control" id="product-packaging-input" placeholder="Enter packaging" required />
-                  <div class="invalid-feedback">
-                    Please enter packaging.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-specification-input">Quy Cách</label>
-                  <input type="text" class="form-control" id="product-specification-input" placeholder="Enter specification" required />
-                  <div class="invalid-feedback">
-                    Please enter a specification.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-registration-input">Số Đăng Ký</label>
-                  <input type="text" class="form-control" id="product-registration-input" placeholder="Enter registration number" required />
-                  <div class="invalid-feedback">
-                    Please enter a registration number.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-expiration-input">Hạn Sử Dụng</label>
-                  <input type="date" class="form-control" id="product-expiration-input" required />
-                  <div class="invalid-feedback">
-                    Please enter an expiration date.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-cost-input">Giá Nhập</label>
-                  <input type="number" class="form-control" id="product-cost-input" placeholder="Enter cost price" required />
-                  <div class="invalid-feedback">
-                    Please enter a cost price.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-price-input">Giá Bán</label>
-                  <input type="number" class="form-control" id="product-price-input" placeholder="Enter selling price" required />
-                  <div class="invalid-feedback">
-                    Please enter a selling price.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-quantity-input">Số Lượng Tồn</label>
-                  <input type="number" class="form-control" id="product-quantity-input" placeholder="Enter stock quantity" required />
-                  <div class="invalid-feedback">
-                    Please enter stock quantity.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-warning-input">Ngưỡng Cảnh Báo</label>
-                  <input type="number" class="form-control" id="product-warning-input" placeholder="Enter warning threshold" required />
-                  <div class="invalid-feedback">
-                    Please enter a warning threshold.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-function-input">Công Dụng</label>
-                  <input type="text" class="form-control" id="product-function-input" placeholder="Enter function" required />
-                  <div class="invalid-feedback">
-                    Please enter a function.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-indication-input">Chỉ Định</label>
-                  <input type="text" class="form-control" id="product-indication-input" placeholder="Enter indications" required />
-                  <div class="invalid-feedback">
-                    Please enter indications.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-contraindication-input">Chống Chỉ Định</label>
-                  <input type="text" class="form-control" id="product-contraindication-input" placeholder="Enter contraindications" required />
-                  <div class="invalid-feedback">
-                    Please enter contraindications.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-usage-input">Hướng Dẫn Sử Dụng</label>
-                  <input type="text" class="form-control" id="product-usage-input" placeholder="Enter usage instructions" required />
-                  <div class="invalid-feedback">
-                    Please enter usage instructions.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-short-description-input">Mô Tả Ngắn</label>
-                  <input type="text" class="form-control" id="product-short-description-input" placeholder="Enter short description" required />
-                  <div class="invalid-feedback">
-                    Please enter a short description.
-                  </div>
-                </div>
-                
-                <div class="mb-3">
-                  <label class="form-label" for="product-status-input">Trạng Thái</label>
-                  <select class="form-select" id="product-status-input" required>
-                    <option value="">Choose status</option>
-                    <option value="true">Có</option>
-                    <option value="false">Không</option>
+                  <label class="form-label" for="product-type-select">Loại Thuốc</label>
+                  <select
+                    class="form-select"
+                    id="product-type-select"
+                    required
+                    [(ngModel)]="product.loaiThuocId"
+                    name="loaiThuocId"
+                    value="{{ product.loaiThuocId }}"
+                  >
+                    <option value="">Chọn loại thuốc</option>
+                    <option value="LT01">Thuốc Giảm Đau</option>
+                    <option value="LT02">Thuốc Kháng Sinh</option>
+                    <option value="LT03">Thuốc Hạ Sốt</option>
+                    <option value="LT04">Thuốc Bổ Sung Vitamin</option>
+                    <option value="LT05">Thuốc Tiêu Hóa</option>
                   </select>
                   <div class="invalid-feedback">
-                    Please select a status.
+                    Vui lòng chọn loại thuốc.
                   </div>
                 </div>
                 
                 <div class="mb-3">
-                  <label class="form-label" for="product-note-input">Ghi Chú</label>
-                  <input type="text" class="form-control" id="product-note-input" placeholder="Enter notes" required />
+                  <label class="form-label" for="product-manufacturer-select">Nhà Sản Xuất</label>
+                  <select
+                    class="form-select"
+                    id="product-manufacturer-select"
+                    required
+                    [(ngModel)]="product.nhaSanXuatId"
+                    name="nhaSanXuatId"
+                    value="{{ product.nhaSanXuatId }}"
+                  >
+                    <option value="">Chọn nhà sản xuất</option>
+                    <option value="NSX01">Công ty Dược A</option>
+                    <option value="NSX02">Công ty Dược B</option>
+                    <option value="NSX03">Công ty Dược C</option>
+                    <option value="NSX04">Công ty Dược D</option>
+                    <option value="NSX05">Công ty Dược E</option>
+                  </select>
                   <div class="invalid-feedback">
-                    Please enter notes.
+                    Vui lòng chọn nhà sản xuất.
                   </div>
                 </div>
                 
+                <div class="mb-3">
+                  <label class="form-label" for="product-category-select">Danh Mục Thuốc</label>
+                  <select
+                    class="form-select"
+                    id="product-category-select"
+                    required
+                    [(ngModel)]="product.danhMucThuocId"
+                    name="danhMucThuocId"
+                    value="{{ product.danhMucThuocId }}"
+                  >
+                    <option value="">Chọn danh mục thuốc</option>
+                    <option value="DM01">Thuốc Giảm Đau</option>
+                    <option value="DM02">Thuốc Kháng Sinh</option>
+                    <option value="DM03">Thuốc Chống Viêm</option>
+                    <option value="DM04">Vitamin và Khoáng Chất</option>
+                    <option value="DM05">Thực Phẩm Chức Năng</option>
+                    <option value="DM06">Thuốc Điều Trị Bệnh</option>
+                    <option value="DM07">Thuốc Hạ Sốt</option>
+                    <option value="DM08">Thuốc Trị Bệnh Ngoài Da</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Vui lòng chọn danh mục thuốc.
+                  </div>
+                </div>
                 
+                                
               </div>
             </div>
             <!-- end card -->
 
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Hình ảnh</h5>
-              </div>
-              <div class="card-body">
-                <div class="mb-4">
-                  <h5 class="fs-14 mb-1">Hình ảnh sản phẩm</h5>
-                  <p class="text-muted">Thêm hình ảnh sản phẩm vào đây.</p>
-                  <div class="text-center">
-                    <div class="position-relative d-inline-block">
-                      <div
-                        class="position-absolute top-100 start-100 translate-middle"
-                      >
-                        <label
-                          for="product-image-input"
-                          class="mb-0"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="right"
-                          title="Select Image"
-                        >
-                          <div class="avatar-xs">
-                            <div
-                              class="avatar-title bg-light border rounded-circle text-muted cursor-pointer"
-                            >
-                              <i class="ri-image-fill"></i>
-                            </div>
-                          </div>
-                        </label>
-                        <input
-                          class="form-control d-none"
-                          value=""
-                          id="product-image-input"
-                          type="file"
-                          accept="image/png, image/gif, image/jpeg"
-                        />
-                      </div>
-                      <div class="avatar-lg">
-                        <div class="avatar-title bg-light rounded">
-                          <img
-                            src="#"
-                            id="product-img"
-                            class="avatar-md h-auto"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div>
-
-                  <div class="dropzone">
-                    <div class="fallback">
-                      <input name="file" type="file" multiple="multiple" />
-                    </div>
-                    <div class="dz-message needsclick">
-                      <div class="mb-3">
-                        <i
-                          class="display-4 text-muted ri-upload-cloud-2-fill"
-                        ></i>
-                      </div>
-
-                      <h5>Drop files here or click to upload.</h5>
-                    </div>
-                  </div>
-
-                  <ul class="list-unstyled mb-0" id="dropzone-preview">
-                    <li class="mt-2" id="dropzone-preview-list">
-                      <!-- This is used as the file preview template -->
-                      <div class="border rounded">
-                        <div class="d-flex p-2">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar-sm bg-light rounded">
-                              <img
-                                data-dz-thumbnail
-                                class="img-fluid rounded d-block"
-                                src="#"
-                                alt="Product-Image"
-                              />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <div class="pt-1">
-                              <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
-                              <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                              <strong
-                                class="error text-danger"
-                                data-dz-errormessage
-                              ></strong>
-                            </div>
-                          </div>
-                          <div class="flex-shrink-0 ms-3">
-                            <button
-                              data-dz-remove
-                              class="btn btn-sm btn-danger"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <!-- end dropzon-preview -->
-                </div>
-              </div>
-            </div>
+            
             <!-- end card -->
 
             <div class="card">
-              <div class="card-header">
-                <ul
-                  class="nav nav-tabs-custom card-header-tabs border-bottom-0"
-                  role="tablist"
-                >
-                  <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      data-bs-toggle="tab"
-                      href="#addproduct-general-info"
-                      role="tab"
-                    >
-                      General Info
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="nav-link"
-                      data-bs-toggle="tab"
-                      href="#addproduct-metadata"
-                      role="tab"
-                    >
-                      Meta Data
-                    </a>
-                  </li>
-                </ul>
-              </div>
+
               <!-- end card header -->
               <div class="card-body">
                 <div class="tab-content">
@@ -361,122 +188,113 @@
                     role="tabpanel"
                   >
                     <div class="row">
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label
-                            class="form-label"
-                            for="manufacturer-name-input"
-                            >Manufacturer Name</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="manufacturer-name-input"
-                            placeholder="Enter manufacturer name"
-                          />
+                      <div class="row">
+                        <!-- Chỉ Định -->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="manufacturer-name-input">Chỉ Định</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="manufacturer-name-input"
+                              placeholder="Mời nhập..."
+                              [(ngModel)]="product.chiDinh"
+                              name="chiDinh"
+                              value="product.chiDinh"
+                            />
+                          </div>
+                        </div>
+                      
+                        <!-- Chống Chỉ Định -->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="manufacturer-brand-input">Chống Chỉ Định</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="manufacturer-brand-input"
+                              placeholder="Mời nhập..."
+                              [(ngModel)]="product.chongChiDinh"
+                              name="chongChiDinh"
+                              value="product.chongChiDinh"
+                            />
+                          </div>
                         </div>
                       </div>
-                      <div class="col-lg-6">
-                        <div class="mb-3">
-                          <label
-                            class="form-label"
-                            for="manufacturer-brand-input"
-                            >Manufacturer Brand</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="manufacturer-brand-input"
-                            placeholder="Enter manufacturer brand"
-                          />
-                        </div>
-                      </div>
+                      
                     </div>
                     <!-- end row -->
 
                     <div class="row">
-                      <div class="col-lg-3 col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label" for="stocks-input"
-                            >Stocks</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="stocks-input"
-                            placeholder="Stocks"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please Enter a product stocks.
+                      <div class="row">
+                        <!-- Giá Nhập -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-price-input">Giá Nhập</label>
+                            <div class="input-group has-validation mb-3">
+                              <span class="input-group-text" id="product-price-addon">$</span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-price-input"
+                                placeholder="Enter price"
+                                aria-label="Price"
+                                aria-describedby="product-price-addon"
+                                required
+                                [(ngModel)]="product.giaNhap"
+                                name="giaNhap"
+                              />
+                              <div class="invalid-feedback">
+                                Mời nhập...
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-lg-3 col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label" for="product-price-input"
-                            >Price</label
-                          >
-                          <div class="input-group has-validation mb-3">
-                            <span
-                              class="input-group-text"
-                              id="product-price-addon"
-                              >$</span
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="product-price-input"
-                              placeholder="Enter price"
-                              aria-label="Price"
-                              aria-describedby="product-price-addon"
-                              required
-                            />
-                            <div class="invalid-feedback">
-                              Please Enter a product price.
+                      
+                        <!-- Giá Bán -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-sale-price-input">Giá Bán</label>
+                            <div class="input-group has-validation mb-3">
+                              <span class="input-group-text" id="product-sale-price-addon">$</span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-sale-price-input"
+                                placeholder="Enter price"
+                                aria-label="Price"
+                                aria-describedby="product-sale-price-addon"
+                                required
+                                [(ngModel)]="product.giaBan"
+                                name="giaBan"
+                              />
+                              <div class="invalid-feedback">
+                                Mời nhập...
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <!-- Số Lượng Tồn -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-quantity-input">Số Lượng Tồn</label>
+                            <div class="input-group mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-quantity-input"
+                                placeholder="Enter quantity"
+                                aria-label="Quantity"
+                                aria-describedby="product-quantity-addon"
+                                [(ngModel)]="product.soLuongTon"
+                                name="soLuongTon"
+                              />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label" for="product-discount-input"
-                            >Discount</label
-                          >
-                          <div class="input-group mb-3">
-                            <span
-                              class="input-group-text"
-                              id="product-discount-addon"
-                              >%</span
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="product-discount-input"
-                              placeholder="Enter discount"
-                              aria-label="discount"
-                              aria-describedby="product-discount-addon"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 col-sm-6">
-                        <div class="mb-3">
-                          <label class="form-label" for="orders-input"
-                            >Orders</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="orders-input"
-                            placeholder="Orders"
-                            required
-                          />
-                          <div class="invalid-feedback">
-                            Please Enter a product orders.
-                          </div>
-                        </div>
-                      </div>
+                      
                       <!-- end col -->
                     </div>
                     <!-- end row -->
@@ -548,140 +366,125 @@
 
           <div class="col-lg-4">
             <div class="card">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Publish</h5>
-              </div>
-              <div class="card-body">
-                <div class="mb-3">
-                  <label for="choices-publish-status-input" class="form-label"
-                    >Status</label
-                  >
-
-                  <select
-                    class="form-select"
-                    id="choices-publish-status-input"
-                    data-choices
-                    data-choices-search-false
-                  >
-                    <option value="Published" selected>Published</option>
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="Draft">Draft</option>
-                  </select>
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Hình ảnh</h5>
                 </div>
-
-                <div>
-                  <label
-                    for="choices-publish-visibility-input"
-                    class="form-label"
-                    >Visibility</label
-                  >
-                  <select
-                    class="form-select"
-                    id="choices-publish-visibility-input"
-                    data-choices
-                    data-choices-search-false
-                  >
-                    <option value="Public" selected>Public</option>
-                    <option value="Hidden">Hidden</option>
-                  </select>
-                </div>
-              </div>
-              <!-- end card body -->
-            </div>
-            <!-- end card -->
-
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Publish Schedule</h5>
-              </div>
-              <!-- end card body -->
-              <div class="card-body">
-                <div>
-                  <label for="datepicker-publish-input" class="form-label"
-                    >Publish Date & Time</label
-                  >
-                  <input
-                    type="text"
-                    id="datepicker-publish-input"
-                    class="form-control"
-                    placeholder="Enter publish date"
-                    data-provider="flatpickr"
-                    data-date-format="d.m.y"
-                    data-enable-time
-                  />
-                </div>
-              </div>
-            </div>
-            <!-- end card -->
-
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Product Categories</h5>
-              </div>
-              <div class="card-body">
-                <p class="text-muted mb-2">
-                  <a href="#" class="float-end text-decoration-underline"
-                    >Add New</a
-                  >Select product category
-                </p>
-                <select
-                  class="form-select"
-                  id="choices-category-input"
-                  name="choices-category-input"
-                  data-choices
-                  data-choices-search-false
-                >
-                  <option value="Appliances">Appliances</option>
-                  <option value="Automotive Accessories">
-                    Automotive Accessories
-                  </option>
-                  <option value="Electronics">Electronics</option>
-                  <option value="Fashion">Fashion</option>
-                  <option value="Furniture">Furniture</option>
-                  <option value="Grocery">Grocery</option>
-                  <option value="Kids">Kids</option>
-                  <option value="Watches">Watches</option>
-                </select>
-              </div>
-              <!-- end card body -->
-            </div>
-            <!-- end card -->
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title mb-0">Product Tags</h5>
-              </div>
-              <div class="card-body">
-                <div class="hstack gap-3 align-items-start">
-                  <div class="flex-grow-1">
-                    <input
-                      class="form-control"
-                      data-choices
-                      data-choices-multiple-remove="true"
-                      placeholder="Enter tags"
-                      type="text"
-                      value="Cotton"
-                    />
+                <div class="card-body">
+                  <div class="mb-4">
+                    <h5 class="fs-14 mb-1">Hình ảnh sản phẩm</h5>
+                    <p class="text-muted">Thêm hình ảnh sản phẩm vào đây.</p>
+                    <div class="text-center">
+                      <div class="position-relative d-inline-block">
+                        <div class="position-absolute top-100 start-100 translate-middle">
+                          <label
+                            for="product-image-input"
+                            class="mb-0"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            title="Chọn hình ảnh"
+                          >
+                            <div class="avatar-xs">
+                              <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                <i class="ri-image-fill"></i>
+                              </div>
+                            </div>
+                          </label>
+                          <input
+                            class="form-control d-none"
+                            id="product-image-input"
+                            type="file"
+                            accept="image/png, image/gif, image/jpeg"
+                            (change)="onImageSelected($event)"
+                          />
+                        </div>
+                        <div class="avatar-lg">
+                          <div class="avatar-title bg-light rounded">
+                            <img
+                              [src]="imageUrl"
+                              id="product-img"
+                              class="avatar-md h-auto"
+                              *ngIf="imageUrl"
+                              alt="Product Image"
+                            />
+                            <p *ngIf="!imageUrl" class="text-muted">Chưa có hình ảnh</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div>
+                    <div class="dropzone">
+                      <div class="fallback">
+                        <input name="file" type="file" multiple="multiple" (change)="onFilesSelected($event)" />
+                      </div>
+                      <div class="dz-message needsclick">
+                        <div class="mb-3">
+                          <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+                        </div>
+                        <h5>Thả tệp vào đây hoặc nhấp để tải lên.</h5>
+                      </div>
+                    </div>
+              
+                    <ul class="list-unstyled mb-0" id="dropzone-preview">
+                      <li class="mt-2" *ngFor="let file of files">
+                        <div class="border rounded">
+                          <div class="d-flex p-2">
+                            <div class="flex-shrink-0 me-3">
+                              <div class="avatar-sm bg-light rounded">
+                                <img
+                                  [src]="file.thumbnail"
+                                  class="img-fluid rounded d-block"
+                                  alt="Product Image"
+                                />
+                              </div>
+                            </div>
+                            <div class="flex-grow-1">
+                              <div class="pt-1">
+                                <h5 class="fs-14 mb-1">{{ file.name }}</h5>
+                                <p class="fs-13 text-muted mb-0">{{ file.size | number }} bytes</p>
+                                <strong class="error text-danger" *ngIf="file.error">{{ file.error }}</strong>
+                              </div>
+                            </div>
+                            <div class="flex-shrink-0 ms-3">
+                              <button
+                                class="btn btn-sm btn-danger"
+                                (click)="removeFile(file)"
+                              >
+                                Xóa
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
+              
               <!-- end card body -->
             </div>
+
             <!-- end card -->
 
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title mb-0">Product Short Description</h5>
+                <h5 class="card-title mb-0">Ghi Chú</h5>
               </div>
               <div class="card-body">
-                <p class="text-muted mb-2">Add short description for product</p>
+                <p class="text-muted mb-2">Thêm Ghi Chú</p>
                 <textarea
                   class="form-control"
-                  placeholder="Must enter minimum of a 100 characters"
+                  placeholder="Nhập tối đa 100 từ"
                   rows="3"
+                  [(ngModel)]="product.ghiChu"  
+                  name="ghiChu"                 
                 ></textarea>
               </div>
               <!-- end card body -->
             </div>
+            
             <!-- end card -->
           </div>
           <!-- end col -->
