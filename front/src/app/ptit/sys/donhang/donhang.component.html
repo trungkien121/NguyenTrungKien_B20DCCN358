@@ -1,0 +1,96 @@
+<div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="page-title-box d-sm-flex align-items-center justify-content-between"
+            >
+              <h4 class="mb-sm-0">Đơn Hàng</h4>
+            </div>
+          </div>
+        </div>
+        <!-- end page title -->
+
+  
+        <!-- content   -->
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div
+                class="card-header border-0 align-items-center justify-content-end"
+              >
+                <div
+                  class="align-items-center p-3 justify-content-between d-flex"
+                >
+                  <div class="flex-shrink-0">
+                    <div class="text-muted">
+                      <span class="fw-semibold">Total: </span>
+                      <span class="fw-semibold">{{ donhang.length }}</span>
+                    </div>
+                  </div>
+                  <!-- <button
+                    type="button"
+                    class="btn btn-success shadow-none"
+                    [routerLink]="['/sys/product-create']"
+                  >
+                    <i class="ri-add-circle-line align-middle me-1"></i>
+                    Thêm Khách Hàng
+                  </button> -->
+                </div>
+                <div class="col-auto mb-3"></div>
+  
+                <div class="col-auto">
+                  <p-table
+                    [value]="donhang"
+                    [rowHover]="true"
+                    dataKey="id"
+                    [showCurrentPageReport]="true"
+                    [rows]="10"
+                    [alwaysShowPaginator]="true"
+                    [paginator]="true"
+                    currentPageReportTemplate=""
+                  >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>ID Khách Hàng</th>
+                            <th>Tên Khách Hàng</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Địa Chỉ</th>
+                            <th>Email</th>
+                            <th>Ngày Lập</th>
+                            <th>Tổng Tiền</th>
+                            <th>Trạng Thái Giao Hàng</th>
+                            <th>Ngày Giao</th>
+                          </tr>
+                    </ng-template>
+                    <ng-template
+                      pTemplate="body"
+                      let-order
+                      let-rowIndex="rowIndex"
+                    >
+                    <tr [style]="{ cursor: 'pointer' }">
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.khachHangId }}</td>
+                        <td>{{ order.tenKhachHang }}</td>
+                        <td>{{ order.soDienThoai }}</td>
+                        <td>{{ order.diaChi }}</td>
+                        <td>{{ order.email }}</td>
+                        <td>{{ order.ngayLap | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ order.tongTien | currency }}</td>
+                        <td>{{ order.trangThaiGiaoHang }}</td>
+                        <td>{{ order.ngayGiao | date: 'yyyy-MM-dd' }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

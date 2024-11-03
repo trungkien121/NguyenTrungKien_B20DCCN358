@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { Customer } from "src/app/_model/customer";
-import { Product } from "src/app/_model/product";
 
 @Component({
   selector: "app-customer",

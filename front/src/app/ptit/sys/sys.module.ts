@@ -26,6 +26,7 @@ import { ProductComponent } from "./product/product.component";
 import { ProductCreatementComponent } from "./product/product-createment/product-createment.component";
 import { NCCComponent } from "./ncc/ncc.component";
 import { CustomerComponent } from "./customer/customer.component";
+import { DonHangComponent } from "./donhang/donhang.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CustomerComponent } from "./customer/customer.component";
     ProductCreatementComponent,
     NCCComponent,
     CustomerComponent,
+    DonHangComponent,
   ],
   imports: [
     CommonModule,
