@@ -43,7 +43,7 @@
             aria-controls="sidebarDashboards"
           >
             <i class="mdi mdi-speedometer"></i>
-            <span data-key="t-dashboards">Products</span>
+            <span data-key="t-dashboards">Sản Phẩm</span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
@@ -53,20 +53,29 @@
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Product
+                  Sản Phẩm
                 </a>
               </li>
               <li class="nav-item">
+                <a
+                  [routerLink]="['/sys/customer']"
+                  class="nav-link"
+                  data-key="t-analytics"
+                >
+                  Khách Hàng
+                </a>
+              </li>
+              <!-- <li class="nav-item">
                 <a href="dashboard-crm.html" class="nav-link" data-key="t-crm">
                   CRM
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a  [routerLink]="['/sys/ncc']" class="nav-link" data-key="t-ecommerce">
                   NCC
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a
                   href="dashboard-crypto.html"
                   class="nav-link"
@@ -74,8 +83,8 @@
                 >
                   Crypto
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a
                   href="dashboard-projects.html"
                   class="nav-link"
@@ -91,7 +100,7 @@
                     >New</span
                   ></a
                 >
-              </li>
+              </li> -->
             </ul>
           </div>
         </li>

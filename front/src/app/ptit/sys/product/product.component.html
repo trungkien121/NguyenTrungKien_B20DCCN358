@@ -7,7 +7,7 @@
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Product</h4>
+            <h4 class="mb-sm-0">Sản Phẩm</h4>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
                 class="align-items-center p-3 justify-content-between d-flex"
               >
                 <div class="d-flex flex-column col-xl-2 pl-2">
-                  <label for="statusDropdown"> Status</label>
+                  <label for="statusDropdown">Trạng Thái</label>
                   <app-select-common
                     [optionValue]="'value'"
                     [options]="statusOptions"
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="d-flex flex-column col-xl-2 pl-2">
-                  <label for="statusDropdown"> Visibility</label>
+                  <label for="statusDropdown"> Nhà Cung Cấp</label>
                   <app-select-common
                     [optionValue]="'value'"
                     [options]="visibilityOptions"
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="d-flex flex-column col-xl-2 pl-2">
-                  <label for="visibilityDropdown"> Category</label>
+                  <label for="visibilityDropdown">Loại Thuốc</label>
                   <app-select-common
                     [optionValue]="'value'"
                     [options]="categoryOption"
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="d-flex flex-column col-xl-3">
-                  <label for="titleDropdown">Title </label>
+                  <label for="titleDropdown">Tên Thuốc </label>
                   <input
                     type="text"
                     pInputText
@@ -69,7 +69,7 @@
                     (click)="search()"
                   >
                     <i class="ri-search-line align-middle me-1"></i>
-                    Search
+                    Tìm Kiếm
                   </button>
                 </div>
               </div>
@@ -102,7 +102,7 @@
                   [routerLink]="['/sys/product-create']"
                 >
                   <i class="ri-add-circle-line align-middle me-1"></i>
-                  Add
+                  Thêm Sản Phẩm
                 </button>
               </div>
               <div class="col-auto mb-3"></div>
@@ -122,20 +122,20 @@
                     <tr>
                       <th>ID</th>
                       <th>Tên Thuốc</th>
-                      <th>Mã Thuốc</th>
-                      <th>Mã Vạch</th>
+                      <!-- <th>Mã Thuốc</th>
+                      <th>Mã Vạch</th> -->
                       <th>Loại Thuốc ID</th>
                       <th>Nhà Sản Xuất ID</th>
                       <th>Danh Mục Thuốc ID</th>
                       <th>Đơn Vị</th>
                       <th>Che Bao</th>
-                      <th>Quy Cách</th>
-                      <th>Số Đăng Ký</th>
+                      <!-- <th>Quy Cách</th>
+                      <th>Số Đăng Ký</th> -->
                       <th>Hạn Sử Dụng</th>
                       <th>Giá Nhập</th>
                       <th>Giá Bán</th>
                       <th>Số Lượng Tồn</th>
-                      <th>Ngưỡng Cảnh Báo</th>
+                      <!-- <th>Ngưỡng Cảnh Báo</th>
                       <th>Hình Ảnh</th>
                       <th>Công Dụng</th>
                       <th>Chỉ Định</th>
@@ -143,7 +143,7 @@
                       <th>Hướng Dẫn Sử Dụng</th>
                       <th>Mô Tả Ngắn</th>
                       <th>Trạng Thái</th>
-                      <th>Ghi Chú</th>
+                      <th>Ghi Chú</th> -->
                     </tr>
                   </ng-template>
                   <ng-template
@@ -154,20 +154,20 @@
                   <tr *ngFor="let product of products" [style]="{ cursor: 'pointer' }">
                     <td>{{ product.id }}</td>
                     <td>{{ product.tenThuoc }}</td>
-                    <td>{{ product.maThuoc }}</td>
-                    <td>{{ product.maVach }}</td>
+                    <!-- <td>{{ product.maThuoc }}</td>
+                    <td>{{ product.maVach }}</td> -->
                     <td>{{ product.loaiThuocId }}</td>
                     <td>{{ product.nhaSanXuatId }}</td>
                     <td>{{ product.danhMucThuocId }}</td>
                     <td>{{ product.donVi }}</td>
-                    <td>{{ product.cheBao }}</td>
-                    <td>{{ product.quyCach }}</td>
+                    <!-- <td>{{ product.cheBao }}</td>
+                    <td>{{ product.quyCach }}</td> -->
                     <td>{{ product.soDangKy }}</td>
                     <td>{{ product.hanSuDung | date: 'dd/MM/yyyy' }}</td>
                     <td>{{ product.giaNhap }}</td>
                     <td>{{ product.giaBan }}</td>
                     <td>{{ product.soLuongTon }}</td>
-                    <td>{{ product.nguongCanhBao }}</td>
+                    <!-- <td>{{ product.nguongCanhBao }}</td>
                     <td><img [src]="product.hinhAnh" [alt]="product.tenThuoc" width="50"></td>
                     <td>{{ product.congDung }}</td>
                     <td>{{ product.chiDinh }}</td>
@@ -175,7 +175,7 @@
                     <td>{{ product.huongDanSuDung }}</td>
                     <td>{{ product.moTaNgan }}</td>
                     <td>{{ product.trangThai ? 'Có' : 'Không' }}</td>
-                    <td>{{ product.ghiChu }}</td>
+                    <td>{{ product.ghiChu }}</td> -->
                   </tr>
                   </ng-template>
                 </p-table>

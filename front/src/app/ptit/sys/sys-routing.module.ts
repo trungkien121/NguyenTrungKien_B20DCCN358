@@ -6,6 +6,7 @@ import { AuthConstant } from "src/app/_constant/auth.constant";
 import { ProductComponent } from "./product/product.component";
 import { ProductCreatementComponent } from "./product/product-createment/product-createment.component";
 import { NCCComponent } from "./ncc/ncc.component";
+import { CustomerComponent } from "./customer/customer.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -20,6 +21,10 @@ const routes: Routes = [
     component: ProductComponent,
   },
   {
+    path: "customer",
+    component: CustomerComponent,
+  },
+  {
     path: "product-create",
     component: ProductCreatementComponent,
   },
@@ -27,6 +32,7 @@ const routes: Routes = [
     path: "ncc",
     component: NCCComponent,
   },
+
 ];
 
 @NgModule({

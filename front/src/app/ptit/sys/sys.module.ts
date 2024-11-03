@@ -25,6 +25,7 @@ import { ProgressSpinnerModule } from "primeng/progressspinner";
 import { ProductComponent } from "./product/product.component";
 import { ProductCreatementComponent } from "./product/product-createment/product-createment.component";
 import { NCCComponent } from "./ncc/ncc.component";
+import { CustomerComponent } from "./customer/customer.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NCCComponent } from "./ncc/ncc.component";
     ConfirmDialogCommonComponent,
     ProductComponent,
     ProductCreatementComponent,
-    NCCComponent
+    NCCComponent,
+    CustomerComponent,
   ],
   imports: [
     CommonModule,
