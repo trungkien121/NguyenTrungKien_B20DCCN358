@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">Arrticle Thumbnail</h5>
+  </div>
+  <div class="card-body">
+    <div>
+      <!-- <h5 class="fs-14 mb-1">Product Gallery</h5>
+        <p class="text-muted">Add Product Gallery Images.</p> -->
+
+      <div
+        class="dropzone"
+        (click)="selectPurOder()"
+        [style]="{ cursor: 'pointer' }"
+      >
+        <div class="fallback">
+          <input
+            id="selectFile"
+            name="file"
+            (change)="onSelectFile($event)"
+            type="file"
+            multiple="multiple"
+            accept="image/png, image/jpeg, image/jpg"
+            [style]="{ display: 'none' }"
+          />
+        </div>
+        <div
+          class="dz-message needsclick d-flex flex-column align-items-center justify-content-center"
+        >
+          <div class="mb-3">
+            <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+          </div>
+          <h5 class="text-center">Drop files here or click to upload.</h5>
+        </div>
+      </div>
+
+      <!-- end dropzon-preview -->
+    </div>
+  </div>
+</div>
+<!-- end card -->

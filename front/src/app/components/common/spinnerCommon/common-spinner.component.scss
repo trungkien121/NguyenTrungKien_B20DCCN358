@@ -1,0 +1,37 @@
+#pause {
+  display: flex; /* Đảm bảo nội dung bên trong sử dụng Flexbox */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background: rgba(0, 0, 0, 0.66); /* Màu nền tối cho overlay */
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 100%; /* Chiếm toàn bộ chiều cao */
+  position: fixed; /* Để định vị overlay */
+  top: 0; /* Đặt ở trên cùng */
+  left: 0; /* Đặt ở bên trái */
+  z-index: 1000; /* Đặt trên cùng */
+}
+
+#spinner {
+  -webkit-animation: frames 1s infinite linear;
+  animation: frames 1s infinite linear;
+  background: transparent;
+  border: 1vw solid #fff; /* Màu sắc của viền spinner */
+  border-radius: 100%; /* Để tạo thành hình tròn */
+  border-top-color: #ee513c; /* Màu sắc của phần viền trên spinner */
+  width: 5vw; /* Kích thước của spinner */
+  height: 5vw; /* Kích thước của spinner */
+  opacity: 0.6; /* Độ trong suốt của spinner */
+  padding: 0;
+  position: relative; /* Định vị bên trong #pause */
+}
+
+@keyframes frames {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}

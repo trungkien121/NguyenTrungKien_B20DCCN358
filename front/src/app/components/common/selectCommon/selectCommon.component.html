@@ -1,0 +1,10 @@
+<p-dropdown
+  id="statusDropdown"
+  [style]="{ width: '100%' }"
+  [options]="options"
+  [(ngModel)]="selectedOptionValue"
+  (ngModelChange)="onOptionChange($event)"
+  [optionLabel]="optionLabel"
+  [optionValue]="optionValue"
+  [scrollHeight]="'300'"
+></p-dropdown>
