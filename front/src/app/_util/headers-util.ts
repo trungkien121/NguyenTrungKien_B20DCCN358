@@ -10,6 +10,7 @@ export class HeadersUtil {
     });
   }
 
+  //chua dung toi
   public static getHeadersAuth(): HttpHeaders {
     const token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
     if (token == undefined || token == null) {

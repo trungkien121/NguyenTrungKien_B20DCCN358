@@ -23,12 +23,11 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.dangNhapService.dangNhap(this.user).subscribe((res: any) => {
+      
       if(res.status == CommonConstant.STATUS_OK_200){
         this.router.navigate(['/sys/product']);  
       }
     // console.log(res)
-
-
     })
   }
 }
