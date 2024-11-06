@@ -21,4 +21,7 @@ export class CommonConstant {
   public static readonly SHOW_ANSWER_FALSE = "FALSE";
 
   public static readonly SHOW_ANSWER_TRUE = "TRUE";
+
+  public static readonly STATUS_OK_200 = "200";
+
 }

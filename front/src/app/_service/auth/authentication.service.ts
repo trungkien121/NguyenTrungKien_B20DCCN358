@@ -29,30 +29,30 @@ export class AuthenticationService {
     //   environment.authApiUrl + "/auth/login?redirectUri=" + doamin || "";
   }
 
-  logOut(isCallApi?: boolean) {
-    // const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
-    // const url = environment.backApiUrl + "/user/logout";
+  // logOut(isCallApi?: boolean) {
+  //   // const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+  //   // const url = environment.backApiUrl + "/user/logout";
 
-    // if (isCallApi) {
-    //   this.http.get<DataResponse>(url, { headers: headers }).subscribe({
-    //     next: (resp: DataResponse) => {},
-    //     error: (err: any) => {},
-    //   });
-    // }
+  //   // if (isCallApi) {
+  //   //   this.http.get<DataResponse>(url, { headers: headers }).subscribe({
+  //   //     next: (resp: DataResponse) => {},
+  //   //     error: (err: any) => {},
+  //   //   });
+  //   // }
 
-    Cookie.delete(AuthConstant.ACCESS_TOKEN_KEY);
-    let doamin = window.location.origin;
-    window.location.href =
-      environment.authApiUrl +
-        "/auth/login?actionType=logout&redirectUri=" +
-        doamin || "";
-  }
+  //   Cookie.delete(AuthConstant.ACCESS_TOKEN_KEY);
+  //   let doamin = window.location.origin;
+  //   window.location.href =
+  //     environment.backApiUrl +
+  //       "/auth/login?actionType=logout&redirectUri=" +
+  //       doamin || "";
+  // }
 
   checkAuthen(): boolean {
-    if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
-      this.logIn();
-      return false;
-    }
+    // if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
+    //   this.logIn();
+    //   return false;
+    // }
     return true;
   }
 

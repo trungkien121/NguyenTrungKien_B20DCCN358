@@ -94,9 +94,7 @@
                   </div>
 
                   <div class="mt-4">
-                    <form
-                      action="https://themesbrand.com/velzon/html/material/index.html"
-                    >
+                    <form (ngSubmit)="login()">
                       <div class="mb-3">
                         <label for="username" class="form-label"
                           >Tên đăng nhập</label
@@ -105,7 +103,9 @@
                           type="text"
                           class="form-control"
                           id="username"
+                          name="username"
                           placeholder="Nhập tên đăng nhập"
+                          [(ngModel)]="user.tenDangNhap"
                         />
                       </div>
 
@@ -125,9 +125,11 @@
                         >
                           <input
                             type="password"
+                            name="password"
                             class="form-control pe-5"
-                            placeholder="Nhập mật khẩu"
+                            placeholder="Nhập mật khẩu"                            
                             id="password-input"
+                            [(ngModel)]="user.matKhau"
                           />
                           <button
                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none"

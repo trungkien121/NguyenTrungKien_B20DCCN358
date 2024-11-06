@@ -20,7 +20,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError((err: any) => {
       if (err.status === 401) {
         // redirect to the logout route
-        this.authService.logOut();
+      console.log("hưm")
+        // this.authService.logOut();
       }
       const error = err.error.message || err.statusText;
       return throwError(() => error);
