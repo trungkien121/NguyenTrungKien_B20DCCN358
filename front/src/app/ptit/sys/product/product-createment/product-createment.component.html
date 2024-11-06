@@ -1,0 +1,527 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Thêm Sản Phẩm</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+
+      <form
+        id="createproduct-form"
+        autocomplete="off"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body">
+                <div class="mb-3">
+                  <label class="form-label" for="product-id-input">ID</label>
+                  <input type="text" 
+                  class="form-control" 
+                  id="product-id-input" 
+                  placeholder="Enter product ID" 
+                  required 
+                  [(ngModel)]="product.id" 
+                  name="id"
+                  value="product.id"/>
+                  <div class="invalid-feedback">
+                    Please enter a product ID.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-title-input">Tên Thuốc</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-title-input"
+                    placeholder="Enter product title"
+                    required
+                    [(ngModel)]="product.tenThuoc"
+                    name="tenThuoc"
+                    value="product.tenThuoc"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a product title.
+                  </div>
+                </div>
+                
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-title-input">Tên Thuốc</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-title-input"
+                    placeholder="Enter product title"
+                    required
+                    [(ngModel)]="product.tenThuoc"
+                    name="tenThuoc"
+                    value="{{ product.tenThuoc }}"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a product title.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-code-input">Mã Thuốc</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-code-input"
+                    placeholder="Enter product code"
+                    required
+                    [(ngModel)]="product.maThuoc"
+                    name="maThuoc"
+                    value="{{ product.maThuoc }}"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a product code.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-barcode-input">Mã Vạch</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-barcode-input"
+                    placeholder="Enter barcode"
+                    required
+                    [(ngModel)]="product.maVach"
+                    name="maVach"
+                    value="{{ product.maVach }}"
+                  />
+                  <div class="invalid-feedback">
+                    Please enter a barcode.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-type-select">Loại Thuốc</label>
+                  <select
+                    class="form-select"
+                    id="product-type-select"
+                    required
+                    [(ngModel)]="product.loaiThuocId"
+                    name="loaiThuocId"
+                    value="{{ product.loaiThuocId }}"
+                  >
+                    <option value="">Chọn loại thuốc</option>
+                    <option value="LT01">Thuốc Giảm Đau</option>
+                    <option value="LT02">Thuốc Kháng Sinh</option>
+                    <option value="LT03">Thuốc Hạ Sốt</option>
+                    <option value="LT04">Thuốc Bổ Sung Vitamin</option>
+                    <option value="LT05">Thuốc Tiêu Hóa</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Vui lòng chọn loại thuốc.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-manufacturer-select">Nhà Sản Xuất</label>
+                  <select
+                    class="form-select"
+                    id="product-manufacturer-select"
+                    required
+                    [(ngModel)]="product.nhaSanXuatId"
+                    name="nhaSanXuatId"
+                    value="{{ product.nhaSanXuatId }}"
+                  >
+                    <option value="">Chọn nhà sản xuất</option>
+                    <option value="NSX01">Công ty Dược A</option>
+                    <option value="NSX02">Công ty Dược B</option>
+                    <option value="NSX03">Công ty Dược C</option>
+                    <option value="NSX04">Công ty Dược D</option>
+                    <option value="NSX05">Công ty Dược E</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Vui lòng chọn nhà sản xuất.
+                  </div>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label" for="product-category-select">Danh Mục Thuốc</label>
+                  <select
+                    class="form-select"
+                    id="product-category-select"
+                    required
+                    [(ngModel)]="product.danhMucThuocId"
+                    name="danhMucThuocId"
+                    value="{{ product.danhMucThuocId }}"
+                  >
+                    <option value="">Chọn danh mục thuốc</option>
+                    <option value="DM01">Thuốc Giảm Đau</option>
+                    <option value="DM02">Thuốc Kháng Sinh</option>
+                    <option value="DM03">Thuốc Chống Viêm</option>
+                    <option value="DM04">Vitamin và Khoáng Chất</option>
+                    <option value="DM05">Thực Phẩm Chức Năng</option>
+                    <option value="DM06">Thuốc Điều Trị Bệnh</option>
+                    <option value="DM07">Thuốc Hạ Sốt</option>
+                    <option value="DM08">Thuốc Trị Bệnh Ngoài Da</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Vui lòng chọn danh mục thuốc.
+                  </div>
+                </div>
+                
+                                
+              </div>
+            </div>
+            <!-- end card -->
+
+            
+            <!-- end card -->
+
+            <div class="card">
+
+              <!-- end card header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div
+                    class="tab-pane active"
+                    id="addproduct-general-info"
+                    role="tabpanel"
+                  >
+                    <div class="row">
+                      <div class="row">
+                        <!-- Chỉ Định -->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="manufacturer-name-input">Chỉ Định</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="manufacturer-name-input"
+                              placeholder="Mời nhập..."
+                              [(ngModel)]="product.chiDinh"
+                              name="chiDinh"
+                              value="product.chiDinh"
+                            />
+                          </div>
+                        </div>
+                      
+                        <!-- Chống Chỉ Định -->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="manufacturer-brand-input">Chống Chỉ Định</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="manufacturer-brand-input"
+                              placeholder="Mời nhập..."
+                              [(ngModel)]="product.chongChiDinh"
+                              name="chongChiDinh"
+                              value="product.chongChiDinh"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                      <div class="row">
+                        <!-- Giá Nhập -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-price-input">Giá Nhập</label>
+                            <div class="input-group has-validation mb-3">
+                              <span class="input-group-text" id="product-price-addon">$</span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-price-input"
+                                placeholder="Enter price"
+                                aria-label="Price"
+                                aria-describedby="product-price-addon"
+                                required
+                                [(ngModel)]="product.giaNhap"
+                                name="giaNhap"
+                              />
+                              <div class="invalid-feedback">
+                                Mời nhập...
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <!-- Giá Bán -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-sale-price-input">Giá Bán</label>
+                            <div class="input-group has-validation mb-3">
+                              <span class="input-group-text" id="product-sale-price-addon">$</span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-sale-price-input"
+                                placeholder="Enter price"
+                                aria-label="Price"
+                                aria-describedby="product-sale-price-addon"
+                                required
+                                [(ngModel)]="product.giaBan"
+                                name="giaBan"
+                              />
+                              <div class="invalid-feedback">
+                                Mời nhập...
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <!-- Số Lượng Tồn -->
+                        <div class="col-lg-4 col-sm-6">
+                          <div class="mb-4">
+                            <label class="form-label" for="product-quantity-input">Số Lượng Tồn</label>
+                            <div class="input-group mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="product-quantity-input"
+                                placeholder="Enter quantity"
+                                aria-label="Quantity"
+                                aria-describedby="product-quantity-addon"
+                                [(ngModel)]="product.soLuongTon"
+                                name="soLuongTon"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                  </div>
+                  <!-- end tab-pane -->
+
+                  <div
+                    class="tab-pane"
+                    id="addproduct-metadata"
+                    role="tabpanel"
+                  >
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label class="form-label" for="meta-title-input"
+                            >Meta title</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter meta title"
+                            id="meta-title-input"
+                          />
+                        </div>
+                      </div>
+                      <!-- end col -->
+
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label class="form-label" for="meta-keywords-input"
+                            >Meta Keywords</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter meta keywords"
+                            id="meta-keywords-input"
+                          />
+                        </div>
+                      </div>
+                      <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div>
+                      <label class="form-label" for="meta-description-input"
+                        >Meta Description</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="meta-description-input"
+                        placeholder="Enter meta description"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+              </div>
+              <!-- end card body -->
+            </div>
+            <!-- end card -->
+
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title mb-0">Hình ảnh</h5>
+                </div>
+                <div class="card-body">
+                  <div class="mb-4">
+                    <h5 class="fs-14 mb-1">Hình ảnh sản phẩm</h5>
+                    <p class="text-muted">Thêm hình ảnh sản phẩm vào đây.</p>
+                    <div class="text-center">
+                      <div class="position-relative d-inline-block">
+                        <div class="position-absolute top-100 start-100 translate-middle">
+                          <label
+                            for="product-image-input"
+                            class="mb-0"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            title="Chọn hình ảnh"
+                          >
+                            <div class="avatar-xs">
+                              <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                <i class="ri-image-fill"></i>
+                              </div>
+                            </div>
+                          </label>
+                          <input
+                            class="form-control d-none"
+                            id="product-image-input"
+                            type="file"
+                            accept="image/png, image/gif, image/jpeg"
+                            (change)="onImageSelected($event)"
+                          />
+                        </div>
+                        <div class="avatar-lg">
+                          <div class="avatar-title bg-light rounded">
+                            <img
+                              [src]="imageUrl"
+                              id="product-img"
+                              class="avatar-md h-auto"
+                              *ngIf="imageUrl"
+                              alt="Product Image"
+                            />
+                            <p *ngIf="!imageUrl" class="text-muted">Chưa có hình ảnh</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div>
+                    <div class="dropzone">
+                      <div class="fallback">
+                        <input name="file" type="file" multiple="multiple" (change)="onFilesSelected($event)" />
+                      </div>
+                      <div class="dz-message needsclick">
+                        <div class="mb-3">
+                          <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+                        </div>
+                        <h5>Thả tệp vào đây hoặc nhấp để tải lên.</h5>
+                      </div>
+                    </div>
+              
+                    <ul class="list-unstyled mb-0" id="dropzone-preview">
+                      <li class="mt-2" *ngFor="let file of files">
+                        <div class="border rounded">
+                          <div class="d-flex p-2">
+                            <div class="flex-shrink-0 me-3">
+                              <div class="avatar-sm bg-light rounded">
+                                <img
+                                  [src]="file.thumbnail"
+                                  class="img-fluid rounded d-block"
+                                  alt="Product Image"
+                                />
+                              </div>
+                            </div>
+                            <div class="flex-grow-1">
+                              <div class="pt-1">
+                                <h5 class="fs-14 mb-1">{{ file.name }}</h5>
+                                <p class="fs-13 text-muted mb-0">{{ file.size | number }} bytes</p>
+                                <strong class="error text-danger" *ngIf="file.error">{{ file.error }}</strong>
+                              </div>
+                            </div>
+                            <div class="flex-shrink-0 ms-3">
+                              <button
+                                class="btn btn-sm btn-danger"
+                                (click)="removeFile(file)"
+                              >
+                                Xóa
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- end card body -->
+            </div>
+
+            <!-- end card -->
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Ghi Chú</h5>
+              </div>
+              <div class="card-body">
+                <p class="text-muted mb-2">Thêm Ghi Chú</p>
+                <textarea
+                  class="form-control"
+                  placeholder="Nhập tối đa 100 từ"
+                  rows="3"
+                  [(ngModel)]="product.ghiChu"  
+                  name="ghiChu"                 
+                ></textarea>
+              </div>
+              <!-- end card body -->
+            </div>
+            
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <div class="text-end mb-3">
+          <button type="submit" class="btn btn-success w-sm">Submit</button>
+        </div>
+        <!-- end row -->
+      </form>
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <div class="text-end mb-3">
+    <button type="submit" class="btn btn-success w-sm">Submit</button>
+  </div>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          © Velzon.
+        </div>
+        <div class="col-sm-6">
+          <div class="text-sm-end d-none d-sm-block">
+            Design & Develop by Themesbrand
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
