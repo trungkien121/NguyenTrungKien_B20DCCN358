@@ -8,6 +8,7 @@ public class ApiRegistry {
 
 	// PUBLIC
 	static {
+		apiEndpoints.add(new ApiEndpoint("/dangnhap", "DANG_NHAP", "PUBLIC"));
 		apiEndpoints.add(new ApiEndpoint("/nguoidung/get", "XEM_NGUOI_DUNG", "PUBLIC"));
 		apiEndpoints.add(new ApiEndpoint("/nguoidung/save", "TAO_NGUOI_DUNG", "PUBLIC"));
 		apiEndpoints.add(new ApiEndpoint("/nguoidung/update", "CAP_NHAT_NGUOI_DUNG", "PUBLIC"));

@@ -56,7 +56,7 @@ public class JwtService {
 			nhomQuyen_chucNang.add(roleMap);
 		}
 
-		claims.put("roles", nhomQuyen_chucNang);
+		claims.put("nhomQuyens", nhomQuyen_chucNang);
 
 		return createToken(claims, tenDangNhap);
 	}
