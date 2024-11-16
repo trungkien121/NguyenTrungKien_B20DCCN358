@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PhieuNhapService {
     List<PhieuNhap> getAllPhieuNhaps();
     Optional<PhieuNhap> getPhieuNhapById(Integer id);
-    PhieuNhap save(PhieuNhapDTO phieuNhapDTO);
+    PhieuNhap create(PhieuNhapDTO phieuNhapDTO);
     PhieuNhap update(PhieuNhapDTO phieuNhapDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 
     @Override
     @Transactional
-    public PhieuNhap save(PhieuNhapDTO phieuNhapDTO) {
+    public PhieuNhap create(PhieuNhapDTO phieuNhapDTO) {
         PhieuNhap phieuNhap = modelMapper.map(phieuNhapDTO, PhieuNhap.class);
         return phieuNhapRepo.save(phieuNhap);
     }

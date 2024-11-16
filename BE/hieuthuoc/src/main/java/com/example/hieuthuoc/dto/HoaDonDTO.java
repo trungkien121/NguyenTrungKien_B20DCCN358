@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class HoaDonDTO {
     private Integer id;
-    private Integer donHangId; // ID của đơn hàng
-    private Integer khachHangId; // ID của khách hàng
-    private Integer nguoiDungId; // ID của người dùng
+    private DonHangDTO donHang; // ID của đơn hàng
+    private NguoiDungDTO khachHang; // ID của khách hàng
+    private NguoiDungDTO nguoiDung; // ID của người dùng
     private Date ngayLap;
     private Double tongTien;
     private Double tienThue;

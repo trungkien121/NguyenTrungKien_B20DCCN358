@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface DoiTuongSdThuocService {
     List<DoiTuongSdThuoc> getAllDoiTuongSdThuocs();
     Optional<DoiTuongSdThuoc> getDoiTuongSdThuocById(Integer id);
-    DoiTuongSdThuoc save(DoiTuongSdThuocDTO doiTuongSdThuocDTO);
+    DoiTuongSdThuoc create(DoiTuongSdThuocDTO doiTuongSdThuocDTO);
     DoiTuongSdThuoc update(DoiTuongSdThuocDTO doiTuongSdThuocDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class DoiTuongSdThuocServiceImpl implements DoiTuongSdThuocService {
 
     @Override
     @Transactional
-    public DoiTuongSdThuoc save(DoiTuongSdThuocDTO doiTuongSdThuocDTO) {
+    public DoiTuongSdThuoc create(DoiTuongSdThuocDTO doiTuongSdThuocDTO) {
         DoiTuongSdThuoc doiTuongSdThuoc = modelMapper.map(doiTuongSdThuocDTO, DoiTuongSdThuoc.class);
         return doiTuongSdThuocRepo.save(doiTuongSdThuoc);
     }

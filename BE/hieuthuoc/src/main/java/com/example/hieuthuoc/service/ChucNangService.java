@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ChucNangService {
     List<ChucNang> getAllChucNangs();
     Optional<ChucNang> getChucNangById(Integer id);
-    ChucNang save(ChucNangDTO chucNangDTO);
+    ChucNang create(ChucNangDTO chucNangDTO);
     ChucNang update(ChucNangDTO chucNangDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class ChucNangServiceImpl implements ChucNangService {
 
     @Override
     @Transactional
-    public ChucNang save(ChucNangDTO chucNangDTO) {
+    public ChucNang create(ChucNangDTO chucNangDTO) {
         ChucNang chucNang = modelMapper.map(chucNangDTO, ChucNang.class);
         return chucNangRepo.save(chucNang);
     }

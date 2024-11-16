@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface NhaCungCapService {
     List<NhaCungCap> getAllNhaCungCaps();
     Optional<NhaCungCap> getNhaCungCapById(Integer id);
-    NhaCungCap save(NhaCungCapDTO nhaCungCapDTO);
+    NhaCungCap create(NhaCungCapDTO nhaCungCapDTO);
     NhaCungCap update(NhaCungCapDTO nhaCungCapDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 
     @Override
     @Transactional
-    public NhaCungCap save(NhaCungCapDTO nhaCungCapDTO) {
+    public NhaCungCap create(NhaCungCapDTO nhaCungCapDTO) {
         NhaCungCap nhaCungCap = modelMapper.map(nhaCungCapDTO, NhaCungCap.class);
         return nhaCungCapRepo.save(nhaCungCap);
     }

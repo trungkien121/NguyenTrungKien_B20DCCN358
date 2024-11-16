@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ChiTietChucNangService {
     List<ChiTietChucNang> getAllChiTietChucNangs();
     Optional<ChiTietChucNang> getChiTietChucNangById(Integer id);
-    ChiTietChucNang save(ChiTietChucNangDTO chiTietChucNangDTO);
+    ChiTietChucNang create(ChiTietChucNangDTO chiTietChucNangDTO);
     ChiTietChucNang update(ChiTietChucNangDTO chiTietChucNangDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class ChiTietChucNangServiceImpl implements ChiTietChucNangService {
 
     @Override
     @Transactional
-    public ChiTietChucNang save(ChiTietChucNangDTO chiTietChucNangDTO) {
+    public ChiTietChucNang create(ChiTietChucNangDTO chiTietChucNangDTO) {
         ChiTietChucNang chiTietChucNang = modelMapper.map(chiTietChucNangDTO, ChiTietChucNang.class);
         return chiTietChucNangRepo.save(chiTietChucNang);
     }

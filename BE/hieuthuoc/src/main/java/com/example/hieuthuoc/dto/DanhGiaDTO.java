@@ -7,9 +7,9 @@ import java.util.Date;
 @Data
 public class DanhGiaDTO {
     private Integer id;
-    private Integer thuocId;      // Chỉ lấy ID của Thuoc
-    private Integer nguoiDungId;  // Chỉ lấy ID của NguoiDung
-    private Integer danhGiaGocId;  // Chỉ lấy ID của DanhGia gốc
+    private ThuocDTO thuoc;      // Chỉ lấy ID của Thuoc
+    private NguoiDungDTO nguoiDung;  // Chỉ lấy ID của NguoiDung
+    private DanhGiaDTO danhGiaGoc;  // Chỉ lấy ID của DanhGia gốc
     private Integer diemSo;
     private String danhGia;
     private Date ngayDanhGia;

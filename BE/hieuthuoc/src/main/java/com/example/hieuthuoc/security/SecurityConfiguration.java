@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -46,14 +45,17 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(config -> {
-			for (ApiEndpoint endpoint : ApiRegistry.apiEndpoints) {
-				if ("PUBLIC".equals(endpoint.getType())) {
-					config.requestMatchers(endpoint.getApi()).permitAll();
-				} else if ("PRIVATE".equals(endpoint.getType())) {
-					config.requestMatchers(endpoint.getApi()).hasAuthority(endpoint.getName());
-				}
-			}
-			config.anyRequest().authenticated(); // Các request khác yêu cầu xác thực
+			
+			config.requestMatchers("/**").permitAll();
+			
+//			for (ApiEndpoint endpoint : ApiRegistry.apiEndpoints) {
+//				if ("PUBLIC".equals(endpoint.getType())) {
+//					config.requestMatchers(endpoint.getApi()).permitAll();
+//				} else if ("PRIVATE".equals(endpoint.getType())) {
+//					config.requestMatchers(endpoint.getApi()).hasAuthority(endpoint.getName());
+//				}
+//			}
+//			config.anyRequest().authenticated(); // Các request khác yêu cầu xác thực
 		});
 
 

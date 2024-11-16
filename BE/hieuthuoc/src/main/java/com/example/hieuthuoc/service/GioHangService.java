@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface GioHangService {
     List<GioHang> getAllGioHangs();
     Optional<GioHang> getGioHangById(Integer id);
-    GioHang save(GioHangDTO gioHangDTO);
+    GioHang create(GioHangDTO gioHangDTO);
     GioHang update(GioHangDTO gioHangDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class GioHangServiceImpl implements GioHangService {
 
     @Override
     @Transactional
-    public GioHang save(GioHangDTO gioHangDTO) {
+    public GioHang create(GioHangDTO gioHangDTO) {
         GioHang gioHang = modelMapper.map(gioHangDTO, GioHang.class);
         return gioHangRepo.save(gioHang);
     }

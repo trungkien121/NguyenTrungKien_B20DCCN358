@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChiTietNhomQuyenDTO {
-    private Long id;
-    private Long nguoiDungId;  // Chỉ lấy ID của NguoiDung
-    private Long nhomQuyenId;  // Chỉ lấy ID của NhomQuyen
+    private Integer id;
+    private NguoiDungDTO nguoiDung;  // Chỉ lấy ID của NguoiDung
+    private NhomQuyenDTO nhomQuyen;  // Chỉ lấy ID của NhomQuyen
 }

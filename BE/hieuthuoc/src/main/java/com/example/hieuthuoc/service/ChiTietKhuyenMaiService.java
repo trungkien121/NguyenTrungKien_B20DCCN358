@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ChiTietKhuyenMaiService {
     List<ChiTietKhuyenMai> getAllChiTietKhuyenMais();
     Optional<ChiTietKhuyenMai> getChiTietKhuyenMaiById(Integer id);
-    ChiTietKhuyenMai save(ChiTietKhuyenMaiDTO chiTietKhuyenMaiDTO);
+    ChiTietKhuyenMai create(ChiTietKhuyenMaiDTO chiTietKhuyenMaiDTO);
     ChiTietKhuyenMai update(ChiTietKhuyenMaiDTO chiTietKhuyenMaiDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class ChiTietKhuyenMaiServiceImpl implements ChiTietKhuyenMaiService {
 
     @Override
     @Transactional
-    public ChiTietKhuyenMai save(ChiTietKhuyenMaiDTO chiTietKhuyenMaiDTO) {
+    public ChiTietKhuyenMai create(ChiTietKhuyenMaiDTO chiTietKhuyenMaiDTO) {
         ChiTietKhuyenMai chiTietKhuyenMai = modelMapper.map(chiTietKhuyenMaiDTO, ChiTietKhuyenMai.class);
         return chiTietKhuyenMaiRepo.save(chiTietKhuyenMai);
     }

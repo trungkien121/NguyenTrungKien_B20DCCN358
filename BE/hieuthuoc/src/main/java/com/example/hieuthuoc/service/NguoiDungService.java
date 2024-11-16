@@ -29,13 +29,13 @@ import com.example.hieuthuoc.entity.NhomQuyen;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 
 public interface NguoiDungService {
-	PageDTO<List<NguoiDungDTO>> getNguoiDungByName(SearchDTO searchDTO);
+	NguoiDungDTO getById(Integer id);
 
-	NguoiDungDTO getNguoiDungById(Integer id);
+	NguoiDungDTO getByTenDangNhap(String tenDangNhap);
 
-	NguoiDungDTO getNguoiDungByTenDangNhap(String tenDangNhap);
+	PageDTO<List<NguoiDungDTO>> getByHoTen(SearchDTO searchDTO);
 
-	NguoiDung save(NguoiDungDTO nguoiDungDTO);
+	NguoiDung create(NguoiDungDTO nguoiDungDTO);
 
 	NguoiDung update(NguoiDungDTO nguoiDungDTO);
 
@@ -51,7 +51,23 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public PageDTO<List<NguoiDungDTO>> getNguoiDungByName(SearchDTO searchDTO) {
+	public NguoiDungDTO getById(Integer id) {
+		NguoiDung nguoiDung = nguoiDungRepo.findById(id).orElse(null);
+		if (nguoiDung != null) {
+			return modelMapper.map(nguoiDung, NguoiDungDTO.class);
+		}
+
+		return null;
+	}
+	
+	@Override
+	public NguoiDungDTO getByTenDangNhap(String tenDangNhap) {
+		NguoiDung nguoiDung = nguoiDungRepo.findByTenDangNhap(tenDangNhap);
+		return modelMapper.map(nguoiDung, NguoiDungDTO.class);
+	}
+	
+	@Override
+	public PageDTO<List<NguoiDungDTO>> getByHoTen(SearchDTO searchDTO) {
 
 		Sort sortBy = Sort.by("hoTen").ascending();
 
@@ -66,6 +82,10 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		if (searchDTO.getSize() == null) {
 			searchDTO.setSize(20);
 		}
+		
+		if (searchDTO.getKeyWord() == null) {
+			searchDTO.setKeyWord("");
+		}
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
 		Page<NguoiDung> page = nguoiDungRepo.searchByName("%" + searchDTO.getKeyWord() + "%", pageRequest);
 
@@ -73,27 +93,17 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		pageDTO.setTotalElements(page.getTotalElements());
 		pageDTO.setTotalPages(page.getTotalPages());
 
-		List<NguoiDungDTO> nguoidungs = page.get().map(nguoidung -> modelMapper.map(nguoidung, NguoiDungDTO.class))
+		List<NguoiDungDTO> nguoiDungDTOs = page.get().map(nguoidung -> modelMapper.map(nguoidung, NguoiDungDTO.class))
 				.collect(Collectors.toList());
 
-		pageDTO.setData(nguoidungs);
+		pageDTO.setData(nguoiDungDTOs);
 
 		return pageDTO;
 	}
 
 	@Override
-	public NguoiDungDTO getNguoiDungById(Integer id) {
-		NguoiDung nguoiDung = nguoiDungRepo.findById(id).orElse(null);
-		if (nguoiDung != null) {
-			return modelMapper.map(nguoiDung, NguoiDungDTO.class);
-		}
-
-		return null;
-	}
-
-	@Override
 	@Transactional
-	public NguoiDung save(NguoiDungDTO nguoiDungDTO) {
+	public NguoiDung create(NguoiDungDTO nguoiDungDTO) {
 		NguoiDung nguoiDung = modelMapper.map(nguoiDungDTO, NguoiDung.class);
 		nguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(nguoiDung.getMatKhau()));
 		return nguoiDungRepo.save(nguoiDung);
@@ -134,11 +144,5 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 		return new org.springframework.security.core.userdetails.User(nguoiDung.getTenDangNhap(),
 				nguoiDung.getMatKhau(), authorities);
-	}
-
-	@Override
-	public NguoiDungDTO getNguoiDungByTenDangNhap(String tenDangNhap) {
-		NguoiDung nguoiDung = nguoiDungRepo.findByTenDangNhap(tenDangNhap);
-		return modelMapper.map(nguoiDung, NguoiDungDTO.class);
 	}
 }

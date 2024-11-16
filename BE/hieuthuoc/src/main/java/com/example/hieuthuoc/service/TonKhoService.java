@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TonKhoService {
     List<TonKho> getAllTonKhos();
     Optional<TonKho> getTonKhoById(Integer id);
-    TonKho save(TonKhoDTO tonKhoDTO);
+    TonKho create(TonKhoDTO tonKhoDTO);
     TonKho update(TonKhoDTO tonKhoDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class TonKhoServiceImpl implements TonKhoService {
 
     @Override
     @Transactional
-    public TonKho save(TonKhoDTO tonKhoDTO) {
+    public TonKho create(TonKhoDTO tonKhoDTO) {
         TonKho tonKho = modelMapper.map(tonKhoDTO, TonKho.class);
         return tonKhoRepo.save(tonKho);
     }

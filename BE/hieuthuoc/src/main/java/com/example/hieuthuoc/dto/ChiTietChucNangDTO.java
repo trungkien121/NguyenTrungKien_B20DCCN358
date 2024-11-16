@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ChiTietChucNangDTO {
     private Integer id;
-    private Integer nhomQuyenId;  // Chỉ lấy ID của NhomQuyen
-    private Integer chucNangId;    // Chỉ lấy ID của ChucNang
+    private NhomQuyenDTO nhomQuyen;  // Chỉ lấy ID của NhomQuyen
+    private ChucNangDTO chucNang;    // Chỉ lấy ID của ChucNang
 }

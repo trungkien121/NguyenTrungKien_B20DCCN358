@@ -35,7 +35,7 @@ public class JwtService {
 	// thành công)
 	public String generateToken(String tenDangNhap) {
 		Map<String, Object> claims = new HashMap<>();
-		NguoiDungDTO nguoiDung = nguoiDungService.getNguoiDungByTenDangNhap(tenDangNhap);
+		NguoiDungDTO nguoiDung = nguoiDungService.getByTenDangNhap(tenDangNhap);
 		claims.put("id", nguoiDung.getId());
 		claims.put("lastName", nguoiDung.getHoTen());
 

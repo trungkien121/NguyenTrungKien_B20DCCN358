@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ThanhPhanThuocService {
     List<ThanhPhanThuoc> getAllThanhPhanThuocs();
     Optional<ThanhPhanThuoc> getThanhPhanThuocById(Integer id);
-    ThanhPhanThuoc save(ThanhPhanThuocDTO thanhPhanThuocDTO);
+    ThanhPhanThuoc create(ThanhPhanThuocDTO thanhPhanThuocDTO);
     ThanhPhanThuoc update(ThanhPhanThuocDTO thanhPhanThuocDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class ThanhPhanThuocServiceImpl implements ThanhPhanThuocService {
 
     @Override
     @Transactional
-    public ThanhPhanThuoc save(ThanhPhanThuocDTO thanhPhanThuocDTO) {
+    public ThanhPhanThuoc create(ThanhPhanThuocDTO thanhPhanThuocDTO) {
         ThanhPhanThuoc thanhPhanThuoc = modelMapper.map(thanhPhanThuocDTO, ThanhPhanThuoc.class);
         return thanhPhanThuocRepo.save(thanhPhanThuoc);
     }

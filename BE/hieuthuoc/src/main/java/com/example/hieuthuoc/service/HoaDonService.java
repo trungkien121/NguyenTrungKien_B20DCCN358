@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface HoaDonService {
     List<HoaDon> getAllHoaDons();
     Optional<HoaDon> getHoaDonById(Integer id);
-    HoaDon save(HoaDonDTO hoaDonDTO);
+    HoaDon create(HoaDonDTO hoaDonDTO);
     HoaDon update(HoaDonDTO hoaDonDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class HoaDonServiceImpl implements HoaDonService {
 
     @Override
     @Transactional
-    public HoaDon save(HoaDonDTO hoaDonDTO) {
+    public HoaDon create(HoaDonDTO hoaDonDTO) {
         HoaDon hoaDon = modelMapper.map(hoaDonDTO, HoaDon.class);
         return hoaDonRepo.save(hoaDon);
     }

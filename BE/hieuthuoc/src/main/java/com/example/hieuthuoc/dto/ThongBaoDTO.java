@@ -11,6 +11,6 @@ public class ThongBaoDTO {
     private String noiDung;
     private String loaiThongBao;
     private Date ngayTao;
-    private Integer nguoiDungId; // Chỉ số ID của người dùng
+    private NguoiDungDTO nguoiDung; // Chỉ số ID của người dùng
     private Boolean trangThai; // Trạng thái đọc/không đọc
 }

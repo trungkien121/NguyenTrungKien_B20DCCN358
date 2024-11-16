@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface DoiTuongService {
     List<DoiTuong> getAllDoiTuongs();
     Optional<DoiTuong> getDoiTuongById(Integer id);
-    DoiTuong save(DoiTuongDTO doiTuongDTO);
+    DoiTuong create(DoiTuongDTO doiTuongDTO);
     DoiTuong update(DoiTuongDTO doiTuongDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class DoiTuongServiceImpl implements DoiTuongService {
 
     @Override
     @Transactional
-    public DoiTuong save(DoiTuongDTO doiTuongDTO) {
+    public DoiTuong create(DoiTuongDTO doiTuongDTO) {
         DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
         return doiTuongRepo.save(doiTuong);
     }

@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class PhieuNhapDTO {
     private Integer id;
-    private Integer nhaCungCapId; // Chỉ số ID của nhà cung cấp
-    private Integer nguoiDungId;    // Chỉ số ID của người dùng
+    private NhaCungCapDTO nhaCungCap; // Chỉ số ID của nhà cung cấp
+    private NguoiDungDTO nguoiDung;    // Chỉ số ID của người dùng
     private Date ngayNhap;
     private Double tongTien;
 

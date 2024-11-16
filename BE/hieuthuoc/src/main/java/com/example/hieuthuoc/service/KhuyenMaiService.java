@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface KhuyenMaiService {
     List<KhuyenMai> getAllKhuyenMais();
     Optional<KhuyenMai> getKhuyenMaiById(Integer id);
-    KhuyenMai save(KhuyenMaiDTO khuyenMaiDTO);
+    KhuyenMai create(KhuyenMaiDTO khuyenMaiDTO);
     KhuyenMai update(KhuyenMaiDTO khuyenMaiDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
     @Override
     @Transactional
-    public KhuyenMai save(KhuyenMaiDTO khuyenMaiDTO) {
+    public KhuyenMai create(KhuyenMaiDTO khuyenMaiDTO) {
         KhuyenMai khuyenMai = modelMapper.map(khuyenMaiDTO, KhuyenMai.class);
         return khuyenMaiRepo.save(khuyenMai);
     }

@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,40 +29,40 @@ public class NguoiDungController {
 	NguoiDungService nguoiDungService;
 	
 	@GetMapping("/get")
-	public ResponseDTO<NguoiDungDTO> getNguoiDungById(@RequestParam("id") int id)
+	public ResponseDTO<NguoiDungDTO> getById(@RequestParam("id") int id)
 			throws Exception {
 
-		NguoiDungDTO nguoiDungDTO = nguoiDungService.getNguoiDungById(id);
+		NguoiDungDTO nguoiDungDTO = nguoiDungService.getById(id);
 		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
 	}
 
-	@GetMapping("/list")
-	public ResponseDTO<PageDTO<List<NguoiDungDTO>>> getNguoiDungByName(@ModelAttribute @Valid SearchDTO searchDTO)
+	@PostMapping("/list")
+	public ResponseDTO<PageDTO<List<NguoiDungDTO>>> getByName(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
-		PageDTO<List<NguoiDungDTO>> nguoiDungDTOs = nguoiDungService.getNguoiDungByName(searchDTO);
+		PageDTO<List<NguoiDungDTO>> nguoiDungDTOs = nguoiDungService.getByHoTen(searchDTO);
 		return ResponseDTO.<PageDTO<List<NguoiDungDTO>>>builder().status(200).msg("ok").data(nguoiDungDTOs).build();
 	}
 	
 	
-	@PostMapping("/save")
-	public ResponseDTO<NguoiDungDTO> createNguoiDung(@ModelAttribute @Valid NguoiDungDTO nguoiDungDTO)
+	@PostMapping("/create")
+	public ResponseDTO<NguoiDungDTO> create(@RequestBody @Valid NguoiDungDTO nguoiDungDTO)
 			throws Exception {
 
-		nguoiDungService.save(nguoiDungDTO);
+		nguoiDungService.create(nguoiDungDTO);
 		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<NguoiDungDTO> updateNguoiDung(@ModelAttribute @Valid NguoiDungDTO nguoiDungDTO)
+	public ResponseDTO<NguoiDungDTO> update(@RequestBody @Valid NguoiDungDTO nguoiDungDTO)
 			throws Exception {
 
-		nguoiDungService.save(nguoiDungDTO);
+		nguoiDungService.update(nguoiDungDTO);
 		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseDTO<Void> deleteNguoiDung(@RequestParam("id") int id) {
+	public ResponseDTO<Void> delete(@RequestParam("id") int id) {
 		nguoiDungService.delete(id);
 		return ResponseDTO.<Void>builder().status(200).msg("ok").build();
 	}

@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface NhaSanXuatService {
     List<NhaSanXuat> getAllNhaSanXuats();
     Optional<NhaSanXuat> getNhaSanXuatById(Integer id);
-    NhaSanXuat save(NhaSanXuatDTO nhaSanXuatDTO);
+    NhaSanXuat create(NhaSanXuatDTO nhaSanXuatDTO);
     NhaSanXuat update(NhaSanXuatDTO nhaSanXuatDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class NhaSanXuatServiceImpl implements NhaSanXuatService {
 
     @Override
     @Transactional
-    public NhaSanXuat save(NhaSanXuatDTO nhaSanXuatDTO) {
+    public NhaSanXuat create(NhaSanXuatDTO nhaSanXuatDTO) {
         NhaSanXuat nhaSanXuat = modelMapper.map(nhaSanXuatDTO, NhaSanXuat.class);
         return nhaSanXuatRepo.save(nhaSanXuat);
     }

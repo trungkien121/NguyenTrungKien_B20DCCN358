@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class DonHangDTO {
     private Integer id;
-    private Integer khachHangId; // ID của khách hàng
-    private Integer nguoiDungId;  // ID của người dùng
+    private NguoiDungDTO khachHang; // ID của khách hàng
+    private NguoiDungDTO nguoiDung;  // ID của người dùng
     private String tenKhachHang;
     private String soDienThoai;
     private String diaChi;
@@ -22,3 +22,4 @@ public class DonHangDTO {
         DANG_XU_LY, DANG_GIAO, DA_GIAO, DA_HUY, TRA_HANG
     }
 }
+

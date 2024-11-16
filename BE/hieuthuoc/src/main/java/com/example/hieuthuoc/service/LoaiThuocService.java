@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface LoaiThuocService {
     List<LoaiThuoc> getAllLoaiThuocs();
     Optional<LoaiThuoc> getLoaiThuocById(Integer id);
-    LoaiThuoc save(LoaiThuocDTO loaiThuocDTO);
+    LoaiThuoc create(LoaiThuocDTO loaiThuocDTO);
     LoaiThuoc update(LoaiThuocDTO loaiThuocDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
     @Override
     @Transactional
-    public LoaiThuoc save(LoaiThuocDTO loaiThuocDTO) {
+    public LoaiThuoc create(LoaiThuocDTO loaiThuocDTO) {
         LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
         return loaiThuocRepo.save(loaiThuoc);
     }

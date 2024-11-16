@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ChiTietDonHangService {
     List<ChiTietDonHang> getAllChiTietDonHangs();
     Optional<ChiTietDonHang> getChiTietDonHangById(Integer id);
-    ChiTietDonHang save(ChiTietDonHangDTO chiTietDonHangDTO);
+    ChiTietDonHang create(ChiTietDonHangDTO chiTietDonHangDTO);
     ChiTietDonHang update(ChiTietDonHangDTO chiTietDonHangDTO);
     void delete(Integer id);
 }
@@ -40,7 +40,7 @@ class ChiTietDonHangServiceImpl implements ChiTietDonHangService {
 
     @Override
     @Transactional
-    public ChiTietDonHang save(ChiTietDonHangDTO chiTietDonHangDTO) {
+    public ChiTietDonHang create(ChiTietDonHangDTO chiTietDonHangDTO) {
         ChiTietDonHang chiTietDonHang = modelMapper.map(chiTietDonHangDTO, ChiTietDonHang.class);
         return chiTietDonHangRepo.save(chiTietDonHang);
     }

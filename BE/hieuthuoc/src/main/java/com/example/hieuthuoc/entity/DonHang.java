@@ -3,6 +3,8 @@ package com.example.hieuthuoc.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,10 +35,14 @@ public class DonHang {
 	private String email;
 	private Date ngayLap;
 	private Double tongTien;
+	private Date ngayGiao;
+	
+    @Enumerated(EnumType.STRING)
+    private TrangThaiGiaoHang trangThaiGiaoHang;
 
 	public enum TrangThaiGiaoHang {
 		DANG_XU_LY, DANG_GIAO, DA_GIAO, DA_HUY, TRA_HANG,
 	}
 
-	private Date ngayGiao;
+
 }
