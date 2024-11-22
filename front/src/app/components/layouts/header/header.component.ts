@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "src/app/_service/auth/authentication.service";
 import { ToastrService } from "ngx-toastr";
 import { LoaderService } from "src/app/_service/comm/loader.service";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
+import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 
 declare var $: any;
 
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   isAuthenticate: boolean = false;
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: NguoidungService,
     private toastr: ToastrService,
     private loading: LoaderService
   ) {}

@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       if (res.status == CommonConstant.STATUS_OK_200) {
         const _token = res.data;
         // const decodedToken = jwtDecode(_token);
-        // console.log("Thông tin token:", decodedToken);
+        // conshole.log("Thông tin token:", decodedToken);
         if (_token) {
           Cookie.set(
             AuthConstant.ACCESS_TOKEN_KEY,

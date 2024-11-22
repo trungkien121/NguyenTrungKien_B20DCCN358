@@ -6,21 +6,18 @@ import {
   RouterStateSnapshot,
 } from "@angular/router";
 import { lastValueFrom } from "rxjs";
-import { AuthenticationService } from "../_service/auth/authentication.service";
 import { CommonConstant } from "../_constant/common.constants";
 import { Quyen } from "../_model/auth/quyen";
 import { DataResponse } from "../_model/resp/data-response";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "../_constant/auth.constant";
+import { NguoidungService } from "../_service/auth/nguoidung.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class RoleGuard implements CanActivate {
-  constructor(
-    public router: Router,
-    private authService: AuthenticationService
-  ) {}
+  constructor(public router: Router, private authService: NguoidungService) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let isPermission: boolean = false;

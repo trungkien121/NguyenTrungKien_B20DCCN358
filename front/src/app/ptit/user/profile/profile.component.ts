@@ -7,22 +7,39 @@ import { DangNhapService } from "src/app/_service/dangnhap.service";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { jwtDecode } from "jwt-decode";
-import { NguoidungService } from "src/app/_service/nguoidung.service";
+import { NguoiDung } from "src/app/_model/auth/nguoidung";
+import { ToastrService } from "ngx-toastr";
+import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
 })
 export class ProfileComponent implements OnInit {
-  signup: string | any[] | null | undefined;
+  user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+  userUpdate: NguoiDung = {};
+
   constructor(
     private nguoidungService: NguoidungService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {}
-  user: DangNhapModel = {
-    tenDangNhap: "",
-    matKhau: "",
-  };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userUpdate = { ...this.user };
+    console.log("user", this.userUpdate);
+  }
+
+  async updateUser() {
+    this.nguoidungService.update(this.userUpdate).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.toastService.success("Update succuess!");
+
+        // Cập nhật lại userInfo trong localStorage
+        localStorage.setItem("userInfo", JSON.stringify(this.userUpdate));
+      } else {
+        this.toastService.error("Update error!");
+      }
+    });
+  }
 }

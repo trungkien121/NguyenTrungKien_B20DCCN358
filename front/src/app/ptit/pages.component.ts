@@ -2,12 +2,12 @@ import { AuthConstant } from "./../_constant/auth.constant";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Cookie } from "ng2-cookies";
-import { CommonConstant } from "../_constant/common.constants";
-import { lastValueFrom } from "rxjs";
-import { AuthenticationService } from "../_service/auth/authentication.service";
 import { NguoiDung } from "../_model/auth/nguoidung";
 import { Quyen } from "../_model/auth/quyen";
 import { jwtDecode } from "jwt-decode";
+import { NguoidungService } from "../_service/auth/nguoidung.service";
+import { lastValueFrom } from "rxjs";
+import { CommonConstant } from "../_constant/common.constants";
 
 @Component({
   selector: "app-pages",
@@ -19,7 +19,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private authService: AuthenticationService,
+    private authService: NguoidungService,
     public router: Router
   ) {
     // this.activatedRoute.queryParams.subscribe((params) => {
@@ -36,20 +36,22 @@ export class PagesComponent implements OnInit, AfterViewInit {
   }
 
   async getUserInfo(): Promise<void> {
-    // const resp = await lastValueFrom(this.authService.getUserInfo());
-    // if (resp.status == CommonConstant.RESULT_OK) {
-    //   let userInfo: NguoiDung = resp.responseData;
-    //   this.roleUser = userInfo.nhomQuuyen ?? [];
-
-    //   localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    // }
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
     const userInfo = jwtDecode(_token) as NguoiDung;
-    console.log("Thông tin token:", userInfo);
-    this.roleUser = userInfo.nhomQuuyen ?? [];
+    console.log("Thông tin token:", userInfo.id);
+    if (userInfo.id) {
+      const resp = await lastValueFrom(
+        this.authService.getUserInfo(userInfo.id)
+      );
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        let userInfo: NguoiDung = resp.data;
+        this.roleUser = userInfo.nhomQuyens ?? [];
 
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      }
+    }
+
     // if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
     //   this.router.navigate(["/sys"]);
     // } else if (this.hasRole(AuthConstant.ROLE_NORMAL)) {

@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { Quyen } from "src/app/_model/auth/quyen";
-import { AuthenticationService } from "src/app/_service/auth/authentication.service";
 import { Subscription } from "rxjs";
 
 @Component({

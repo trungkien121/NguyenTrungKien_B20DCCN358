@@ -11,7 +11,7 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class AuthenticationService {
+export class NguoidungService {
   constructor(
     private http: HttpClient,
 
@@ -58,10 +58,15 @@ export class AuthenticationService {
     return true;
   }
 
-  getUserInfo(): Observable<DataResponse> {
+  getUserInfo(id: any): Observable<any> {
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+    let params = new HttpParams().set("id", id?.toString() || "");
+
     const url = environment.backApiUrl + "/nguoidung/get";
-    return this.http.get<DataResponse>(url, { headers: headers });
+    return this.http.get<DataResponse>(url, {
+      headers: headers,
+      params: params,
+    });
   }
 
   getRoles(): Observable<DataResponse> {
@@ -71,12 +76,24 @@ export class AuthenticationService {
   }
 
   update(user: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/nguoidung/updateUserInfo`;
-    const headers: HttpHeaders = HeadersUtil.getHeadersAuthCover();
+    const apiUrl = environment.backApiUrl + `/nguoidung/update`;
+    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
 
     let params = new HttpParams();
 
-    return this.http.post(`${apiUrl}`, user, {
+    return this.http.put(`${apiUrl}`, user, {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  create(userInfo: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/create`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    let params = new HttpParams();
+
+    return this.http.post(`${apiUrl}`, userInfo, {
       headers: headers,
       params: params,
     });
