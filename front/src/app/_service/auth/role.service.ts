@@ -1,6 +1,6 @@
 // role.service.ts
 import { Injectable } from "@angular/core";
-import { Role } from "src/app/_model/auth/role";
+import { Role } from "src/app/_model/auth/quyen";
 
 @Injectable({
   providedIn: "root",

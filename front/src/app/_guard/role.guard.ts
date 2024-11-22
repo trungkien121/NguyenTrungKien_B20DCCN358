@@ -8,7 +8,7 @@ import {
 import { lastValueFrom } from "rxjs";
 import { AuthenticationService } from "../_service/auth/authentication.service";
 import { CommonConstant } from "../_constant/common.constants";
-import { Role } from "../_model/auth/role";
+import { Quyen } from "../_model/auth/quyen";
 import { DataResponse } from "../_model/resp/data-response";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "../_constant/auth.constant";
@@ -34,7 +34,7 @@ export class RoleGuard implements CanActivate {
         .then((resp: DataResponse) => {
           if (CommonConstant.RESULT_OK == resp.status) {
             let temp: any = resp.responseData;
-            let roleStr: string[] = [...temp].map((role: Role) => role.roleId);
+            let roleStr: string[] = [...temp].map((role: Quyen) => role.id);
             isPermission = roleStr.some((role: string) => roles.includes(role));
           }
         })

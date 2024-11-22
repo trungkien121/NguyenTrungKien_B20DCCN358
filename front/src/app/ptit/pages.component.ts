@@ -5,8 +5,8 @@ import { Cookie } from "ng2-cookies";
 import { CommonConstant } from "../_constant/common.constants";
 import { lastValueFrom } from "rxjs";
 import { AuthenticationService } from "../_service/auth/authentication.service";
-import { UserInfo } from "../_model/auth/user-info";
-import { Role } from "../_model/auth/role";
+import { NguoiDung } from "../_model/auth/nguoidung";
+import { Quyen } from "../_model/auth/quyen";
 
 @Component({
   selector: "app-pages",
@@ -14,7 +14,7 @@ import { Role } from "../_model/auth/role";
   styleUrls: ["./pages.component.css"],
 })
 export class PagesComponent implements OnInit, AfterViewInit {
-  roleUser: Role[] = [];
+  roleUser: Quyen[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,8 +37,8 @@ export class PagesComponent implements OnInit, AfterViewInit {
   async getUserInfo(): Promise<void> {
     const resp = await lastValueFrom(this.authService.getUserInfo());
     if (resp.status == CommonConstant.RESULT_OK) {
-      let userInfo: UserInfo = resp.responseData;
-      this.roleUser = userInfo.roles ?? [];
+      let userInfo: NguoiDung = resp.responseData;
+      this.roleUser = userInfo.nhomQuuyen ?? [];
 
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
     }

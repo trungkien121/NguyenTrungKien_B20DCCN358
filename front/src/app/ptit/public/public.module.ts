@@ -8,15 +8,21 @@ import { TreeTableModule } from "primeng/treetable";
 import { HomeComponent } from "./home/home.component";
 import { FormsModule } from "@angular/forms";
 import { LoginComponent } from "./login/login.component";
+import { SignupComponent } from "./sign-up/signup.component";
 
 @NgModule({
-  declarations: [PublicComponent, HomeComponent, LoginComponent],
+  declarations: [
+    PublicComponent,
+    HomeComponent,
+    LoginComponent,
+    SignupComponent,
+  ],
   imports: [
     CommonModule,
     PublicRoutingModule,
     TranslateModule,
     TreeTableModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class DashboardsModule {}

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
-import { Role } from "src/app/_model/auth/role";
+import { Quyen } from "src/app/_model/auth/quyen";
 import { AuthenticationService } from "src/app/_service/auth/authentication.service";
 import { Subscription } from "rxjs";
 
@@ -15,7 +15,7 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
 
   AuthConstant = AuthConstant;
 
-  @Input() roleUser: Role[] = [];
+  @Input() roleUser: Quyen[] = [];
   // roleUser: Role[] = [];
   userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
   isAuthenticate: boolean = false;
@@ -55,7 +55,7 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
 
   hasRole(roleId: string): boolean {
     return this.roleUser
-      ? this.roleUser.some((role) => role.roleId == roleId)
+      ? this.roleUser.some((role) => role.id == roleId)
       : false;
   }
 }
