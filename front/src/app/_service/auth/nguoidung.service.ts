@@ -98,4 +98,15 @@ export class NguoidungService {
       params: params,
     });
   }
+
+  getUserLst(request: any): Observable<any> {
+    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+    let params = new HttpParams();
+
+    const url = environment.backApiUrl + "/nguoidung/list";
+    return this.http.post<DataResponse>(url, request, {
+      headers: headers,
+      params: params,
+    });
+  }
 }
