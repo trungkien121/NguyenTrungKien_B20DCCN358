@@ -5,8 +5,8 @@ import { AuthConstant } from "../_constant/auth.constant";
 export class HeadersUtil {
   public static getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      // "Content-Type": "application/json",
-      "Content-Type":"x-www-form-urlencoded"
+      "Content-Type": "application/json",
+      // "Content-Type":"x-www-form-urlencoded"
     });
   }
 
