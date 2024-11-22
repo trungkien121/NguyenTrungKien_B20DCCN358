@@ -22,9 +22,10 @@ import { DataViewModule } from "primeng/dataview";
 import { PaginatorModule } from "primeng/paginator";
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UserComponent, ProfileComponent],
 
   imports: [
     CommonModule,

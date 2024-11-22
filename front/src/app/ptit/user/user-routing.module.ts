@@ -4,6 +4,7 @@ import { UserComponent } from "./user.component";
 import { RoleGuard } from "src/app/_guard/role.guard";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { HomeComponent } from "../public/home/home.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,13 @@ const routes: Routes = [
         path: "home",
         component: HomeComponent,
         // resolve: { redirect: RedirectResolver },
+        // canActivate: [RoleGuard],
+        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+      },
+
+      {
+        path: "profile",
+        component: ProfileComponent,
         // canActivate: [RoleGuard],
         // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
       },

@@ -6,6 +6,7 @@ import { DangNhapModel } from "src/app/_model/dangnhap";
 import { DangNhapService } from "src/app/_service/dangnhap.service";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: "app-login",
@@ -29,6 +30,8 @@ export class LoginComponent implements OnInit {
     this.dangNhapService.dangNhap(this.user).subscribe((res: any) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         const _token = res.data;
+        // const decodedToken = jwtDecode(_token);
+        // console.log("Thông tin token:", decodedToken);
         if (_token) {
           Cookie.set(
             AuthConstant.ACCESS_TOKEN_KEY,
@@ -37,7 +40,8 @@ export class LoginComponent implements OnInit {
             "/"
           );
         }
-        this.router.navigate(["/sys/product"]);
+        // this.router.navigate(["/sys/product"]);
+        this.router.navigate(["/home"]);
       }
       // console.log(res)
     });

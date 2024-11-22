@@ -7,6 +7,7 @@ import { lastValueFrom } from "rxjs";
 import { AuthenticationService } from "../_service/auth/authentication.service";
 import { NguoiDung } from "../_model/auth/nguoidung";
 import { Quyen } from "../_model/auth/quyen";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: "app-pages",
@@ -35,14 +36,20 @@ export class PagesComponent implements OnInit, AfterViewInit {
   }
 
   async getUserInfo(): Promise<void> {
-    const resp = await lastValueFrom(this.authService.getUserInfo());
-    if (resp.status == CommonConstant.RESULT_OK) {
-      let userInfo: NguoiDung = resp.responseData;
-      this.roleUser = userInfo.nhomQuuyen ?? [];
+    // const resp = await lastValueFrom(this.authService.getUserInfo());
+    // if (resp.status == CommonConstant.RESULT_OK) {
+    //   let userInfo: NguoiDung = resp.responseData;
+    //   this.roleUser = userInfo.nhomQuuyen ?? [];
 
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    }
+    //   localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    // }
+    const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
+    const userInfo = jwtDecode(_token) as NguoiDung;
+    console.log("Thông tin token:", userInfo);
+    this.roleUser = userInfo.nhomQuuyen ?? [];
+
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
     // if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
     //   this.router.navigate(["/sys"]);
     // } else if (this.hasRole(AuthConstant.ROLE_NORMAL)) {
