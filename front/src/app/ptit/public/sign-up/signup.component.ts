@@ -28,14 +28,30 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
-  check() {}
+  check(): boolean {
+    if (
+      !this.user.tenDangNhap?.trim() ||
+      !this.user.matKhau?.trim() ||
+      !this.user.email?.trim() ||
+      !this.user.diaChi?.trim() ||
+      !this.user.soDienThoai?.trim() ||
+      !this.user.hoTen?.trim()
+    ) {
+      this.toastService.error("Vui lòng điền đầy đủ thông tin");
+      return false;
+    }
+    return true;
+  }
 
-  singup() {
-    // console.log("user", this.user);
+  signup() {
+    if (!this.check()) {
+      return;
+    }
+
     this.nguoidungService.create(this.user).subscribe((res: any) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        // this.router.navigate(["/login"]);
         this.toastService.success("Đăng ký thành công");
+        // this.router.navigate(["/login"]);
       }
     });
   }
