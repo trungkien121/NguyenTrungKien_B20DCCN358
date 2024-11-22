@@ -53,8 +53,7 @@ export class ProductCreatementComponent implements OnInit {
         value: "0",
       },
     ];
-    this.product = 
-    {
+    this.product = {
       id: "P001",
       tenThuoc: "Thuốc giảm đau",
       maThuoc: "TD001",
@@ -79,25 +78,22 @@ export class ProductCreatementComponent implements OnInit {
       moTaNgan: "Thuốc giảm đau phổ biến",
       trangThai: true,
       ghiChu: "Để nơi khô ráo, tránh ánh sáng",
-    }
-
-
-  } 
+    };
+  }
   search() {}
 
   onStatusChange(newStatus: string) {
-    this.modelSearch.statusSearch = newStatus;
+    // this.modelSearch.statusSearch = newStatus;
   }
 
-  onVisibilityChange(newStatus: string) {
-    this.modelSearch.visibilySearch = newStatus;
-  }
+  onVisibilityChange(newStatus: string) {}
 
   onCategoryChange(newCategory: string) {
-    this.modelSearch.categorySearch = newCategory;
+    // this.modelSearch.categorySearch = newCategory;
   }
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
-  files: { name: string; size: number; thumbnail: string; error?: string }[] = []; // Danh sách các tệp hình ảnh
+  files: { name: string; size: number; thumbnail: string; error?: string }[] =
+    []; // Danh sách các tệp hình ảnh
 
   // Hàm xử lý khi hình ảnh được chọn
   onImageSelected(event: Event) {
@@ -137,8 +133,6 @@ export class ProductCreatementComponent implements OnInit {
 
   // Hàm xóa tệp khỏi danh sách
   removeFile(file: { name: string }) {
-    this.files = this.files.filter(f => f.name !== file.name); // Xóa tệp khỏi danh sách
+    this.files = this.files.filter((f) => f.name !== file.name); // Xóa tệp khỏi danh sách
   }
 }
-
-

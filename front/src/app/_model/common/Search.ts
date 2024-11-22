@@ -1,11 +1,7 @@
 export class SearchModel {
-  keySearch?: string;
-  statusSearch?: string;
-  visibilySearch?: string;
-  categorySearch?: string;
-  courseSearch?: string;
-  typeSearch?: string;
-
-  limit?: number;
-  offset?: number;
+  keyWord?: string;
+  currentPage?: string;
+  size?: number;
+  id?: number;
+  sortedField?: string;
 }
