@@ -9,11 +9,11 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class ProductService {
+export class DonhangService {
   constructor(private http: HttpClient) {}
 
-  getProductLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/list`;
+  getLst(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -21,8 +21,8 @@ export class ProductService {
     });
   }
 
-  createProduct(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/create`;
+  create(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -30,8 +30,8 @@ export class ProductService {
     });
   }
 
-  getProduct(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/get`;
+  get(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/get`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -42,8 +42,8 @@ export class ProductService {
     });
   }
 
-  deleteProduct(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/delete`;
+  delete(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -54,8 +54,8 @@ export class ProductService {
     });
   }
 
-  updateProduct(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/update`;
+  update(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

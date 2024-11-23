@@ -14,8 +14,10 @@ export class ProductCreatementComponent implements OnInit {
   modelSearch: SearchModel = {};
   optionLabel: string = "";
 
-  statusOptions: OptionSelect[] = [];
-  visibilityOptions: OptionSelect[] = [];
+  statusOptions: any = {
+    name: "",
+    value: true,
+  };
   categoryOption: OptionSelect[] = [];
 
   constructor(private productService: ProductService) {}
@@ -24,22 +26,11 @@ export class ProductCreatementComponent implements OnInit {
     this.statusOptions = [
       {
         name: "Đang bán",
-        value: "1",
+        value: true,
       },
       {
         name: "Ngừng bán",
-        value: "0",
-      },
-    ];
-
-    this.visibilityOptions = [
-      {
-        name: "Hiển thị",
-        value: "1",
-      },
-      {
-        name: "Không hiển thị",
-        value: "0",
+        value: false,
       },
     ];
 

@@ -1,22 +1,22 @@
 // role.service.ts
 import { Injectable } from "@angular/core";
-import { Role } from "src/app/_model/auth/quyen";
+import { Quyen } from "src/app/_model/auth/quyen";
 
 @Injectable({
   providedIn: "root",
 })
 export class RoleService {
-  roleUser: Role[] | undefined;
+  roleUser: Quyen[] | undefined;
 
   constructor() {}
 
   hasRole(roleId: string): boolean {
     return this.roleUser
-      ? this.roleUser.some((role) => role.roleId === roleId)
+      ? this.roleUser.some((role) => role.id === roleId)
       : false;
   }
 
-  setRoles(roles: Role[]): void {
+  setRoles(roles: Quyen[]): void {
     this.roleUser = roles;
   }
 }

@@ -58,7 +58,13 @@ export class NguoidungService {
     return true;
   }
 
-  getUserInfo(id: any): Observable<any> {
+  getRoles(): Observable<DataResponse> {
+    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+    const url = environment.backApiUrl + "/nguoidung/getRoles";
+    return this.http.get<DataResponse>(url, { headers: headers });
+  }
+
+  get(id: any): Observable<any> {
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
     let params = new HttpParams().set("id", id?.toString() || "");
 
@@ -67,12 +73,6 @@ export class NguoidungService {
       headers: headers,
       params: params,
     });
-  }
-
-  getRoles(): Observable<DataResponse> {
-    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
-    const url = environment.backApiUrl + "/nguoidung/getRoles";
-    return this.http.get<DataResponse>(url, { headers: headers });
   }
 
   update(user: any): Observable<any> {
@@ -105,6 +105,18 @@ export class NguoidungService {
 
     const url = environment.backApiUrl + "/nguoidung/list";
     return this.http.post<DataResponse>(url, request, {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  delete(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/delete`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    let params = new HttpParams().set("id", id?.toString() || "");
+
+    return this.http.delete(`${apiUrl}`, {
       headers: headers,
       params: params,
     });

@@ -39,11 +39,9 @@ export class PagesComponent implements OnInit, AfterViewInit {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
     const userInfo = jwtDecode(_token) as NguoiDung;
-    console.log("Thông tin token:", userInfo.id);
+    // console.log("Thông tin token:", userInfo.id);
     if (userInfo.id) {
-      const resp = await lastValueFrom(
-        this.authService.getUserInfo(userInfo.id)
-      );
+      const resp = await lastValueFrom(this.authService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         let userInfo: NguoiDung = resp.data;
         this.roleUser = userInfo.nhomQuyens ?? [];
