@@ -1,20 +1,18 @@
 package com.example.hieuthuoc.service;
 
-import com.example.hieuthuoc.dto.ChiTietDonHangDTO;
-import com.example.hieuthuoc.entity.ChiTietDonHang;
-import com.example.hieuthuoc.repository.ChiTietDonHangRepo;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.hieuthuoc.dto.ChiTietDonHangDTO;
+import com.example.hieuthuoc.entity.ChiTietDonHang;
+import com.example.hieuthuoc.repository.ChiTietDonHangRepo;
+
 public interface ChiTietDonHangService {
-    List<ChiTietDonHang> getAllChiTietDonHangs();
-    Optional<ChiTietDonHang> getChiTietDonHangById(Integer id);
+    List<ChiTietDonHang> getByDonHangId();
     ChiTietDonHang create(ChiTietDonHangDTO chiTietDonHangDTO);
     ChiTietDonHang update(ChiTietDonHangDTO chiTietDonHangDTO);
     void delete(Integer id);
@@ -29,13 +27,8 @@ class ChiTietDonHangServiceImpl implements ChiTietDonHangService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<ChiTietDonHang> getAllChiTietDonHangs() {
+    public List<ChiTietDonHang> getByDonHangId() {
         return chiTietDonHangRepo.findAll();
-    }
-
-    @Override
-    public Optional<ChiTietDonHang> getChiTietDonHangById(Integer id) {
-        return chiTietDonHangRepo.findById(id);
     }
 
     @Override

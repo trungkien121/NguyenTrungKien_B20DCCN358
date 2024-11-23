@@ -14,7 +14,7 @@ public class NguoiDungDTO {
     private String email;
     private String diaChi;
     private String soDienThoai;
-    private Boolean trangThai;
+    private Boolean trangThai = true;
     private Date ngayTao;
 
 	private List<NhomQuyenDTO> nhomQuyens;

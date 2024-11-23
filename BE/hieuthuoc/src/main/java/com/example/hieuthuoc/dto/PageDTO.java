@@ -8,6 +8,7 @@ import lombok.Data;
 public class PageDTO<T> {
 	private int totalPages;
 	private long totalElements;
+	private int currentPage;
 	private	T data;
 	
 }

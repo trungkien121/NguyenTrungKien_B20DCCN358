@@ -16,4 +16,6 @@ public interface NguoiDungRepo extends JpaRepository<NguoiDung, Integer> {
 	Page<NguoiDung> searchByName(@Param("x") String s, Pageable pageable);
 	
 	NguoiDung findByTenDangNhap(String tenDangNhap);
+	
+	NguoiDung findByEmail(String email);
 }

@@ -1,6 +1,7 @@
 package com.example.hieuthuoc.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,6 +18,8 @@ public class DonHangDTO {
     private Double tongTien;
     private TrangThaiGiaoHangDTO trangThaiGiaoHang; // Enum cho trạng thái giao hàng
     private Date ngayGiao;
+    
+    private List<ChiTietDonHangDTO> chiTietDonHangs;
 
     public enum TrangThaiGiaoHangDTO {
         DANG_XU_LY, DANG_GIAO, DA_GIAO, DA_HUY, TRA_HANG

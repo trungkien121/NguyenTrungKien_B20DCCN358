@@ -16,10 +16,10 @@ import com.example.hieuthuoc.dto.NguoiDungDTO;
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
+import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.service.NguoiDungService;
 
 import jakarta.validation.Valid;
-
 
 @RestController
 @RequestMapping("/nguoidung")
@@ -27,38 +27,47 @@ public class NguoiDungController {
 
 	@Autowired
 	NguoiDungService nguoiDungService;
-	
-	@GetMapping("/get")
-	public ResponseDTO<NguoiDungDTO> getById(@RequestParam("id") int id)
-			throws Exception {
 
-		NguoiDungDTO nguoiDungDTO = nguoiDungService.getById(id);
-		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
+	@GetMapping("/get")
+	public ResponseDTO<NguoiDung> getById(@RequestParam("id") int id) throws Exception {
+
+		return nguoiDungService.getById(id);
 	}
 
 	@PostMapping("/list")
 	public ResponseDTO<PageDTO<List<NguoiDungDTO>>> getByName(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
-		PageDTO<List<NguoiDungDTO>> nguoiDungDTOs = nguoiDungService.getByHoTen(searchDTO);
-		return ResponseDTO.<PageDTO<List<NguoiDungDTO>>>builder().status(200).msg("ok").data(nguoiDungDTOs).build();
+		return nguoiDungService.getByHoTen(searchDTO);
 	}
-	
-	
-	@PostMapping("/create")
-	public ResponseDTO<NguoiDungDTO> create(@RequestBody @Valid NguoiDungDTO nguoiDungDTO)
-			throws Exception {
 
-		nguoiDungService.create(nguoiDungDTO);
-		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
+	@PutMapping("/change_matkhau")
+	public ResponseDTO<NguoiDung> changeMatKhau(@RequestBody @Valid NguoiDungDTO nguoiDungDTO) throws Exception {
+
+		return nguoiDungService.changeMatKhau(nguoiDungDTO);
+	}
+
+	@PutMapping("/forgot_matkhau")
+	public ResponseDTO<NguoiDung> forgotMatKhau(@RequestParam("email") @Valid String email) throws Exception {
+
+		return nguoiDungService.forgotMatKhau(email);
+	}
+
+	@PostMapping("/dangky")
+	public ResponseDTO<NguoiDung> register(@RequestBody @Valid NguoiDungDTO nguoiDungDTO) {
+
+		return nguoiDungService.register(nguoiDungDTO);
+	}
+
+	@PostMapping("/create")
+	public ResponseDTO<NguoiDung> create(@RequestBody @Valid NguoiDungDTO nguoiDungDTO) throws Exception {
+		return nguoiDungService.create(nguoiDungDTO);
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<NguoiDungDTO> update(@RequestBody @Valid NguoiDungDTO nguoiDungDTO)
-			throws Exception {
+	public ResponseDTO<NguoiDung> update(@RequestBody @Valid NguoiDungDTO nguoiDungDTO) throws Exception {
 
-		nguoiDungService.update(nguoiDungDTO);
-		return ResponseDTO.<NguoiDungDTO>builder().status(200).msg("ok").data(nguoiDungDTO).build();
+		return nguoiDungService.update(nguoiDungDTO);
 	}
 
 	@DeleteMapping("/delete")

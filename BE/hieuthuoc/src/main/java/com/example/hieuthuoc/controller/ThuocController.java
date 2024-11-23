@@ -30,7 +30,7 @@ public class ThuocController {
 	ThuocService thuocService;
 
 	@PostMapping("/list")
-	public ResponseDTO<PageDTO<List<ThuocDTO>>> getByTenThuoc(@RequestBody  SearchDTO searchDTO)
+	public ResponseDTO<PageDTO<List<ThuocDTO>>> getByTenThuoc(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
 		PageDTO<List<ThuocDTO>> thuocDTOs = thuocService.getByTenThuoc(searchDTO);
