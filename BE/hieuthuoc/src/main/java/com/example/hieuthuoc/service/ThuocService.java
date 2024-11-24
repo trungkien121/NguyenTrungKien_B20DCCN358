@@ -2,7 +2,6 @@ package com.example.hieuthuoc.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,93 +13,129 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.example.hieuthuoc.dto.PageDTO;
-import com.example.hieuthuoc.dto.SearchDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
 import com.example.hieuthuoc.entity.Thuoc;
+import com.example.hieuthuoc.repository.DanhMucThuocRepo;
+import com.example.hieuthuoc.repository.LoaiThuocRepo;
+import com.example.hieuthuoc.repository.NhaSanXuatRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
 
 public interface ThuocService {
-    PageDTO<List<ThuocDTO>> getByTenThuoc(SearchDTO searchDTO);
-    Optional<ThuocDTO> getById(Integer id);
-    Thuoc create(ThuocDTO thuocDTO);
-    Thuoc update(ThuocDTO thuocDTO);
-    void delete(Integer id);
+	ResponseDTO<Thuoc> create(ThuocDTO thuocDTO);
+
+	ResponseDTO<Thuoc> update(ThuocDTO thuocDTO);
+
+	ResponseDTO<Void> delete(Integer id);
+
+	ResponseDTO<Thuoc> getById(Integer id);
+
+	ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO);
+
 }
 
 @Service
 class ThuocServiceImpl implements ThuocService {
 
-    @Autowired
-    private ThuocRepo thuocRepo;
-    
-    ModelMapper modelMapper = new ModelMapper();
+	@Autowired
+	private ThuocRepo thuocRepo;
+	
+	@Autowired
+	LoaiThuocRepo loaiThuocRepo;
+	
+	@Autowired
+	NhaSanXuatRepo nhaSanXuatRepo;
+	
+	@Autowired
+	DanhMucThuocRepo danhMucThuocRepo;
+	
 
-    @Override
-    public PageDTO<List<ThuocDTO>> getByTenThuoc(SearchDTO searchDTO) {
-    	Sort sortBy = Sort.by("tenThuoc").ascending();
+	ModelMapper modelMapper = new ModelMapper();
 
-		if (StringUtils.hasText(searchDTO.getSortedField())) {
-			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
+	@Override
+	public ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO) {
+		Sort sortBy = Sort.by("tenThuoc").ascending();
+
+		if (StringUtils.hasText(searchThuocDTO.getSortedField())) {
+			sortBy = Sort.by(searchThuocDTO.getSortedField()).ascending();
 		}
 
-		if (searchDTO.getCurrentPage() == null) {
-			searchDTO.setCurrentPage(0);
+		if (searchThuocDTO.getCurrentPage() == null) {
+			searchThuocDTO.setCurrentPage(0);
 		}
 
-		if (searchDTO.getSize() == null) {
-			searchDTO.setSize(20);
+		if (searchThuocDTO.getSize() == null) {
+			searchThuocDTO.setSize(20);
 		}
-		
-		if (searchDTO.getKeyWord() == null) {
-			searchDTO.setKeyWord("");
-		}
-		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
-		Page<Thuoc> page = thuocRepo.findByTenThuoc("%" + searchDTO.getKeyWord() + "%", pageRequest);
 
-		PageDTO<List<ThuocDTO>> pageDTO = new PageDTO<>();
+		if (searchThuocDTO.getKeyWord() == null) {
+			searchThuocDTO.setKeyWord("");
+		}
+		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
+		Page<Thuoc> page = thuocRepo.search(
+				searchThuocDTO.getKeyWord(),
+				searchThuocDTO.getLoaiThuoc(),
+				searchThuocDTO.getNhaSanXuat(),
+				searchThuocDTO.getDanhMucThuoc(),
+				searchThuocDTO.getDoiTuongSd(),
+				searchThuocDTO.getMaxGiaBan(), pageRequest);
+
+		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
 		pageDTO.setTotalPages(page.getTotalPages());
 
-		List<ThuocDTO> thuocDTOs = page.get().map(thuoc -> modelMapper.map(thuoc, ThuocDTO.class))
-				.collect(Collectors.toList());
+		List<Thuoc> thuocDTOs = page.getContent();
 
 		pageDTO.setData(thuocDTOs);
 
-		return pageDTO;
-    }
+		return ResponseDTO.<PageDTO<List<Thuoc>>>builder().status(0).msg(null).data(pageDTO).build();
+	}
 
-    @Override
-    public Optional<ThuocDTO> getById(Integer id) {
-        Optional<Thuoc> thuoc = thuocRepo.findById(id);
-        if (thuoc.isPresent()) {
-            ThuocDTO thuocDTO = modelMapper.map(thuoc.get(), ThuocDTO.class);
-            return Optional.of(thuocDTO);
-        }
-        return Optional.empty();
-    }
+	@Override
+	public ResponseDTO<Thuoc> getById(Integer id) {
+		Optional<Thuoc> thuoc = thuocRepo.findById(id);
+		if (thuoc.isPresent()) {
+			return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuoc.get()).build();
+		}
+		return ResponseDTO.<Thuoc>builder().status(409).msg("Không tìm thấy thuốc").build();
+	}
 
-    @Override
-    @Transactional 
-    public Thuoc create(ThuocDTO thuocDTO) {
-    	Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
-        return thuocRepo.save(thuoc);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Thuoc> create(ThuocDTO thuocDTO) {
+		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
 
-    @Override
-    @Transactional 
-    public Thuoc update(ThuocDTO thuocDTO) {
-    	Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
-    	Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
-  	
-    	if(curentThuoc != null) {
-    		return thuocRepo.save(thuoc);
-    	}    	
-    	 return null;
-    }
+		if (thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
+			 return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build(); 
+		}
+		
+		if (thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
+			 return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build(); 
+		}
+		
+		thuoc.setLoaiThuoc(loaiThuocRepo.findById(thuocDTO.getLoaiThuocId()).get());
+		thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
+		thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
+		
+		return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
+	}
 
-    @Override
-    @Transactional 
-    public void delete(Integer id) {
-        thuocRepo.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Thuoc> update(ThuocDTO thuocDTO) {
+		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
+		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
+		if (curentThuoc != null) {
+			return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
+		}
+		return ResponseDTO.<Thuoc>builder().status(409).msg("Không tìm thấy thuốc").build();
+	}
+
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		thuocRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+	}
 }

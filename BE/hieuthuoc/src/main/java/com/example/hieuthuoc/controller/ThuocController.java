@@ -1,7 +1,6 @@
 package com.example.hieuthuoc.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
-import com.example.hieuthuoc.dto.SearchDTO;
+import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
 import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.service.ThuocService;
@@ -30,37 +29,29 @@ public class ThuocController {
 	ThuocService thuocService;
 
 	@PostMapping("/list")
-	public ResponseDTO<PageDTO<List<ThuocDTO>>> getByTenThuoc(@RequestBody @Valid SearchDTO searchDTO)
+	public ResponseDTO<PageDTO<List<Thuoc>>> search(@RequestBody @Valid SearchThuocDTO searchThuocDTO)
 			throws Exception {
-
-		PageDTO<List<ThuocDTO>> thuocDTOs = thuocService.getByTenThuoc(searchDTO);
-		return ResponseDTO.<PageDTO<List<ThuocDTO>>>builder().status(200).msg("ok").data(thuocDTOs).build();
+		return thuocService.search(searchThuocDTO);
 	}
-	
+
 	@GetMapping("/get")
-	public ResponseDTO<Optional<ThuocDTO>> getById(@RequestParam("id") @Valid int id){
-		Optional<ThuocDTO> thuocDTO = thuocService.getById(id); 
-		return ResponseDTO.<Optional<ThuocDTO>>builder().status(200).msg("ok").data(thuocDTO).build();
+	public ResponseDTO<Thuoc> getById(@RequestParam("id") @Valid int id) {
+		return thuocService.getById(id);
 	}
-	
-	@PostMapping("/create")
-	public ResponseDTO<ThuocDTO> create(@RequestBody @Valid ThuocDTO thuocDTO)
-			throws Exception {
 
-		thuocService.create(thuocDTO);
-		return ResponseDTO.<ThuocDTO>builder().status(200).msg("ok").data(thuocDTO).build();
+	@PostMapping("/create")
+	public ResponseDTO<Thuoc> create(@RequestBody @Valid ThuocDTO thuocDTO) throws Exception {
+
+		return thuocService.create(thuocDTO);
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<Thuoc> update(@RequestBody @Valid ThuocDTO thuocDTO)
-			throws Exception {
-		Thuoc thuoc = thuocService.update(thuocDTO);
-		return ResponseDTO.<Thuoc>builder().status(200).msg("ok").data(thuoc).build();
+	public ResponseDTO<Thuoc> update(@RequestBody @Valid ThuocDTO thuocDTO) throws Exception {
+		return thuocService.update(thuocDTO);
 	}
-	
+
 	@DeleteMapping("/delete")
-	public ResponseDTO<Void> delete(@RequestParam("id") @Valid int id){
-		thuocService.delete(id);
-		return ResponseDTO.<Void>builder().status(200).msg("ok").build();
+	public ResponseDTO<Void> delete(@RequestParam("id") @Valid int id) {
+		return thuocService.delete(id);
 	}
 }

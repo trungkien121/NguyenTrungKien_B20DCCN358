@@ -154,6 +154,7 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		List<NhomQuyen> nhomQuyens = new ArrayList<>();
 		nhomQuyens.add(nhomQuyenRepo.findByTenNhomQuyen("KHACH_HANG"));
 
+		nguoiDung.setNhomQuyens(nhomQuyens);
 		nguoiDungRepo.save(nguoiDung);
 
 		return ResponseDTO.<NguoiDung>builder().status(200).msg("Đăng ký thành công.").data(nguoiDung).build();
@@ -233,7 +234,10 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 				String matkhau = RandomStringUtils.random(10, true, true);
 				nguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(matkhau));
 				nguoiDungRepo.save(nguoiDung);
-
+				
+				System.out.println("Mật Khẩu : " + matkhau);
+				
+				sendEmailForgotMatKhau(email, matkhau);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

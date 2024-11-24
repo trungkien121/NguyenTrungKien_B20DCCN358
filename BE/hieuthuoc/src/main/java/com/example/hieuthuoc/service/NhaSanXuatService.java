@@ -1,9 +1,5 @@
 package com.example.hieuthuoc.service;
 
-import com.example.hieuthuoc.dto.NhaSanXuatDTO;
-import com.example.hieuthuoc.entity.NhaSanXuat;
-import com.example.hieuthuoc.repository.NhaSanXuatRepo;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.hieuthuoc.dto.NhaSanXuatDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.entity.NhaSanXuat;
+import com.example.hieuthuoc.repository.NhaSanXuatRepo;
+
 public interface NhaSanXuatService {
-    List<NhaSanXuat> getAllNhaSanXuats();
-    Optional<NhaSanXuat> getNhaSanXuatById(Integer id);
-    NhaSanXuat create(NhaSanXuatDTO nhaSanXuatDTO);
-    NhaSanXuat update(NhaSanXuatDTO nhaSanXuatDTO);
-    void delete(Integer id);
+    ResponseDTO<List<NhaSanXuat>> getAll();
+
+    ResponseDTO<NhaSanXuat> create(NhaSanXuatDTO nhaSanXuatDTO);
+
+    ResponseDTO<NhaSanXuat> update(NhaSanXuatDTO nhaSanXuatDTO);
+
+    ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
@@ -29,36 +32,37 @@ class NhaSanXuatServiceImpl implements NhaSanXuatService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public List<NhaSanXuat> getAllNhaSanXuats() {
-        return nhaSanXuatRepo.findAll();
-    }
-
-    @Override
-    public Optional<NhaSanXuat> getNhaSanXuatById(Integer id) {
-        return nhaSanXuatRepo.findById(id);
+    public ResponseDTO<List<NhaSanXuat>> getAll() {
+        List<NhaSanXuat> nhaSanXuats = nhaSanXuatRepo.findAll();
+        return ResponseDTO.<List<NhaSanXuat>>builder().status(200).msg("Thành công").data(nhaSanXuats).build();
     }
 
     @Override
     @Transactional
-    public NhaSanXuat create(NhaSanXuatDTO nhaSanXuatDTO) {
+    public ResponseDTO<NhaSanXuat> create(NhaSanXuatDTO nhaSanXuatDTO) {
         NhaSanXuat nhaSanXuat = modelMapper.map(nhaSanXuatDTO, NhaSanXuat.class);
-        return nhaSanXuatRepo.save(nhaSanXuat);
-    }
-
-    @Override
-    @Transactional
-    public NhaSanXuat update(NhaSanXuatDTO nhaSanXuatDTO) {
-        NhaSanXuat nhaSanXuat = modelMapper.map(nhaSanXuatDTO, NhaSanXuat.class);
-        NhaSanXuat currentNhaSanXuat = nhaSanXuatRepo.findById(nhaSanXuat.getId()).orElse(null);
-        if (currentNhaSanXuat != null) {
-            return nhaSanXuatRepo.save(nhaSanXuat);
+        if (nhaSanXuatRepo.existsByMaNSX(nhaSanXuat.getMaNSX())) {
+            return ResponseDTO.<NhaSanXuat>builder().status(409).msg("Nhà sản xuất đã tồn tại").build();
         }
-        return null;
+        return ResponseDTO.<NhaSanXuat>builder().status(201).msg("Thành công").data(nhaSanXuatRepo.save(nhaSanXuat)).build();
     }
 
     @Override
     @Transactional
-    public void delete(Integer id) {
+    public ResponseDTO<NhaSanXuat> update(NhaSanXuatDTO nhaSanXuatDTO) {
+        NhaSanXuat nhaSanXuat = modelMapper.map(nhaSanXuatDTO, NhaSanXuat.class);
+        Optional<NhaSanXuat> currentNhaSanXuat = nhaSanXuatRepo.findById(nhaSanXuat.getId());
+        if (currentNhaSanXuat.isPresent()) {
+            NhaSanXuat updatedNhaSanXuat = nhaSanXuatRepo.save(nhaSanXuat);
+            return ResponseDTO.<NhaSanXuat>builder().status(200).msg("Thành công").data(updatedNhaSanXuat).build();
+        }
+        return ResponseDTO.<NhaSanXuat>builder().status(404).msg("Không tìm thấy nhà sản xuất").build();
+    }
+
+    @Override
+    @Transactional
+    public ResponseDTO<Void> delete(Integer id) {
         nhaSanXuatRepo.deleteById(id);
+        return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
     }
 }

@@ -1,4 +1,2 @@
-2024-11-11T15:38:33.031+07:00  WARN 16912 --- [hieuthuoc] [HikariPool-55 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-55 - Thread starvation or clock leap detected (housekeeper delta=22h12m12s391ms38µs800ns).
-2024-11-11T18:29:52.056+07:00  INFO 16912 --- [hieuthuoc] [http-nio-8888-exec-1] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-11-11T18:29:52.078+07:00  INFO 16912 --- [hieuthuoc] [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2024-11-11T18:29:52.189+07:00  INFO 16912 --- [hieuthuoc] [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 110 ms
+2024-11-25T00:07:19.850+07:00  WARN 6372 --- [hieuthuoc] [HikariPool-3 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Thread starvation or clock leap detected (housekeeper delta=3h28s367ms355µs400ns).
+2024-11-25T02:59:56.159+07:00  WARN 6372 --- [hieuthuoc] [HikariPool-3 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Thread starvation or clock leap detected (housekeeper delta=2h52m36s319ms675µs400ns).

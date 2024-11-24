@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class NhaCungCapDTO {
     private Integer id;
+    private String maNCC;
     private String tenNhaCungCap;
     private String diaChi;
     private String soDienThoai;

@@ -1,64 +1,68 @@
 package com.example.hieuthuoc.service;
 
-import com.example.hieuthuoc.dto.LoaiThuocDTO;
-import com.example.hieuthuoc.entity.LoaiThuoc;
-import com.example.hieuthuoc.repository.LoaiThuocRepo;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.hieuthuoc.dto.LoaiThuocDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.entity.LoaiThuoc;
+import com.example.hieuthuoc.repository.LoaiThuocRepo;
+
 public interface LoaiThuocService {
-    List<LoaiThuoc> getAllLoaiThuocs();
-    Optional<LoaiThuoc> getLoaiThuocById(Integer id);
-    LoaiThuoc create(LoaiThuocDTO loaiThuocDTO);
-    LoaiThuoc update(LoaiThuocDTO loaiThuocDTO);
-    void delete(Integer id);
+	ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs();
+
+	ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO);
+
+	ResponseDTO<LoaiThuoc> update(LoaiThuocDTO loaiThuocDTO);
+
+	ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
 class LoaiThuocServiceImpl implements LoaiThuocService {
 
-    @Autowired
-    private LoaiThuocRepo loaiThuocRepo;
+	@Autowired
+	private LoaiThuocRepo loaiThuocRepo;
 
-    ModelMapper modelMapper = new ModelMapper();
+	ModelMapper modelMapper = new ModelMapper();
 
-    @Override
-    public List<LoaiThuoc> getAllLoaiThuocs() {
-        return loaiThuocRepo.findAll();
-    }
+	@Override
+	public ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs() {
+		return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocRepo.findAll())
+				.build();
+	}
 
-    @Override
-    public Optional<LoaiThuoc> getLoaiThuocById(Integer id) {
-        return loaiThuocRepo.findById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO) {
+		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
+		if (loaiThuocRepo.existsByTenLoai(loaiThuoc.getTenLoai())) {
+			return ResponseDTO.<LoaiThuoc>builder().status(409).msg("Loại thuốc đã tồn tại").build();
+		}	
+		return ResponseDTO.<LoaiThuoc>builder().status(201).msg("Thành công").data(loaiThuocRepo.save(loaiThuoc))
+				.build();
+	}
 
-    @Override
-    @Transactional
-    public LoaiThuoc create(LoaiThuocDTO loaiThuocDTO) {
-        LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
-        return loaiThuocRepo.save(loaiThuoc);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<LoaiThuoc> update(LoaiThuocDTO loaiThuocDTO) {
+		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
+		LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
+		if (currentLoaiThuoc != null) {
+			return ResponseDTO.<LoaiThuoc>builder().status(200).msg("Thành công").data(loaiThuocRepo.save(loaiThuoc))
+					.build();
+		}
+		return ResponseDTO.<LoaiThuoc>builder().status(404).msg("Không tìm thấy loại thuốc").build();
+	}
 
-    @Override
-    @Transactional
-    public LoaiThuoc update(LoaiThuocDTO loaiThuocDTO) {
-        LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
-        LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
-        if (currentLoaiThuoc != null) {
-            return loaiThuocRepo.save(loaiThuoc);
-        }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        loaiThuocRepo.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		loaiThuocRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+	}
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class NhaSanXuatDTO {
     private Integer id;
+    private String maNSX;
     private String tenNhaSanXuat;
     private String nuocSanXuat;
     private String diaChi;

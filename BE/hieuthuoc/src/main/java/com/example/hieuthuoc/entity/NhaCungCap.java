@@ -15,6 +15,7 @@ public class NhaCungCap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String maNCC;
     private String tenNhaCungCap;
     private String diaChi;
     private String soDienThoai;

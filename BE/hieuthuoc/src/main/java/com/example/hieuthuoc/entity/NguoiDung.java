@@ -1,9 +1,11 @@
 package com.example.hieuthuoc.entity;
 
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,11 +15,14 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "nguoi_dung")
-public class NguoiDung {
+public class NguoiDung extends TimeAuditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,7 +34,6 @@ public class NguoiDung {
     private String diaChi;
     private String soDienThoai;
     private Boolean trangThai = true;
-    private Date ngayTao;
     
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "chi_tiet_nhom_quyen", 
