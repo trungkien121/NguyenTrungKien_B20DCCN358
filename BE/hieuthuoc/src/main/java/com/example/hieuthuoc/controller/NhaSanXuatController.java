@@ -18,7 +18,7 @@ import com.example.hieuthuoc.entity.NhaSanXuat;
 import com.example.hieuthuoc.service.NhaSanXuatService;
 
 @RestController
-@RequestMapping("/api/nhasanxuat")
+@RequestMapping("/nhasanxuat")
 public class NhaSanXuatController {
 
     @Autowired

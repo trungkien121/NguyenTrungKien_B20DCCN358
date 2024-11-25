@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface NhomQuyenRepo extends JpaRepository<NhomQuyen, Integer> {
 	
 	NhomQuyen findByTenNhomQuyen(String tenNhomQuyen);
+	
+	Boolean existsByTenNhomQuyen(String tenNhomQuyen);
 }

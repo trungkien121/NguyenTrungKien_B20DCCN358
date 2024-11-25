@@ -1,28 +1,29 @@
 package com.example.hieuthuoc.service;
 
-import com.example.hieuthuoc.dto.NhomQuyenDTO;
-import com.example.hieuthuoc.entity.NhomQuyen;
-import com.example.hieuthuoc.repository.NhomQuyenRepo;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.hieuthuoc.dto.NhomQuyenDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.entity.NhomQuyen;
+import com.example.hieuthuoc.repository.NhomQuyenRepo;
+
 public interface NhomQuyenService {
-	List<NhomQuyenDTO> getAll();
 
-	Optional<NhomQuyenDTO> getById(Integer id);
+	ResponseDTO<NhomQuyen> create(NhomQuyenDTO nhomQuyenDTO);
 
-	NhomQuyen create(NhomQuyenDTO nhomQuyenDTO);
+	ResponseDTO<NhomQuyen> update(NhomQuyenDTO nhomQuyenDTO);
 
-	NhomQuyen update(NhomQuyenDTO nhomQuyenDTO);
+	ResponseDTO<Void> delete(Integer id);
 
-	void delete(Integer id);
+	ResponseDTO<NhomQuyen> getById(Integer id);
+
+	ResponseDTO<List<NhomQuyen>> getAll();
 }
 
 @Service
@@ -31,45 +32,52 @@ class NhomQuyenServiceImpl implements NhomQuyenService {
 	@Autowired
 	private NhomQuyenRepo nhomQuyenRepo;
 
-	ModelMapper modelMapper = new ModelMapper();
+	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public List<NhomQuyenDTO> getAll() {
-		List<NhomQuyen> nhomQuyenList = nhomQuyenRepo.findAll();
-		return nhomQuyenList.stream().map(nhomQuyen -> modelMapper.map(nhomQuyen, NhomQuyenDTO.class)).collect(Collectors.toList());
+	@Transactional
+	public ResponseDTO<NhomQuyen> create(NhomQuyenDTO nhomQuyenDTO) {
+		if (nhomQuyenRepo.existsByTenNhomQuyen(nhomQuyenDTO.getTenNhomQuyen())) {
+			return ResponseDTO.<NhomQuyen>builder().status(409).msg("Nhóm quyền đã tồn tại").build();
+		}
+		NhomQuyen nhomQuyen = modelMapper.map(nhomQuyenDTO, NhomQuyen.class);
+		NhomQuyen savedNhomQuyen = nhomQuyenRepo.save(nhomQuyen);
+		return ResponseDTO.<NhomQuyen>builder().status(201).msg("Tạo nhóm quyền thành công").data(savedNhomQuyen)
+				.build();
 	}
 
 	@Override
-	public Optional<NhomQuyenDTO> getById(Integer id) {
+	@Transactional
+	public ResponseDTO<NhomQuyen> update(NhomQuyenDTO nhomQuyenDTO) {
+		Optional<NhomQuyen> existingNhomQuyen = nhomQuyenRepo.findById(nhomQuyenDTO.getId());
+		if (existingNhomQuyen.isPresent()) {
+			NhomQuyen updatedNhomQuyen = modelMapper.map(nhomQuyenDTO, NhomQuyen.class);
+			updatedNhomQuyen = nhomQuyenRepo.save(updatedNhomQuyen);
+			return ResponseDTO.<NhomQuyen>builder().status(200).msg("Cập nhật nhóm quyền thành công")
+					.data(updatedNhomQuyen).build();
+		}
+		return ResponseDTO.<NhomQuyen>builder().status(404).msg("Không tìm thấy nhóm quyền").build();
+	}
+
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		nhomQuyenRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Xóa nhóm quyền thành công").build();
+	}
+	
+	@Override
+	public ResponseDTO<NhomQuyen> getById(Integer id) {
 		Optional<NhomQuyen> nhomQuyen = nhomQuyenRepo.findById(id);
 		if (nhomQuyen.isPresent()) {
-			NhomQuyenDTO nhomQuyenDTO = modelMapper.map(nhomQuyen.get(), NhomQuyenDTO.class);
-			return Optional.of(nhomQuyenDTO);
+			return ResponseDTO.<NhomQuyen>builder().status(200).msg("Thành công").data(nhomQuyen.get()).build();
 		}
-		return null;
+		return ResponseDTO.<NhomQuyen>builder().status(404).msg("Không tìm thấy nhóm quyền").build();
 	}
 
 	@Override
-	@Transactional
-	public NhomQuyen create(NhomQuyenDTO nhomQuyenDTO) {
-		NhomQuyen nhomQuyen = modelMapper.map(nhomQuyenDTO, NhomQuyen.class);
-		return nhomQuyenRepo.save(nhomQuyen);
-	}
-
-	@Override
-	@Transactional
-	public NhomQuyen update(NhomQuyenDTO nhomQuyenDTO) {
-		NhomQuyen nhomQuyen = modelMapper.map(nhomQuyenDTO, NhomQuyen.class);
-		NhomQuyen currentNhomQuyen = nhomQuyenRepo.findById(nhomQuyen.getId()).orElse(null);
-		if (currentNhomQuyen != null) {
-			return nhomQuyenRepo.save(nhomQuyen);
-		}
-		return null;
-	}
-
-	@Override
-	@Transactional
-	public void delete(Integer id) {
-		nhomQuyenRepo.deleteById(id);
+	public ResponseDTO<List<NhomQuyen>> getAll() {
+		List<NhomQuyen> nhomQuyens = nhomQuyenRepo.findAll();
+		return ResponseDTO.<List<NhomQuyen>>builder().status(200).msg("Thành công").data(nhomQuyens).build();
 	}
 }

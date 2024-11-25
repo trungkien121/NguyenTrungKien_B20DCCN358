@@ -1,64 +1,70 @@
 package com.example.hieuthuoc.service;
 
 import com.example.hieuthuoc.dto.DanhMucThuocDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.entity.DanhMucThuoc;
 import com.example.hieuthuoc.repository.DanhMucThuocRepo;
-
-import java.util.List;
-import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface DanhMucThuocService {
-    List<DanhMucThuoc> getAllDanhMucThuocs();
-    Optional<DanhMucThuoc> getDanhMucThuocById(Integer id);
-    DanhMucThuoc create(DanhMucThuocDTO danhMucThuocDTO);
-    DanhMucThuoc update(DanhMucThuocDTO danhMucThuocDTO);
-    void delete(Integer id);
+	ResponseDTO<List<DanhMucThuoc>> getAll();
+
+	ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO);
+
+	ResponseDTO<DanhMucThuoc> update(DanhMucThuocDTO danhMucThuocDTO);
+
+	ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
 class DanhMucThuocServiceImpl implements DanhMucThuocService {
 
-    @Autowired
-    private DanhMucThuocRepo danhMucThuocRepo;
+	@Autowired
+	private DanhMucThuocRepo danhMucThuocRepo;
 
-    ModelMapper modelMapper = new ModelMapper();
+	private final ModelMapper modelMapper = new ModelMapper();
 
-    @Override
-    public List<DanhMucThuoc> getAllDanhMucThuocs() {
-        return danhMucThuocRepo.findAll();
-    }
+	@Override
+	public ResponseDTO<List<DanhMucThuoc>> getAll() {
+		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findAll();
+		return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
+	}
 
-    @Override
-    public Optional<DanhMucThuoc> getDanhMucThuocById(Integer id) {
-        return danhMucThuocRepo.findById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO) {
+		DanhMucThuoc danhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
+		if (danhMucThuocRepo.existsByTenDanhMuc(danhMucThuoc.getTenDanhMuc())) {
+			return ResponseDTO.<DanhMucThuoc>builder().status(409).msg("Danh mục thuốc đã tồn tại").build();
+		}
+		DanhMucThuoc savedDanhMucThuoc = danhMucThuocRepo.save(danhMucThuoc);
+		return ResponseDTO.<DanhMucThuoc>builder().status(201).msg("Tạo danh mục thuốc thành công")
+				.data(savedDanhMucThuoc).build();
+	}
 
-    @Override
-    @Transactional
-    public DanhMucThuoc create(DanhMucThuocDTO danhMucThuocDTO) {
-        DanhMucThuoc danhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
-        return danhMucThuocRepo.save(danhMucThuoc);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DanhMucThuoc> update(DanhMucThuocDTO danhMucThuocDTO) {
+		Optional<DanhMucThuoc> existingDanhMucThuoc = danhMucThuocRepo.findById(danhMucThuocDTO.getId());
+		if (existingDanhMucThuoc.isPresent()) {
+			DanhMucThuoc updatedDanhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
+			updatedDanhMucThuoc = danhMucThuocRepo.save(updatedDanhMucThuoc);
+			return ResponseDTO.<DanhMucThuoc>builder().status(200).msg("Cập nhật danh mục thuốc thành công")
+					.data(updatedDanhMucThuoc).build();
+		}
+		return ResponseDTO.<DanhMucThuoc>builder().status(404).msg("Không tìm thấy danh mục thuốc").build();
+	}
 
-    @Override
-    @Transactional
-    public DanhMucThuoc update(DanhMucThuocDTO danhMucThuocDTO) {
-        DanhMucThuoc danhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
-        DanhMucThuoc currentDanhMucThuoc = danhMucThuocRepo.findById(danhMucThuoc.getId()).orElse(null);
-        if (currentDanhMucThuoc != null) {
-            return danhMucThuocRepo.save(danhMucThuoc);
-        }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        danhMucThuocRepo.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		danhMucThuocRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+	}
 }
