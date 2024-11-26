@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
+import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { NhaCungCap } from "src/app/_model/ncc";
 import { Product } from "src/app/_model/product";
+import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 import { ProductService } from "src/app/_service/product.service";
 
 @Component({
@@ -11,6 +14,9 @@ import { ProductService } from "src/app/_service/product.service";
 })
 export class ProductComponent implements OnInit {
   productLst: Product[] = [];
+  loaithuocLst: LoaiThuoc[] = [];
+  nccLst: NhaCungCap[] = [];
+
   modelSearch: SearchModel = {};
   optionLabel: string = "";
 
@@ -18,12 +24,17 @@ export class ProductComponent implements OnInit {
   visibilityOptions: OptionSelect[] = [];
   categoryOption: OptionSelect[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private loaithuocService: LoaithuocService
+  ) {}
 
   ngOnInit() {
     this.productService.getProductLst(this.modelSearch).subscribe((res) => {
       this.productLst = res.responseData;
     });
+
+    this.getLoaiThuoc();
 
     this.statusOptions = [
       {
@@ -46,6 +57,12 @@ export class ProductComponent implements OnInit {
         value: "0",
       },
     ];
+  }
+
+  getLoaiThuoc() {
+    this.loaithuocService.getLoaiThuocLst().subscribe((res) => {
+      this.productLst = res.responseData;
+    });
   }
 
   search() {}

@@ -14,7 +14,13 @@ import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 export class CustomerComponent implements OnInit {
   constructor(private nguoidungService: NguoidungService) {}
   customerLst: NguoiDung[] = [];
-  modelSearch: SearchModel = {};
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 10,
+    sortedField: "",
+  };
   optionLabel: string = "";
 
   statusOptions: OptionSelect[] = [];
