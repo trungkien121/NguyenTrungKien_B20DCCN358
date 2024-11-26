@@ -27,8 +27,10 @@ import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.ChucNang;
+import com.example.hieuthuoc.entity.GioHang;
 import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.entity.NhomQuyen;
+import com.example.hieuthuoc.repository.GioHangRepo;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.NhomQuyenRepo;
 
@@ -65,6 +67,9 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 	@Autowired
 	NhomQuyenRepo nhomQuyenRepo;
+	
+	@Autowired 
+	GioHangRepo gioHangRepo;
 
 	@Autowired
 	EmailService emailService;
@@ -113,6 +118,11 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		nguoiDung.setNhomQuyens(nhomQuyens);
 
 		nguoiDungRepo.save(nguoiDung);
+		
+		//tạo giỏ hàng 
+		GioHang gioHang = new GioHang();
+		gioHang.setKhachHang(nguoiDung);
+		gioHangRepo.save(gioHang);
 
 		return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công").data(nguoiDung).build();
 	}
@@ -156,6 +166,11 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 		nguoiDung.setNhomQuyens(nhomQuyens);
 		nguoiDungRepo.save(nguoiDung);
+		
+		//tạo giỏ hàng 
+		GioHang gioHang = new GioHang();
+		gioHang.setKhachHang(nguoiDung);
+		gioHangRepo.save(gioHang);
 
 		return ResponseDTO.<NguoiDung>builder().status(200).msg("Đăng ký thành công.").data(nguoiDung).build();
 	}

@@ -19,9 +19,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
+@Table(name = "nguoi_dung")
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "nguoi_dung")
 public class NguoiDung extends TimeAuditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
