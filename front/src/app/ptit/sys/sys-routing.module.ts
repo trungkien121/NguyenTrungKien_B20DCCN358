@@ -8,6 +8,7 @@ import { ProductCreatementComponent } from "./product/product-createment/product
 import { NCCComponent } from "./ncc/ncc.component";
 import { CustomerComponent } from "./customer/customer.component";
 import { DonHangComponent } from "./donhang/donhang.component";
+import { LoaiThuocComponent } from "./loaithuoc/loaithuoc.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -37,7 +38,10 @@ const routes: Routes = [
     path: "donhang",
     component: DonHangComponent,
   },
-
+  {
+    path: "loaithuoc",
+    component: LoaiThuocComponent,
+  },
 ];
 
 @NgModule({

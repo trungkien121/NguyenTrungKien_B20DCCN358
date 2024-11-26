@@ -1,6 +1,6 @@
 export class SearchModel {
   keyWord?: string;
-  currentPage?: string;
+  currentPage?: number;
   size?: number;
   id?: number;
   sortedField?: string;

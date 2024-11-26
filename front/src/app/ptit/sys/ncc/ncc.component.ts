@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { Ncc } from "src/app/_model/ncc";
+import { NhaCungCap } from "src/app/_model/ncc";
 
 @Component({
   selector: "app-ncc",
@@ -9,7 +9,7 @@ import { Ncc } from "src/app/_model/ncc";
   // styleUrls: ["./customer.component.css"],
 })
 export class NCCComponent implements OnInit {
-  ncc: Ncc[] = [];
+  ncc: NhaCungCap[] = [];
   modelSearch: SearchModel = {};
   optionLabel: string = "";
 
@@ -20,21 +20,21 @@ export class NCCComponent implements OnInit {
   ngOnInit(): void {
     this.ncc = [
       {
-        id: 1,
+        id: "1",
         tenNhaCungCap: "Công Ty Dược Phẩm ABC",
         diaChi: "123 Đường A, Quận X",
         soDienThoai: "0123456789",
         email: "contact@abcpharma.com",
       },
       {
-        id: 2,
+        id: "2",
         tenNhaCungCap: "Nhà Cung Cấp Y Dược XYZ",
         diaChi: "456 Đường B, Quận Y",
         soDienThoai: "0987654321",
         email: "info@xyzsupplier.com",
       },
       {
-        id: 3,
+        id: "3",
         tenNhaCungCap: "Dược Phẩm Quốc Tế PQR",
         diaChi: "789 Đường C, Quận Z",
         soDienThoai: "0912345678",

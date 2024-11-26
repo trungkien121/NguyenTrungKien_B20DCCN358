@@ -1,0 +1,143 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <div
+        *ngIf="displayDialog"
+        id="layer-popup"
+        [ngClass]="{ active: displayDialog }"
+      >
+        <app-loaithuoc-createment
+          (cancel)="handleCancel($event)"
+          [loaithuoc]="loaithuocNew"
+          (save)="handeSave($event)"
+        >
+        </app-loaithuoc-createment>
+      </div>
+
+      <app-confirm-dialog-common> </app-confirm-dialog-common>
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Loại thuốc</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+
+      <!-- search -->
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header border-0 align-items-center justify-content-end"
+            >
+              <div
+                class="align-items-center p-3 justify-content-between d-flex"
+              >
+                <div class="d-flex flex-column col-xl-9">
+                  <label for="titleDropdown">Tên loại thuốc </label>
+                  <input
+                    type="text"
+                    pInputText
+                    [(ngModel)]="modelSearch.keyWord"
+                  />
+                </div>
+
+                <div class="d-flex align-items-end col-xl-2">
+                  <button
+                    type="button"
+                    class="btn btn-info shadow-none mt-3"
+                    (click)="search()"
+                  >
+                    <i class="ri-search-line align-middle me-1"></i>
+                    Tìm Kiếm
+                  </button>
+                </div>
+              </div>
+
+              <!-- <div class="col-auto mb-3"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- content   -->
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div
+              class="card-header border-0 align-items-center justify-content-end"
+            >
+              <div
+                class="align-items-center p-3 justify-content-between d-flex"
+              >
+                <div class="flex-shrink-0">
+                  <div class="text-muted">
+                    <span class="fw-semibold">Tổng: </span>
+                    <span class="fw-semibold">{{ loaithuocLst.length }}</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-success shadow-none"
+                  (click)="preAdd()"
+                >
+                  <i class="ri-add-circle-line align-middle me-1"></i>
+                  Thêm loại thuốc
+                </button>
+              </div>
+              <div class="col-auto mb-3"></div>
+
+              <div class="col-auto">
+                <p-table
+                  [value]="loaithuocLst"
+                  [rowHover]="true"
+                  dataKey="id"
+                  [showCurrentPageReport]="true"
+                  [rows]="10"
+                  [alwaysShowPaginator]="true"
+                  [paginator]="true"
+                  currentPageReportTemplate=""
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>STT</th>
+                      <th>Tên</th>
+
+                      <th>Mô tả</th>
+                      <th></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template
+                    pTemplate="body"
+                    let-model
+                    let-rowIndex="rowIndex"
+                  >
+                    <tr [style]="{ cursor: 'pointer' }">
+                      <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
+                      <td (click)="preUpdate(model)">{{ model.tenLoai }}</td>
+                      <td (click)="preUpdate(model)">{{ model.moTa }}</td>
+                      <td>
+                        <a
+                          class="d-inline-block remove-item-btn"
+                          data-bs-toggle="modal"
+                          href="#delete"
+                          (click)="preDelete(model)"
+                        >
+                          <i class="ri-delete-bin-line fs-2"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

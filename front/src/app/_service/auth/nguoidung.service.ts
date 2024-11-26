@@ -100,9 +100,8 @@ export class NguoidungService {
   }
 
   getUserLst(request: any): Observable<any> {
-    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
     let params = new HttpParams();
-
     const url = environment.backApiUrl + "/nguoidung/list";
     return this.http.post<DataResponse>(url, request, {
       headers: headers,
