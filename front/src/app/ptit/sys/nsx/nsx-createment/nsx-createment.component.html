@@ -1,0 +1,138 @@
+<p-dialog
+  header="Thêm nhà sản xuất"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="true"
+  [resizable]="false"
+  [modal]="true"
+  (onHide)="onCancel()"
+>
+  <div>
+    <div class="mb-3">
+      <label class="col-form-label" for="maNSX"> Mã NSX </label>
+      <input
+        type="text"
+        name="maNSX"
+        class="form-control"
+        id="maNSX"
+        placeholder="Nhập mã nhà sản xuất"
+        #maNSX="ngModel"
+        [(ngModel)]="nsx.maNSX"
+        required
+      />
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="
+        nsx.maNSX == '' || (maNSX.invalid && (maNSX.dirty || maNSX.touched))
+      "
+    >
+      Hãy nhập mã nhà sản xuẩt
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="tenNhaSanXuat">Tên </label>
+      <input
+        type="text"
+        name="tenNhaSanXuat"
+        class="form-control"
+        id="tenNhaSanXuat"
+        #tenNhaSanXuat="ngModel"
+        placeholder="Nhập tên nhà sản xuất"
+        [(ngModel)]="nsx.tenNhaSanXuat"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          nsx.tenNhaSanXuat == '' ||
+          (tenNhaSanXuat.invalid &&
+            (tenNhaSanXuat.dirty || tenNhaSanXuat.touched))
+        "
+      >
+        Nhập tên nhà sản xuất
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="diaChi">Địa chỉ </label>
+      <input
+        type="text"
+        name="diaChi"
+        class="form-control"
+        id="diaChi"
+        #diaChi="ngModel"
+        placeholder="Nhập địa chỉ nhà cung cấp"
+        [(ngModel)]="nsx.diaChi"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          nsx.diaChi == '' ||
+          (diaChi.invalid && (diaChi.dirty || diaChi.touched))
+        "
+      >
+        Nhập địa chỉ nhà cung cấp
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="email">Email </label>
+      <input
+        type="text"
+        name="email"
+        class="form-control"
+        id="email"
+        #email="ngModel"
+        placeholder="Nhập email nhà cung cấp"
+        [(ngModel)]="nsx.email"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          nsx.email == '' || (email.invalid && (email.dirty || email.touched))
+        "
+      >
+        Nhập email nhà cung cấp
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="soDienThoai">Số điện thoại </label>
+      <input
+        type="number"
+        name="soDienThoai"
+        class="form-control"
+        id="soDienThoai"
+        #soDienThoai="ngModel"
+        placeholder="Nhập số điện thoại nhà cung cấp"
+        [(ngModel)]="nsx.soDienThoai"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          nsx.soDienThoai == '' ||
+          (soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched))
+        "
+      >
+        Nhập số điện thoại nhà cung cấp
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="displayModal = false"
+      label="Hủy"
+      styleClass="btn btn-danger"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      label="Lưu"
+      (click)="onSave()"
+      styleClass="btn btn-success"
+    ></p-button>
+  </ng-template>
+</p-dialog>

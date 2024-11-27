@@ -6,27 +6,27 @@ import {
   MessageService,
 } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
-import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { NhaCungCap } from "src/app/_model/ncc";
-import { NCCService } from "src/app/_service/ncc.service";
+import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
+import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 
 @Component({
-  selector: "app-ncc",
-  templateUrl: "./ncc.component.html",
+  selector: "app-danhmucthuoc",
+  templateUrl: "./danhmucthuoc.component.html",
   providers: [ConfirmationService, MessageService],
 })
-export class NCCComponent implements OnInit {
+export class DanhmucThuocComponent implements OnInit {
   constructor(
-    private nccService: NCCService,
+    private dmThuocService: DanhmucThuocService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
-
-  nccLst: NhaCungCap[] = [];
-  nccNew: NhaCungCap = {};
-  nccDelete: NhaCungCap = {};
+  dmThuocLst: DanhMucThuoc[] = [];
+  dmThuocNew: DanhMucThuoc = {};
+  dmThuocDelete: DanhMucThuoc = {};
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -36,6 +36,8 @@ export class NCCComponent implements OnInit {
     sortedField: "",
   };
 
+  totalRow: number = 0;
+
   displayDialog: boolean = false;
 
   ngOnInit(): void {
@@ -43,9 +45,10 @@ export class NCCComponent implements OnInit {
   }
 
   getData() {
-    this.nccService.getNCCLst(this.modelSearch).subscribe((res) => {
+    this.dmThuocService.getDMTLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.nccLst = res.data;
+        this.dmThuocLst = res.data;
+        this.totalRow = res.data.totalElements;
       }
     });
   }
@@ -57,36 +60,30 @@ export class NCCComponent implements OnInit {
   preAdd() {
     this.displayDialog = true;
   }
-  preUpdate(ncc: NhaCungCap) {
+  preUpdate(loaithuoc: LoaiThuoc) {
     this.displayDialog = true;
-    this.nccNew = ncc;
+    this.dmThuocNew = loaithuoc;
   }
 
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
-    this.nccNew = {};
+    this.dmThuocNew = {};
   }
 
-  handeSave(ncc: NhaCungCap) {
-    if (!ncc.id) {
-      this.nccService.createNCC(ncc).subscribe((resp) => {
+  handeSave(dmThuoc: DanhMucThuoc) {
+    if (!dmThuoc.id) {
+      this.dmThuocService.createDMT(dmThuoc).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_201) {
           this.toastService.success("Lưu thành công");
           this.getData();
-        } else if (resp.status == CommonConstant.STATUS_OK_409) {
-          this.toastService.error(resp.msg);
-          this.getData();
         } else {
-          this.toastService.error("Cập nhật thất bại");
+          this.toastService.error("Lưu thất bại");
         }
       });
     } else {
-      this.nccService.updateNCC(ncc).subscribe((resp) => {
+      this.dmThuocService.updateDMT(dmThuoc).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Cập nhật thành công");
-          this.getData();
-        } else if (resp.status == CommonConstant.STATUS_OK_409) {
-          this.toastService.error(resp.msg);
           this.getData();
         } else {
           this.toastService.error("Cập nhật thất bại");
@@ -95,8 +92,8 @@ export class NCCComponent implements OnInit {
     }
   }
 
-  delete(ncc: NhaCungCap) {
-    this.nccService.deleteNCC(ncc.id).subscribe((resp) => {
+  delete(dmThuoc: DanhMucThuoc) {
+    this.dmThuocService.deleteDMT(dmThuoc.id).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Xóa thành công");
         this.getData();
@@ -106,13 +103,13 @@ export class NCCComponent implements OnInit {
     });
   }
 
-  preDelete(ncc: NhaCungCap) {
+  preDelete(dmThuoc: DanhMucThuoc) {
     this.confirmationService.confirm({
-      message: "Bạn có chắc muốn xóa nhà cung cấp này?",
-      header: "Xác nhận xóa nhà cung cấp",
+      message: "Bạn có chắc muốn xóa danh mục thuốc này?",
+      header: "Xác nhận xóa danh mục thuốc",
       icon: "pi pi-info-circle",
       accept: () => {
-        this.delete(ncc);
+        this.delete(dmThuoc);
       },
       reject: (type: any) => {
         switch (type) {

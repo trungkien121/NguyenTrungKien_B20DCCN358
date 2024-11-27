@@ -6,12 +6,12 @@
         id="layer-popup"
         [ngClass]="{ active: displayDialog }"
       >
-        <app-loaithuoc-createment
+        <app-danhmucthuoc-createment
           (cancel)="handleCancel($event)"
-          [loaithuoc]="loaithuocNew"
+          [dmThuoc]="dmThuocNew"
           (save)="handeSave($event)"
         >
-        </app-loaithuoc-createment>
+        </app-danhmucthuoc-createment>
       </div>
 
       <app-confirm-dialog-common> </app-confirm-dialog-common>
@@ -21,7 +21,7 @@
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Loại thuốc</h4>
+            <h4 class="mb-sm-0">Danh mục thuốc</h4>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
                 class="align-items-center p-3 justify-content-between d-flex"
               >
                 <div class="d-flex flex-column col-xl-9">
-                  <label for="titleDropdown">Tên loại thuốc </label>
+                  <label for="titleDropdown">Tên danh mục thuốc </label>
                   <input
                     type="text"
                     pInputText
@@ -77,7 +77,7 @@
                 <div class="flex-shrink-0">
                   <div class="text-muted">
                     <span class="fw-semibold">Tổng: </span>
-                    <span class="fw-semibold">{{ loaithuocLst.length }}</span>
+                    <span class="fw-semibold">{{ dmThuocLst.length }}</span>
                   </div>
                 </div>
                 <button
@@ -86,14 +86,14 @@
                   (click)="preAdd()"
                 >
                   <i class="ri-add-circle-line align-middle me-1"></i>
-                  Thêm loại thuốc
+                  Thêm danh mục thuốc
                 </button>
               </div>
               <div class="col-auto mb-3"></div>
 
               <div class="col-auto">
                 <p-table
-                  [value]="loaithuocLst"
+                  [value]="dmThuocLst"
                   [rowHover]="true"
                   dataKey="id"
                   [showCurrentPageReport]="true"
@@ -118,7 +118,7 @@
                   >
                     <tr [style]="{ cursor: 'pointer' }">
                       <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
-                      <td (click)="preUpdate(model)">{{ model.tenLoai }}</td>
+                      <td (click)="preUpdate(model)">{{ model.tenDanhMuc }}</td>
                       <td (click)="preUpdate(model)">{{ model.moTa }}</td>
                       <td>
                         <a

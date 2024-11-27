@@ -24,4 +24,5 @@ export class CommonConstant {
 
   public static readonly STATUS_OK_200 = "200";
   public static readonly STATUS_OK_201 = "201";
+  public static readonly STATUS_OK_409 = "409";
 }

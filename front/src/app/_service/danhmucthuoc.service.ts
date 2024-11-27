@@ -8,11 +8,11 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class LoaithuocService {
+export class DanhmucThuocService {
   constructor(private http: HttpClient) {}
 
-  getLoaiThuocLst(request?: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/list`;
+  getDMTLst(request?: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.get(`${apiUrl}`, {
@@ -20,8 +20,8 @@ export class LoaithuocService {
     });
   }
 
-  createLoaiThuoc(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/create`;
+  createDMT(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -29,20 +29,8 @@ export class LoaithuocService {
     });
   }
 
-  //   getLoaiThuoc(id: any): Observable<any> {
-  //     const apiUrl = environment.backApiUrl + `/thuoc/get`;
-  //     let params = new HttpParams().set("id", id?.toString() || "");
-
-  //     const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-  //     return this.http.get(`${apiUrl}`, {
-  //       headers: headers,
-  //       params: params,
-  //     });
-  //   }
-
-  deleteLoaiThuoc(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/delete`;
+  deleteDMT(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -53,8 +41,8 @@ export class LoaithuocService {
     });
   }
 
-  updateLoaiThuoc(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/update`;
+  updateDMT(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

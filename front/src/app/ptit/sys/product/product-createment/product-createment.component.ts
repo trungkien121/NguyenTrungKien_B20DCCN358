@@ -1,8 +1,17 @@
 import { Component, OnInit } from "@angular/core";
+import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { Product } from "src/app/_model/product";
-import { ProductService } from "src/app/_service/product.service";
+import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { NhaCungCap } from "src/app/_model/ncc";
+import { NhaSanXuat } from "src/app/_model/nsx";
+import { Thuoc } from "src/app/_model/thuoc";
+import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
+import { LoaithuocService } from "src/app/_service/loaithuoc.service";
+import { NCCService } from "src/app/_service/ncc.service";
+import { NSXService } from "src/app/_service/nsx.service";
+import { ThuocService } from "src/app/_service/thuoc.service";
 
 @Component({
   selector: "app-product-createment",
@@ -10,9 +19,18 @@ import { ProductService } from "src/app/_service/product.service";
   styleUrls: ["./product-createment.component.css"],
 })
 export class ProductCreatementComponent implements OnInit {
-  product: Product = {};
-  modelSearch: SearchModel = {};
-  optionLabel: string = "";
+  thuoc: Thuoc = {};
+  loaithuocLst: LoaiThuoc[] = [];
+  nsxLst: NhaSanXuat[] = [];
+  danhmucLst: DanhMucThuoc[] = [];
+
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 10,
+    sortedField: "",
+  };
 
   statusOptions: any = {
     name: "",
@@ -20,9 +38,18 @@ export class ProductCreatementComponent implements OnInit {
   };
   categoryOption: OptionSelect[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private thuocService: ThuocService,
+    private loaithuocService: LoaithuocService,
+    private nsxService: NSXService,
+    private dmThuocService: DanhmucThuocService
+  ) {}
 
   ngOnInit() {
+    this.getLoaiThuoc();
+    this.getNSX();
+    this.getDanhMucThuoc();
+
     this.statusOptions = [
       {
         name: "Đang bán",
@@ -33,55 +60,58 @@ export class ProductCreatementComponent implements OnInit {
         value: false,
       },
     ];
-
-    this.categoryOption = [
-      {
-        name: "Thuốc về đầu",
-        value: "1",
-      },
-      {
-        name: "Thuốc về dạ dày",
-        value: "0",
-      },
-    ];
-    this.product = {
-      id: "P001",
-      tenThuoc: "Thuốc giảm đau",
-      maThuoc: "TD001",
-      maVach: "1234567890",
-      loaiThuocId: "LT01",
-      nhaSanXuatId: "NSX01",
-      danhMucThuocId: "DM01",
-      donVi: "viên",
-      cheBao: "Hộp",
-      quyCach: "10 viên / vỉ",
-      soDangKy: "SD001",
-      hanSuDung: new Date("2025-12-31"),
-      giaNhap: 2000,
-      giaBan: 5000,
-      soLuongTon: 100,
-      nguongCanhBao: 10,
-      hinhAnh: "thuoc-giam-dau.jpg",
-      congDung: "Giảm đau nhanh chóng",
-      chiDinh: "Dùng khi đau đầu, đau bụng",
-      chongChiDinh: "Không dùng cho người mẫn cảm",
-      huongDanSuDung: "Uống 1-2 viên mỗi ngày",
-      moTaNgan: "Thuốc giảm đau phổ biến",
-      trangThai: true,
-      ghiChu: "Để nơi khô ráo, tránh ánh sáng",
-    };
   }
+
+  getNSX() {
+    this.nsxService.getNSXLst().subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.nsxLst = res.data;
+      }
+    });
+  }
+
+  getLoaiThuoc() {
+    this.loaithuocService.getLoaiThuocLst().subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.loaithuocLst = res.data;
+      }
+    });
+  }
+
+  getDanhMucThuoc() {
+    this.dmThuocService.getDMTLst().subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.danhmucLst = res.data;
+      }
+    });
+  }
+
+  getThuoc(id: string) {
+    this.thuocService.getProduct(id).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.thuoc = res.data;
+      }
+    });
+  }
+
   search() {}
 
-  onStatusChange(newStatus: string) {
-    // this.modelSearch.statusSearch = newStatus;
+  onStatusChange(value: any) {
+    this.thuoc.trangThai = value;
   }
 
-  onVisibilityChange(newStatus: string) {}
-
-  onCategoryChange(newCategory: string) {
-    // this.modelSearch.categorySearch = newCategory;
+  onLoaiThuocChange(value: string) {
+    this.thuoc.loaiThuocId = value;
   }
+
+  onNSXChange(value: string) {
+    this.thuoc.nhaSanXuatId = value;
+  }
+
+  onDanhmucThuocChange(value: string) {
+    this.thuoc.danhMucThuocId = value;
+  }
+
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
   files: { name: string; size: number; thumbnail: string; error?: string }[] =
     []; // Danh sách các tệp hình ảnh

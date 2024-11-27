@@ -43,7 +43,7 @@
             aria-controls="sidebarDashboards"
           >
             <i class="mdi mdi-speedometer"></i>
-            <span data-key="t-dashboards">Sản Phẩm</span>
+            <span data-key="t-dashboards"> Quản lý</span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
@@ -53,7 +53,7 @@
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Sản Phẩm
+                  Thuốc
                 </a>
               </li>
               <li class="nav-item">
@@ -72,7 +72,17 @@
                   class="nav-link"
                   data-key="t-ecommerce"
                 >
-                  NCC
+                  Nhà cung cấp
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a
+                  [routerLink]="['/sys/nsx']"
+                  class="nav-link"
+                  data-key="t-ecommerce"
+                >
+                  Nhà sản xuất
                 </a>
               </li>
 
@@ -92,6 +102,16 @@
                   data-key="t-ecommerce"
                 >
                   Loại thuốc
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a
+                  [routerLink]="['/sys/danhmucThuoc']"
+                  class="nav-link"
+                  data-key="t-ecommerce"
+                >
+                  Danh mục thuốc
                 </a>
               </li>
             </ul>

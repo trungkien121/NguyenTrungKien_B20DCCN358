@@ -8,20 +8,11 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class LoaithuocService {
+export class ThuocService {
   constructor(private http: HttpClient) {}
 
-  getLoaiThuocLst(request?: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/list`;
-    const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-    return this.http.get(`${apiUrl}`, {
-      headers: headers,
-    });
-  }
-
-  createLoaiThuoc(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/create`;
+  getProductLst(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thuoc/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -29,20 +20,29 @@ export class LoaithuocService {
     });
   }
 
-  //   getLoaiThuoc(id: any): Observable<any> {
-  //     const apiUrl = environment.backApiUrl + `/thuoc/get`;
-  //     let params = new HttpParams().set("id", id?.toString() || "");
+  createProduct(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thuoc/create`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
 
-  //     const headers: HttpHeaders = HeadersUtil.getHeaders();
+    return this.http.post(`${apiUrl}`, request, {
+      headers: headers,
+    });
+  }
 
-  //     return this.http.get(`${apiUrl}`, {
-  //       headers: headers,
-  //       params: params,
-  //     });
-  //   }
+  getProduct(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thuoc/get`;
+    let params = new HttpParams().set("id", id?.toString() || "");
 
-  deleteLoaiThuoc(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/delete`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  deleteProduct(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thuoc/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -53,8 +53,8 @@ export class LoaithuocService {
     });
   }
 
-  updateLoaiThuoc(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/loaithuoc/update`;
+  updateProduct(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thuoc/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

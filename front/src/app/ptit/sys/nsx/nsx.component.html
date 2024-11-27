@@ -6,22 +6,23 @@
         id="layer-popup"
         [ngClass]="{ active: displayDialog }"
       >
-        <app-loaithuoc-createment
+        <app-nsx-createment
           (cancel)="handleCancel($event)"
-          [loaithuoc]="loaithuocNew"
+          [nsx]="nsxNew"
           (save)="handeSave($event)"
         >
-        </app-loaithuoc-createment>
+        </app-nsx-createment>
       </div>
 
       <app-confirm-dialog-common> </app-confirm-dialog-common>
+
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Loại thuốc</h4>
+            <h4 class="mb-sm-0">Nhà Cung Cấp</h4>
           </div>
         </div>
       </div>
@@ -38,7 +39,7 @@
                 class="align-items-center p-3 justify-content-between d-flex"
               >
                 <div class="d-flex flex-column col-xl-9">
-                  <label for="titleDropdown">Tên loại thuốc </label>
+                  <label for="titleDropdown">Tên Nhà Cung Cấp </label>
                   <input
                     type="text"
                     pInputText
@@ -76,8 +77,8 @@
               >
                 <div class="flex-shrink-0">
                   <div class="text-muted">
-                    <span class="fw-semibold">Tổng: </span>
-                    <span class="fw-semibold">{{ loaithuocLst.length }}</span>
+                    <span class="fw-semibold">Total: </span>
+                    <span class="fw-semibold">{{ nsxLst.length }}</span>
                   </div>
                 </div>
                 <button
@@ -86,14 +87,14 @@
                   (click)="preAdd()"
                 >
                   <i class="ri-add-circle-line align-middle me-1"></i>
-                  Thêm loại thuốc
+                  Thêm nhà sản xuất
                 </button>
               </div>
               <div class="col-auto mb-3"></div>
 
               <div class="col-auto">
                 <p-table
-                  [value]="loaithuocLst"
+                  [value]="nsxLst"
                   [rowHover]="true"
                   dataKey="id"
                   [showCurrentPageReport]="true"
@@ -104,28 +105,29 @@
                 >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th>STT</th>
-                      <th>Tên</th>
-
-                      <th>Mô tả</th>
+                      <th>ID</th>
+                      <th>Mã nhà sản xuất</th>
+                      <th>Tên nhà sản xuất</th>
+                      <th>Địa chỉ</th>
+                      <th>Số Điện Thoại</th>
+                      <th>Email</th>
                       <th></th>
                     </tr>
                   </ng-template>
-                  <ng-template
-                    pTemplate="body"
-                    let-model
-                    let-rowIndex="rowIndex"
-                  >
+                  <ng-template pTemplate="body" let-nsx let-rowIndex="rowIndex">
                     <tr [style]="{ cursor: 'pointer' }">
-                      <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
-                      <td (click)="preUpdate(model)">{{ model.tenLoai }}</td>
-                      <td (click)="preUpdate(model)">{{ model.moTa }}</td>
+                      <td (click)="preUpdate(nsx)">{{ rowIndex + 1 }}</td>
+                      <td (click)="preUpdate(nsx)">{{ nsx.maNSX }}</td>
+                      <td (click)="preUpdate(nsx)">{{ nsx.tenNhaSanXuat }}</td>
+                      <td (click)="preUpdate(nsx)">{{ nsx.diaChi }}</td>
+                      <td (click)="preUpdate(nsx)">{{ nsx.soDienThoai }}</td>
+                      <td (click)="preUpdate(nsx)">{{ nsx.email }}</td>
                       <td>
                         <a
                           class="text-danger d-inline-block remove-item-btn"
                           data-bs-toggle="modal"
                           href="#delete"
-                          (click)="preDelete(model)"
+                          (click)="preDelete(nsx)"
                         >
                           <i class="ri-delete-bin-line fs-2"></i>
                         </a>

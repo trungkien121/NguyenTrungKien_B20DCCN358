@@ -1,6 +1,6 @@
 import { WeekDay } from "@angular/common";
 
-export class Product {
+export class Thuoc {
   id?: String;
   tenThuoc?: String;
   maThuoc?: String;

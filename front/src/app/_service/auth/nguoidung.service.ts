@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Cookie } from "ng2-cookies";
 import { Observable } from "rxjs";
 import { AuthConstant } from "src/app/_constant/auth.constant";
-import { DataResponse } from "src/app/_model/resp/data-response";
 import { HeadersUtil } from "src/app/_util/headers-util";
 import { environment } from "src/environments/environment";
 
@@ -58,10 +57,10 @@ export class NguoidungService {
     return true;
   }
 
-  getRoles(): Observable<DataResponse> {
+  getRoles(): Observable<any> {
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
     const url = environment.backApiUrl + "/nguoidung/getRoles";
-    return this.http.get<DataResponse>(url, { headers: headers });
+    return this.http.get<any>(url, { headers: headers });
   }
 
   get(id: any): Observable<any> {
@@ -69,7 +68,7 @@ export class NguoidungService {
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const url = environment.backApiUrl + "/nguoidung/get";
-    return this.http.get<DataResponse>(url, {
+    return this.http.get<any>(url, {
       headers: headers,
       params: params,
     });
@@ -103,7 +102,7 @@ export class NguoidungService {
     const headers: HttpHeaders = HeadersUtil.getHeaders();
     let params = new HttpParams();
     const url = environment.backApiUrl + "/nguoidung/list";
-    return this.http.post<DataResponse>(url, request, {
+    return this.http.post<any>(url, request, {
       headers: headers,
       params: params,
     });

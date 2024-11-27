@@ -29,6 +29,11 @@ import { CustomerComponent } from "./customer/customer.component";
 import { DonHangComponent } from "./donhang/donhang.component";
 import { LoaiThuocComponent } from "./loaithuoc/loaithuoc.component";
 import { LoaiThuocCreatementComponent } from "./loaithuoc/loaithuoc-createment/loaithuoc-createment.component";
+import { NccCreatementComponent } from "./ncc/ncc-createment/ncc-createment.component";
+import { NSXComponent } from "./nsx/nsx.component";
+import { NsxCreatementComponent } from "./nsx/nsx-createment/nsx-createment.component";
+import { DanhmucThuocCreatementComponent } from "./danhmucthuoc/danhmucthuoc-createment/danhmucthuoc-createment.component";
+import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
 
 @NgModule({
   declarations: [
@@ -38,11 +43,16 @@ import { LoaiThuocCreatementComponent } from "./loaithuoc/loaithuoc-createment/l
     ConfirmDialogCommonComponent,
     ProductComponent,
     ProductCreatementComponent,
-    NCCComponent,
     CustomerComponent,
     DonHangComponent,
     LoaiThuocComponent,
     LoaiThuocCreatementComponent,
+    NccCreatementComponent,
+    NCCComponent,
+    NSXComponent,
+    NsxCreatementComponent,
+    DanhmucThuocCreatementComponent,
+    DanhmucThuocComponent,
   ],
   imports: [
     CommonModule,
