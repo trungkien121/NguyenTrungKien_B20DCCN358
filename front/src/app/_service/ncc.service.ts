@@ -8,41 +8,29 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class ProductService {
+export class NCCService {
   constructor(private http: HttpClient) {}
 
-  getProductLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/list`;
-    const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-    return this.http.post(`${apiUrl}`, request, {
-      headers: headers,
-    });
-  }
-
-  createProduct(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/create`;
-    const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-    return this.http.post(`${apiUrl}`, request, {
-      headers: headers,
-    });
-  }
-
-  getProduct(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/get`;
-    let params = new HttpParams().set("id", id?.toString() || "");
-
+  getNCCLst(request?: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhacungcap/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.get(`${apiUrl}`, {
       headers: headers,
-      params: params,
     });
   }
 
-  deleteProduct(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/delete`;
+  createNCC(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhacungcap/create`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.post(`${apiUrl}`, request, {
+      headers: headers,
+    });
+  }
+
+  deleteNCC(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhacungcap/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -53,8 +41,8 @@ export class ProductService {
     });
   }
 
-  updateProduct(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/update`;
+  updateNCC(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhacungcap/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

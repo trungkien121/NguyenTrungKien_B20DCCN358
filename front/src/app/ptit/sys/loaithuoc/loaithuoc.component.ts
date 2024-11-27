@@ -6,18 +6,13 @@ import {
   MessageService,
 } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
-import { NguoiDung } from "src/app/_model/auth/nguoidung";
-import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { Customer } from "src/app/_model/customer";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
-import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 
 @Component({
   selector: "app-loaithuoc",
   templateUrl: "./loaithuoc.component.html",
-  // styleUrls: ["./customer.component.css"],
   providers: [ConfirmationService, MessageService],
 })
 export class LoaiThuocComponent implements OnInit {

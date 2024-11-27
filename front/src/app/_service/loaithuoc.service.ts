@@ -1,7 +1,6 @@
 // role.service.ts
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DataResponse } from "../_model/resp/data-response";
 import { HeadersUtil } from "../_util/headers-util";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";

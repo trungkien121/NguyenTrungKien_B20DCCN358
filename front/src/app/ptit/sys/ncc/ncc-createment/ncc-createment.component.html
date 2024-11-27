@@ -1,0 +1,138 @@
+<p-dialog
+  header="Thêm nhà cung cấp"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="true"
+  [resizable]="false"
+  [modal]="true"
+  (onHide)="onCancel()"
+>
+  <div>
+    <div class="mb-3">
+      <label class="col-form-label" for="maNCC"> Mã NCC </label>
+      <input
+        type="text"
+        name="maNCC"
+        class="form-control"
+        id="maNCC"
+        placeholder="Nhập mã nhà cung cấp"
+        #maNCC="ngModel"
+        [(ngModel)]="ncc.maNCC"
+        required
+      />
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="
+        ncc.maNCC == '' || (maNCC.invalid && (maNCC.dirty || maNCC.touched))
+      "
+    >
+      Hãy nhập mã nhà cung cấp
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="tenNhaCungCap">Tên </label>
+      <input
+        type="text"
+        name="tenNhaCungCap"
+        class="form-control"
+        id="tenNhaCungCap"
+        #tenNhaCungCap="ngModel"
+        placeholder="Nhập tên nhà cung cấp"
+        [(ngModel)]="ncc.tenNhaCungCap"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          ncc.tenNhaCungCap == '' ||
+          (tenNhaCungCap.invalid &&
+            (tenNhaCungCap.dirty || tenNhaCungCap.touched))
+        "
+      >
+        Nhập tên nhà cung cấp
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="diaChi">Địa chỉ </label>
+      <input
+        type="text"
+        name="diaChi"
+        class="form-control"
+        id="diaChi"
+        #diaChi="ngModel"
+        placeholder="Nhập địa chỉ nhà cung cấp"
+        [(ngModel)]="ncc.diaChi"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          ncc.diaChi == '' ||
+          (diaChi.invalid && (diaChi.dirty || diaChi.touched))
+        "
+      >
+        Nhập địa chỉ nhà cung cấp
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="email">Email </label>
+      <input
+        type="text"
+        name="email"
+        class="form-control"
+        id="email"
+        #email="ngModel"
+        placeholder="Nhập email nhà cung cấp"
+        [(ngModel)]="ncc.email"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          ncc.email == '' || (email.invalid && (email.dirty || email.touched))
+        "
+      >
+        Nhập email nhà cung cấp
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="soDienThoai">Số điện thoại </label>
+      <input
+        type="number"
+        name="soDienThoai"
+        class="form-control"
+        id="soDienThoai"
+        #soDienThoai="ngModel"
+        placeholder="Nhập số điện thoại nhà cung cấp"
+        [(ngModel)]="ncc.soDienThoai"
+      />
+      <div
+        class="text-danger"
+        *ngIf="
+          ncc.soDienThoai == '' ||
+          (soDienThoai.invalid && (soDienThoai.dirty || soDienThoai.touched))
+        "
+      >
+        Nhập số điện thoại nhà cung cấp
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="displayModal = false"
+      label="Hủy"
+      styleClass="btn btn-danger"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      label="Lưu"
+      (click)="onSave()"
+      styleClass="btn btn-success"
+    ></p-button>
+  </ng-template>
+</p-dialog>

@@ -9,24 +9,26 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { NhaCungCap } from "src/app/_model/ncc";
+import { NhaSanXuat } from "src/app/_model/nsx";
 import { NCCService } from "src/app/_service/ncc.service";
+import { NSXService } from "src/app/_service/nsx.service";
 
 @Component({
-  selector: "app-ncc",
-  templateUrl: "./ncc.component.html",
+  selector: "app-nsx",
+  templateUrl: "./nsx.component.html",
   providers: [ConfirmationService, MessageService],
 })
-export class NCCComponent implements OnInit {
+export class NSXComponent implements OnInit {
   constructor(
-    private nccService: NCCService,
+    private nsxService: NSXService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
 
-  nccLst: NhaCungCap[] = [];
-  nccNew: NhaCungCap = {};
-  nccDelete: NhaCungCap = {};
+  nsxLst: NhaSanXuat[] = [];
+  nsxNew: NhaSanXuat = {};
+  nsxDelete: NhaSanXuat = {};
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -43,9 +45,9 @@ export class NCCComponent implements OnInit {
   }
 
   getData() {
-    this.nccService.getNCCLst(this.modelSearch).subscribe((res) => {
+    this.nsxService.getNSXLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.nccLst = res.data;
+        this.nsxLst = res.data;
       }
     });
   }
@@ -59,17 +61,17 @@ export class NCCComponent implements OnInit {
   }
   preUpdate(ncc: NhaCungCap) {
     this.displayDialog = true;
-    this.nccNew = ncc;
+    this.nsxNew = ncc;
   }
 
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
-    this.nccNew = {};
+    this.nsxNew = {};
   }
 
-  handeSave(ncc: NhaCungCap) {
-    if (!ncc.id) {
-      this.nccService.createNCC(ncc).subscribe((resp) => {
+  handeSave(nsx: NhaSanXuat) {
+    if (!nsx.id) {
+      this.nsxService.createNSX(nsx).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_201) {
           this.toastService.success("Lưu thành công");
           this.getData();
@@ -78,7 +80,7 @@ export class NCCComponent implements OnInit {
         }
       });
     } else {
-      this.nccService.updateNCC(ncc).subscribe((resp) => {
+      this.nsxService.updateNSX(nsx).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Cập nhật thành công");
           this.getData();
@@ -89,8 +91,8 @@ export class NCCComponent implements OnInit {
     }
   }
 
-  delete(ncc: NhaCungCap) {
-    this.nccService.deleteNCC(ncc.id).subscribe((resp) => {
+  delete(nsx: NhaSanXuat) {
+    this.nsxService.deleteNSX(nsx.id).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Xóa thành công");
         this.getData();
@@ -100,13 +102,13 @@ export class NCCComponent implements OnInit {
     });
   }
 
-  preDelete(ncc: NhaCungCap) {
+  preDelete(nsx: NhaSanXuat) {
     this.confirmationService.confirm({
-      message: "Bạn có chắc muốn xóa nhà cung cấp này?",
-      header: "Xác nhận xóa nhà cung cấp",
+      message: "Bạn có chắc muốn xóa nhà sản xuất này?",
+      header: "Xác nhận xóa nhà sản xuất",
       icon: "pi pi-info-circle",
       accept: () => {
-        this.delete(ncc);
+        this.delete(nsx);
       },
       reject: (type: any) => {
         switch (type) {

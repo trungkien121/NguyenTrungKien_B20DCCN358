@@ -9,6 +9,7 @@ import { NCCComponent } from "./ncc/ncc.component";
 import { CustomerComponent } from "./customer/customer.component";
 import { DonHangComponent } from "./donhang/donhang.component";
 import { LoaiThuocComponent } from "./loaithuoc/loaithuoc.component";
+import { NSXComponent } from "./nsx/nsx.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: "ncc",
     component: NCCComponent,
+  },
+  {
+    path: "nsx",
+    component: NSXComponent,
   },
   {
     path: "donhang",
