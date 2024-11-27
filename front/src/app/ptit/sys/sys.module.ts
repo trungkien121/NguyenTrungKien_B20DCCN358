@@ -32,6 +32,8 @@ import { LoaiThuocCreatementComponent } from "./loaithuoc/loaithuoc-createment/l
 import { NccCreatementComponent } from "./ncc/ncc-createment/ncc-createment.component";
 import { NSXComponent } from "./nsx/nsx.component";
 import { NsxCreatementComponent } from "./nsx/nsx-createment/nsx-createment.component";
+import { DanhmucThuocCreatementComponent } from "./danhmucthuoc/danhmucthuoc-createment/danhmucthuoc-createment.component";
+import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { NsxCreatementComponent } from "./nsx/nsx-createment/nsx-createment.comp
     NCCComponent,
     NSXComponent,
     NsxCreatementComponent,
+    DanhmucThuocCreatementComponent,
+    DanhmucThuocComponent,
   ],
   imports: [
     CommonModule,
