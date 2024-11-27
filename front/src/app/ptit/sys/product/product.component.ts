@@ -3,9 +3,9 @@ import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { NhaCungCap } from "src/app/_model/ncc";
-import { Product } from "src/app/_model/product";
+import { Thuoc } from "src/app/_model/thuoc";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
-import { ProductService } from "src/app/_service/product.service";
+import { ThuocService } from "src/app/_service/thuoc.service";
 
 @Component({
   selector: "app-product",
@@ -13,7 +13,7 @@ import { ProductService } from "src/app/_service/product.service";
   styleUrls: ["./product.component.css"],
 })
 export class ProductComponent implements OnInit {
-  productLst: Product[] = [];
+  productLst: Thuoc[] = [];
   loaithuocLst: LoaiThuoc[] = [];
   nccLst: NhaCungCap[] = [];
 
@@ -25,12 +25,12 @@ export class ProductComponent implements OnInit {
   categoryOption: OptionSelect[] = [];
 
   constructor(
-    private productService: ProductService,
+    private thuocService: ThuocService,
     private loaithuocService: LoaithuocService
   ) {}
 
   ngOnInit() {
-    this.productService.getProductLst(this.modelSearch).subscribe((res) => {
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       this.productLst = res.responseData;
     });
 

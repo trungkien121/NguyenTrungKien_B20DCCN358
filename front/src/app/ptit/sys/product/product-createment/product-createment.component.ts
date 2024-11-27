@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { Product } from "src/app/_model/product";
-import { ProductService } from "src/app/_service/product.service";
+import { Thuoc } from "src/app/_model/thuoc";
+import { ThuocService } from "src/app/_service/thuoc.service";
 
 @Component({
   selector: "app-product-createment",
@@ -10,7 +10,7 @@ import { ProductService } from "src/app/_service/product.service";
   styleUrls: ["./product-createment.component.css"],
 })
 export class ProductCreatementComponent implements OnInit {
-  product: Product = {};
+  product: Thuoc = {};
   modelSearch: SearchModel = {};
   optionLabel: string = "";
 
@@ -20,7 +20,7 @@ export class ProductCreatementComponent implements OnInit {
   };
   categoryOption: OptionSelect[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private ThuocService: ThuocService) {}
 
   ngOnInit() {
     this.statusOptions = [
