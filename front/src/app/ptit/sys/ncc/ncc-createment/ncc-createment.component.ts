@@ -45,11 +45,11 @@ export class NccCreatementComponent implements OnInit {
       this.ncc.tenNhaCungCap = "";
       return check;
     }
-    if (ncc.soDienThoai == undefined || ncc.soDienThoai.trim().length == 0) {
-      check = false;
-      this.ncc.soDienThoai = "";
-      return check;
-    }
+    // if (ncc.soDienThoai == undefined || ncc.soDienThoai.trim().length == 0) {
+    //   check = false;
+    //   this.ncc.soDienThoai = "";
+    //   return check;
+    // }
     if (ncc.email == undefined || ncc.email.trim().length == 0) {
       check = false;
       this.ncc.email = "";

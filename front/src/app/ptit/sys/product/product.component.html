@@ -34,21 +34,23 @@
                 </div>
 
                 <div class="d-flex flex-column col-xl-2 pl-2">
-                  <label for="statusDropdown"> Nhà Cung Cấp</label>
+                  <label for="statusDropdown"> Nhà cung cấp</label>
                   <app-select-common
-                    [optionValue]="'value'"
-                    [options]="visibilityOptions"
-                    [isOptionSelectType]="true"
-                    (selectionChange)="onNCCChange($event)"
+                    [optionValue]="'id'"
+                    [optionLabel]="'tenNhaSanXuat'"
+                    [options]="nsxLst"
+                    [isOptionSelectType]="false"
+                    (selectionChange)="onNSXChange($event)"
                   ></app-select-common>
                 </div>
 
                 <div class="d-flex flex-column col-xl-2 pl-2">
-                  <label for="visibilityDropdown">Loại Thuốc</label>
+                  <label for="visibilityDropdown">Loại thuốc</label>
                   <app-select-common
-                    [optionValue]="'value'"
-                    [options]="categoryOption"
-                    [isOptionSelectType]="true"
+                    [optionValue]="'id'"
+                    [optionLabel]="'tenLoai'"
+                    [options]="loaithuocLst"
+                    [isOptionSelectType]="false"
                     (selectionChange)="onCategoryChange($event)"
                   ></app-select-common>
                 </div>
@@ -92,7 +94,7 @@
               >
                 <div class="flex-shrink-0">
                   <div class="text-muted">
-                    <span class="fw-semibold">Total: </span>
+                    <span class="fw-semibold">Tổng: </span>
                     <span class="fw-semibold">{{ productLst.length }}</span>
                   </div>
                 </div>

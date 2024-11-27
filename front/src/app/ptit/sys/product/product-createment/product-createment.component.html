@@ -31,10 +31,10 @@
                     id="product-id-input"
                     placeholder="Enter product ID"
                     required
-                    [(ngModel)]="product.id"
-                    disabled="true"
+                    [(ngModel)]="thuoc.id"
+                    [disabled]="!!thuoc.id"
                     name="id"
-                    value="product.id"
+                    value="thuoc.id"
                   />
                 </div>
 
@@ -48,9 +48,9 @@
                     id="product-title-input"
                     placeholder="Enter product title"
                     required
-                    [(ngModel)]="product.tenThuoc"
+                    [(ngModel)]="thuoc.tenThuoc"
                     name="tenThuoc"
-                    value="{{ product.tenThuoc }}"
+                    value="{{ thuoc.tenThuoc }}"
                   />
                   <div class="invalid-feedback">
                     Please enter a product title.
@@ -67,9 +67,9 @@
                     id="product-code-input"
                     placeholder="Enter product code"
                     required
-                    [(ngModel)]="product.maThuoc"
+                    [(ngModel)]="thuoc.maThuoc"
                     name="maThuoc"
-                    value="{{ product.maThuoc }}"
+                    value="{{ thuoc.maThuoc }}"
                   />
                   <div class="invalid-feedback">
                     Please enter a product code.
@@ -86,9 +86,9 @@
                     id="product-barcode-input"
                     placeholder="Enter barcode"
                     required
-                    [(ngModel)]="product.maVach"
+                    [(ngModel)]="thuoc.maVach"
                     name="maVach"
-                    value="{{ product.maVach }}"
+                    value="{{ thuoc.maVach }}"
                   />
                   <div class="invalid-feedback">Please enter a barcode.</div>
                 </div>
@@ -97,92 +97,51 @@
                   <label class="form-label" for="product-type-select"
                     >Loại Thuốc</label
                   >
-                  <select
-                    class="form-select"
-                    id="product-type-select"
-                    required
-                    [(ngModel)]="product.loaiThuocId"
-                    name="loaiThuocId"
-                    value="{{ product.loaiThuocId }}"
-                  >
-                    <option value="">Chọn loại thuốc</option>
-                    <option value="LT01">Thuốc Giảm Đau</option>
-                    <option value="LT02">Thuốc Kháng Sinh</option>
-                    <option value="LT03">Thuốc Hạ Sốt</option>
-                    <option value="LT04">Thuốc Bổ Sung Vitamin</option>
-                    <option value="LT05">Thuốc Tiêu Hóa</option>
-                  </select>
-                  <div class="invalid-feedback">Vui lòng chọn loại thuốc.</div>
+                  <app-select-common
+                    [optionValue]="'id'"
+                    [optionLabel]="'tenLoai'"
+                    [options]="loaithuocLst"
+                    [isOptionSelectType]="false"
+                    (selectionChange)="onLoaiThuocChange($event)"
+                  ></app-select-common>
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label" for="product-manufacturer-select"
                     >Nhà Sản Xuất</label
                   >
-                  <select
-                    class="form-select"
-                    id="product-manufacturer-select"
-                    required
-                    [(ngModel)]="product.nhaSanXuatId"
-                    name="nhaSanXuatId"
-                    value="{{ product.nhaSanXuatId }}"
-                  >
-                    <option value="">Chọn nhà sản xuất</option>
-                    <option value="NSX01">Công ty Dược A</option>
-                    <option value="NSX02">Công ty Dược B</option>
-                    <option value="NSX03">Công ty Dược C</option>
-                    <option value="NSX04">Công ty Dược D</option>
-                    <option value="NSX05">Công ty Dược E</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Vui lòng chọn nhà sản xuất.
-                  </div>
+                  <app-select-common
+                    [optionValue]="'id'"
+                    [optionLabel]="'tenNhaSanXuat'"
+                    [options]="nsxLst"
+                    [isOptionSelectType]="false"
+                    (selectionChange)="onNSXChange($event)"
+                  ></app-select-common>
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label" for="product-category-select"
                     >Danh Mục Thuốc</label
                   >
-                  <select
-                    class="form-select"
-                    id="product-category-select"
-                    required
-                    [(ngModel)]="product.danhMucThuocId"
-                    name="danhMucThuocId"
-                    value="{{ product.danhMucThuocId }}"
-                  >
-                    <option value="">Chọn danh mục thuốc</option>
-                    <option value="DM01">Thuốc Giảm Đau</option>
-                    <option value="DM02">Thuốc Kháng Sinh</option>
-                    <option value="DM03">Thuốc Chống Viêm</option>
-                    <option value="DM04">Vitamin và Khoáng Chất</option>
-                    <option value="DM05">Thực Phẩm Chức Năng</option>
-                    <option value="DM06">Thuốc Điều Trị Bệnh</option>
-                    <option value="DM07">Thuốc Hạ Sốt</option>
-                    <option value="DM08">Thuốc Trị Bệnh Ngoài Da</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Vui lòng chọn danh mục thuốc.
-                  </div>
+                  <app-select-common
+                    [optionValue]="'id'"
+                    [optionLabel]="'tenDanhMuc'"
+                    [options]="danhmucLst"
+                    [isOptionSelectType]="false"
+                    (selectionChange)="onDanhmucThuocChange($event)"
+                  ></app-select-common>
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label" for="product-category-select"
                     >Trạng thái</label
                   >
-                  <select
-                    class="form-select"
-                    id="product-category-select"
-                    required
-                    [(ngModel)]="product.trangThai"
-                    name="trangThai"
-                    value="{{ product.trangThai }}"
-                  >
-                    <option value="">Chọn trạng thái</option>
-                    <option value="false">Ngừng bán</option>
-                    <option value="true">Đang bán</option>
-                  </select>
-                  <div class="invalid-feedback">Vui lòng chọn trạng thái.</div>
+                  <app-select-common
+                    [optionValue]="'value'"
+                    [options]="statusOptions"
+                    [isOptionSelectType]="true"
+                    (selectionChange)="onStatusChange($event)"
+                  ></app-select-common>
                 </div>
               </div>
             </div>
@@ -214,9 +173,9 @@
                               class="form-control"
                               id="manufacturer-name-input"
                               placeholder="Mời nhập..."
-                              [(ngModel)]="product.chiDinh"
+                              [(ngModel)]="thuoc.chiDinh"
                               name="chiDinh"
-                              value="product.chiDinh"
+                              value="thuoc.chiDinh"
                             />
                           </div>
                         </div>
@@ -234,9 +193,9 @@
                               class="form-control"
                               id="manufacturer-brand-input"
                               placeholder="Mời nhập..."
-                              [(ngModel)]="product.chongChiDinh"
+                              [(ngModel)]="thuoc.chongChiDinh"
                               name="chongChiDinh"
-                              value="product.chongChiDinh"
+                              value="thuoc.chongChiDinh"
                             />
                           </div>
                         </div>
@@ -266,7 +225,7 @@
                                 aria-label="Price"
                                 aria-describedby="product-price-addon"
                                 required
-                                [(ngModel)]="product.giaNhap"
+                                [(ngModel)]="thuoc.giaNhap"
                                 name="giaNhap"
                               />
                               <div class="invalid-feedback">Mời nhập...</div>
@@ -296,7 +255,7 @@
                                 aria-label="Price"
                                 aria-describedby="product-sale-price-addon"
                                 required
-                                [(ngModel)]="product.giaBan"
+                                [(ngModel)]="thuoc.giaBan"
                                 name="giaBan"
                               />
                               <div class="invalid-feedback">Mời nhập...</div>
@@ -320,7 +279,7 @@
                                 placeholder="Enter quantity"
                                 aria-label="Quantity"
                                 aria-describedby="product-quantity-addon"
-                                [(ngModel)]="product.soLuongTon"
+                                [(ngModel)]="thuoc.soLuongTon"
                                 name="soLuongTon"
                               />
                             </div>
@@ -527,7 +486,7 @@
                   class="form-control"
                   placeholder="Nhập tối đa 100 từ"
                   rows="3"
-                  [(ngModel)]="product.ghiChu"
+                  [(ngModel)]="thuoc.ghiChu"
                   name="ghiChu"
                 ></textarea>
               </div>

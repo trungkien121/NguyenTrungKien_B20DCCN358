@@ -73,14 +73,20 @@ export class NCCComponent implements OnInit {
         if (resp.status == CommonConstant.STATUS_OK_201) {
           this.toastService.success("Lưu thành công");
           this.getData();
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
+          this.getData();
         } else {
-          this.toastService.error("Lưu thất bại");
+          this.toastService.error("Cập nhật thất bại");
         }
       });
     } else {
       this.nccService.updateNCC(ncc).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Cập nhật thành công");
+          this.getData();
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
           this.getData();
         } else {
           this.toastService.error("Cập nhật thất bại");
