@@ -33,6 +33,7 @@ public class NguoiDung extends TimeAuditable{
     private String email;
     private String diaChi;
     private String soDienThoai;
+    private String avatar;
     private Boolean trangThai = true;
     
 	@ManyToMany(fetch = FetchType.EAGER)

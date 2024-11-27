@@ -54,5 +54,5 @@ public class Thuoc {
     private Boolean trangThai = true;
     private String ghiChu;
 
-    // getters and setters
+    private String avatar;
 }

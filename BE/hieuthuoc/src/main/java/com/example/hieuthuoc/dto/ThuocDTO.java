@@ -1,6 +1,9 @@
 package com.example.hieuthuoc.dto;
 
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -32,4 +35,8 @@ public class ThuocDTO {
     private String moTaNgan;
     private Boolean trangThai;
     private String ghiChu;
+    
+    private String avatar;
+    
+    private MultipartFile file;
 }

@@ -53,6 +53,11 @@ public class NguoiDungController {
 		return nguoiDungService.forgotMatKhau(email);
 	}
 
+	@PutMapping("")
+	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO){
+		return nguoiDungService.changeAvatar(nguoiDungDTO);
+	}
+	
 	@PostMapping("/dangky")
 	public ResponseDTO<NguoiDung> register(@RequestBody @Valid NguoiDungDTO nguoiDungDTO) {
 

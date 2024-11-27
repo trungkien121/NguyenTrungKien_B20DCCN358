@@ -67,12 +67,15 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 	@Autowired
 	NhomQuyenRepo nhomQuyenRepo;
-	
-	@Autowired 
+
+	@Autowired
 	GioHangRepo gioHangRepo;
 
 	@Autowired
 	EmailService emailService;
+
+	@Autowired
+	UploadImageService uploadImageService;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -118,8 +121,8 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		nguoiDung.setNhomQuyens(nhomQuyens);
 
 		nguoiDungRepo.save(nguoiDung);
-		
-		//tạo giỏ hàng 
+
+		// tạo giỏ hàng
 		GioHang gioHang = new GioHang();
 		gioHang.setKhachHang(nguoiDung);
 		gioHangRepo.save(gioHang);
@@ -166,8 +169,8 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 		nguoiDung.setNhomQuyens(nhomQuyens);
 		nguoiDungRepo.save(nguoiDung);
-		
-		//tạo giỏ hàng 
+
+		// tạo giỏ hàng
 		GioHang gioHang = new GioHang();
 		gioHang.setKhachHang(nguoiDung);
 		gioHangRepo.save(gioHang);
@@ -249,9 +252,9 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 				String matkhau = RandomStringUtils.random(10, true, true);
 				nguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(matkhau));
 				nguoiDungRepo.save(nguoiDung);
-				
+
 				System.out.println("Mật Khẩu : " + matkhau);
-				
+
 				sendEmailForgotMatKhau(email, matkhau);
 			}
 		} catch (Exception e) {
@@ -264,8 +267,20 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 	@Override
 	@Transactional
 	public ResponseDTO<NguoiDung> changeAvatar(NguoiDungDTO nguoiDungDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			NguoiDung nguoiDung = nguoiDungRepo.findById(nguoiDungDTO.getId()).get();
+			if (nguoiDung.getAvatar().length() > 0) {
+				uploadImageService.deleteImage(nguoiDung.getAvatar());
+			}
+			String url = uploadImageService.uploadImage(nguoiDungDTO.getFile(), "nguoiDung_" + nguoiDungDTO.getId());
+			nguoiDung.setAvatar(url);
+			nguoiDungRepo.save(nguoiDung);
+			return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công.").build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseDTO.<NguoiDung>builder().status(500).msg("Đã xảy ra lỗi khi thay đổi hình đại diện.")
+					.build();
+		}
 	}
 
 	@Override

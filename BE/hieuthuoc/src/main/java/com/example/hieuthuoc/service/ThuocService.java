@@ -40,16 +40,18 @@ class ThuocServiceImpl implements ThuocService {
 
 	@Autowired
 	private ThuocRepo thuocRepo;
-	
+
 	@Autowired
 	LoaiThuocRepo loaiThuocRepo;
-	
+
 	@Autowired
 	NhaSanXuatRepo nhaSanXuatRepo;
-	
+
 	@Autowired
 	DanhMucThuocRepo danhMucThuocRepo;
-	
+
+	@Autowired
+	UploadImageService uploadImageService;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -73,12 +75,8 @@ class ThuocServiceImpl implements ThuocService {
 			searchThuocDTO.setKeyWord("");
 		}
 		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
-		Page<Thuoc> page = thuocRepo.search(
-				searchThuocDTO.getKeyWord(),
-				searchThuocDTO.getLoaiThuoc(),
-				searchThuocDTO.getNhaSanXuat(),
-				searchThuocDTO.getDanhMucThuoc(),
-				searchThuocDTO.getDoiTuongSd(),
+		Page<Thuoc> page = thuocRepo.search(searchThuocDTO.getKeyWord(), searchThuocDTO.getLoaiThuoc(),
+				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getDoiTuongSd(),
 				searchThuocDTO.getMaxGiaBan(), pageRequest);
 
 		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
@@ -107,17 +105,30 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
 
 		if (thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
-			 return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build(); 
+			return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build();
 		}
-		
+
 		if (thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
-			 return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build(); 
+			return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build();
 		}
-		
+
 		thuoc.setLoaiThuoc(loaiThuocRepo.findById(thuocDTO.getLoaiThuocId()).get());
 		thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
 		thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
-		
+
+		if (thuocDTO.getFile() == null || thuocDTO.getFile().isEmpty()) {
+			System.out.println("File không tồn tại hoặc rỗng.");
+
+		}else {
+			System.out.println("có file");
+		}
+
+		// set Avatar
+		String name = "Thuoc_" + thuocDTO.getId();
+		String url = uploadImageService.uploadImage(thuocDTO.getFile(), name);
+		thuoc.setAvatar(url);
+		System.out.println("URL : " + url);
+
 		return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
 	}
 
@@ -127,6 +138,21 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
 		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
 		if (curentThuoc != null) {
+
+			thuoc.setLoaiThuoc(loaiThuocRepo.findById(thuocDTO.getLoaiThuocId()).get());
+			thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
+			thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
+
+			// lưu ảnh
+			if (thuocDTO.getFile() != null) {
+				if (thuoc.getAvatar().length() > 0) {
+					uploadImageService.deleteImage(thuoc.getAvatar());
+				}
+				String name = "Thuoc_" + thuocDTO.getId();
+				String url = uploadImageService.uploadImage(thuocDTO.getFile(), name);
+				thuoc.setAvatar(url);
+			}
+
 			return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
 		}
 		return ResponseDTO.<Thuoc>builder().status(409).msg("Không tìm thấy thuốc").build();
