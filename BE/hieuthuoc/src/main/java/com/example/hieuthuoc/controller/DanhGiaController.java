@@ -28,14 +28,8 @@ public class DanhGiaController {
 	@Autowired
 	DanhGiaService danhgiaService;
 	
-	@GetMapping("/get")
-	public ResponseDTO<Optional<DanhGiaDTO>> getById(@RequestParam("id") @Valid int id){
-		Optional<DanhGiaDTO> danhGia = danhgiaService.getById(id); 
-		return ResponseDTO.<Optional<DanhGiaDTO>>builder().status(200).msg("ok").data(danhGia).build();
-	}
-	
 	@PostMapping("/list")
-	public ResponseDTO<PageDTO<List<DanhGiaDTO>>> getByThuocId(@RequestBody @Valid SearchDTO searchDTO)
+	public ResponseDTO<PageDTO<List<DanhGiaDTO>>> getAll(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
 		PageDTO<List<DanhGiaDTO>> danhGiaDTOs = danhgiaService.getByThuocId(searchDTO);

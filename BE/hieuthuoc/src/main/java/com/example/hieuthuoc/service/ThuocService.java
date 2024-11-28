@@ -87,7 +87,7 @@ class ThuocServiceImpl implements ThuocService {
 
 		pageDTO.setData(thuocDTOs);
 
-		return ResponseDTO.<PageDTO<List<Thuoc>>>builder().status(0).msg(null).data(pageDTO).build();
+		return ResponseDTO.<PageDTO<List<Thuoc>>>builder().status(200).msg("Thanh công").data(pageDTO).build();
 	}
 
 	@Override
