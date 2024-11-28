@@ -145,19 +145,18 @@ export class ThuocCreatementComponent implements OnInit {
   // Hàm xử lý khi hình ảnh được chọn
   onImageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const reader = new FileReader();
 
-      // Đọc file dưới dạng Base64
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const base64String = e.target?.result as string;
-        this.imageUrl = base64String; // Hiển thị hình ảnh
-        this.thuoc.file = base64String; // Lưu Base64 vào thuộc tính `thuoc.file`
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result; // Cập nhật đường dẫn hình ảnh
       };
 
-      reader.readAsDataURL(file); // Đọc tệp hình ảnh dưới dạng Base64
+      reader.readAsDataURL(file); // Đọc tệp hình ảnh
+
+      // Lưu tệp vào thuộc tính thuoc.file
+      this.thuoc.file = file;
     }
   }
 

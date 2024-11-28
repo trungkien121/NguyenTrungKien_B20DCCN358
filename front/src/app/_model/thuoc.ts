@@ -26,5 +26,5 @@ export class Thuoc {
 
   hinhAnh?: string;
   avatar?: string;
-  file?: string;
+  file?: File;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { SearchModel } from "src/app/_model/common/Search";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
@@ -8,12 +8,11 @@ import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 import { ThuocService } from "src/app/_service/thuoc.service";
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+  selector: "app-thuoc-chitiet",
+  templateUrl: "./thuoc-chitiet.component.html",
 })
-export class HomeComponent implements OnInit {
-  productLst: Thuoc[] = [];
+export class ThuocChiTietComponent implements OnInit {
+  thuoc: Thuoc = {};
   loaithuocLst: LoaiThuoc[] = [];
 
   modelSearch: SearchModel = {
@@ -29,16 +28,33 @@ export class HomeComponent implements OnInit {
   constructor(
     private thuocService: ThuocService,
     private loaithuocService: LoaithuocService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.getData();
+    this.getThuocByParam();
+  }
+
+  getThuocByParam() {
+    this.route.queryParams.subscribe(async (params) => {
+      this.thuoc.id = this.route.snapshot.paramMap.get("id") || "";
+      if (this.thuoc.id) {
+        this.getThuocById(this.thuoc.id);
+      }
+    });
+  }
+
+  getThuocById(id: string) {
+    this.thuocService.getProduct(id).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.thuoc = res.data;
+      }
+    });
   }
 
   getData() {
-    this.getThuoc();
-
     this.getLoaiThuoc();
   }
 
@@ -50,16 +66,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getThuoc() {
-    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
-      // if (res.status == CommonConstant.STATUS_OK_200) {
-      this.productLst = res.data.data;
-      this.totalRows = res.data.totalElements;
-      // }
-    });
-  }
-
-  showDetail(thuoc: Thuoc) {
-    this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
-  }
+  addProductInCart() {}
 }

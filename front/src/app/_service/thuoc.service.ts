@@ -20,11 +20,28 @@ export class ThuocService {
     });
   }
 
-  createProduct(request: any): Observable<any> {
+  createProduct(thuoc: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/thuoc/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
-    return this.http.post(`${apiUrl}`, request, {
+    const formData = new FormData(); // Thêm dữ liệu JSON của `thuocDTO` vào FormData
+
+    const thuocDTO = {
+      ...thuoc, // Các trường trong `thuoc`
+      hinhAnh: undefined, // Không cần gửi thuộc tính `hinhAnh` nếu không dùng
+      file: undefined, // Xóa thuộc tính `file` nếu đã gửi dưới dạng MultipartFile
+    };
+    formData.append(
+      "thuocDTO",
+      new Blob([JSON.stringify(thuocDTO)], { type: "application/json" })
+    );
+
+    // Thêm tệp (File) vào FormData
+    if (thuoc.file) {
+      formData.append("file", thuoc.file);
+    }
+
+    return this.http.post(`${apiUrl}`, formData, {
       headers: headers,
     });
   }

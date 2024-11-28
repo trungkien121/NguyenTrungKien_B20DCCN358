@@ -7,16 +7,7 @@
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Sellers</h4>
-
-            <div class="page-title-right">
-              <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item">
-                  <a href="javascript: void(0);">Ecommerce</a>
-                </li>
-                <li class="breadcrumb-item active">Sellers</li>
-              </ol>
-            </div>
+            <h4 class="mb-sm-0">Thuốc</h4>
           </div>
         </div>
       </div>
@@ -29,7 +20,7 @@
                 <input
                   type="text"
                   class="form-control search"
-                  placeholder="Search for sellers & owner name or something..."
+                  placeholder="Tìm kiếm..."
                 />
                 <i class="ri-search-line search-icon"></i>
               </div>
@@ -42,7 +33,7 @@
                   data-choices
                   data-choices-search-false
                 >
-                  <option value="">Select Categories</option>
+                  <option value="">Loại thuốc</option>
                   <option value="All">All</option>
                   <option value="Retailer">Retailer</option>
                   <option value="Health & Medicine">Health & Medicine</option>
@@ -60,13 +51,6 @@
                 <button type="button" class="btn btn-danger">
                   <i class="ri-equalizer-fill me-1 align-bottom"></i> Filters
                 </button>
-                <button
-                  class="btn btn-success"
-                  data-bs-toggle="modal"
-                  data-bs-target="#addSeller"
-                >
-                  <i class="ri-add-fill me-1 align-bottom"></i> Add Seller
-                </button>
               </div>
             </div>
             <!--end col-->
@@ -76,22 +60,18 @@
       </div>
 
       <div class="row mt-4">
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6" *ngFor="let item of productLst">
           <div class="card ribbon-box right overflow-hidden">
             <div class="card-body text-center p-4">
-              <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-                <i class="ri-flashlight-fill text-white align-bottom"></i>
-                <span class="trending-ribbon-text">Trending</span>
-              </div>
-              <img src="assets/images/companies/img-1.png" alt="" height="45" />
+              <img src="assets/images/companies/img-1.png" alt="" height="80" />
               <h5 class="mb-1 mt-4">
                 <a
                   href="apps-ecommerce-seller-details.html"
                   class="link-primary"
-                  >Force Medicines</a
+                  >{{ item.tenThuoc }}</a
                 >
               </h5>
-              <p class="text-muted mb-4">David Marshall</p>
+              <!-- <p class="text-muted mb-4">Đau răng</p> -->
               <div class="row justify-content-center">
                 <div class="col-lg-8">
                   <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
@@ -99,303 +79,22 @@
               </div>
               <div class="row mt-4">
                 <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>452</h5>
-                  <span class="text-muted">Item Stock</span>
+                  <h5>{{ item.soLuongTon }}</h5>
+                  <span class="text-muted">Còn lại</span>
                 </div>
                 <div class="col-lg-6">
-                  <h5>$45,415</h5>
-                  <span class="text-muted">Wallet Balance</span>
+                  <h5>8</h5>
+                  <span class="text-muted">Đánh giá</span>
                 </div>
               </div>
               <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
+                <a (click)="showDetail(item)" class="btn btn-light w-100"
+                  >Xem chi tiết</a
                 >
               </div>
             </div>
           </div>
         </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card">
-            <div class="card-body text-center p-4">
-              <img src="assets/images/companies/img-2.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Micro Design</a
-                >
-              </h5>
-              <p class="text-muted mb-4">Katia Stapleton</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller2" data-colors='["--vz-success"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>784</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$97,642</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card">
-            <div class="card-body text-center p-4">
-              <img src="assets/images/companies/img-3.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Nesta Technologies</a
-                >
-              </h5>
-              <p class="text-muted mb-4">Harley Fuller</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller3" data-colors='["--vz-warning"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>320</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$27,102</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-              <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-                <i class="ri-flashlight-fill text-white align-bottom"></i>
-                <span class="trending-ribbon-text">Trending</span>
-              </div>
-              <img src="assets/images/companies/img-4.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >iTest Factory</a
-                >
-              </h5>
-              <p class="text-muted mb-4">Oliver Tyler</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller4" data-colors='["--vz-success"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>159</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$14,933</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card">
-            <div class="card-body text-center p-4">
-              <img src="assets/images/companies/img-5.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Meta4Systems</a
-                >
-              </h5>
-              <p class="text-muted mb-4">Zoe Dennis</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller5" data-colors='["--vz-warning"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>363</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$73,426</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-              <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-                <i class="ri-flashlight-fill text-white align-bottom"></i>
-                <span class="trending-ribbon-text">Trending</span>
-              </div>
-              <img src="assets/images/companies/img-6.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Digitech Galaxy</a
-                >
-              </h5>
-              <p class="text-muted mb-4">John Roberts</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller6" data-colors='["--vz-success"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>412</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$34,241</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card ribbon-box right overflow-hidden">
-            <div class="card-body text-center p-4">
-              <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-                <i class="ri-flashlight-fill text-white align-bottom"></i>
-                <span class="trending-ribbon-text">Trending</span>
-              </div>
-              <img src="assets/images/companies/img-7.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Syntyce Solutions</a
-                >
-              </h5>
-              <p class="text-muted mb-4">Demi Allen</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller7" data-colors='["--vz-danger"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>945</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$17,200</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-        <div class="col-xl-3 col-lg-6">
-          <div class="card">
-            <div class="card-body text-center p-4">
-              <img src="assets/images/companies/img-8.png" alt="" height="45" />
-              <h5 class="mb-1 mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="link-primary"
-                  >Zoetic Fashion</a
-                >
-              </h5>
-              <p class="text-muted mb-4">James Bowen</p>
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <div id="chart-seller8" data-colors='["--vz-warning"]'></div>
-                </div>
-              </div>
-              <div class="row mt-4">
-                <div class="col-lg-6 border-end-dashed border-end">
-                  <h5>784</h5>
-                  <span class="text-muted">Item Stock</span>
-                </div>
-                <div class="col-lg-6">
-                  <h5>$97,642</h5>
-                  <span class="text-muted">Wallet Balance</span>
-                </div>
-              </div>
-              <div class="mt-4">
-                <a
-                  href="apps-ecommerce-seller-details.html"
-                  class="btn btn-light w-100"
-                  >View Details</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
       </div>
       <!--end row-->
 

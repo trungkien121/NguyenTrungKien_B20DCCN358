@@ -8,41 +8,29 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class DonhangService {
+export class GioHangService {
   constructor(private http: HttpClient) {}
 
-  getLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/donhang/list`;
-    const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-    return this.http.post(`${apiUrl}`, request, {
-      headers: headers,
-    });
-  }
-
-  create(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/donhang/create`;
-    const headers: HttpHeaders = HeadersUtil.getHeaders();
-
-    return this.http.post(`${apiUrl}`, request, {
-      headers: headers,
-    });
-  }
-
-  get(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/donhang/get`;
-    let params = new HttpParams().set("id", id?.toString() || "");
-
+  getGHLst(nguoiDungId?: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/giohang/get`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.get(`${apiUrl}`, {
       headers: headers,
-      params: params,
     });
   }
 
-  delete(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/donhang/delete`;
+  createGH(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/giohang/create`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.post(`${apiUrl}`, request, {
+      headers: headers,
+    });
+  }
+
+  deleteGH(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/giohang/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -53,8 +41,8 @@ export class DonhangService {
     });
   }
 
-  update(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/donhang/update`;
+  updateGH(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/giohang/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {
