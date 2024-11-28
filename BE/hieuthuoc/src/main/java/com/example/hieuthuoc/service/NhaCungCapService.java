@@ -41,10 +41,11 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 	@Transactional
 	public ResponseDTO<NhaCungCap> create(NhaCungCapDTO nhaCungCapDTO) {
 		NhaCungCap nhaCungCap = modelMapper.map(nhaCungCapDTO, NhaCungCap.class);
-		if(nhaCungCapRepo.existsByMaNCC(nhaCungCap.getMaNCC())) {
+		if (nhaCungCapRepo.existsByMaNCC(nhaCungCap.getMaNCC())) {
 			return ResponseDTO.<NhaCungCap>builder().status(409).msg("Nhà cung cấp đã tồn tại").build();
 		}
-		return ResponseDTO.<NhaCungCap>builder().status(201).msg("Thành công").data(nhaCungCapRepo.save(nhaCungCap)).build();
+		return ResponseDTO.<NhaCungCap>builder().status(201).msg("Thành công").data(nhaCungCapRepo.save(nhaCungCap))
+				.build();
 	}
 
 	@Override
@@ -52,11 +53,15 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 	public ResponseDTO<NhaCungCap> update(NhaCungCapDTO nhaCungCapDTO) {
 		NhaCungCap nhaCungCap = modelMapper.map(nhaCungCapDTO, NhaCungCap.class);
 		Optional<NhaCungCap> currentNhaCungCap = nhaCungCapRepo.findById(nhaCungCap.getId());
-		if (currentNhaCungCap.isPresent()) {
-			NhaCungCap updatedNhaCungCap = nhaCungCapRepo.save(nhaCungCap);
-			return ResponseDTO.<NhaCungCap>builder().status(200).msg("Thành công").data(updatedNhaCungCap).build();
+
+		if (!currentNhaCungCap.isPresent()) {
+			return ResponseDTO.<NhaCungCap>builder().status(404).msg("Không tìm thấy nhà cung cấp").build();
 		}
-		return ResponseDTO.<NhaCungCap>builder().status(404).msg("Không tìm thấy nhà cung cấp").build();
+		if (nhaCungCapRepo.existsByMaNCC(nhaCungCap.getMaNCC())) {
+			return ResponseDTO.<NhaCungCap>builder().status(409).msg("Mã Nhà cung cấp đã tồn tại").build();
+		}
+		NhaCungCap updatedNhaCungCap = nhaCungCapRepo.save(nhaCungCap);
+		return ResponseDTO.<NhaCungCap>builder().status(200).msg("Thành công").data(updatedNhaCungCap).build();
 	}
 
 	@Override

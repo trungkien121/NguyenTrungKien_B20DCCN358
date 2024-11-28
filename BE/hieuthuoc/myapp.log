@@ -68,3 +68,41 @@
 2024-11-28T00:06:08.724+07:00  INFO 9308 --- [hieuthuoc] [http-nio-8888-exec-2] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-11-28T00:06:08.724+07:00  INFO 9308 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-11-28T00:06:08.726+07:00  INFO 9308 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-11-28T00:30:30.533+07:00  INFO 9308 --- [hieuthuoc] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-28T00:30:30.902+07:00  INFO 9308 --- [hieuthuoc] [Thread-35] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28T00:30:30.903+07:00  INFO 9308 --- [hieuthuoc] [Thread-35] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2024-11-28T00:30:30.909+07:00  INFO 9308 --- [hieuthuoc] [Thread-35] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2024-11-28T00:30:31.043+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.8.1 with PID 9308 (C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-11-28T00:30:31.043+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-11-28T00:30:31.429+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28T00:30:31.534+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 25 JPA repository interfaces.
+2024-11-28T00:30:31.720+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-11-28T00:30:31.721+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-11-28T00:30:31.721+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28T00:30:31.753+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-11-28T00:30:31.753+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 708 ms
+2024-11-28T00:30:31.764+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2024-11-28T00:30:31.777+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-10 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6252d792
+2024-11-28T00:30:31.778+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2024-11-28T00:30:31.778+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-11-28T00:30:31.828+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28T00:30:31.833+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-28T00:30:31.845+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28T00:30:31.848+07:00  WARN 9308 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28T00:30:31.848+07:00  WARN 9308 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-11-28T00:30:32.442+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28T00:30:32.757+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28T00:30:32.915+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-28T00:30:32.916+07:00  WARN 9308 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-28T00:30:33.284+07:00  WARN 9308 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28T00:30:33.388+07:00  WARN 9308 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-11-28T00:30:33.435+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-11-28T00:30:33.448+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path '/hieuthuoc'
+2024-11-28T00:30:33.454+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Started HieuthuocApplication in 2.441 seconds (process running for 3308.385)
+2024-11-28T00:30:33.456+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-11-28T00:34:09.246+07:00  INFO 9308 --- [hieuthuoc] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2024-11-28T00:34:09.571+07:00  INFO 9308 --- [hieuthuoc] [Thread-39] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28T00:34:09.571+07:00  INFO 9308 --- [hieuthuoc] [Thread-39] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown initiated...
+2024-11-28T00:34:09.577+07:00  INFO 9308 --- [hieuthuoc] [Thread-39] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown completed.
+2024-11-28T00:34:09.706+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.8.1 with PID 9308 (C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-11-28T00:34:09.706+07:00  INFO 9308 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
