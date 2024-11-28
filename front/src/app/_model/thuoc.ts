@@ -1,7 +1,5 @@
-import { WeekDay } from "@angular/common";
-
 export class Thuoc {
-  id?: String;
+  id?: string;
   tenThuoc?: String;
   maThuoc?: String;
   maVach?: String;
@@ -17,7 +15,6 @@ export class Thuoc {
   giaBan?: number;
   soLuongTon?: number;
   nguongCanhBao?: number;
-  hinhAnh?: String;
   congDung?: String;
   chiDinh?: String;
   chongChiDinh?: String;
@@ -25,4 +22,9 @@ export class Thuoc {
   moTaNgan?: String;
   trangThai?: boolean;
   ghiChu?: String;
+  doiTuongSD?: string;
+
+  hinhAnh?: string;
+  avatar?: string;
+  file?: string;
 }

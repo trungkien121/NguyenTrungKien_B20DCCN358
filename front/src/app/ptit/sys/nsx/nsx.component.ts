@@ -28,7 +28,6 @@ export class NSXComponent implements OnInit {
 
   nsxLst: NhaSanXuat[] = [];
   nsxNew: NhaSanXuat = {};
-  nsxDelete: NhaSanXuat = {};
 
   modelSearch: SearchModel = {
     keyWord: "",

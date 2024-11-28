@@ -22,8 +22,8 @@ import { SharedPipeModule } from "src/app/_pipe/sharedpipe.module";
 import { AngMusicPlayerModule } from "ang-music-player";
 import { CommonSpinnerComponent } from "src/app/components/common/spinnerCommon/common-spinner.component";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
-import { ProductComponent } from "./product/product.component";
-import { ProductCreatementComponent } from "./product/product-createment/product-createment.component";
+import { ThuocComponent } from "./product/thuoc.component";
+import { ThuocCreatementComponent } from "./product/thuoc-createment/thuoc-createment.component";
 import { NCCComponent } from "./ncc/ncc.component";
 import { CustomerComponent } from "./customer/customer.component";
 import { DonHangComponent } from "./donhang/donhang.component";
@@ -41,8 +41,8 @@ import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
     SelectCommonComponent,
     CommonSpinnerComponent,
     ConfirmDialogCommonComponent,
-    ProductComponent,
-    ProductCreatementComponent,
+    ThuocComponent,
+    ThuocCreatementComponent,
     CustomerComponent,
     DonHangComponent,
     LoaiThuocComponent,

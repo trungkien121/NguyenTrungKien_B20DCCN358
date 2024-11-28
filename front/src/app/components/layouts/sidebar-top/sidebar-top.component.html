@@ -43,7 +43,7 @@
             aria-controls="sidebarDashboards"
           >
             <i class="mdi mdi-speedometer"></i>
-            <span data-key="t-dashboards"> Quản lý</span>
+            <span data-key="t-dashboards"> Quản lý thuốc</span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
@@ -54,15 +54,6 @@
                   data-key="t-analytics"
                 >
                   Thuốc
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/customer']"
-                  class="nav-link"
-                  data-key="t-analytics"
-                >
-                  Khách Hàng
                 </a>
               </li>
 
@@ -86,15 +77,6 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/donhang']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Đơn Hàng
-                </a>
-              </li>
               <li class="nav-item">
                 <a
                   [routerLink]="['/sys/loaithuoc']"
@@ -128,24 +110,20 @@
             aria-controls="sidebarApps"
           >
             <i class="mdi mdi-view-grid-plus-outline"></i>
-            <span data-key="t-apps">Apps</span>
+            <span data-key="t-apps">Quản lý đơn hàng</span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarApps">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
                 <a
-                  href="apps-calendar.html"
+                  [routerLink]="['/sys/donhang']"
                   class="nav-link"
-                  data-key="t-calendar"
+                  data-key="t-ecommerce"
                 >
-                  Calendar
+                  Đơn hàng
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="apps-chat.html" class="nav-link" data-key="t-chat">
-                  Chat
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a
                   href="#sidebarEmail"
@@ -230,48 +208,34 @@
             aria-controls="sidebarLayouts"
           >
             <i class="mdi mdi-view-carousel-outline"></i>
-            <span data-key="t-layouts">Layouts</span>
+            <span data-key="t-layouts">Quản lý khách hàng</span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarLayouts">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
                 <a
-                  href="layouts-horizontal.html"
+                  [routerLink]="['/sys/customer']"
                   class="nav-link"
-                  target="_blank"
-                  data-key="t-horizontal"
-                  >Horizontal</a
+                  data-key="t-analytics"
                 >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="layouts-detached.html"
-                  class="nav-link"
-                  target="_blank"
-                  data-key="t-detached"
-                  >Detached</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="layouts-two-column.html"
-                  class="nav-link"
-                  target="_blank"
-                  data-key="t-two-column"
-                  >Two Column</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="layouts-vertical-hovered.html"
-                  class="nav-link"
-                  target="_blank"
-                  data-key="t-hovered"
-                  >Hovered</a
-                >
+                  Khách hàng
+                </a>
               </li>
             </ul>
           </div>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            [routerLink]="['/home']"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarLayouts"
+          >
+            <i class="mdi mdi-view-carousel-outline"></i>
+            <span data-key="t-layouts">Trang chủ</span>
+          </a>
         </li>
       </ul>
     </div>

@@ -43,10 +43,10 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    this.nguoidungService.create(this.user).subscribe((res: any) => {
+    this.nguoidungService.dangky(this.user).subscribe((res: any) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Đăng ký thành công");
-        // this.router.navigate(["/login"]);
+        this.router.navigate(["/login"]);
       }
     });
   }

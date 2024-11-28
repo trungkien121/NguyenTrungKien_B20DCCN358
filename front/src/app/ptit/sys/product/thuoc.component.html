@@ -1,13 +1,16 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
+      <app-confirm-dialog-common> </app-confirm-dialog-common>
+
       <!-- start page title -->
+
       <div class="row">
         <div class="col-12">
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Sản Phẩm</h4>
+            <h4 class="mb-sm-0">Thuốc</h4>
           </div>
         </div>
       </div>
@@ -104,7 +107,7 @@
                   [routerLink]="['/sys/product-create']"
                 >
                   <i class="ri-add-circle-line align-middle me-1"></i>
-                  Thêm Sản Phẩm
+                  Thêm thuốc
                 </button>
               </div>
               <div class="col-auto mb-3"></div>
@@ -122,30 +125,14 @@
                 >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th>ID</th>
+                      <th>STT</th>
                       <th>Tên Thuốc</th>
-                      <!-- <th>Mã Thuốc</th>
-                      <th>Mã Vạch</th> -->
-                      <th>Loại Thuốc ID</th>
-                      <th>Nhà Sản Xuất ID</th>
-                      <th>Danh Mục Thuốc ID</th>
-                      <th>Đơn Vị</th>
-                      <th>Che Bao</th>
-                      <!-- <th>Quy Cách</th>
-                      <th>Số Đăng Ký</th> -->
-                      <th>Hạn Sử Dụng</th>
-                      <th>Giá Nhập</th>
-                      <th>Giá Bán</th>
+                      <th>Mã Thuốc</th>
                       <th>Số Lượng Tồn</th>
-                      <!-- <th>Ngưỡng Cảnh Báo</th>
-                      <th>Hình Ảnh</th>
-                      <th>Công Dụng</th>
-                      <th>Chỉ Định</th>
-                      <th>Chống Chỉ Định</th>
-                      <th>Hướng Dẫn Sử Dụng</th>
-                      <th>Mô Tả Ngắn</th>
-                      <th>Trạng Thái</th>
-                      <th>Ghi Chú</th> -->
+
+                      <th>Giá Nhập</th>
+                      <th>Trạng thái</th>
+                      <th></th>
                     </tr>
                   </ng-template>
                   <ng-template
@@ -153,34 +140,29 @@
                     let-product
                     let-rowIndex="rowIndex"
                   >
-                    <tr
-                      *ngFor="let product of productLst"
-                      [style]="{ cursor: 'pointer' }"
-                    >
-                      <td>{{ product.id }}</td>
-                      <td>{{ product.tenThuoc }}</td>
-                      <!-- <td>{{ product.maThuoc }}</td>
-                    <td>{{ product.maVach }}</td> -->
-                      <td>{{ product.loaiThuocId }}</td>
-                      <td>{{ product.nhaSanXuatId }}</td>
-                      <td>{{ product.danhMucThuocId }}</td>
-                      <td>{{ product.donVi }}</td>
-                      <!-- <td>{{ product.cheBao }}</td>
-                    <td>{{ product.quyCach }}</td> -->
-                      <td>{{ product.soDangKy }}</td>
-                      <td>{{ product.hanSuDung | date : "dd/MM/yyyy" }}</td>
-                      <td>{{ product.giaNhap }}</td>
-                      <td>{{ product.giaBan }}</td>
-                      <td>{{ product.soLuongTon }}</td>
-                      <!-- <td>{{ product.nguongCanhBao }}</td>
-                    <td><img [src]="product.hinhAnh" [alt]="product.tenThuoc" width="50"></td>
-                    <td>{{ product.congDung }}</td>
-                    <td>{{ product.chiDinh }}</td>
-                    <td>{{ product.chongChiDinh }}</td>
-                    <td>{{ product.huongDanSuDung }}</td>
-                    <td>{{ product.moTaNgan }}</td>
-                    <td>{{ product.trangThai ? 'Có' : 'Không' }}</td>
-                    <td>{{ product.ghiChu }}</td> -->
+                    <tr [style]="{ cursor: 'pointer' }">
+                      <td (click)="preUpdate(product)">{{ rowIndex + 1 }}</td>
+                      <td (click)="preUpdate(product)">
+                        {{ product.tenThuoc }}
+                      </td>
+                      <td (click)="preUpdate(product)">
+                        {{ product.maThuoc }}
+                      </td>
+                      <td (click)="preUpdate(product)">
+                        {{ product.soLuongTon }}
+                      </td>
+
+                      <td (click)="preUpdate(product)">
+                        {{ product.giaNhap }}
+                      </td>
+                      <td (click)="preUpdate(product)">
+                        {{ product.trangThai }}
+                      </td>
+                      <td (click)="preDelete(product)">
+                        <a class="text-danger d-inline-block remove-item-btn">
+                          <i class="ri-delete-bin-line fs-2"></i>
+                        </a>
+                      </td>
                     </tr>
                   </ng-template>
                 </p-table>

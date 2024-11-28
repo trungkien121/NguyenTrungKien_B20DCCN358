@@ -86,8 +86,8 @@ export class NguoidungService {
     });
   }
 
-  create(userInfo: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/nguoidung/create`;
+  dangky(userInfo: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/dangky`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     let params = new HttpParams();
