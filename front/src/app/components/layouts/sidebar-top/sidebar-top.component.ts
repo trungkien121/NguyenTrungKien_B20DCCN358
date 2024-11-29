@@ -1,8 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { Quyen } from "src/app/_model/auth/quyen";
-import { Subscription } from "rxjs";
+import { lastValueFrom, Subscription } from "rxjs";
+import { jwtDecode } from "jwt-decode";
+import { NguoiDung } from "src/app/_model/auth/nguoidung";
+import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
+import { CommonConstant } from "src/app/_constant/common.constants";
 
 @Component({
   selector: "app-sidebar-top",
@@ -10,7 +14,10 @@ import { Subscription } from "rxjs";
   styleUrls: ["./sidebar-top.component.css"],
 })
 export class SidebarLeftComponent implements OnInit, OnDestroy {
-  constructor() {}
+  constructor(
+    private nguoidungService: NguoidungService,
+
+  ) {}
 
   AuthConstant = AuthConstant;
 
@@ -19,8 +26,21 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
   isAuthenticate: boolean = false;
 
+  @Input() isAdmin: boolean | null = null;
+  @Input() isCustomer: boolean | null = null;
+
+
   private langChangeSubscription!: Subscription;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isAdmin']) {
+      console.log('isAdmin value changed:', this.isAdmin);
+    }
+    if (changes['isCustomer']) {
+      console.log('isCustomer value changed:', this.isCustomer);
+    }
+  }
+  
   ngOnDestroy(): void {
     // Hủy đăng ký khi component bị destroy để tránh rò rỉ bộ nhớ
     if (this.langChangeSubscription) {
@@ -29,28 +49,34 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    console.log("admin", this.isAdmin)
+    console.log("customer", this.isCustomer)
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
       this.isAuthenticate = true;
+      await this.getUserInfo();
     }
-    this.roleUser = this.userInfo.roles ?? [];
-    // Extract roleId values
-    let roles = this.userInfo.roles?.map((role: any) => role.roleId) ?? [];
   }
 
-  // async getUserInfo(): Promise<void> {
-  //   const resp = await lastValueFrom(this.authService.getUserInfo());
-  //   if (resp.status == CommonConstant.RESULT_OK) {
-  //     let userInfo: UserInfo = resp.responseData;
-  //     this.roleUser = userInfo.roles ?? [];
-  //     // this.isAuthenticate = true;
-  //   }
+  async getUserInfo(): Promise<void> {
+    const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
-  //   // if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
-  //   //   this.router.navigate(["/sys"]);
-  //   // } else if (this.hasRole(AuthConstant.ROLE_NORMAL)) {
-  //   //   this.router.navigate(["/user"]);
-  //   // }
-  // }
+    const userInfo = jwtDecode(_token) as NguoiDung;
+    if (userInfo.id) {
+      const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        let userInfo: NguoiDung = resp.data;
+        this.roleUser = userInfo.nhomQuyens ?? [];
+
+        // if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
+        //   this.isAdmin = true;
+        // } if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
+        //   this.isCustomer = true;
+        // }
+      }
+     
+
+    }
+  }
 
   hasRole(roleId: string): boolean {
     return this.roleUser

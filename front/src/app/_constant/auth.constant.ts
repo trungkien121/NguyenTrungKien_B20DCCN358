@@ -6,6 +6,6 @@ export class AuthConstant {
     public static readonly TOKEN_TYPE_KEY = 'Bearer ';
     public static readonly TOKEN_EXPIRE = 1; // one day
 
-    public static readonly ROLE_ADMIN = "R000"
-    public static readonly ROLE_NORMAL = "R001"
+    public static readonly ROLE_ADMIN = "1"
+    public static readonly ROLE_KHACHHANG = "3"
   }
