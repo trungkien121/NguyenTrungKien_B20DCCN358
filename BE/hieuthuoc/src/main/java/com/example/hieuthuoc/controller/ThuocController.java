@@ -45,7 +45,7 @@ public class ThuocController {
 	public ResponseDTO<Thuoc> create(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
 			throws Exception {
 
-		if (file.isEmpty()) {
+		if (!file.isEmpty()) {
 			thuocDTO.setFile(file);
 		}
 		return thuocService.create(thuocDTO);
@@ -54,7 +54,7 @@ public class ThuocController {
 	@PutMapping("/update")
 	public ResponseDTO<Thuoc> update(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
 			throws Exception {
-		if (file.isEmpty()) {
+		if (!file.isEmpty()) {
 			thuocDTO.setFile(file);
 		}
 		return thuocService.update(thuocDTO);
