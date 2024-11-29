@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { Quyen } from "src/app/_model/auth/quyen";
@@ -11,12 +11,13 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 @Component({
   selector: "app-sidebar-top",
   templateUrl: "./sidebar-top.component.html",
-  styleUrls: ["./sidebar-top.component.css"],
+  styleUrls: ["./sidebar-top.component.css"], 
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class SidebarLeftComponent implements OnInit, OnDestroy {
   constructor(
     private nguoidungService: NguoidungService,
-
+    private cdr: ChangeDetectorRef
   ) {}
 
   AuthConstant = AuthConstant;
@@ -34,14 +35,22 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isAdmin']) {
+      this.cdr.detectChanges();
       console.log('isAdmin value changed:', this.isAdmin);
     }
     if (changes['isCustomer']) {
-      console.log('isCustomer value changed:', this.isCustomer);
+    this.cdr.detectChanges();
+    console.log('isCustomer value changed:', this.isCustomer);
     }
+// Đánh dấu view cần được cập nhật
+this.cdr.markForCheck();
+    console.log("admin", this.isAdmin)
+    console.log("customer", this.isCustomer)
+
   }
   
   ngOnDestroy(): void {
+    
     // Hủy đăng ký khi component bị destroy để tránh rò rỉ bộ nhớ
     if (this.langChangeSubscription) {
       this.langChangeSubscription.unsubscribe();
@@ -49,6 +58,8 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    // Đảm bảo view được cập nhật
+    this.cdr.detectChanges(); 
     console.log("admin", this.isAdmin)
     console.log("customer", this.isCustomer)
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
