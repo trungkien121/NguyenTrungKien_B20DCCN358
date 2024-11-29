@@ -31,7 +31,7 @@
                     id="product-id-input"
                     required
                     [(ngModel)]="thuoc.id"
-                    [disabled]="!thuoc.id"
+                    [disabled]="true"
                     name="id"
                     value="thuoc.id"
                   />
@@ -111,6 +111,7 @@
                         [optionLabel]="'tenLoai'"
                         [options]="loaithuocLst"
                         [isOptionSelectType]="false"
+                        [selectedOptionValue]="thuoc.loaiThuocId"
                         (selectionChange)="onLoaiThuocChange($event)"
                       ></app-select-common>
                     </div>
@@ -127,6 +128,7 @@
                         [optionLabel]="'tenNhaSanXuat'"
                         [options]="nsxLst"
                         [isOptionSelectType]="false"
+                        [selectedOptionValue]="thuoc.nhaSanXuatId"
                         (selectionChange)="onNSXChange($event)"
                       ></app-select-common>
                     </div>
@@ -144,6 +146,7 @@
                         [optionLabel]="'tenDanhMuc'"
                         [options]="danhmucLst"
                         [isOptionSelectType]="false"
+                        [selectedOptionValue]="thuoc.danhMucThuocId"
                         (selectionChange)="onDanhmucThuocChange($event)"
                       ></app-select-common>
                     </div>
@@ -464,6 +467,7 @@
                             (change)="onImageSelected($event)"
                           />
                         </div>
+
                         <div class="avatar-lg">
                           <div class="avatar-title bg-light rounded">
                             <img
@@ -473,7 +477,18 @@
                               *ngIf="imageUrl"
                               alt="Product Image"
                             />
-                            <p *ngIf="!imageUrl" class="text-muted">
+
+                            <img
+                              [src]="thuoc.avatar"
+                              id="product-img"
+                              class="avatar-md h-auto"
+                              *ngIf="thuoc.avatar && !imageUrl"
+                              alt="Product Image"
+                            />
+                            <p
+                              *ngIf="!imageUrl && !thuoc.avatar"
+                              class="text-muted"
+                            >
                               Chưa có hình ảnh
                             </p>
                           </div>

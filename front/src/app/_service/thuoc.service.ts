@@ -28,7 +28,6 @@ export class ThuocService {
 
     const thuocDTO = {
       ...thuoc, // Các trường trong `thuoc`
-      hinhAnh: undefined, // Không cần gửi thuộc tính `hinhAnh` nếu không dùng
       file: undefined, // Xóa thuộc tính `file` nếu đã gửi dưới dạng MultipartFile
     };
     formData.append(
@@ -42,7 +41,7 @@ export class ThuocService {
     }
 
     return this.http.post(`${apiUrl}`, formData, {
-      headers: headers,
+      // headers: headers,
     });
   }
 
@@ -70,12 +69,35 @@ export class ThuocService {
     });
   }
 
-  updateProduct(request: any): Observable<any> {
+  updateProduct(thuoc: any): Observable<any> {
+    // const apiUrl = environment.backApiUrl + `/thuoc/update`;
+    // const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    // return this.http.put(`${apiUrl}`, request, {
+    //   headers: headers,
+    // });
+
     const apiUrl = environment.backApiUrl + `/thuoc/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
-    return this.http.put(`${apiUrl}`, request, {
-      headers: headers,
+    const formData = new FormData(); // Thêm dữ liệu JSON của `thuocDTO` vào FormData
+
+    const thuocDTO = {
+      ...thuoc, // Các trường trong `thuoc`
+      file: undefined, // Xóa thuộc tính `file` nếu đã gửi dưới dạng MultipartFile
+    };
+    formData.append(
+      "thuocDTO",
+      new Blob([JSON.stringify(thuocDTO)], { type: "application/json" })
+    );
+
+    // Thêm tệp (File) vào FormData
+    if (thuoc.file) {
+      formData.append("file", thuoc.file);
+    }
+
+    return this.http.put(`${apiUrl}`, formData, {
+      // headers: headers,
     });
   }
 }

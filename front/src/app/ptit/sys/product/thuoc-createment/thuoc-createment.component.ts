@@ -7,12 +7,10 @@ import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
-import { NhaCungCap } from "src/app/_model/ncc";
 import { NhaSanXuat } from "src/app/_model/nsx";
 import { Thuoc } from "src/app/_model/thuoc";
 import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
-import { NCCService } from "src/app/_service/ncc.service";
 import { NSXService } from "src/app/_service/nsx.service";
 import { ThuocService } from "src/app/_service/thuoc.service";
 
@@ -66,6 +64,13 @@ export class ThuocCreatementComponent implements OnInit {
     this.thuocService.getProduct(id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.thuoc = res.data;
+        this.thuoc.loaiThuocId = this.thuoc.loaiThuoc?.id;
+        this.thuoc.danhMucThuocId = this.thuoc.danhMucThuoc?.id;
+        this.thuoc.nhaSanXuatId = this.thuoc.nhaSanXuat?.id;
+
+        if (this.thuoc.avatar) {
+          this.imageUrl = this.thuoc.avatar;
+        }
       }
     });
   }
@@ -132,6 +137,7 @@ export class ThuocCreatementComponent implements OnInit {
 
   onNSXChange(value: string) {
     this.thuoc.nhaSanXuatId = value;
+    console.log("nsxId", value);
   }
 
   onDanhmucThuocChange(value: string) {

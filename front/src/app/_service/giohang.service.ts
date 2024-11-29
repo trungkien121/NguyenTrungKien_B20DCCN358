@@ -11,11 +11,17 @@ import { Observable } from "rxjs";
 export class GioHangService {
   constructor(private http: HttpClient) {}
 
-  getGHLst(nguoiDungId?: any): Observable<any> {
+  getGH(nguoiDungId: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/giohang/get`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
+    let params = new HttpParams().set(
+      "nguoiDungId",
+      nguoiDungId?.toString() || ""
+    );
+
     return this.http.get(`${apiUrl}`, {
+      params: params,
       headers: headers,
     });
   }

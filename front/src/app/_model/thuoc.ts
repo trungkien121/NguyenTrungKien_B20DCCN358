@@ -1,11 +1,15 @@
+import { DanhMucThuoc } from "./danhmucthuoc";
+import { LoaiThuoc } from "./loaithuoc";
+import { NhaSanXuat } from "./nsx";
+
 export class Thuoc {
   id?: string;
   tenThuoc?: String;
   maThuoc?: String;
   maVach?: String;
-  loaiThuocId?: String;
-  nhaSanXuatId?: String;
-  danhMucThuocId?: String;
+  loaiThuocId?: string;
+  nhaSanXuatId?: string;
+  danhMucThuocId?: string;
   donVi?: String;
   cheBao?: String;
   quyCach?: String;
@@ -27,4 +31,8 @@ export class Thuoc {
   hinhAnh?: string;
   avatar?: string;
   file?: File;
+
+  loaiThuoc?: LoaiThuoc;
+  nhaSanXuat?: NhaSanXuat;
+  danhMucThuoc?: DanhMucThuoc;
 }

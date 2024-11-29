@@ -23,9 +23,16 @@ import { PaginatorModule } from "primeng/paginator";
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";
 import { ProfileComponent } from "./profile/profile.component";
+import { GiohangComponent } from "./giohang/giohang.component";
+import { CheckoutComponent } from "./checkout/checkout.component";
 
 @NgModule({
-  declarations: [UserComponent, ProfileComponent],
+  declarations: [
+    UserComponent,
+    ProfileComponent,
+    GiohangComponent,
+    CheckoutComponent,
+  ],
 
   imports: [
     CommonModule,

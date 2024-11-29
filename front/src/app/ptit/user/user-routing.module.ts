@@ -6,6 +6,7 @@ import { AuthConstant } from "src/app/_constant/auth.constant";
 import { HomeComponent } from "../public/home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { GiohangComponent } from "./giohang/giohang.component";
+import { CheckoutComponent } from "./checkout/checkout.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,13 @@ const routes: Routes = [
       {
         path: "giohang",
         component: GiohangComponent,
+        // canActivate: [RoleGuard],
+        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+      },
+
+      {
+        path: "checkout",
+        component: CheckoutComponent,
         // canActivate: [RoleGuard],
         // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
       },
