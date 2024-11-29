@@ -102,7 +102,9 @@ export class ThuocChiTietComponent implements OnInit {
   getGH() {
     this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        if (res.data.chiTietGioHangs.length > 0) this.gioHangId = res.data.id;
+        if (res.data.id){
+          this.gioHangId = res.data.id;
+        } 
       }
     });
   }

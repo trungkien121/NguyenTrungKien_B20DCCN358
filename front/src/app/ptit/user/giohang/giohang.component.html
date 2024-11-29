@@ -92,7 +92,7 @@
                     <h5 class="fs-14">
                       <span id="ticket_price" class="product-price">{{
                         item.thuoc?.giaBan
-                      }}</span>
+                      }} VNĐ</span>
                     </h5>
                   </div>
                 </div>
@@ -130,7 +130,7 @@
                     <div>Tổng :</div>
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }}
+                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }} VNĐ
                       </span>
                     </h5>
                   </div>
@@ -158,9 +158,9 @@
           <div class="sticky-side-div">
             <div class="card">
               <div class="card-header border-bottom-dashed">
-                <h5 class="card-title mb-0">Order Summary</h5>
+                <h5 class="card-title mb-0">Hóa đơn</h5>
               </div>
-              <div class="card-header bg-soft-light border-bottom-dashed">
+              <!-- <div class="card-header bg-soft-light border-bottom-dashed">
                 <div class="text-center">
                   <h6 class="mb-2">
                     Have a <span class="fw-semibold">promo</span> code ?
@@ -177,34 +177,34 @@
                     Apply
                   </button>
                 </div>
-              </div>
+              </div> -->
               <div class="card-body pt-2">
                 <div class="table-responsive">
                   <table class="table table-borderless mb-0">
                     <tbody>
                       <tr>
-                        <td>Sub Total :</td>
-                        <td class="text-end" id="cart-subtotal">$ 359.96</td>
+                        <td>Tổng:</td>
+                        <td class="text-end" id="cart-subtotal">{{tongTien}} VNĐ</td>
                       </tr>
                       <tr>
                         <td>
-                          Discount <span class="text-muted">(VELZON15)</span> :
+                          Giảm giá:
                         </td>
-                        <td class="text-end" id="cart-discount">- $ 53.99</td>
+                        <td class="text-end" id="cart-discount">- 0</td>
                       </tr>
                       <tr>
-                        <td>Shipping Charge :</td>
-                        <td class="text-end" id="cart-shipping">$ 65.00</td>
+                        <td>Phí vận chuyển :</td>
+                        <td class="text-end" id="cart-shipping">0</td>
                       </tr>
                       <tr>
-                        <td>Estimated Tax (12.5%) :</td>
-                        <td class="text-end" id="cart-tax">$ 44.99</td>
+                        <td>Thuế :</td>
+                        <td class="text-end" id="cart-tax">0</td>
                       </tr>
                       <tr class="table-active">
                         <th>Total (USD) :</th>
                         <td class="text-end">
                           <span class="fw-semibold" id="cart-total">
-                            $415.96
+                           {{tongTien}} VNĐ
                           </span>
                         </td>
                       </tr>
@@ -224,21 +224,4 @@
   </div>
   <!-- End Page-content -->
 
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          © Velzon.
-        </div>
-        <div class="col-sm-6">
-          <div class="text-sm-end d-none d-sm-block">
-            Design & Develop by Themesbrand
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
 </div>
