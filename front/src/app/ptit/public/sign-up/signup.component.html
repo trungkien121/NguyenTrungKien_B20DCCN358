@@ -40,12 +40,14 @@
               </div>
               <div class="p-2 mt-4">
                 <div class="mb-3">
+                  <div class="mb-3">
                   <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
                   <input type="email" class="form-control" id="useremail" placeholder="Nhập địa chỉ email" required
                     [(ngModel)]="user.email" />
                   <div *ngIf="!isValidEmail(user.email) && user.email" class="text-danger mt-1">
                     Email không đúng định dạng
                     <div class="invalid-feedback">Hãy nhập email</div>
+                  </div>
                   </div>
                   <div class="mb-3">
                     <label for="username" class="form-label">Tên đăng nhập <span class="text-danger">*</span></label>
