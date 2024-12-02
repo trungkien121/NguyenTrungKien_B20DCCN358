@@ -10,11 +10,14 @@ import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
   templateUrl: "./signup.component.html",
 })
 export class SignupComponent implements OnInit {
+  showPassword: boolean = false; // Biến kiểm soát trạng thái hiển thị mật khẩu
+
   constructor(
     private nguoidungService: NguoidungService,
     private router: Router,
     private toastService: ToastrService
   ) {}
+
   user: NguoiDung = {
     tenDangNhap: "",
     matKhau: "",
@@ -22,8 +25,14 @@ export class SignupComponent implements OnInit {
   };
 
   ngOnInit() {}
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword; // Đổi trạng thái hiển thị
+  }
 
   check(): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]+$/; // Chỉ cho phép các ký tự số
+
     if (
       !this.user.tenDangNhap?.trim() ||
       !this.user.matKhau?.trim() ||
@@ -35,6 +44,17 @@ export class SignupComponent implements OnInit {
       this.toastService.error("Vui lòng điền đầy đủ thông tin");
       return false;
     }
+
+    if (!emailRegex.test(this.user.email)) {
+      this.toastService.error("Email không đúng định dạng");
+      return false;
+    }
+
+    if (!phoneRegex.test(this.user.soDienThoai)) {
+      this.toastService.error("Số điện thoại không đúng định dạng");
+      return false;
+    }
+
     return true;
   }
 
@@ -50,4 +70,19 @@ export class SignupComponent implements OnInit {
       }
     });
   }
+
+  // **Thêm hàm kiểm tra email
+  isValidEmail(email: string | undefined): boolean {
+    if (!email) return false; // Nếu email là undefined hoặc null, trả về false.
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  isValidPhoneNumber(phone: string | undefined): boolean {
+    if (!phone) return false; // Nếu trống thì không hợp lệ
+    const phoneRegex = /^[0-9]+$/;
+    return phoneRegex.test(phone);
+  }
+  
+  
 }

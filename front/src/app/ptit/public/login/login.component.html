@@ -116,24 +116,23 @@
                         <label class="form-label" for="password-input"
                           >Mật khẩu</label
                         >
-                        <div
-                          class="position-relative auth-pass-inputgroup mb-3"
-                        >
+                        <div class="position-relative auth-pass-inputgroup">
                           <input
-                            type="password"
-                            name="password"
-                            class="form-control pe-5"
+                            [type]="showPassword ? 'text' : 'password'"
+                            class="form-control pe-5 password-input"
                             placeholder="Nhập mật khẩu"
                             id="password-input"
                             [(ngModel)]="user.matKhau"
+                            required
                           />
                           <button
-                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted shadow-none"
                             type="button"
-                            id="password-addon"
+                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                            (click)="togglePasswordVisibility()"
                           >
-                            <i class="ri-eye-fill align-middle"></i>
+                            <i [class]="showPassword ? 'ri-eye-off-fill' : 'ri-eye-fill'"></i>
                           </button>
+                          <div class="invalid-feedback">Hãy nhập mật khẩu</div>
                         </div>
                       </div>
 

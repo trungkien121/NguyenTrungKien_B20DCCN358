@@ -4,15 +4,9 @@
     <div class="bg-overlay"></div>
 
     <div class="shape">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 1440 120"
-      >
-        <path
-          d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"
-        ></path>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 1440 120">
+        <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
       </svg>
     </div>
   </div>
@@ -46,181 +40,135 @@
               </div>
               <div class="p-2 mt-4">
                 <div class="mb-3">
-                  <label for="useremail" class="form-label"
-                    >Email <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="useremail"
-                    placeholder="Nhập địa chỉ email"
-                    required
-                    [(ngModel)]="user.email"
-                  />
-                  <div class="invalid-feedback">Hãy nhập email</div>
-                </div>
-                <div class="mb-3">
-                  <label for="username" class="form-label"
-                    >Tên đăng nhập <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    placeholder="Enter username"
-                    [(ngModel)]="user.tenDangNhap"
-                    required
-                  />
-                  <div class="invalid-feedback">Please enter username</div>
-                </div>
+                  <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" id="useremail" placeholder="Nhập địa chỉ email" required
+                    [(ngModel)]="user.email" />
+                  <div *ngIf="!isValidEmail(user.email) && user.email" class="text-danger mt-1">
+                    Email không đúng định dạng
+                    <div class="invalid-feedback">Hãy nhập email</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Tên đăng nhập <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username"
+                      [(ngModel)]="user.tenDangNhap" required />
+                    <div class="invalid-feedback">Please enter username</div>
+                  </div>
 
-                <div class="mb-3">
-                  <label class="form-label" for="password-input"
-                    >Mật khẩu</label
-                  >
-                  <div class="position-relative auth-pass-inputgroup">
-                    <input
-                      type="password"
-                      class="form-control pe-5 password-input"
-                      onpaste="return false"
-                      placeholder="Enter password"
-                      id="password-input"
-                      aria-describedby="passwordInput"
-                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                      [(ngModel)]="user.matKhau"
-                      required
-                    />
-                    <button
-                      class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
-                      type="button"
-                      id="password-addon"
-                    >
-                      <i class="ri-eye-fill align-middle"></i>
+                  <div class="mb-3">
+                    <label class="form-label" for="password-input">Mật khẩu</label>
+                    <div class="position-relative auth-pass-inputgroup">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        class="form-control pe-5 password-input"
+                        placeholder="Nhập mật khẩu"
+                        id="password-input"
+                        [(ngModel)]="user.matKhau"
+                        required
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                        (click)="togglePasswordVisibility()"
+                      >
+                        <i [class]="showPassword ? 'ri-eye-off-fill' : 'ri-eye-fill'"></i>
+                      </button>
+                      <div class="invalid-feedback">Hãy nhập mật khẩu</div>
+                    </div>
+                  </div>
+                  
+
+                  <div id="password-contain" class="p-3 bg-light mb-2 rounded">
+                    <h5 class="fs-13">Password must contain:</h5>
+                    <p id="pass-length" class="invalid fs-12 mb-2">
+                      Minimum <b>8 characters</b>
+                    </p>
+                    <p id="pass-lower" class="invalid fs-12 mb-2">
+                      At <b>lowercase</b> letter (a-z)
+                    </p>
+                    <p id="pass-upper" class="invalid fs-12 mb-2">
+                      At least <b>uppercase</b> letter (A-Z)
+                    </p>
+                    <p id="pass-number" class="invalid fs-12 mb-0">
+                      A least <b>number</b> (0-9)
+                    </p>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="username" [(ngModel)]="user.hoTen"
+                      placeholder="Enter username" required />
+                    <div class="invalid-feedback">Please enter username</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username"
+                      [(ngModel)]="user.soDienThoai" required />
+                    <div *ngIf="user.soDienThoai && !isValidPhoneNumber(user.soDienThoai)" class="text-danger mt-1">
+                      Số điện thoại không đúng định dạng
+                    </div>
+                    <div class="invalid-feedback">Please enter username</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" [(ngModel)]="user.diaChi" id="username"
+                      placeholder="Enter username" required />
+                    <div class="invalid-feedback">Please enter username</div>
+                  </div>
+
+                  <div class="mb-4">
+                    <p class="mb-0 fs-12 text-muted fst-italic">
+                      By registering you agree to the Ptit
+                      <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a>
+                    </p>
+                  </div>
+
+                  <div class="mt-4">
+                    <button class="btn btn-success w-100" (click)="signup()">
+                      Đăng ký
                     </button>
-                    <div class="invalid-feedback">Please enter password</div>
                   </div>
                 </div>
-
-                <div id="password-contain" class="p-3 bg-light mb-2 rounded">
-                  <h5 class="fs-13">Password must contain:</h5>
-                  <p id="pass-length" class="invalid fs-12 mb-2">
-                    Minimum <b>8 characters</b>
-                  </p>
-                  <p id="pass-lower" class="invalid fs-12 mb-2">
-                    At <b>lowercase</b> letter (a-z)
-                  </p>
-                  <p id="pass-upper" class="invalid fs-12 mb-2">
-                    At least <b>uppercase</b> letter (A-Z)
-                  </p>
-                  <p id="pass-number" class="invalid fs-12 mb-0">
-                    A least <b>number</b> (0-9)
-                  </p>
-                </div>
-
-                <div class="mb-3">
-                  <label for="username" class="form-label"
-                    >Họ và tên <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    [(ngModel)]="user.hoTen"
-                    placeholder="Enter username"
-                    required
-                  />
-                  <div class="invalid-feedback">Please enter username</div>
-                </div>
-
-                <div class="mb-3">
-                  <label for="username" class="form-label"
-                    >Số điện thoại <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    placeholder="Enter username"
-                    [(ngModel)]="user.soDienThoai"
-                    required
-                  />
-                  <div class="invalid-feedback">Please enter username</div>
-                </div>
-
-                <div class="mb-3">
-                  <label for="username" class="form-label"
-                    >Địa chỉ <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="user.diaChi"
-                    id="username"
-                    placeholder="Enter username"
-                    required
-                  />
-                  <div class="invalid-feedback">Please enter username</div>
-                </div>
-
-                <div class="mb-4">
-                  <p class="mb-0 fs-12 text-muted fst-italic">
-                    By registering you agree to the Ptit
-                    <a
-                      href="#"
-                      class="text-primary text-decoration-underline fst-normal fw-medium"
-                      >Terms of Use</a
-                    >
-                  </p>
-                </div>
-
-                <div class="mt-4">
-                  <button class="btn btn-success w-100" (click)="signup()">
-                    Đăng ký
-                  </button>
-                </div>
               </div>
+              <!-- end card body -->
             </div>
-            <!-- end card body -->
-          </div>
-          <!-- end card -->
+            <!-- end card -->
 
-          <div class="mt-4 text-center">
-            <p class="mb-0">
-              Bạn đã có tài khoản ?
-              <a
-                [routerLink]="['/login']"
-                class="fw-semibold text-primary text-decoration-underline"
-              >
-                Đăng nhập
-              </a>
-            </p>
+            <div class="mt-4 text-center">
+              <p class="mb-0">
+                Bạn đã có tài khoản ?
+                <a [routerLink]="['/login']" class="fw-semibold text-primary text-decoration-underline">
+                  Đăng nhập
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </div>
+    <!-- end auth page content -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="text-center">
+              <p class="mb-0 text-muted">
+                &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                Ptit. Crafted with <i class="mdi mdi-heart text-danger"></i> by
+                Ptit
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <!-- end row -->
-    </div>
-    <!-- end container -->
+    </footer>
+    <!-- end Footer -->
   </div>
-  <!-- end auth page content -->
-
-  <!-- footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="text-center">
-            <p class="mb-0 text-muted">
-              &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              Ptit. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-              Ptit
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- end Footer -->
-</div>

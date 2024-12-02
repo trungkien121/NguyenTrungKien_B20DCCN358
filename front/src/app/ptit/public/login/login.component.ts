@@ -12,6 +12,8 @@ import { AuthConstant } from "src/app/_constant/auth.constant";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+  showPassword: boolean = false; // Biến kiểm soát trạng thái hiển thị mật khẩu
+
   signup: string | any[] | null | undefined;
   constructor(
     private dangNhapService: DangNhapService,
@@ -23,6 +25,10 @@ export class LoginComponent implements OnInit {
   };
 
   ngOnInit() {}
+  
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword; // Đổi trạng thái hiển thị
+  }
 
   login() {
     this.dangNhapService.dangNhap(this.user).subscribe((res: any) => {
