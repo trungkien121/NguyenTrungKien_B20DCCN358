@@ -11,7 +11,7 @@ import com.example.hieuthuoc.service.DoiTuongService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doituong")
+@RequestMapping("/doituong")
 public class DoiTuongController {
 
 	@Autowired
