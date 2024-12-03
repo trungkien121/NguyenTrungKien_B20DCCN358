@@ -1,5 +1,5 @@
 <p-dialog
-  header="Thêm loại thuốc"
+  header="Thêm danh mục thuốc"
   [(visible)]="displayModal"
   [modal]="true"
   [style]="{ width: '50vw' }"
@@ -11,26 +11,28 @@
 >
   <div>
     <div class="mb-3">
-      <label class="col-form-label" for="title"> Tên <span class="text-danger">*</span></label>
+      <label class="col-form-label" for="title">
+        Tên <span class="text-danger">*</span></label
+      >
       <input
         type="text"
         name="title"
         class="form-control"
         id="title"
-        placeholder="Nhập tên loại thuốc"
+        placeholder="Nhập tên đối tượng"
         #title="ngModel"
-        [(ngModel)]="loaithuoc.tenLoai"
+        [(ngModel)]="doituong.tenDoiTuong"
         required
       />
     </div>
     <div
       class="text-danger"
       *ngIf="
-        loaithuoc.tenLoai == '' ||
+        doituong.tenDoiTuong == '' ||
         (title.invalid && (title.dirty || title.touched))
       "
     >
-      Hãy nhập tên loại thuốc
+      Hãy nhập tên đối tượng
     </div>
 
     <div class="mb-3">
@@ -41,7 +43,7 @@
         class="form-control"
         id="mota"
         placeholder="Nhập mô tả loại thuốc"
-        [(ngModel)]="loaithuoc.moTa"
+        [(ngModel)]="doituong.moTa"
       >
       </textarea>
     </div>

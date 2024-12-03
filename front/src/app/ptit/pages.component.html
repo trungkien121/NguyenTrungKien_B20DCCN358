@@ -1,11 +1,7 @@
 <div id="layout-wrapper">
   <app-header></app-header>
 
-  <app-sidebar-top
-  [roleUser]="roleUser"
-  [isAdmin]="isAdmin$ | async"
-  [isCustomer]="isCustomer$ | async"
-></app-sidebar-top>
+  <app-sidebar-top></app-sidebar-top>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>
