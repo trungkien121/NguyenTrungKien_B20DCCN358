@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.NguoiDungDTO;
 import com.example.hieuthuoc.dto.PageDTO;
@@ -33,6 +34,7 @@ import com.example.hieuthuoc.entity.NhomQuyen;
 import com.example.hieuthuoc.repository.GioHangRepo;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.NhomQuyenRepo;
+import com.example.hieuthuoc.util.Base64ToMultipartFileConverter;
 
 public interface NguoiDungService {
 
@@ -269,11 +271,19 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 	public ResponseDTO<NguoiDung> changeAvatar(NguoiDungDTO nguoiDungDTO) {
 		try {
 			NguoiDung nguoiDung = nguoiDungRepo.findById(nguoiDungDTO.getId()).get();
-			if (nguoiDung.getAvatar().length() > 0) {
+
+			// Xoá đi ảnh trước đó trong cloudinary
+			if (nguoiDungDTO.getFile().length() > 0) {
 				uploadImageService.deleteImage(nguoiDung.getAvatar());
 			}
-			String url = uploadImageService.uploadImage(nguoiDungDTO.getFile(), "nguoiDung_" + nguoiDungDTO.getId());
-			nguoiDung.setAvatar(url);
+
+			if (Base64ToMultipartFileConverter.isBase64(nguoiDungDTO.getFile())) {
+				MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(nguoiDungDTO.getFile());
+				String name = "NguoiDung_" + nguoiDungDTO.getId();
+				String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+				nguoiDung.setAvatar(avatarUrl);
+			}
+
 			nguoiDungRepo.save(nguoiDung);
 			return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công.").build();
 		} catch (Exception e) {

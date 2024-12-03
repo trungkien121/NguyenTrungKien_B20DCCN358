@@ -1,8 +1,6 @@
 package com.example.hieuthuoc.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +13,32 @@ import org.springframework.util.StringUtils;
 
 import com.example.hieuthuoc.dto.DanhGiaDTO;
 import com.example.hieuthuoc.dto.PageDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.DanhGia;
 import com.example.hieuthuoc.repository.DanhGiaRepo;
 
 public interface DanhGiaService {
-	PageDTO<List<DanhGiaDTO>> getByThuocId(SearchDTO searchDTO);
-    Optional<DanhGiaDTO> getById(Integer id);
-    DanhGia create(DanhGiaDTO danhGiaDTO);
-    DanhGia update(DanhGiaDTO danhGiaDTO);
-    void delete(Integer id);
+	ResponseDTO<PageDTO<List<DanhGia>>> getAll(SearchDTO searchDTO);
+
+	ResponseDTO<DanhGia> create(DanhGiaDTO danhGiaDTO);
+
+	ResponseDTO<DanhGia> update(DanhGiaDTO danhGiaDTO);
+
+	ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
 class DanhGiaServiceImpl implements DanhGiaService {
 
-    @Autowired
-    private DanhGiaRepo danhGiaRepo;
+	@Autowired
+	private DanhGiaRepo danhGiaRepo;
 
-    ModelMapper modelMapper = new ModelMapper();
+	ModelMapper modelMapper = new ModelMapper();
 
-    @Override
-    public PageDTO<List<DanhGiaDTO>> getByThuocId(SearchDTO searchDTO) {
-    	Sort sortBy = Sort.by("id").ascending();
+	@Override
+	public ResponseDTO<PageDTO<List<DanhGia>>> getAll(SearchDTO searchDTO) {
+		Sort sortBy = Sort.by("id").ascending();
 
 		if (StringUtils.hasText(searchDTO.getSortedField())) {
 			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
@@ -50,57 +51,47 @@ class DanhGiaServiceImpl implements DanhGiaService {
 		if (searchDTO.getSize() == null) {
 			searchDTO.setSize(20);
 		}
-	
+
 		if (searchDTO.getKeyWord() == null) {
 			searchDTO.setKeyWord("");
 		}
-		
+
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
 		Page<DanhGia> page = danhGiaRepo.findByThuocId(searchDTO.getId(), pageRequest);
 
-		PageDTO<List<DanhGiaDTO>> pageDTO = new PageDTO<>();
+		PageDTO<List<DanhGia>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
 		pageDTO.setTotalPages(page.getTotalPages());
 
-		List<DanhGiaDTO> danhGiaDTOs = page.get().map(danhGia -> modelMapper.map(danhGia, DanhGiaDTO.class))
-				.collect(Collectors.toList());
+		List<DanhGia> danhGiaDTOs = page.getContent();
 
 		pageDTO.setData(danhGiaDTOs);
 
-		return pageDTO;
-    }
+		return ResponseDTO.<PageDTO<List<DanhGia>>>builder().status(200).msg("Thanh công").data(pageDTO).build();
+	}
 
-    @Override
-    public Optional<DanhGiaDTO> getById(Integer id) {
-        Optional<DanhGia> danhGia = danhGiaRepo.findById(id);
-        if (danhGia.isPresent()) {
-        	DanhGiaDTO danhGiaDTO = modelMapper.map(danhGia.get(), DanhGiaDTO.class);
-            return Optional.of(danhGiaDTO);
-        }
-        return Optional.empty();
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DanhGia> create(DanhGiaDTO danhGiaDTO) {
+		DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
+		return ResponseDTO.<DanhGia>builder().status(200).msg("Thanh công").data(danhGia).build();
+	}
 
-    @Override
-    @Transactional
-    public DanhGia create(DanhGiaDTO danhGiaDTO) {
-        DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
-        return danhGiaRepo.save(danhGia);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DanhGia> update(DanhGiaDTO danhGiaDTO) {
+		DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
+		DanhGia currentDanhGia = danhGiaRepo.findById(danhGia.getId()).orElse(null);
+		if (currentDanhGia != null) {
+			return ResponseDTO.<DanhGia>builder().status(200).msg("Thanh công").data(danhGiaRepo.save(danhGia)).build();
+		}
+		return ResponseDTO.<DanhGia>builder().status(409).msg("Không tồn tại đánh giá").build();
+	}
 
-    @Override
-    @Transactional
-    public DanhGia update(DanhGiaDTO danhGiaDTO) {
-        DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
-        DanhGia currentDanhGia = danhGiaRepo.findById(danhGia.getId()).orElse(null);
-        if (currentDanhGia != null) {
-            return danhGiaRepo.save(danhGia);
-        }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        danhGiaRepo.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		danhGiaRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thanh công").build();
+	}
 }

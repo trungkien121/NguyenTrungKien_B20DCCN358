@@ -34,20 +34,13 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   private langChangeSubscription!: Subscription;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isAdmin']) {
-      this.cdr.detectChanges();
-      console.log('isAdmin value changed:', this.isAdmin);
+    if (changes['isAdmin'] || changes['isCustomer']) {
+      this.cdr.markForCheck(); // Đánh dấu cần cập nhật giao diện
+      console.log('isAdmin:', this.isAdmin);
+      console.log('isCustomer:', this.isCustomer);
     }
-    if (changes['isCustomer']) {
-    this.cdr.detectChanges();
-    console.log('isCustomer value changed:', this.isCustomer);
-    }
-// Đánh dấu view cần được cập nhật
-this.cdr.markForCheck();
-    console.log("admin", this.isAdmin)
-    console.log("customer", this.isCustomer)
-
   }
+  
   
   ngOnDestroy(): void {
     
@@ -58,36 +51,60 @@ this.cdr.markForCheck();
   }
 
   async ngOnInit() {
-    // Đảm bảo view được cập nhật
-    this.cdr.detectChanges(); 
-    console.log("admin", this.isAdmin)
-    console.log("customer", this.isCustomer)
+    // Lấy trạng thái từ localStorage
+    this.userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    this.isAdmin = JSON.parse(localStorage.getItem("isAdmin") || "false");
+    this.isCustomer = JSON.parse(localStorage.getItem("isCustomer") || "false");
+  
+    // Đánh dấu view cần cập nhật
+    this.cdr.detectChanges();
+  
+    console.log("admin", this.isAdmin);
+    console.log("customer", this.isCustomer);
+  
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
       this.isAuthenticate = true;
       await this.getUserInfo();
     }
   }
+  
 
   async getUserInfo(): Promise<void> {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
-
+  
     const userInfo = jwtDecode(_token) as NguoiDung;
     if (userInfo.id) {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         let userInfo: NguoiDung = resp.data;
         this.roleUser = userInfo.nhomQuyens ?? [];
-
-        // if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
-        //   this.isAdmin = true;
-        // } if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
-        //   this.isCustomer = true;
-        // }
+        
+        // Kiểm tra vai trò của người dùng
+        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN);
+        this.isCustomer = this.hasRole(AuthConstant.ROLE_KHACHHANG);
+  
+        // Lưu trạng thái vào localStorage để giữ lại sau khi tải lại trang
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem("isAdmin", JSON.stringify(this.isAdmin));
+        localStorage.setItem("isCustomer", JSON.stringify(this.isCustomer));
+  
+        // Đánh dấu view cần cập nhật
+        this.cdr.markForCheck();
       }
-     
-
     }
   }
+  
+  logout(): void {
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("isCustomer");
+    Cookie.delete(AuthConstant.ACCESS_TOKEN_KEY);
+    this.isAuthenticate = false;
+    this.isAdmin = null;
+    this.isCustomer = null;
+    this.cdr.detectChanges(); // Đảm bảo giao diện được cập nhật
+  }
+  
 
   hasRole(roleId: string): boolean {
     return this.roleUser

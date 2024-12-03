@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
@@ -42,21 +40,14 @@ public class ThuocController {
 	}
 
 	@PostMapping("/create")
-	public ResponseDTO<Thuoc> create(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
+	public ResponseDTO<Thuoc> create(@RequestBody @Valid ThuocDTO thuocDTO)
 			throws Exception {
-
-		if (!file.isEmpty()) {
-			thuocDTO.setFile(file);
-		}
 		return thuocService.create(thuocDTO);
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<Thuoc> update(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
+	public ResponseDTO<Thuoc> update(@RequestBody @Valid ThuocDTO thuocDTO)
 			throws Exception {
-		if (!file.isEmpty()) {
-			thuocDTO.setFile(file);
-		}
 		return thuocService.update(thuocDTO);
 	}
 

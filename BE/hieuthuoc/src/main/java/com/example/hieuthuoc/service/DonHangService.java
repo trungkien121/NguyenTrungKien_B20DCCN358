@@ -3,7 +3,6 @@ package com.example.hieuthuoc.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +13,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.example.hieuthuoc.dto.ChiTietDonHangDTO;
 import com.example.hieuthuoc.dto.DonHangDTO;
 import com.example.hieuthuoc.dto.PageDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.ChiTietDonHang;
 import com.example.hieuthuoc.entity.DonHang;
+import com.example.hieuthuoc.entity.DonHang.TrangThaiGiaoHang;
+import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.repository.DonHangRepo;
+import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
 
 public interface DonHangService {
-	PageDTO<List<DonHangDTO>> getByTrangThaiGiaoHang(SearchDTO searchDTO);
+	ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(SearchDTO searchDTO);
 
-	Optional<DonHangDTO> getById(Integer id);
+	ResponseDTO<DonHang> getById(Integer id);
+	
+	ResponseDTO<DonHang> changTrangThaiGiaoHang(DonHangDTO donHangDTO);
+	
+	ResponseDTO<DonHang> changTrangThaiThanhToan(DonHangDTO donHangDTO);
 
-	DonHang create(DonHangDTO donHangDTO);
+	ResponseDTO<DonHang> create(DonHangDTO donHangDTO);
 
-	DonHang update(DonHangDTO donHangDTO);
+	ResponseDTO<DonHang> update(DonHangDTO donHangDTO);
 
-	void delete(Integer id);
+	ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
@@ -42,12 +50,15 @@ class DonHangServiceImpl implements DonHangService {
 	private DonHangRepo donHangRepo;
 
 	@Autowired
+	NguoiDungRepo nguoiDungRepo;
+
+	@Autowired
 	private ThuocRepo thuocRepo;
 
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public PageDTO<List<DonHangDTO>> getByTrangThaiGiaoHang(SearchDTO searchDTO) {
+	public ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(SearchDTO searchDTO) {
 		Sort sortBy = Sort.by("id").ascending();
 
 		if (StringUtils.hasText(searchDTO.getSortedField())) {
@@ -71,40 +82,78 @@ class DonHangServiceImpl implements DonHangService {
 
 		page = donHangRepo.findByTrangThaiGiaoHang("%" + searchDTO.getKeyWord() + "%", pageRequest);
 
-		PageDTO<List<DonHangDTO>> pageDTO = new PageDTO<>();
+		PageDTO<List<DonHang>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
 		pageDTO.setTotalPages(page.getTotalPages());
 
-		List<DonHangDTO> donHangDTOs = page.get().map(donghang -> modelMapper.map(donghang, DonHangDTO.class))
-				.collect(Collectors.toList());
+		List<DonHang> donHang = page.getContent();
 
-		pageDTO.setData(donHangDTOs);
+		pageDTO.setData(donHang);
 
-		return pageDTO;
+		return ResponseDTO.<PageDTO<List<DonHang>>>builder().status(200).msg("ok").data(pageDTO).build();
 	}
 
 	@Override
-	public Optional<DonHangDTO> getById(Integer id) {
+	public ResponseDTO<DonHang> getById(Integer id) {
 		Optional<DonHang> donhang = donHangRepo.findById(id);
 		if (donhang.isPresent()) {
-			DonHangDTO donHangDTO = modelMapper.map(donhang.get(), DonHangDTO.class);
-			return Optional.of(donHangDTO);
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donhang.get()).build();
 		}
-		return Optional.empty();
+		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
 	}
 
 	@Override
+	public ResponseDTO<DonHang> changTrangThaiGiaoHang(DonHangDTO donHangDTO) {
+		DonHang donHang = donHangRepo.findById(donHangDTO.getId()).orElse(null);
+		if (donHang != null) {
+			donHang.setTrangThaiGiaoHang(DonHang.TrangThaiGiaoHang.valueOf(donHangDTO.getTrangThaiGiaoHang()));
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang)).build();
+		}
+		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
+	}
+
+	@Override
+	public ResponseDTO<DonHang> changTrangThaiThanhToan(DonHangDTO donHangDTO) {
+		DonHang donHang = donHangRepo.findById(donHangDTO.getId()).orElse(null);
+		if (donHang != null) {
+			donHang.setTrangThaiThanhToan(DonHang.TrangThaiThanhToan.valueOf(donHangDTO.getTrangThaiThanhToan()));
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang)).build();
+		}
+		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
+	}
+	
+	@Override
 	@Transactional
-	public DonHang create(DonHangDTO donHangDTO) {
+	public ResponseDTO<DonHang> create(DonHangDTO donHangDTO) {
 		DonHang donHang = modelMapper.map(donHangDTO, DonHang.class);
-		
-		
 
+		if (donHangDTO.getKhachHangId() != null) {
+			NguoiDung khachHang = nguoiDungRepo.findById(donHangDTO.getKhachHangId()).orElse(null);
+			if (khachHang != null) {
+				donHang.setKhachHang(khachHang);
+			}
+		}
+
+		if (donHangDTO.getNguoiDungId() != null) {
+			NguoiDung nguoiDung = nguoiDungRepo.findById(donHangDTO.getNguoiDungId()).orElse(null);
+			if (nguoiDung != null) {
+				donHang.setKhachHang(nguoiDung);
+			}
+		}
+		if (donHangDTO.getKhachHangId() != null && donHangDTO.getNguoiDungId() != null) {
+			ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
+		}
+
+		Double tongTien = 0.0;
 		List<ChiTietDonHang> chiTietDonHangs = new ArrayList<>();
-		for (ChiTietDonHang chiTietDonHang : donHang.getChiTietDonHangs()) {
+		for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHangs()) {
 
-			Thuoc thuoc = thuocRepo.findById(chiTietDonHang.getThuoc().getId())
+			ChiTietDonHang chiTietDonHang = modelMapper.map(chiTietDonHangDTO, ChiTietDonHang.class);
+
+			Thuoc thuoc = thuocRepo.findById(chiTietDonHangDTO.getThuocId())
 					.orElseThrow(() -> new RuntimeException("Thuốc không tồn tại"));
+
+			tongTien += chiTietDonHang.getDonGia() * chiTietDonHang.getSoLuong();
 
 			chiTietDonHang.setThuoc(thuoc);
 			chiTietDonHang.setDonHang(donHang);
@@ -112,22 +161,32 @@ class DonHangServiceImpl implements DonHangService {
 
 		}
 
+		donHang.setTrangThaiGiaoHang(TrangThaiGiaoHang.DANG_XU_LY);
+		donHang.setPhuongThucThanhToan(DonHang.PhuongThucThanhToan.valueOf(donHangDTO.getPhuongThucThanhToan()));
+		donHang.setTrangThaiThanhToan(DonHang.TrangThaiThanhToan.valueOf(donHangDTO.getTrangThaiThanhToan()));
+
+		donHang.setTongTien(tongTien);
 		donHang.setChiTietDonHangs(chiTietDonHangs);
-		return donHangRepo.save(donHang);
+		return ResponseDTO.<DonHang>builder().status(200).msg("ok").data(donHangRepo.save(donHang)).build();
 	}
 
 	@Override
 	@Transactional
-	public DonHang update(DonHangDTO donHangDTO) {
+	public ResponseDTO<DonHang> update(DonHangDTO donHangDTO) {
 		DonHang donHang = modelMapper.map(donHangDTO, DonHang.class);
 		DonHang currentDonHang = donHangRepo.findById(donHang.getId()).orElse(null);
 		if (currentDonHang != null) {
 
+			Double tongTien = 0.0;
 			List<ChiTietDonHang> chiTietDonHangs = new ArrayList<>();
-			for (ChiTietDonHang chiTietDonHang : donHang.getChiTietDonHangs()) {
+			for (ChiTietDonHangDTO chiTietDonHangDTO : donHangDTO.getChiTietDonHangs()) {
 
-				Thuoc thuoc = thuocRepo.findById(chiTietDonHang.getThuoc().getId())
+				ChiTietDonHang chiTietDonHang = modelMapper.map(chiTietDonHangDTO, ChiTietDonHang.class);
+
+				Thuoc thuoc = thuocRepo.findById(chiTietDonHangDTO.getThuocId())
 						.orElseThrow(() -> new RuntimeException("Thuốc không tồn tại"));
+
+				tongTien += chiTietDonHang.getDonGia() * chiTietDonHang.getSoLuong();
 
 				chiTietDonHang.setThuoc(thuoc);
 				chiTietDonHang.setDonHang(donHang);
@@ -135,16 +194,20 @@ class DonHangServiceImpl implements DonHangService {
 
 			}
 
-			donHang.setChiTietDonHangs(chiTietDonHangs);
+			currentDonHang.setTongTien(tongTien);
+			currentDonHang.setChiTietDonHangs(chiTietDonHangs);
 
-			return donHangRepo.save(donHang);
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(currentDonHang))
+					.build();
 		}
-		return null;
+		return ResponseDTO.<DonHang>builder().status(409).msg("Đơn hàng không tồn tài").build();
 	}
 
 	@Override
 	@Transactional
-	public void delete(Integer id) {
+	public ResponseDTO<Void> delete(Integer id) {
 		donHangRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thành công.").build();
 	}
+
 }

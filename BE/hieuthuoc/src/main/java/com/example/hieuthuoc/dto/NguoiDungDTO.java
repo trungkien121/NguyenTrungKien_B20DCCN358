@@ -3,8 +3,6 @@ package com.example.hieuthuoc.dto;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
 
 @Data
@@ -19,7 +17,7 @@ public class NguoiDungDTO {
     private Boolean trangThai = true;
     private Date ngayTao;
     
-    private MultipartFile file;
+    private String file;
 
 	private List<NhomQuyenDTO> nhomQuyens;
     // Có thể thêm các trường khác nếu cần

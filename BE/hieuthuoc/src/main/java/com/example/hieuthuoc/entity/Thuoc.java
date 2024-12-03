@@ -1,13 +1,19 @@
 package com.example.hieuthuoc.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -44,15 +50,22 @@ public class Thuoc {
     private Double giaBan;
     private Integer soLuongTon;
     private Integer nguongCanhBao;
-    private String hinhAnh;
     private String congDung;
     private String chiDinh;
     private String chongChiDinh;
-    private String doiTuongSd;
     private String huongDanSuDung;
     private String moTaNgan;
+    private String avatar;
     private Boolean trangThai = true;
     private String ghiChu;
 
-    private String avatar;
+    
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinTable(name = "doi_tuong_sd_thuoc", 
+	           joinColumns = @JoinColumn(name="thuoc_id"), 
+	           inverseJoinColumns = @JoinColumn(name="doi_tuong_id"))
+    private List<DoiTuong> doiTuongs;
+    
+    @OneToMany(mappedBy = "thuoc",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ThanhPhanThuoc> thanhPhanThuocs;
 }

@@ -1,64 +1,66 @@
 package com.example.hieuthuoc.service;
 
-import com.example.hieuthuoc.dto.DoiTuongDTO;
-import com.example.hieuthuoc.entity.DoiTuong;
-import com.example.hieuthuoc.repository.DoiTuongRepo;
-
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.hieuthuoc.dto.DoiTuongDTO;
+import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.entity.DoiTuong;
+import com.example.hieuthuoc.repository.DoiTuongRepo;
+
 public interface DoiTuongService {
-    List<DoiTuong> getAllDoiTuongs();
-    Optional<DoiTuong> getDoiTuongById(Integer id);
-    DoiTuong create(DoiTuongDTO doiTuongDTO);
-    DoiTuong update(DoiTuongDTO doiTuongDTO);
-    void delete(Integer id);
+	ResponseDTO<List<DoiTuong>> getAll();
+
+	ResponseDTO<DoiTuong> create(DoiTuongDTO doiTuongDTO);
+
+	ResponseDTO<DoiTuong> update(DoiTuongDTO doiTuongDTO);
+
+	ResponseDTO<Void> delete(Integer id);
 }
 
 @Service
 class DoiTuongServiceImpl implements DoiTuongService {
 
-    @Autowired
-    private DoiTuongRepo doiTuongRepo;
+	@Autowired
+	private DoiTuongRepo doiTuongRepo;
 
-    ModelMapper modelMapper = new ModelMapper();
+	ModelMapper modelMapper = new ModelMapper();
 
-    @Override
-    public List<DoiTuong> getAllDoiTuongs() {
-        return doiTuongRepo.findAll();
-    }
+	@Override
+	public ResponseDTO<List<DoiTuong>> getAll() {
+		List<DoiTuong> doiTuongs = doiTuongRepo.findAll();
+		return ResponseDTO.<List<DoiTuong>>builder().status(200).msg("Thanh công").data(doiTuongs).build();
+	}
 
-    @Override
-    public Optional<DoiTuong> getDoiTuongById(Integer id) {
-        return doiTuongRepo.findById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DoiTuong> create(DoiTuongDTO doiTuongDTO) {
+		DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
+		if (doiTuongRepo.existsByTenDoiTuong(doiTuong.getTenDoiTuong())) {
+			return ResponseDTO.<DoiTuong>builder().status(409).msg("Đối tượng đã tồn tại").build();
+		}
+		return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuong).build();
+	}
 
-    @Override
-    @Transactional
-    public DoiTuong create(DoiTuongDTO doiTuongDTO) {
-        DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
-        return doiTuongRepo.save(doiTuong);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<DoiTuong> update(DoiTuongDTO doiTuongDTO) {
+		DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
+		DoiTuong currentDoiTuong = doiTuongRepo.findById(doiTuong.getId()).orElse(null);
+		if (currentDoiTuong != null) {
+			return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuong).build();
+		}
+		return ResponseDTO.<DoiTuong>builder().status(409).msg("Đối tượng không tồn tại").build();
+	}
 
-    @Override
-    @Transactional
-    public DoiTuong update(DoiTuongDTO doiTuongDTO) {
-        DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
-        DoiTuong currentDoiTuong = doiTuongRepo.findById(doiTuong.getId()).orElse(null);
-        if (currentDoiTuong != null) {
-            return doiTuongRepo.save(doiTuong);
-        }
-        return null;
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        doiTuongRepo.deleteById(id);
-    }
+	@Override
+	@Transactional
+	public ResponseDTO<Void> delete(Integer id) {
+		doiTuongRepo.deleteById(id);
+		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+	}
 }

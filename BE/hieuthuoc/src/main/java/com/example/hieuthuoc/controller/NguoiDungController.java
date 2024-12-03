@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.NguoiDungDTO;
 import com.example.hieuthuoc.dto.PageDTO;
@@ -55,11 +53,7 @@ public class NguoiDungController {
 	}
 
 	@PutMapping("")
-	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO,
-			@RequestPart("file") MultipartFile file) {
-		if (file.isEmpty()) {
-			nguoiDungDTO.setFile(file);
-		}
+	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO) {
 		return nguoiDungService.changeAvatar(nguoiDungDTO);
 	}
 

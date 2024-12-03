@@ -52,11 +52,11 @@ export class PagesComponent implements OnInit, AfterViewInit {
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
       }
 
-         if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
-      this.router.navigate(["/sys/product"]);
-    } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
-      this.router.navigate(["/home"]);
-    }
+    //      if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
+    //   this.router.navigate(["/sys"]);
+    // } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
+    //   this.router.navigate(["/home"]);
+    // }
 
     this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN));
     this.isCustomer$.next(this.hasRole(AuthConstant.ROLE_KHACHHANG));

@@ -31,7 +31,6 @@ public class GioHang extends TimeAuditable{
     @JoinColumn(name = "nguoi_dung_id")
     private NguoiDung khachHang;
 
-
     @OneToMany(mappedBy = "gioHang", cascade = CascadeType.ALL)
     List<ChiTietGioHang> chiTietGioHangs;
 

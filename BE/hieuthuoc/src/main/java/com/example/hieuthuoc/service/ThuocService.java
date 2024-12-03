@@ -2,6 +2,7 @@ package com.example.hieuthuoc.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +12,26 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
+import com.example.hieuthuoc.entity.DanhMucThuoc;
+import com.example.hieuthuoc.entity.DoiTuong;
+import com.example.hieuthuoc.entity.LoaiThuoc;
+import com.example.hieuthuoc.entity.NhaSanXuat;
+import com.example.hieuthuoc.entity.ThanhPhanThuoc;
 import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.repository.DanhMucThuocRepo;
+import com.example.hieuthuoc.repository.DoiTuongRepo;
+import com.example.hieuthuoc.repository.DoiTuongSdThuocRepo;
 import com.example.hieuthuoc.repository.LoaiThuocRepo;
 import com.example.hieuthuoc.repository.NhaSanXuatRepo;
+import com.example.hieuthuoc.repository.ThanhPhanThuocRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
+import com.example.hieuthuoc.util.Base64ToMultipartFileConverter;
 
 public interface ThuocService {
 	ResponseDTO<Thuoc> create(ThuocDTO thuocDTO);
@@ -51,6 +62,15 @@ class ThuocServiceImpl implements ThuocService {
 	DanhMucThuocRepo danhMucThuocRepo;
 
 	@Autowired
+	DoiTuongRepo doiTuongRepo;
+
+	@Autowired
+	DoiTuongSdThuocRepo doiTuongSdThuocRepo;
+
+	@Autowired
+	ThanhPhanThuocRepo thanhPhanThuocRepo;
+
+	@Autowired
 	UploadImageService uploadImageService;
 
 	ModelMapper modelMapper = new ModelMapper();
@@ -76,8 +96,8 @@ class ThuocServiceImpl implements ThuocService {
 		}
 		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
 		Page<Thuoc> page = thuocRepo.search(searchThuocDTO.getKeyWord(), searchThuocDTO.getLoaiThuoc(),
-				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getDoiTuongSd(),
-				searchThuocDTO.getMaxGiaBan(), pageRequest);
+				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getMaxGiaBan(),
+				pageRequest);
 
 		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
@@ -112,22 +132,42 @@ class ThuocServiceImpl implements ThuocService {
 			return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build();
 		}
 
-		thuoc.setLoaiThuoc(loaiThuocRepo.findById(thuocDTO.getLoaiThuocId()).get());
-		thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
-		thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
+		// Lấy các thực thể liên quan từ cơ sở dữ liệu
+		LoaiThuoc loaiThuoc = loaiThuocRepo.findById(thuocDTO.getLoaiThuocId())
+				.orElseThrow(() -> new RuntimeException("Loại thuốc không tồn tại"));
+		NhaSanXuat nhaSanXuat = nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId())
+				.orElseThrow(() -> new RuntimeException("Nhà sản xuất không tồn tại"));
+		DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId())
+				.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
 
-		if (thuocDTO.getFile() == null || thuocDTO.getFile().isEmpty()) {
-			System.out.println("File không tồn tại hoặc rỗng.");
+		thuoc.setLoaiThuoc(loaiThuoc);
+		thuoc.setNhaSanXuat(nhaSanXuat);
+		thuoc.setDanhMucThuoc(danhMucThuoc);
 
-		}else {
-			System.out.println("có file");
+		// lưu ảnh vài cloudinary
+		if (thuocDTO.getFile() != null && Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
+			MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
+			String name = "Thuoc_" + thuocDTO.getId();
+			String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+			thuoc.setAvatar(avatarUrl);
 		}
 
-		// set Avatar
-		String name = "Thuoc_" + thuocDTO.getId();
-		String url = uploadImageService.uploadImage(thuocDTO.getFile(), name);
-		thuoc.setAvatar(url);
-		System.out.println("URL : " + url);
+		if (!thuocDTO.getThanhPhanThuocs().isEmpty()) {
+			List<ThanhPhanThuoc> thanhPhanThuocs = thuocDTO.getThanhPhanThuocs().stream().map(t -> {
+				ThanhPhanThuoc thanhPhanThuoc = modelMapper.map(t, ThanhPhanThuoc.class);
+				thanhPhanThuoc.setThuoc(thuoc);
+				return thanhPhanThuoc;
+			}).collect(Collectors.toList());
+			thuoc.setThanhPhanThuocs(thanhPhanThuocs);
+		}
+
+		// Xử lý danh sách DoiTuong
+		if (!thuocDTO.getDoiTuongs().isEmpty()) {
+			List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream().map(d -> doiTuongRepo.findById(d.getId()) 
+					.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
+					.collect(Collectors.toList());
+			thuoc.setDoiTuongs(doiTuongs);
+		}
 
 		return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
 	}
@@ -143,14 +183,34 @@ class ThuocServiceImpl implements ThuocService {
 			thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
 			thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
 
-			// lưu ảnh
-			if (thuocDTO.getFile() != null) {
-				if (thuoc.getAvatar().length() > 0) {
-					uploadImageService.deleteImage(thuoc.getAvatar());
-				}
+			// Xoá đi ảnh trước đó trong cloudinary
+			if (thuocDTO.getFile().length() > 0) {
+				uploadImageService.deleteImage(thuoc.getAvatar());
+			}
+
+			if (Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
+				MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
 				String name = "Thuoc_" + thuocDTO.getId();
-				String url = uploadImageService.uploadImage(thuocDTO.getFile(), name);
-				thuoc.setAvatar(url);
+				String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+				thuoc.setAvatar(avatarUrl);
+			}
+
+			// Xử lý danh sách Thanh Phần Thuốc
+			if (!thuocDTO.getThanhPhanThuocs().isEmpty()) {
+				List<ThanhPhanThuoc> thanhPhanThuocs = thuocDTO.getThanhPhanThuocs().stream().map(t -> {
+					ThanhPhanThuoc thanhPhanThuoc = modelMapper.map(t, ThanhPhanThuoc.class);
+					thanhPhanThuoc.setThuoc(thuoc);
+					return thanhPhanThuoc;
+				}).collect(Collectors.toList());
+				thuoc.setThanhPhanThuocs(thanhPhanThuocs);
+			}
+
+			// Xử lý danh sách DoiTuong
+			if (!thuocDTO.getDoiTuongs().isEmpty()) {
+				List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream().map(d -> doiTuongRepo.findById(d.getId()) 
+						.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
+						.collect(Collectors.toList());
+				thuoc.setDoiTuongs(doiTuongs);
 			}
 
 			return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();

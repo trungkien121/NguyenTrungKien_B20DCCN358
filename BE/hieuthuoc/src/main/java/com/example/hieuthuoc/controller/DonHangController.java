@@ -1,7 +1,6 @@
 package com.example.hieuthuoc.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,42 +24,48 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/donhang")
 public class DonHangController {
-	
+
 	@Autowired
 	DonHangService donHangService;
-	
+
 	@GetMapping("/get")
-	public ResponseDTO<Optional<DonHangDTO>> getById(@RequestParam("id") @Valid int id){
-		Optional<DonHangDTO> donhangDTO = donHangService.getById(id); 
-		return ResponseDTO.<Optional<DonHangDTO>>builder().status(200).msg("ok").data(donhangDTO).build();
+	public ResponseDTO<DonHang> getById(@RequestParam("id") @Valid int id) {
+		return donHangService.getById(id);
 	}
-	
+
 	@PostMapping("/list")
-	public ResponseDTO<PageDTO<List<DonHangDTO>>> getByTrangThaiGiaoHang(@RequestBody @Valid SearchDTO searchDTO)
+	public ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
-		PageDTO<List<DonHangDTO>> donhangDTOs = donHangService.getByTrangThaiGiaoHang(searchDTO);
-		return ResponseDTO.<PageDTO<List<DonHangDTO>>>builder().status(200).msg("ok").data(donhangDTOs).build();
+		return donHangService.getByTrangThaiGiaoHang(searchDTO);
 	}
-	
-	@PostMapping("/create")
-	public ResponseDTO<DonHangDTO> create(@RequestBody @Valid DonHangDTO donHangDTO)
-			throws Exception {
 
-		donHangService.create(donHangDTO);
-		return ResponseDTO.<DonHangDTO>builder().status(200).msg("ok").data(donHangDTO).build();
+	@PostMapping("/changTrangThaiGiaoHang")
+	public ResponseDTO<DonHang> changTrangThaiGiaoHang(@RequestBody DonHangDTO donHangDTO) throws Exception {
+
+		return donHangService.changTrangThaiGiaoHang(donHangDTO);
+	}
+
+	@PostMapping("/changTrangThaiThanhToan")
+	public ResponseDTO<DonHang> changTrangThaiThanhToan(@RequestBody DonHangDTO donHangDTO) throws Exception {
+
+		return donHangService.changTrangThaiThanhToan(donHangDTO);
+	}
+
+	@PostMapping("/create")
+	public ResponseDTO<DonHang> create(@RequestBody DonHangDTO donHangDTO) throws Exception {
+
+		return donHangService.create(donHangDTO);
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<DonHang> update(@RequestBody @Valid DonHangDTO thuocDTO)
-			throws Exception {
-		DonHang donHang = donHangService.update(thuocDTO);
-		return ResponseDTO.<DonHang>builder().status(200).msg("ok").data(donHang).build();
+	public ResponseDTO<DonHang> update(@RequestBody DonHangDTO thuocDTO) throws Exception {
+		return donHangService.update(thuocDTO);
 	}
-	
+
 	@DeleteMapping("/delete")
-	public ResponseDTO<Void> delete(@RequestParam("id") @Valid int id){
-		donHangService.delete(id);
-		return ResponseDTO.<Void>builder().status(200).msg("ok").build();
+	public ResponseDTO<Void> delete(@RequestParam("id") @Valid int id) {
+
+		return donHangService.delete(id);
 	}
 }
