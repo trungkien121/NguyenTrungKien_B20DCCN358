@@ -1393,72 +1393,72 @@
     //       : new Choices(e, t);
     // }),
     (i = document.querySelectorAll("[data-provider]")),
-    Array.from(i).forEach(function (e) {
-      var t, a, n;
-      "flatpickr" == e.getAttribute("data-provider")
-        ? ((n = {}),
-          (t = e.attributes)["data-date-format"] &&
-            (n.dateFormat = t["data-date-format"].value.toString()),
-          t["data-enable-time"] &&
-            ((n.enableTime = !0),
-            (n.dateFormat = t["data-date-format"].value.toString() + " H:i")),
-          t["data-altFormat"] &&
-            ((n.altInput = !0),
-            (n.altFormat = t["data-altFormat"].value.toString())),
-          t["data-minDate"] &&
-            ((n.minDate = t["data-minDate"].value.toString()),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-maxDate"] &&
-            ((n.maxDate = t["data-maxDate"].value.toString()),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-deafult-date"] &&
-            ((n.defaultDate = t["data-deafult-date"].value.toString()),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-multiple-date"] &&
-            ((n.mode = "multiple"),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-range-date"] &&
-            ((n.mode = "range"),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-inline-date"] &&
-            ((n.inline = !0),
-            (n.defaultDate = t["data-deafult-date"].value.toString()),
-            (n.dateFormat = t["data-date-format"].value.toString())),
-          t["data-disable-date"] &&
-            ((a = []).push(t["data-disable-date"].value),
-            (n.disable = a.toString().split(","))),
-          flatpickr(e, n))
-        : "timepickr" == e.getAttribute("data-provider") &&
-          ((a = {}),
-          (n = e.attributes)["data-time-basic"] &&
-            ((a.enableTime = !0), (a.noCalendar = !0), (a.dateFormat = "H:i")),
-          n["data-time-hrs"] &&
-            ((a.enableTime = !0),
-            (a.noCalendar = !0),
-            (a.dateFormat = "H:i"),
-            (a.time_24hr = !0)),
-          n["data-min-time"] &&
-            ((a.enableTime = !0),
-            (a.noCalendar = !0),
-            (a.dateFormat = "H:i"),
-            (a.minTime = n["data-min-time"].value.toString())),
-          n["data-max-time"] &&
-            ((a.enableTime = !0),
-            (a.noCalendar = !0),
-            (a.dateFormat = "H:i"),
-            (a.minTime = n["data-max-time"].value.toString())),
-          n["data-default-time"] &&
-            ((a.enableTime = !0),
-            (a.noCalendar = !0),
-            (a.dateFormat = "H:i"),
-            (a.defaultDate = n["data-default-time"].value.toString())),
-          n["data-time-inline"] &&
-            ((a.enableTime = !0),
-            (a.noCalendar = !0),
-            (a.defaultDate = n["data-time-inline"].value.toString()),
-            (a.inline = !0)),
-          flatpickr(e, a));
-    }),
+    // Array.from(i).forEach(function (e) {
+    //   var t, a, n;
+    //   "flatpickr" == e.getAttribute("data-provider")
+    //     ? ((n = {}),
+    //       (t = e.attributes)["data-date-format"] &&
+    //         (n.dateFormat = t["data-date-format"].value.toString()),
+    //       t["data-enable-time"] &&
+    //         ((n.enableTime = !0),
+    //         (n.dateFormat = t["data-date-format"].value.toString() + " H:i")),
+    //       t["data-altFormat"] &&
+    //         ((n.altInput = !0),
+    //         (n.altFormat = t["data-altFormat"].value.toString())),
+    //       t["data-minDate"] &&
+    //         ((n.minDate = t["data-minDate"].value.toString()),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-maxDate"] &&
+    //         ((n.maxDate = t["data-maxDate"].value.toString()),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-deafult-date"] &&
+    //         ((n.defaultDate = t["data-deafult-date"].value.toString()),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-multiple-date"] &&
+    //         ((n.mode = "multiple"),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-range-date"] &&
+    //         ((n.mode = "range"),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-inline-date"] &&
+    //         ((n.inline = !0),
+    //         (n.defaultDate = t["data-deafult-date"].value.toString()),
+    //         (n.dateFormat = t["data-date-format"].value.toString())),
+    //       t["data-disable-date"] &&
+    //         ((a = []).push(t["data-disable-date"].value),
+    //         (n.disable = a.toString().split(","))),
+    //       flatpickr(e, n))
+    //     : "timepickr" == e.getAttribute("data-provider") &&
+    //       ((a = {}),
+    //       (n = e.attributes)["data-time-basic"] &&
+    //         ((a.enableTime = !0), (a.noCalendar = !0), (a.dateFormat = "H:i")),
+    //       n["data-time-hrs"] &&
+    //         ((a.enableTime = !0),
+    //         (a.noCalendar = !0),
+    //         (a.dateFormat = "H:i"),
+    //         (a.time_24hr = !0)),
+    //       n["data-min-time"] &&
+    //         ((a.enableTime = !0),
+    //         (a.noCalendar = !0),
+    //         (a.dateFormat = "H:i"),
+    //         (a.minTime = n["data-min-time"].value.toString())),
+    //       n["data-max-time"] &&
+    //         ((a.enableTime = !0),
+    //         (a.noCalendar = !0),
+    //         (a.dateFormat = "H:i"),
+    //         (a.minTime = n["data-max-time"].value.toString())),
+    //       n["data-default-time"] &&
+    //         ((a.enableTime = !0),
+    //         (a.noCalendar = !0),
+    //         (a.dateFormat = "H:i"),
+    //         (a.defaultDate = n["data-default-time"].value.toString())),
+    //       n["data-time-inline"] &&
+    //         ((a.enableTime = !0),
+    //         (a.noCalendar = !0),
+    //         (a.defaultDate = n["data-time-inline"].value.toString()),
+    //         (a.inline = !0)),
+    //       flatpickr(e, a));
+    // }),
     Array.from(
       document.querySelectorAll('.dropdown-menu a[data-bs-toggle="tab"]')
     ).forEach(function (e) {
