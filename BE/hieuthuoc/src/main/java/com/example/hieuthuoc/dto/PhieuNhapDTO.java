@@ -1,16 +1,19 @@
 package com.example.hieuthuoc.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class PhieuNhapDTO {
     private Integer id;
-    private NhaCungCapDTO nhaCungCap; // Chỉ số ID của nhà cung cấp
-    private NguoiDungDTO nguoiDung;    // Chỉ số ID của người dùng
+    private Integer nhaCungCapId; // Chỉ số ID của nhà cung cấp
+    private Integer nguoiDungId;    // Chỉ số ID của người dùng
     private Date ngayNhap;
     private Double tongTien;
+    
+    private List<ChiTietPhieuNhapDTO> chiTietPhieuNhaps;
 
     // Có thể thêm các trường khác nếu cần
 }

@@ -141,7 +141,7 @@ class DonHangServiceImpl implements DonHangService {
 			}
 		}
 		if (donHangDTO.getKhachHangId() != null && donHangDTO.getNguoiDungId() != null) {
-			ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
+			 return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
 		}
 
 		Double tongTien = 0.0;

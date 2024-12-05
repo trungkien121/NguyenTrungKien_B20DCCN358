@@ -20,16 +20,25 @@ public interface ThuocRepo extends JpaRepository<Thuoc, Integer> {
 	Boolean existsByTenThuoc(String tenThuoc);
 
 //    Search thuoc
-	@Query("SELECT t FROM Thuoc t " + "LEFT JOIN t.loaiThuoc lt " + "LEFT JOIN t.nhaSanXuat nsx "
-			+ "LEFT JOIN t.danhMucThuoc dmt "
-			+ "WHERE (:keyWord IS NULL OR (LOWER(t.tenThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')) "
-			+ "OR LOWER(t.maThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')))) "
-			+ "AND (:loaiThuoc IS NULL OR LOWER(lt.tenLoai) LIKE LOWER(CONCAT('%', :loaiThuoc, '%'))) "
-			+ "AND (:nhaSanXuat IS NULL OR LOWER(nsx.tenNhaSanXuat) LIKE LOWER(CONCAT('%', :nhaSanXuat, '%'))) "
-			+ "AND (:danhMucThuoc IS NULL OR LOWER(dmt.tenDanhMuc) LIKE LOWER(CONCAT('%', :danhMucThuoc, '%'))) "
-			+ "AND (:maxGiaBan IS NULL OR t.giaBan <= :maxGiaBan)")
-	Page<Thuoc> search(@Param("keyWord") String keyWord, // Tìm kiếm chung cho tên thuốc và mã thuốc
-			@Param("loaiThuoc") String loaiThuoc, @Param("nhaSanXuat") String nhaSanXuat,
-			@Param("danhMucThuoc") String danhMucThuoc, @Param("maxGiaBan") Double maxGiaBan, Pageable pageable);
+	@Query("SELECT t FROM Thuoc t " +
+		       "LEFT JOIN t.loaiThuoc lt " +
+		       "LEFT JOIN t.nhaSanXuat nsx " +
+		       "LEFT JOIN t.danhMucThuoc dmt " +
+		       "LEFT JOIN t.doiTuongs dt " +
+		       "WHERE (:keyWord IS NULL OR (LOWER(t.tenThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')) " +
+		       "OR LOWER(t.maThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')))) " +
+		       "AND (:loaiThuoc IS NULL OR LOWER(lt.tenLoai) LIKE LOWER(CONCAT('%', :loaiThuoc, '%'))) " +
+		       "AND (:nhaSanXuat IS NULL OR LOWER(nsx.tenNhaSanXuat) LIKE LOWER(CONCAT('%', :nhaSanXuat, '%'))) " +
+		       "AND (:danhMucThuoc IS NULL OR LOWER(dmt.tenDanhMuc) LIKE LOWER(CONCAT('%', :danhMucThuoc, '%'))) " +
+		       "AND (:maxGiaBan IS NULL OR t.giaBan <= :maxGiaBan) " +
+		       "AND (:doiTuong IS NULL OR LOWER(dt.tenDoiTuong) LIKE LOWER(CONCAT('%', :tenDoiTuong, '%')))")
+		Page<Thuoc> search(@Param("keyWord") String keyWord,
+		                   @Param("loaiThuoc") String loaiThuoc,
+		                   @Param("nhaSanXuat") String nhaSanXuat,
+		                   @Param("danhMucThuoc") String danhMucThuoc,
+		                   @Param("maxGiaBan") Double maxGiaBan,
+		                   @Param("tenDoiTuong") String tenDoiTuong, 
+		                   Pageable pageable);
+
 
 }

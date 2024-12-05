@@ -3,6 +3,8 @@ package com.example.hieuthuoc.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -37,5 +39,5 @@ public class ThuocDTO {
 	private List<DoiTuongDTO> doiTuongs;
 	private List<ThanhPhanThuocDTO> thanhPhanThuocs;
 
-	private String file;
+	private MultipartFile file;
 }

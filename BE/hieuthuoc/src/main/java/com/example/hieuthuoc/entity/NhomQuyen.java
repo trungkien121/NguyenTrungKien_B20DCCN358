@@ -2,6 +2,7 @@ package com.example.hieuthuoc.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,8 @@ public class NhomQuyen {
     private String tenNhomQuyen;
     private String moTa;
     
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
 	@JoinTable(name = "chi_tiet_chuc_nang", 
 	           joinColumns = @JoinColumn(name="nhom_quyen_id"), 
 	           inverseJoinColumns = @JoinColumn(name="chuc_nang_id"))

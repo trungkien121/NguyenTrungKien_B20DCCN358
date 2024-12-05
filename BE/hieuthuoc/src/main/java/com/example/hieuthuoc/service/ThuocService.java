@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
@@ -31,7 +30,6 @@ import com.example.hieuthuoc.repository.LoaiThuocRepo;
 import com.example.hieuthuoc.repository.NhaSanXuatRepo;
 import com.example.hieuthuoc.repository.ThanhPhanThuocRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
-import com.example.hieuthuoc.util.Base64ToMultipartFileConverter;
 
 public interface ThuocService {
 	ResponseDTO<Thuoc> create(ThuocDTO thuocDTO);
@@ -97,7 +95,7 @@ class ThuocServiceImpl implements ThuocService {
 		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
 		Page<Thuoc> page = thuocRepo.search(searchThuocDTO.getKeyWord(), searchThuocDTO.getLoaiThuoc(),
 				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getMaxGiaBan(),
-				pageRequest);
+				searchThuocDTO.getTenDoiTuong(), pageRequest);
 
 		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
@@ -145,10 +143,16 @@ class ThuocServiceImpl implements ThuocService {
 		thuoc.setDanhMucThuoc(danhMucThuoc);
 
 		// lưu ảnh vài cloudinary
-		if (thuocDTO.getFile() != null && Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
-			MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
+//		if (thuocDTO.getFile() != null && Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
+//			MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
+//			String name = "Thuoc_" + thuocDTO.getId();
+//			String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+//			thuoc.setAvatar(avatarUrl);
+//		}
+
+		if (thuocDTO.getFile() != null && !thuocDTO.getFile().isEmpty()) {
 			String name = "Thuoc_" + thuocDTO.getId();
-			String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+			String avatarUrl = uploadImageService.uploadImage(thuocDTO.getFile(), name);
 			thuoc.setAvatar(avatarUrl);
 		}
 
@@ -163,8 +167,9 @@ class ThuocServiceImpl implements ThuocService {
 
 		// Xử lý danh sách DoiTuong
 		if (!thuocDTO.getDoiTuongs().isEmpty()) {
-			List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream().map(d -> doiTuongRepo.findById(d.getId()) 
-					.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
+			List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream()
+					.map(d -> doiTuongRepo.findById(d.getId())
+							.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
 					.collect(Collectors.toList());
 			thuoc.setDoiTuongs(doiTuongs);
 		}
@@ -184,14 +189,23 @@ class ThuocServiceImpl implements ThuocService {
 			thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
 
 			// Xoá đi ảnh trước đó trong cloudinary
-			if (thuocDTO.getFile().length() > 0) {
-				uploadImageService.deleteImage(thuoc.getAvatar());
-			}
+//			if (thuocDTO.getFile().length() > 0) {
+//				uploadImageService.deleteImage(thuoc.getAvatar());
+//			}
+//
+//			if (Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
+//				MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
+//				String name = "Thuoc_" + thuocDTO.getId();
+//				String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+//				thuoc.setAvatar(avatarUrl);
+//			}
 
-			if (Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
-				MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(thuocDTO.getFile());
+			if (thuocDTO.getFile() != null && !thuocDTO.getFile().isEmpty()) {
+				// Xoá đi ảnh trước đó trong cloudinary
+				uploadImageService.deleteImage(thuoc.getAvatar());
+
 				String name = "Thuoc_" + thuocDTO.getId();
-				String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+				String avatarUrl = uploadImageService.uploadImage(thuocDTO.getFile(), name);
 				thuoc.setAvatar(avatarUrl);
 			}
 
@@ -207,8 +221,9 @@ class ThuocServiceImpl implements ThuocService {
 
 			// Xử lý danh sách DoiTuong
 			if (!thuocDTO.getDoiTuongs().isEmpty()) {
-				List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream().map(d -> doiTuongRepo.findById(d.getId()) 
-						.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
+				List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream()
+						.map(d -> doiTuongRepo.findById(d.getId())
+								.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
 						.collect(Collectors.toList());
 				thuoc.setDoiTuongs(doiTuongs);
 			}

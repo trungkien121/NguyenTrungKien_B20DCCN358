@@ -43,7 +43,7 @@ class DoiTuongServiceImpl implements DoiTuongService {
 		if (doiTuongRepo.existsByTenDoiTuong(doiTuong.getTenDoiTuong())) {
 			return ResponseDTO.<DoiTuong>builder().status(409).msg("Đối tượng đã tồn tại").build();
 		}
-		return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuong).build();
+		return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuongRepo.save(doiTuong)).build();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ class DoiTuongServiceImpl implements DoiTuongService {
 		DoiTuong doiTuong = modelMapper.map(doiTuongDTO, DoiTuong.class);
 		DoiTuong currentDoiTuong = doiTuongRepo.findById(doiTuong.getId()).orElse(null);
 		if (currentDoiTuong != null) {
-			return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuong).build();
+			return ResponseDTO.<DoiTuong>builder().status(200).msg("Thanh công").data(doiTuongRepo.save(doiTuong)).build();
 		}
 		return ResponseDTO.<DoiTuong>builder().status(409).msg("Đối tượng không tồn tại").build();
 	}

@@ -21,7 +21,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.NguoiDungDTO;
 import com.example.hieuthuoc.dto.PageDTO;
@@ -34,7 +33,6 @@ import com.example.hieuthuoc.entity.NhomQuyen;
 import com.example.hieuthuoc.repository.GioHangRepo;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.NhomQuyenRepo;
-import com.example.hieuthuoc.util.Base64ToMultipartFileConverter;
 
 public interface NguoiDungService {
 
@@ -272,15 +270,13 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		try {
 			NguoiDung nguoiDung = nguoiDungRepo.findById(nguoiDungDTO.getId()).get();
 
-			// Xoá đi ảnh trước đó trong cloudinary
-			if (nguoiDungDTO.getFile().length() > 0) {
+			if (nguoiDungDTO.getFile() != null && !nguoiDungDTO.getFile().isEmpty()) {
+				// Xoá đi ảnh trước đó trong cloudinary
 				uploadImageService.deleteImage(nguoiDung.getAvatar());
-			}
-
-			if (Base64ToMultipartFileConverter.isBase64(nguoiDungDTO.getFile())) {
-				MultipartFile avatarFile = Base64ToMultipartFileConverter.convert(nguoiDungDTO.getFile());
+				
+				//Thêm ảnh mới mới vào cloudinary
 				String name = "NguoiDung_" + nguoiDungDTO.getId();
-				String avatarUrl = uploadImageService.uploadImage(avatarFile, name);
+				String avatarUrl = uploadImageService.uploadImage(nguoiDungDTO.getFile(), name);
 				nguoiDung.setAvatar(avatarUrl);
 			}
 
