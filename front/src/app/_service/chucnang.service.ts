@@ -1,3 +1,4 @@
+import { ChucNang } from "./../_model/chucnang";
 // role.service.ts
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -8,11 +9,11 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class DanhgiaService {
+export class ChucNangService {
   constructor(private http: HttpClient) {}
 
   getLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/danhgia/list`;
+    const apiUrl = environment.backApiUrl + `/chucnang/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -21,7 +22,7 @@ export class DanhgiaService {
   }
 
   create(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/danhgia/create`;
+    const apiUrl = environment.backApiUrl + `/chucnang/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -30,7 +31,7 @@ export class DanhgiaService {
   }
 
   get(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/danhgia/get`;
+    const apiUrl = environment.backApiUrl + `/chucnang/get`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -42,7 +43,7 @@ export class DanhgiaService {
   }
 
   delete(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/danhgia/delete`;
+    const apiUrl = environment.backApiUrl + `/chucnang/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();

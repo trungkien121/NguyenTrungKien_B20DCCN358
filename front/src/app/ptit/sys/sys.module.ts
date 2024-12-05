@@ -36,6 +36,8 @@ import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
 import { LoaiThuocCreatementComponent } from "./loaithuoc/loaithuoc-createment/loaithuoc-createment.component";
 import { DoiTuongCreatementComponent } from "./doituong/doituong-createment/doituong-createment.component";
 import { DoituongComponent } from "./doituong/doituong.component";
+import { ChucNangComponent } from "./chucnang/chucnang.component";
+import { ChucNangCreatementComponent } from "./chucnang/chucnang-createment/chucnang-createment.component";
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { DoituongComponent } from "./doituong/doituong.component";
     DanhmucThuocComponent,
     DoiTuongCreatementComponent,
     DoituongComponent,
+    ChucNangComponent,
+    ChucNangCreatementComponent,
   ],
   imports: [
     CommonModule,

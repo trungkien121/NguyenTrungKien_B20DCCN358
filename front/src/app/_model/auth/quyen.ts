@@ -1,4 +1,4 @@
-import { ChucNang } from "./chucnang";
+import { ChucNang } from "../chucnang";
 
 export class Quyen {
   id: string;
