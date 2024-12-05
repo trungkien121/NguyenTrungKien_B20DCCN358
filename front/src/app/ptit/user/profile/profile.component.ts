@@ -4,6 +4,10 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { ToastrService } from "ngx-toastr";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
+import { lastValueFrom } from "rxjs";
+import { Cookie } from "ng2-cookies";
+import { AuthConstant } from "src/app/_constant/auth.constant";
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: "app-profile",
@@ -20,8 +24,19 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userUpdate = { ...this.user };
-    console.log("user", this.userUpdate);
+    this.getUserInfo();
+  }
+
+  async getUserInfo(): Promise<void> {
+    const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
+
+    const userInfo = jwtDecode(_token) as NguoiDung;
+    if (userInfo.id) {
+      const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.userUpdate = resp.data;
+      }
+    }
   }
 
   async updateUser() {

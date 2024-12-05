@@ -17,10 +17,9 @@ import { CommonConstant } from "../_constant/common.constants";
 export class PagesComponent implements OnInit, AfterViewInit {
   roleUser: Quyen[] = [];
 
-  
   isAdmin$ = new BehaviorSubject<boolean>(false);
   isCustomer$ = new BehaviorSubject<boolean>(false);
-  
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: NguoidungService,
@@ -52,19 +51,15 @@ export class PagesComponent implements OnInit, AfterViewInit {
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
       }
 
-    //      if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
-    //   this.router.navigate(["/sys"]);
-    // } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
-    //   this.router.navigate(["/home"]);
-    // }
+      //      if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
+      //   this.router.navigate(["/sys"]);
+      // } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
+      //   this.router.navigate(["/home"]);
+      // }
 
-    this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN));
-    this.isCustomer$.next(this.hasRole(AuthConstant.ROLE_KHACHHANG));
-    console.log("admin", this.isAdmin$)
-    console.log("customer", this.isCustomer$)
+      this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN));
+      this.isCustomer$.next(this.hasRole(AuthConstant.ROLE_KHACHHANG));
     }
-
- 
   }
 
   async ngOnInit() {

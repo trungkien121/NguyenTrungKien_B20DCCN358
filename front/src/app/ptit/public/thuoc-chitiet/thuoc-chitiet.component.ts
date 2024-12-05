@@ -113,7 +113,7 @@ export class ThuocChiTietComponent implements OnInit {
       gioHangId: this.gioHangId,
       soLuong: 1,
       thuocId: Number(this.thuoc.id),
-      dongia: this.thuoc.giaBan,
+      donGia: this.thuoc.giaBan,
     };
 
     this.gioHangService.createGH(gioHang).subscribe((resp) => {

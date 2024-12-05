@@ -17,7 +17,7 @@ export class DonHang {
   email?: string;
   ngayLap?: Date;
   ngayGiao?: Date;
-  chiTietDonHang?: ChiTietDonHang;
+  chiTietDonHangs?: ChiTietDonHang[];
   trangThaiGiaoHang?: TrangThaiGiaoHang;
   phuongThucThanhToan?: PhuongThucThanhToan;
   trangThaiThanhToan?: TrangThaiThanhToan;
