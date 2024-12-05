@@ -12,7 +12,7 @@ export class DoituongService {
   constructor(private http: HttpClient) {}
 
   getDTLst(request?: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/api/doituong/list`;
+    const apiUrl = environment.backApiUrl + `/doituong/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.get(`${apiUrl}`, {
@@ -21,7 +21,7 @@ export class DoituongService {
   }
 
   createDT(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/api/doituong/create`;
+    const apiUrl = environment.backApiUrl + `/doituong/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -30,7 +30,7 @@ export class DoituongService {
   }
 
   deleteDT(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/api/doituong/delete`;
+    const apiUrl = environment.backApiUrl + `/doituong/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -42,7 +42,7 @@ export class DoituongService {
   }
 
   updateDT(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/api/doituong/update`;
+    const apiUrl = environment.backApiUrl + `/doituong/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

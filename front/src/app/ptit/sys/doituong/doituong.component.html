@@ -118,7 +118,9 @@
                   >
                     <tr [style]="{ cursor: 'pointer' }">
                       <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
-                      <td (click)="preUpdate(model)">{{ model.tenDanhMuc }}</td>
+                      <td (click)="preUpdate(model)">
+                        {{ model.tenDoiTuong }}
+                      </td>
                       <td (click)="preUpdate(model)">{{ model.moTa }}</td>
                       <td>
                         <a

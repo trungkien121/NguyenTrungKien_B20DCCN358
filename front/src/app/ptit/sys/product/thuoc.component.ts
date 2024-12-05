@@ -28,9 +28,13 @@ export class ThuocComponent implements OnInit {
   loaithuocLst: LoaiThuoc[] = [];
   nsxLst: NhaSanXuat[] = [];
 
-  modelSearch: SearchModel = {
+  modelSearch: any = {
     keyWord: "",
-    id: 0,
+    loaiThuoc: "",
+    nhaSanXuat: "",
+    danhMucThuoc: "",
+    tenDoiTuong: "",
+    maxGiaBan: 0,
     currentPage: 0,
     size: 10,
     sortedField: "",

@@ -12,7 +12,7 @@ export class ThuocService {
   constructor(private http: HttpClient) {}
 
   getProductLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/list`;
+    const apiUrl = environment.backApiUrl + `/thuoc/search`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -40,9 +40,7 @@ export class ThuocService {
       formData.append("file", thuoc.file);
     }
 
-    return this.http.post(`${apiUrl}`, formData, {
-      // headers: headers,
-    });
+    return this.http.post(`${apiUrl}`, formData, {});
   }
 
   getProduct(id: any): Observable<any> {
