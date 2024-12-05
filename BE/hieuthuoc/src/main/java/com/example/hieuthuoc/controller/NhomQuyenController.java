@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hieuthuoc.dto.NhomQuyenDTO;
+import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.NhomQuyen;
 import com.example.hieuthuoc.service.NhomQuyenService;
 
@@ -32,8 +34,8 @@ public class NhomQuyenController {
 	}
 
 	@GetMapping("/list")
-	public ResponseDTO<List<NhomQuyen>> getAll() {
-		return nhomQuyenService.getAll();
+	public ResponseDTO<PageDTO<List<NhomQuyen>>> getByTenNhomQuyen(@RequestBody @Valid SearchDTO searchDTO) {
+		return nhomQuyenService.getByTenNhomQuyen(searchDTO);
 	}
 
 	@PostMapping("/create")

@@ -94,7 +94,7 @@ class ThongBaoServiceImpl implements ThongBaoService {
 	public ResponseDTO<ThongBao> create(ThongBaoDTO thongBaoDTO) {
 		ThongBao thongBao = modelMapper.map(thongBaoDTO, ThongBao.class);
 
-		if (thongBaoDTO.getNguoiDungId().size() > 0) {
+		if (thongBaoDTO.getNguoiDungId() != null && thongBaoDTO.getNguoiDungId().size() > 0) {
 			List<NguoiDung> nguoiDungs = new ArrayList<>();
 			for (int id : thongBaoDTO.getNguoiDungId()) {
 				NguoiDung nguoiDung = nguoiDungRepo.findById(id)
@@ -115,7 +115,7 @@ class ThongBaoServiceImpl implements ThongBaoService {
 		ThongBao thongBao = modelMapper.map(thongBaoDTO, ThongBao.class);
 		ThongBao currentThongBao = thongBaoRepo.findById(thongBao.getId()).orElse(null);
 		if (currentThongBao != null) {
-			if (thongBaoDTO.getNguoiDungId().size() > 0) {
+			if (thongBaoDTO.getNguoiDungId() != null && thongBaoDTO.getNguoiDungId().size() > 0) {
 				List<NguoiDung> nguoiDungs = new ArrayList<>();
 				for (int id : thongBaoDTO.getNguoiDungId()) {
 					NguoiDung nguoiDung = nguoiDungRepo.findById(id)

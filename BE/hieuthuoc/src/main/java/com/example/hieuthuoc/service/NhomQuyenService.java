@@ -6,11 +6,17 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.example.hieuthuoc.dto.NhomQuyenDTO;
+import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.ChucNang;
 import com.example.hieuthuoc.entity.NhomQuyen;
 import com.example.hieuthuoc.repository.ChucNangRepo;
@@ -26,7 +32,7 @@ public interface NhomQuyenService {
 
 	ResponseDTO<NhomQuyen> getById(Integer id);
 
-	ResponseDTO<List<NhomQuyen>> getAll();
+	ResponseDTO<PageDTO<List<NhomQuyen>>> getByTenNhomQuyen(SearchDTO searchDTO);
 }
 
 @Service
@@ -48,7 +54,7 @@ class NhomQuyenServiceImpl implements NhomQuyenService {
 		}
 		NhomQuyen nhomQuyen = modelMapper.map(nhomQuyenDTO, NhomQuyen.class);
 
-		if (!nhomQuyenDTO.getChucNangs().isEmpty()) {
+		if (nhomQuyenDTO.getChucNangs() != null && !nhomQuyenDTO.getChucNangs().isEmpty()) {
 			List<ChucNang> chucNangs = nhomQuyenDTO.getChucNangs().stream()
 					.map(c -> chucNangRepo.findById(c.getId())
 							.orElseThrow(() -> new RuntimeException("Chức Năng không tồn tại: ID " + c.getId())))
@@ -98,8 +104,35 @@ class NhomQuyenServiceImpl implements NhomQuyenService {
 	}
 
 	@Override
-	public ResponseDTO<List<NhomQuyen>> getAll() {
-		List<NhomQuyen> nhomQuyens = nhomQuyenRepo.findAll();
-		return ResponseDTO.<List<NhomQuyen>>builder().status(200).msg("Thành công").data(nhomQuyens).build();
+	public ResponseDTO<PageDTO<List<NhomQuyen>>> getByTenNhomQuyen(SearchDTO searchDTO) {
+		Sort sortBy = Sort.by("tenNhomQuyen").ascending();
+
+		if (StringUtils.hasText(searchDTO.getSortedField())) {
+			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
+		}
+
+		if (searchDTO.getCurrentPage() == null) {
+			searchDTO.setCurrentPage(0);
+		}
+
+		if (searchDTO.getSize() == null) {
+			searchDTO.setSize(20);
+		}
+
+		if (searchDTO.getKeyWord() == null) {
+			searchDTO.setKeyWord("");
+		}
+		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
+		Page<NhomQuyen> page = nhomQuyenRepo.getByTenNhomQuyen("%" + searchDTO.getKeyWord() + "%", pageRequest);
+
+		PageDTO<List<NhomQuyen>> pageDTO = new PageDTO<>();
+		pageDTO.setTotalElements(page.getTotalElements());
+		pageDTO.setTotalPages(page.getTotalPages());
+
+		List<NhomQuyen> nhomQuyens = page.getContent();
+
+		pageDTO.setData(nhomQuyens);
+
+		return ResponseDTO.<PageDTO<List<NhomQuyen>>>builder().status(200).msg("Thanh công").data(pageDTO).build();
 	}
 }

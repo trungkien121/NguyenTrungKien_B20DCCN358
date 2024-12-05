@@ -140,7 +140,7 @@ class DonHangServiceImpl implements DonHangService {
 				donHang.setKhachHang(nguoiDung);
 			}
 		}
-		if (donHangDTO.getKhachHangId() != null && donHangDTO.getNguoiDungId() != null) {
+		if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
 			 return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
 		}
 
@@ -176,6 +176,23 @@ class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = modelMapper.map(donHangDTO, DonHang.class);
 		DonHang currentDonHang = donHangRepo.findById(donHang.getId()).orElse(null);
 		if (currentDonHang != null) {
+			
+			if (donHangDTO.getKhachHangId() != null) {
+				NguoiDung khachHang = nguoiDungRepo.findById(donHangDTO.getKhachHangId()).orElse(null);
+				if (khachHang != null) {
+					donHang.setKhachHang(khachHang);
+				}
+			}
+
+			if (donHangDTO.getNguoiDungId() != null) {
+				NguoiDung nguoiDung = nguoiDungRepo.findById(donHangDTO.getNguoiDungId()).orElse(null);
+				if (nguoiDung != null) {
+					donHang.setKhachHang(nguoiDung);
+				}
+			}
+			if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
+				 return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
+			}
 
 			Double tongTien = 0.0;
 			List<ChiTietDonHang> chiTietDonHangs = new ArrayList<>();
@@ -194,10 +211,10 @@ class DonHangServiceImpl implements DonHangService {
 
 			}
 
-			currentDonHang.setTongTien(tongTien);
-			currentDonHang.setChiTietDonHangs(chiTietDonHangs);
+			donHang.setTongTien(tongTien);
+			donHang.setChiTietDonHangs(chiTietDonHangs);
 
-			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(currentDonHang))
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang))
 					.build();
 		}
 		return ResponseDTO.<DonHang>builder().status(409).msg("Đơn hàng không tồn tài").build();

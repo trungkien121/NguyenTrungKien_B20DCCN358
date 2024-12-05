@@ -184,9 +184,25 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
 		if (curentThuoc != null) {
 
-			thuoc.setLoaiThuoc(loaiThuocRepo.findById(thuocDTO.getLoaiThuocId()).get());
-			thuoc.setDanhMucThuoc(danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId()).get());
-			thuoc.setNhaSanXuat(nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId()).get());
+			if (thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
+				return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build();
+			}
+
+			if (thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
+				return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build();
+			}
+			
+			// Lấy các thực thể liên quan từ cơ sở dữ liệu
+			LoaiThuoc loaiThuoc = loaiThuocRepo.findById(thuocDTO.getLoaiThuocId())
+					.orElseThrow(() -> new RuntimeException("Loại thuốc không tồn tại"));
+			NhaSanXuat nhaSanXuat = nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId())
+					.orElseThrow(() -> new RuntimeException("Nhà sản xuất không tồn tại"));
+			DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId())
+					.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
+
+			thuoc.setLoaiThuoc(loaiThuoc);
+			thuoc.setNhaSanXuat(nhaSanXuat);
+			thuoc.setDanhMucThuoc(danhMucThuoc);
 
 			// Xoá đi ảnh trước đó trong cloudinary
 //			if (thuocDTO.getFile().length() > 0) {
