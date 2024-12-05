@@ -12,7 +12,7 @@ export class ThuocService {
   constructor(private http: HttpClient) {}
 
   getProductLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thuoc/list`;
+    const apiUrl = environment.backApiUrl + `/thuoc/search`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
