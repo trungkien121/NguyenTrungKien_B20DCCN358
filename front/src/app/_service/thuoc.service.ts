@@ -40,9 +40,7 @@ export class ThuocService {
       formData.append("file", thuoc.file);
     }
 
-    return this.http.post(`${apiUrl}`, formData, {
-      // headers: headers,
-    });
+    return this.http.post(`${apiUrl}`, formData, {});
   }
 
   getProduct(id: any): Observable<any> {
