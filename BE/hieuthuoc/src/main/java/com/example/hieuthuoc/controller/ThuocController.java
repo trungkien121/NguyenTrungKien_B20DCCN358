@@ -42,7 +42,7 @@ public class ThuocController {
 	}
 
 	@PostMapping("/create")
-	public ResponseDTO<Thuoc> create(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
+	public ResponseDTO<Thuoc> create(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart(value = "file", required = false) MultipartFile file)
 			throws Exception {
 		if(file != null && !file.isEmpty()) {
 			thuocDTO.setFile(file);
@@ -51,7 +51,7 @@ public class ThuocController {
 	}
 
 	@PutMapping("/update")
-	public ResponseDTO<Thuoc> update(@RequestPart @Valid ThuocDTO thuocDTO, @RequestPart("file") MultipartFile file)
+	public ResponseDTO<Thuoc> update(@RequestPart @Valid ThuocDTO thuocDTO,  @RequestPart(value = "file", required = false) MultipartFile file)
 			throws Exception {
 		if(file != null && !file.isEmpty()) {
 			thuocDTO.setFile(file);

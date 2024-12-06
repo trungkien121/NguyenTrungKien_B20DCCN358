@@ -6,6 +6,7 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { DoiTuong } from "src/app/_model/doituong";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { NhaSanXuat } from "src/app/_model/nsx";
 import { Thuoc } from "src/app/_model/thuoc";
@@ -38,6 +39,7 @@ export class ThuocCreatementComponent implements OnInit {
     value: true,
   };
   categoryOption: OptionSelect[] = [];
+  displayDialog: boolean = false;
 
   constructor(
     private thuocService: ThuocService,
@@ -50,6 +52,16 @@ export class ThuocCreatementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  handleCancel(displayDialog: boolean) {
+    this.displayDialog = displayDialog;
+    // this.courseNew = {};
+  }
+
+  handleSaveDoiTuong(scoreCard: DoiTuong) {
+    // console.log(scoreCard);
+    // this.applyScoreCard(scoreCard, this.typeTestActiveTab);
+  }
 
   getThuocByParam() {
     this.route.queryParams.subscribe(async (params) => {
@@ -70,6 +82,15 @@ export class ThuocCreatementComponent implements OnInit {
 
         if (this.thuoc.avatar) {
           this.imageUrl = this.thuoc.avatar;
+        }
+
+        if (this.thuoc.hanSuDung) {
+          const date = new Date(this.thuoc.hanSuDung);
+
+          this.thuoc.hanSuDung = `${date.getFullYear()}-${(
+            "0" +
+            (date.getMonth() + 1)
+          ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
         }
       }
     });
@@ -137,7 +158,7 @@ export class ThuocCreatementComponent implements OnInit {
 
   onNSXChange(value: string) {
     this.thuoc.nhaSanXuatId = value;
-    console.log("nsxId", value);
+    // console.log("nsxId", value);
   }
 
   onDanhmucThuocChange(value: string) {

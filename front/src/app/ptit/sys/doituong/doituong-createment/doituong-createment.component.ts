@@ -22,6 +22,7 @@ export class DoiTuongCreatementComponent implements OnInit {
   @Output()
   cancel: EventEmitter<any> = new EventEmitter();
 
+  @Input()
   displayModal: boolean = true;
 
   ngOnInit() {}
