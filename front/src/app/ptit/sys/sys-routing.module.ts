@@ -12,6 +12,7 @@ import { LoaiThuocComponent } from "./loaithuoc/loaithuoc.component";
 import { NSXComponent } from "./nsx/nsx.component";
 import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
 import { DoituongComponent } from "./doituong/doituong.component";
+import { ChucNangComponent } from "./chucnang/chucnang.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -60,6 +61,10 @@ const routes: Routes = [
   {
     path: "doituong",
     component: DoituongComponent,
+  },
+  {
+    path: "chucnang",
+    component: ChucNangComponent,
   },
 ];
 

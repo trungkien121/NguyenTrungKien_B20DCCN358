@@ -5,7 +5,7 @@ export class GioHangChiTiet {
   gioHangId?: number;
   soLuong?: number;
   thuocId?: number;
-  dongia?: number;
+  donGia?: number;
 
   thuoc?: Thuoc;
 }
