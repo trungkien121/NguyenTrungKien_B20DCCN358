@@ -4754,3 +4754,4 @@ Caused by: java.lang.IllegalStateException: Using named parameters for method pu
 2024-12-05T22:42:13.610+07:00  INFO 16696 --- [hieuthuoc] [http-nio-8888-exec-2] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-12-05T22:42:13.610+07:00  INFO 16696 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-12-05T22:42:13.611+07:00  INFO 16696 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-05T23:50:57.570+07:00  WARN 16696 --- [hieuthuoc] [HikariPool-69 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-69 - Thread starvation or clock leap detected (housekeeper delta=12m49s486ms159µs600ns).

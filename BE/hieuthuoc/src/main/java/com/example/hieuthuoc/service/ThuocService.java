@@ -184,11 +184,13 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
 		if (curentThuoc != null) {
 
-			if (thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
+			
+			
+			if (thuocDTO.getMaThuoc().equals(curentThuoc.getMaThuoc()) == false && thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
 				return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build();
 			}
 
-			if (thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
+			if (thuocDTO.getTenThuoc().equals(curentThuoc.getTenThuoc()) == false && thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
 				return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build();
 			}
 			
