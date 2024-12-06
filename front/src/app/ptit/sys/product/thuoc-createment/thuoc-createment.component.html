@@ -7,6 +7,7 @@
         [ngClass]="{ active: displayDialog }"
       >
         <app-select-doituong
+          [doituongSelected]="doituongSelected"
           (cancel)="handleCancel($event)"
           (save)="handleSaveDoiTuong($event)"
         >
@@ -444,9 +445,17 @@
                     </div>
 
                     <div>
-                      <button type="button" class="btn btn-dark">
-                        Notifications
-                        <span class="badge bg-danger ms-1">x</span>
+                      <button
+                        type="button"
+                        class="btn btn-dark me-2"
+                        *ngFor="let item of doituongSelected"
+                      >
+                        {{ item.tenDoiTuong }}
+                        <span
+                          class="badge bg-danger ms-1"
+                          (click)="deleteDoiTuongSelected(item)"
+                          >x</span
+                        >
                       </button>
                     </div>
                   </div>
@@ -466,24 +475,30 @@
                   </div>
 
                   <div class="col-lg-6 d-flex justify-content-end">
-                    <button class="btn btn-primary">
+                    <button
+                      class="btn btn-primary"
+                      (click)="addThanhPhanThuoc()"
+                    >
                       <i class="ri-add-box-line"></i> Thêm
                     </button>
                   </div>
                 </div>
 
-                <div class="row align-items-center">
+                <div
+                  class="row align-items-center"
+                  *ngFor="let item of thanhPhanThuocLSt; let index = index"
+                >
                   <div class="col-lg-4">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input">
                         Tên thành phần thuốc
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
                         id="manufacturer-name-input"
                         placeholder="Nhập ngưỡng cảnh báo"
-                        [(ngModel)]="thuoc.nguongCanhBao"
+                        [(ngModel)]="item.tenThanhPhan"
                         name="nguongCanhBao"
                       />
                     </div>
@@ -499,7 +514,7 @@
                         class="form-control"
                         id="manufacturer-brand-input"
                         placeholder="Nhập quy cách"
-                        [(ngModel)]="thuoc.quyCach"
+                        [(ngModel)]="item.hamLuong"
                         name="quyCach"
                       />
                     </div>
@@ -515,7 +530,7 @@
                         class="form-control"
                         id="manufacturer-brand-input"
                         placeholder="Nhập quy cách"
-                        [(ngModel)]="thuoc.quyCach"
+                        [(ngModel)]="item.donVi"
                         name="quyCach"
                       />
                     </div>
@@ -523,6 +538,7 @@
 
                   <div class="col-lg-1 d-flex justify-content-end">
                     <i
+                      (click)="deleteThanhPhanThuoc(index)"
                       class="ri-delete-bin-line text-danger cursor-pointer"
                       style="font-size: 2rem"
                     ></i>

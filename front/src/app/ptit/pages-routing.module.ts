@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PagesComponent,
     // resolve: { redirect: RedirectResolver },
     children: [
-      { path: "", redirectTo: "", pathMatch: "full" },
+      { path: "", redirectTo: "home", pathMatch: "full" },
       {
         path: "",
         loadChildren: () =>

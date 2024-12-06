@@ -62,7 +62,7 @@
                 name="selectScoreCard"
                 [id]="model.id"
                 (click)="selectDoituong(model)"
-                [checked]="doituongSelected.includes(model.id)"
+                [checked]="isSelected(model.id)"
               />
             </td>
             <td (click)="selectDoituong(model)">{{ rowIndex + 1 }}</td>

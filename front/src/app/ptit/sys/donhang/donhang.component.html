@@ -26,7 +26,7 @@
                 <div class="flex-shrink-0">
                   <div class="text-muted">
                     <span class="fw-semibold">Total: </span>
-                    <span class="fw-semibold">{{ donhang.length }}</span>
+                    <span class="fw-semibold">{{ donhangLst.length }}</span>
                   </div>
                 </div>
                 <!-- <button
@@ -42,7 +42,7 @@
 
               <div class="col-auto">
                 <p-table
-                  [value]="donhang"
+                  [value]="donhangLst"
                   [rowHover]="true"
                   dataKey="id"
                   [showCurrentPageReport]="true"

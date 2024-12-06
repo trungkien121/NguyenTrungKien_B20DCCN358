@@ -45,8 +45,8 @@ export class SelectDoiTUongComponent implements OnInit {
 
   modelSearch: SearchModel = {};
   doituongLst: DoiTuong[] = [];
-
-  doituongSelected: string[] = [];
+  @Input()
+  doituongSelected: DoiTuong[] = [];
 
   ngOnInit() {
     this.getData();
@@ -171,15 +171,21 @@ export class SelectDoiTUongComponent implements OnInit {
   }
 
   selectDoituong(model: DoiTuong) {
-    const index = this.doituongSelected.findIndex((id: any) => id === model.id);
+    const index = this.doituongSelected.findIndex(
+      (item: any) => item.id === model.id
+    );
     if (index === -1) {
       // Thêm đối tượng vào danh sách nếu chưa tồn tại
-      if (model.id) this.doituongSelected.push(model.id);
+      this.doituongSelected.push(model);
     } else {
       // Loại bỏ đối tượng nếu đã tồn tại
       this.doituongSelected.splice(index, 1);
     }
 
     console.log("selected", this.doituongSelected);
+  }
+
+  isSelected(modelId: string): boolean {
+    return this.doituongSelected.some((item) => item.id === modelId);
   }
 }

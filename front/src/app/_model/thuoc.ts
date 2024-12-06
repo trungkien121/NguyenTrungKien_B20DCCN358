@@ -1,6 +1,8 @@
 import { DanhMucThuoc } from "./danhmucthuoc";
+import { DoiTuong } from "./doituong";
 import { LoaiThuoc } from "./loaithuoc";
 import { NhaSanXuat } from "./nsx";
+import { ThanhPhanThuoc } from "./thanhphanthuoc";
 
 export class Thuoc {
   id?: string;
@@ -35,4 +37,7 @@ export class Thuoc {
   loaiThuoc?: LoaiThuoc;
   nhaSanXuat?: NhaSanXuat;
   danhMucThuoc?: DanhMucThuoc;
+
+  doiTuongs?: DoiTuong[];
+  thanhPhanThuocs?: ThanhPhanThuoc[];
 }

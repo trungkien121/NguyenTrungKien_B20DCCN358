@@ -25,9 +25,9 @@
             </div>
             <div class="col-sm-auto">
               <a
-                href="apps-ecommerce-products.html"
+                [routerLink]="['/user/home']"
                 class="link-primary text-decoration-underline"
-                >Continue Shopping</a
+                >Thêm thuốc</a
               >
             </div>
           </div>
@@ -90,9 +90,9 @@
                   <div class="text-lg-end">
                     <p class="text-muted mb-1">Giá:</p>
                     <h5 class="fs-14">
-                      <span id="ticket_price" class="product-price">{{
-                        item.thuoc?.giaBan
-                      }} VNĐ</span>
+                      <span id="ticket_price" class="product-price"
+                        >{{ item.thuoc?.giaBan }} VNĐ</span
+                      >
                     </h5>
                   </div>
                 </div>
@@ -130,7 +130,8 @@
                     <div>Tổng :</div>
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }} VNĐ
+                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }}
+                        VNĐ
                       </span>
                     </h5>
                   </div>
@@ -141,8 +142,40 @@
           </div>
           <!-- end card -->
 
+          <div *ngIf="gioHangLst.length == 0" id="pills-finish">
+            <div class="card">
+              <div class="card-body">
+                <div
+                  class="text-center py-5 cursor-pointer"
+                  [routerLink]="['/user/home']"
+                >
+                  <div class="mb-4">
+                    <lord-icon
+                      src="https://cdn.lordicon.com/lupuorrc.json"
+                      trigger="loop"
+                      colors="primary:#0ab39c,secondary:#405189"
+                      style="width: 120px; height: 120px"
+                    ></lord-icon>
+                  </div>
+                  <h5>Hiện tại giỏ hàng của bạn đang trống!</h5>
+                  <p class="text-muted">Hãy cùng đi thêm thuốc vào giỏ hàng</p>
+
+                  <!-- <h3 class="fw-semibold">
+                    Order ID:
+                    <a
+                      href="apps-ecommerce-order-details.html"
+                      class="text-decoration-underline"
+                      >VZ2451</a
+                    >
+                  </h3> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="text-end mb-4">
             <a
+              *ngIf="gioHangLst.length > 0"
               [routerLink]="['/user/checkout']"
               class="btn btn-success btn-label right ms-auto"
               ><i
@@ -184,27 +217,24 @@
                     <tbody>
                       <tr>
                         <td>Tổng:</td>
-                        <td class="text-end" id="cart-subtotal">{{tongTien}} VNĐ</td>
+                        <td class="text-end" id="cart-subtotal">
+                          {{ tongTien }} VNĐ
+                        </td>
                       </tr>
                       <tr>
-                        <td>
-                          Giảm giá:
-                        </td>
+                        <td>Giảm giá:</td>
                         <td class="text-end" id="cart-discount">- 0</td>
                       </tr>
                       <tr>
                         <td>Phí vận chuyển :</td>
                         <td class="text-end" id="cart-shipping">0</td>
                       </tr>
-                      <tr>
-                        <td>Thuế :</td>
-                        <td class="text-end" id="cart-tax">0</td>
-                      </tr>
+
                       <tr class="table-active">
                         <th>Total (USD) :</th>
                         <td class="text-end">
                           <span class="fw-semibold" id="cart-total">
-                           {{tongTien}} VNĐ
+                            {{ tongTien }} VNĐ
                           </span>
                         </td>
                       </tr>
@@ -223,5 +253,4 @@
     <!-- container-fluid -->
   </div>
   <!-- End Page-content -->
-
 </div>
