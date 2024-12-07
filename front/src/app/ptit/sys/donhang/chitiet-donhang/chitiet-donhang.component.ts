@@ -39,6 +39,8 @@ import { NSXService } from "src/app/_service/nsx.service";
   providers: [ConfirmationService, MessageService],
 })
 export class ChiTietDonHangComponent implements OnInit {
+  TrangThaiGiaoHang = TrangThaiGiaoHang;
+
   donhang: DonHang = {};
   //   loaithuocLst: LoaiThuoc[] = [];
   //   nsxLst: NhaSanXuat[] = [];
@@ -83,8 +85,31 @@ export class ChiTietDonHangComponent implements OnInit {
     // this.courseNew = {};
   }
 
+  preSave() {
+    if (this.donhang.khachHang) {
+      this.donhang.khachHangId = this.donhang.khachHang.id;
+    }
+
+    this.donhang.chiTietDonHangs?.forEach((item: ChiTietDonHang) => {
+      item.thuocId = item.thuoc?.id;
+    });
+  }
+
   xacNhanDonHang() {
+    this.preSave();
     this.donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DANG_GIAO;
+
+    this.updateDonHang();
+  }
+
+  huyDonHang() {
+    this.preSave();
+    this.donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DA_HUY;
+
+    this.updateDonHang();
+  }
+
+  updateDonHang() {
     this.donHangService.update(this.donhang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Cập nhật thành công");
