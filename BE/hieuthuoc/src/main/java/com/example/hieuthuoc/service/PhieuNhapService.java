@@ -152,7 +152,7 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 				ChiTietPhieuNhap chiTietPhieuNhap = modelMapper.map(chiTietPhieuNhapDTO, ChiTietPhieuNhap.class);
 
 				Thuoc thuoc = thuocRepo.findById(chiTietPhieuNhapDTO.getThuocId())
-						.orElseThrow(() -> new RuntimeException("Thuốc không tồn tại"));
+						.orElseThrow(() -> new RuntimeException("Thuốc có Id = " + chiTietPhieuNhapDTO.getThuocId() + " không tồn tại"));
 
 				tongTien += chiTietPhieuNhap.getDonGia() * chiTietPhieuNhap.getSoLuong();
 
@@ -164,9 +164,9 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 			phieuNhap.setTongTien(tongTien);
 			phieuNhap.setChiTietPhieuNhaps(chiTietPhieuNhaps);
 			
-			return ResponseDTO.<PhieuNhap>builder().status(200).msg("Thành công").data(phieuNhap).build();
+			return ResponseDTO.<PhieuNhap>builder().status(200).msg("Thành công").data(phieuNhapRepo.save(phieuNhap)).build();
 		}
-		return ResponseDTO.<PhieuNhap>builder().status(200).msg("Không tìm thấy phiếu nhập").data(phieuNhap).build();
+		return ResponseDTO.<PhieuNhap>builder().status(200).msg("Không tìm thấy phiếu nhập").build();
 	}
 
 	@Override

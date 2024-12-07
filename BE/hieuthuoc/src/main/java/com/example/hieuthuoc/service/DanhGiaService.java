@@ -16,7 +16,11 @@ import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.DanhGia;
+import com.example.hieuthuoc.entity.NguoiDung;
+import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.repository.DanhGiaRepo;
+import com.example.hieuthuoc.repository.NguoiDungRepo;
+import com.example.hieuthuoc.repository.ThuocRepo;
 
 public interface DanhGiaService {
 	ResponseDTO<PageDTO<List<DanhGia>>> getAll(SearchDTO searchDTO);
@@ -33,6 +37,13 @@ class DanhGiaServiceImpl implements DanhGiaService {
 
 	@Autowired
 	private DanhGiaRepo danhGiaRepo;
+	
+	@Autowired
+	private ThuocRepo thuocRepo;
+	
+	@Autowired
+	private NguoiDungRepo nguoiDungRepo;
+	
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -74,15 +85,35 @@ class DanhGiaServiceImpl implements DanhGiaService {
 	@Transactional
 	public ResponseDTO<DanhGia> create(DanhGiaDTO danhGiaDTO) {
 		DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
-		return ResponseDTO.<DanhGia>builder().status(200).msg("Thanh công").data(danhGia).build();
+		
+		Thuoc thuoc = thuocRepo.findById(danhGiaDTO.getThuocId())
+				.orElseThrow(() -> new RuntimeException("Thuốc không tồn tại"));
+		
+		NguoiDung nguoiDung = nguoiDungRepo.findById(danhGiaDTO.getNguoiDungId())
+				.orElseThrow(() -> new RuntimeException("Người dùng không tồn tại"));
+		
+		
+		if(danhGiaDTO.getDanhGiaGocId() != null) {
+			DanhGia danhGiaGoc = danhGiaRepo.findById(danhGiaDTO.getDanhGiaGocId())
+					.orElseThrow(() -> new RuntimeException("Đánh giá không tồn tại"));
+			danhGia.setDanhGiaGoc(danhGiaGoc);
+		}
+		
+		danhGia.setThuoc(thuoc);
+		danhGia.setNguoiDung(nguoiDung);
+
+		return ResponseDTO.<DanhGia>builder().status(200).msg("Thanh công").data(danhGiaRepo.save(danhGia)).build();
 	}
 
 	@Override
 	@Transactional
 	public ResponseDTO<DanhGia> update(DanhGiaDTO danhGiaDTO) {
-		DanhGia danhGia = modelMapper.map(danhGiaDTO, DanhGia.class);
-		DanhGia currentDanhGia = danhGiaRepo.findById(danhGia.getId()).orElse(null);
-		if (currentDanhGia != null) {
+		DanhGia danhGia = danhGiaRepo.findById(danhGiaDTO.getId()).orElse(null);
+		if (danhGia != null) {
+			
+			danhGia.setDanhGia(danhGiaDTO.getDanhGia());
+			danhGia.setDiemSo(danhGiaDTO.getDiemSo());
+			
 			return ResponseDTO.<DanhGia>builder().status(200).msg("Thanh công").data(danhGiaRepo.save(danhGia)).build();
 		}
 		return ResponseDTO.<DanhGia>builder().status(409).msg("Không tồn tại đánh giá").build();

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.hieuthuoc.entity.ThongBao;
+import com.example.hieuthuoc.entity.ThongBao.LoaiThongBao;
 
 @Repository
 public interface ThongBaoRepo extends JpaRepository<ThongBao, Integer> {
@@ -20,5 +21,9 @@ public interface ThongBaoRepo extends JpaRepository<ThongBao, Integer> {
 		       "OR tb.loaiThongBao = 'KHUYEN_MAI')") // Điều kiện 4: Thông báo loại khuyến mãi
 		Page<ThongBao> findByNguoiDungId(@Param("nguoiDungId") Integer nguoiDungId, Pageable pageable);
 
+	
+	Page<ThongBao> findByLoaiThongBao(LoaiThongBao loaiThongBao, Pageable pageable);
+	
+	Page<ThongBao> findAll(Pageable pageable);
 
 }

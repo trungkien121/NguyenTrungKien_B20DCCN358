@@ -31,9 +31,9 @@ public interface DonHangService {
 	ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(SearchDTO searchDTO);
 
 	ResponseDTO<DonHang> getById(Integer id);
-	
+
 	ResponseDTO<DonHang> changTrangThaiGiaoHang(DonHangDTO donHangDTO);
-	
+
 	ResponseDTO<DonHang> changTrangThaiThanhToan(DonHangDTO donHangDTO);
 
 	ResponseDTO<DonHang> create(DonHangDTO donHangDTO);
@@ -78,9 +78,13 @@ class DonHangServiceImpl implements DonHangService {
 
 		if (searchDTO.getKeyWord() == null) {
 			page = donHangRepo.findAll(pageRequest);
-		}
+		} else {
+			
+			TrangThaiGiaoHang trangThaiGiaoHang = TrangThaiGiaoHang.valueOf(searchDTO.getKeyWord());
+			
+			page = donHangRepo.findByTrangThaiGiaoHang(trangThaiGiaoHang, pageRequest);
 
-		page = donHangRepo.findByTrangThaiGiaoHang("%" + searchDTO.getKeyWord() + "%", pageRequest);
+		}
 
 		PageDTO<List<DonHang>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
@@ -121,7 +125,7 @@ class DonHangServiceImpl implements DonHangService {
 		}
 		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
 	}
-	
+
 	@Override
 	@Transactional
 	public ResponseDTO<DonHang> create(DonHangDTO donHangDTO) {
@@ -141,7 +145,7 @@ class DonHangServiceImpl implements DonHangService {
 			}
 		}
 		if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
-			 return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
+			return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
 		}
 
 		Double tongTien = 0.0;
@@ -176,7 +180,7 @@ class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = modelMapper.map(donHangDTO, DonHang.class);
 		DonHang currentDonHang = donHangRepo.findById(donHang.getId()).orElse(null);
 		if (currentDonHang != null) {
-			
+
 			if (donHangDTO.getKhachHangId() != null) {
 				NguoiDung khachHang = nguoiDungRepo.findById(donHangDTO.getKhachHangId()).orElse(null);
 				if (khachHang != null) {
@@ -191,7 +195,7 @@ class DonHangServiceImpl implements DonHangService {
 				}
 			}
 			if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
-				 return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
+				return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
 			}
 
 			Double tongTien = 0.0;
@@ -214,8 +218,7 @@ class DonHangServiceImpl implements DonHangService {
 			donHang.setTongTien(tongTien);
 			donHang.setChiTietDonHangs(chiTietDonHangs);
 
-			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang))
-					.build();
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang)).build();
 		}
 		return ResponseDTO.<DonHang>builder().status(409).msg("Đơn hàng không tồn tài").build();
 	}

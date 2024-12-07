@@ -183,8 +183,6 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
 		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
 		if (curentThuoc != null) {
-
-			
 			
 			if (thuocDTO.getMaThuoc().equals(curentThuoc.getMaThuoc()) == false && thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
 				return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build();
@@ -220,7 +218,9 @@ class ThuocServiceImpl implements ThuocService {
 
 			if (thuocDTO.getFile() != null && !thuocDTO.getFile().isEmpty()) {
 				// Xoá đi ảnh trước đó trong cloudinary
-				uploadImageService.deleteImage(thuoc.getAvatar());
+				if (thuoc.getAvatar() != null) {
+				    uploadImageService.deleteImage(thuoc.getAvatar());
+				}
 
 				String name = "Thuoc_" + thuocDTO.getId();
 				String avatarUrl = uploadImageService.uploadImage(thuocDTO.getFile(), name);
@@ -228,7 +228,7 @@ class ThuocServiceImpl implements ThuocService {
 			}
 
 			// Xử lý danh sách Thanh Phần Thuốc
-			if (!thuocDTO.getThanhPhanThuocs().isEmpty()) {
+			if (thuocDTO.getThanhPhanThuocs() != null &&  !thuocDTO.getThanhPhanThuocs().isEmpty()) {
 				List<ThanhPhanThuoc> thanhPhanThuocs = thuocDTO.getThanhPhanThuocs().stream().map(t -> {
 					ThanhPhanThuoc thanhPhanThuoc = modelMapper.map(t, ThanhPhanThuoc.class);
 					thanhPhanThuoc.setThuoc(thuoc);
@@ -238,7 +238,7 @@ class ThuocServiceImpl implements ThuocService {
 			}
 
 			// Xử lý danh sách DoiTuong
-			if (!thuocDTO.getDoiTuongs().isEmpty()) {
+			if (thuocDTO.getDoiTuongs() != null && !thuocDTO.getDoiTuongs().isEmpty()) {
 				List<DoiTuong> doiTuongs = thuocDTO.getDoiTuongs().stream()
 						.map(d -> doiTuongRepo.findById(d.getId())
 								.orElseThrow(() -> new RuntimeException("Đối tượng không tồn tại: ID " + d.getId())))
@@ -248,7 +248,7 @@ class ThuocServiceImpl implements ThuocService {
 
 			return ResponseDTO.<Thuoc>builder().status(200).msg("Thành công").data(thuocRepo.save(thuoc)).build();
 		}
-		return ResponseDTO.<Thuoc>builder().status(409).msg("Không tìm thấy thuốc").build();
+		return ResponseDTO.<Thuoc>builder().status(404).msg("Không tìm thấy thuốc").build();
 	}
 
 	@Override

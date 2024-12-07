@@ -1,8 +1,9 @@
 package com.example.hieuthuoc.entity;
 
-import java.util.Date;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,11 +11,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "danh_gia")
-public class DanhGia {
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(callSuper = true)
+public class DanhGia extends TimeAuditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,7 +37,6 @@ public class DanhGia {
 
     private Integer diemSo;
     private String danhGia;
-    private Date ngayDanhGia;
 
     // getters and setters
 }
