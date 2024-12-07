@@ -143,6 +143,12 @@
                     <tr [style]="{ cursor: 'pointer' }">
                       <td (click)="preUpdate(product)">{{ rowIndex + 1 }}</td>
                       <td (click)="preUpdate(product)">
+                        <img
+                          [src]="product.avatar"
+                          alt=""
+                          height="40"
+                          width="40"
+                        />
                         {{ product.tenThuoc }}
                       </td>
                       <td (click)="preUpdate(product)">
@@ -156,7 +162,18 @@
                         {{ product.giaNhap }}
                       </td>
                       <td (click)="preUpdate(product)">
-                        {{ product.trangThai }}
+                        <span
+                          class="badge bg-success"
+                          *ngIf="product.trangThai == true"
+                        >
+                          Bán
+                        </span>
+                        <span
+                          class="badge bg-danger"
+                          *ngIf="product.trangThai == false"
+                        >
+                          Ngưng bán
+                        </span>
                       </td>
                       <td (click)="preDelete(product)">
                         <a class="text-danger d-inline-block remove-item-btn">

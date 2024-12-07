@@ -1,6 +1,19 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
+      <div
+        *ngIf="displayDialog"
+        id="layer-popup"
+        [ngClass]="{ active: displayDialog }"
+      >
+        <app-select-doituong
+          [doituongSelected]="doituongSelected"
+          (cancel)="handleCancel($event)"
+          (save)="handleSaveDoiTuong($event)"
+        >
+        </app-select-doituong>
+      </div>
+
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
@@ -37,22 +50,42 @@
                   />
                 </div>
 
-                <div class="mb-3">
-                  <label class="form-label" for="product-title-input"
-                    >Tên Thuốc <span class="text-danger">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="product-title-input"
-                    placeholder="Enter product title"
-                    required
-                    [(ngModel)]="thuoc.tenThuoc"
-                    name="tenThuoc"
-                    value="{{ thuoc.tenThuoc }}"
-                  />
-                  <div class="invalid-feedback">
-                    Please enter a product title.
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="product-title-input"
+                        >Tên Thuốc <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="product-title-input"
+                        placeholder="Enter product title"
+                        required
+                        [(ngModel)]="thuoc.tenThuoc"
+                        name="tenThuoc"
+                        value="{{ thuoc.tenThuoc }}"
+                      />
+                      <div class="invalid-feedback">
+                        Please enter a product title.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-name-input"
+                        >Số đăng ký</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="manufacturer-name-input"
+                        placeholder="Nhập số đăng ký"
+                        [(ngModel)]="thuoc.soDangKy"
+                        name="soDangKy"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -91,7 +124,6 @@
                         required
                         [(ngModel)]="thuoc.maVach"
                         name="maVach"
-                        value="{{ thuoc.maVach }}"
                       />
                       <div class="invalid-feedback">
                         Please enter a barcode.
@@ -361,19 +393,18 @@
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input"
-                        >Số đăng ký</label
+                        >Công dụng</label
                       >
                       <input
                         type="text"
                         class="form-control"
                         id="manufacturer-name-input"
-                        placeholder="Nhập số đăng ký"
-                        [(ngModel)]="thuoc.soDangKy"
-                        name="soDangKy"
+                        placeholder="Nhập công dụng"
+                        [(ngModel)]="thuoc.congDung"
+                        name="congDung"
                       />
                     </div>
                   </div>
-
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input"
@@ -393,40 +424,126 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Công dụng</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập công dụng"
-                        [(ngModel)]="thuoc.congDung"
-                        name="congDung"
-                      />
-                    </div>
-                  </div>
+                <div class="row"></div>
+                <!-- end row -->
+              </div>
+            </div>
 
-                  <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-end">
+                  <div class="col-lg-12">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input"
                         >Đối tượng sử dụng</label
                       >
+                      <a
+                        class="float-end text-decoration-underline cursor-pointer"
+                        (click)="displayDialog = true"
+                        >Thêm đối tượng</a
+                      >
+                    </div>
+
+                    <div>
+                      <button
+                        type="button"
+                        class="btn btn-dark me-2"
+                        *ngFor="let item of doituongSelected"
+                      >
+                        {{ item.tenDoiTuong }}
+                        <span
+                          class="badge bg-danger ms-1"
+                          (click)="deleteDoiTuongSelected(item)"
+                          >x</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-end">
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-name-input">
+                        Thành phần thuốc
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 d-flex justify-content-end">
+                    <button
+                      class="btn btn-primary"
+                      (click)="addThanhPhanThuoc()"
+                    >
+                      <i class="ri-add-box-line"></i> Thêm
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="row align-items-center"
+                  *ngFor="let item of thanhPhanThuocLSt; let index = index"
+                >
+                  <div class="col-lg-4">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-name-input">
+                        Tên thành phần thuốc
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="manufacturer-name-input"
+                        placeholder="Nhập ngưỡng cảnh báo"
+                        [(ngModel)]="item.tenThanhPhan"
+                        name="nguongCanhBao"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Hàm lượng
+                      </label>
                       <input
                         type="text"
                         class="form-control"
                         id="manufacturer-brand-input"
-                        placeholder="Nhập đối tượng sử dụng"
-                        [(ngModel)]="thuoc.doiTuongSD"
-                        name="doiTuongSD"
+                        placeholder="Nhập quy cách"
+                        [(ngModel)]="item.hamLuong"
+                        name="quyCach"
                       />
                     </div>
                   </div>
+
+                  <div class="col-lg-4">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Đơn vị
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="manufacturer-brand-input"
+                        placeholder="Nhập quy cách"
+                        [(ngModel)]="item.donVi"
+                        name="quyCach"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-lg-1 d-flex justify-content-end">
+                    <i
+                      (click)="deleteThanhPhanThuoc(index)"
+                      class="ri-delete-bin-line text-danger cursor-pointer"
+                      style="font-size: 2rem"
+                    ></i>
+                  </div>
                 </div>
-                <!-- end row -->
               </div>
             </div>
           </div>
@@ -616,6 +733,7 @@
           </div>
           <!-- end col -->
         </div>
+
         <div class="text-end mb-3">
           <button
             type="submit"

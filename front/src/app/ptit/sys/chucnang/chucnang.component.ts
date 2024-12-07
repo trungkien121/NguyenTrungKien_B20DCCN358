@@ -70,6 +70,7 @@ export class ChucNangComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.chucNangNew = {};
+    this.getData();
   }
 
   handeSave(chucnang: ChucNang) {

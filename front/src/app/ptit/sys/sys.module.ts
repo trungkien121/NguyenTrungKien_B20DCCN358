@@ -38,6 +38,10 @@ import { DoiTuongCreatementComponent } from "./doituong/doituong-createment/doit
 import { DoituongComponent } from "./doituong/doituong.component";
 import { ChucNangComponent } from "./chucnang/chucnang.component";
 import { ChucNangCreatementComponent } from "./chucnang/chucnang-createment/chucnang-createment.component";
+import { SelectDoiTUongComponent } from "./product/select-doituong/select-doituong.component";
+import { PhieuNhapComponent } from "./phieunhap/phieunhap.component";
+import { PhieuNhapCreatementComponent } from "./phieunhap/phieunhap-createment/phieunhap-createment.component";
+import { SelectThuocComponent } from "./phieunhap/select-thuoc/select-thuoc.component";
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { ChucNangCreatementComponent } from "./chucnang/chucnang-createment/chuc
     DoituongComponent,
     ChucNangComponent,
     ChucNangCreatementComponent,
+    SelectDoiTUongComponent,
+    PhieuNhapComponent,
+    PhieuNhapCreatementComponent,
+    SelectThuocComponent,
   ],
   imports: [
     CommonModule,

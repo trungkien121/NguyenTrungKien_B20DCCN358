@@ -106,11 +106,14 @@ export class ThuocComponent implements OnInit {
       // if (res.status == CommonConstant.STATUS_OK_200) {
       this.productLst = res.data.data;
       this.totalRows = res.data.totalElements;
+
       // }
     });
   }
 
-  search() {}
+  search() {
+    this.getData();
+  }
 
   delete(thuoc: Thuoc) {
     this.thuocService.deleteProduct(thuoc.id).subscribe((resp) => {

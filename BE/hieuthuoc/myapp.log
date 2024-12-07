@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2024-12-07T02:05:27.920+07:00  INFO 17788 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.8.1 with PID 17788 (C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\Users\Admin\OneDrive\Documents\code\DoAn\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
 2024-12-07T02:05:27.940+07:00  INFO 17788 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
 2024-12-07T02:05:28.634+07:00  INFO 17788 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -1890,3 +1891,5 @@ Caused by: org.hibernate.query.sqm.PathElementException: Could not resolve attri
 2024-12-07T17:04:46.974+07:00  INFO 21016 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-12-07T17:04:46.975+07:00  INFO 21016 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2024-12-07T17:07:42.167+07:00  WARN 21016 --- [hieuthuoc] [http-nio-8888-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+=======
+>>>>>>> b8bc34ea1ba9751c2964bd30bd8718423f4b2a08

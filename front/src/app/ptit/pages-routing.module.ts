@@ -9,23 +9,23 @@ const routes: Routes = [
     component: PagesComponent,
     // resolve: { redirect: RedirectResolver },
     children: [
-      { path: "", redirectTo: "", pathMatch: "full" },
+      { path: "", redirectTo: "home", pathMatch: "full" },
       {
         path: "",
         loadChildren: () =>
           import("./public/public.module").then((m) => m.DashboardsModule),
-        //  canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: "sys",
         loadChildren: () => import("./sys/sys.module").then((m) => m.SysModule),
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: "user",
         loadChildren: () =>
           import("./user/user.module").then((m) => m.UserModule),
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ],
   },

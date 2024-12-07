@@ -57,8 +57,10 @@ export class PagesComponent implements OnInit, AfterViewInit {
       //   this.router.navigate(["/home"]);
       // }
 
-      this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN));
-      this.isCustomer$.next(this.hasRole(AuthConstant.ROLE_KHACHHANG));
+      this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN.toString()));
+      this.isCustomer$.next(
+        this.hasRole(AuthConstant.ROLE_KHACHHANG.toString())
+      );
     }
   }
 

@@ -1,5 +1,5 @@
 export class DoiTuong {
-  id?: number;
+  id?: string;
   tenDoiTuong?: string;
   moTa?: string;
 }

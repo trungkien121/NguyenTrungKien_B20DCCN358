@@ -105,9 +105,18 @@
                       <td>{{ customer.diaChi }}</td>
                       <td>{{ customer.soDienThoai }}</td>
                       <td>
-                        {{
-                          customer.trangThai ? "Hoạt động" : "Không hoạt động"
-                        }}
+                        <span
+                          class="badge bg-success"
+                          *ngIf="customer.trangThai == true"
+                        >
+                          Hoạt động
+                        </span>
+                        <span
+                          class="badge bg-success"
+                          *ngIf="customer.trangThai == false"
+                        >
+                          Không hoạt động
+                        </span>
                       </td>
                       <td>{{ customer.ngayTao | date : "dd/MM/yyyy" }}</td>
                     </tr>

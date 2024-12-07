@@ -50,18 +50,18 @@ export class NguoidungService {
   }
 
   checkAuthen(): boolean {
-    // if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
-    //   this.logIn();
-    //   return false;
-    // }
+    if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
+      this.logIn();
+      return false;
+    }
     return true;
   }
 
-  getRoles(): Observable<any> {
-    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
-    const url = environment.backApiUrl + "/nguoidung/getRoles";
-    return this.http.get<any>(url, { headers: headers });
-  }
+  // getRoles(): Observable<any> {
+  //   const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+  //   const url = environment.backApiUrl + "/nguoidung/getRoles";
+  //   return this.http.get<any>(url, { headers: headers });
+  // }
 
   get(id: any): Observable<any> {
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
@@ -76,6 +76,18 @@ export class NguoidungService {
 
   update(user: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/nguoidung/update`;
+    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+
+    let params = new HttpParams();
+
+    return this.http.put(`${apiUrl}`, user, {
+      headers: headers,
+      params: params,
+    });
+  }
+
+  changePwd(user: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/change_matkhau`;
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
 
     let params = new HttpParams();

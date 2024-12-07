@@ -68,6 +68,7 @@ export class DanhmucThuocComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.dmThuocNew = {};
+    this.getData();
   }
 
   handeSave(dmThuoc: DanhMucThuoc) {

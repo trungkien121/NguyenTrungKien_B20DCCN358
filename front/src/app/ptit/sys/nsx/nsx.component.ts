@@ -66,6 +66,7 @@ export class NSXComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.nsxNew = {};
+    this.getData();
   }
 
   handeSave(nsx: NhaSanXuat) {

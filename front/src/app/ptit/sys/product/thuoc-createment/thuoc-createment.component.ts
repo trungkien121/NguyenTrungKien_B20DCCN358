@@ -6,8 +6,10 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { DoiTuong } from "src/app/_model/doituong";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { NhaSanXuat } from "src/app/_model/nsx";
+import { ThanhPhanThuoc } from "src/app/_model/thanhphanthuoc";
 import { Thuoc } from "src/app/_model/thuoc";
 import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
@@ -25,6 +27,9 @@ export class ThuocCreatementComponent implements OnInit {
   nsxLst: NhaSanXuat[] = [];
   danhmucLst: DanhMucThuoc[] = [];
 
+  doituongSelected: DoiTuong[] = [];
+  thanhPhanThuocLSt: ThanhPhanThuoc[] = [];
+
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
@@ -38,6 +43,7 @@ export class ThuocCreatementComponent implements OnInit {
     value: true,
   };
   categoryOption: OptionSelect[] = [];
+  displayDialog: boolean = false;
 
   constructor(
     private thuocService: ThuocService,
@@ -50,6 +56,25 @@ export class ThuocCreatementComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  deleteDoiTuongSelected(doituong: DoiTuong) {
+    const index = this.doituongSelected.findIndex(
+      (item: any) => item.id === doituong.id
+    );
+
+    this.doituongSelected.splice(index, 1);
+  }
+
+  handleCancel(displayDialog: boolean) {
+    this.displayDialog = displayDialog;
+    // this.courseNew = {};
+  }
+
+  handleSaveDoiTuong(doituongSelected: DoiTuong[]) {
+    console.log("selected", doituongSelected);
+    this.doituongSelected = doituongSelected;
+    // this.applyScoreCard(scoreCard, this.typeTestActiveTab);
+  }
 
   getThuocByParam() {
     this.route.queryParams.subscribe(async (params) => {
@@ -67,15 +92,26 @@ export class ThuocCreatementComponent implements OnInit {
         this.thuoc.loaiThuocId = this.thuoc.loaiThuoc?.id;
         this.thuoc.danhMucThuocId = this.thuoc.danhMucThuoc?.id;
         this.thuoc.nhaSanXuatId = this.thuoc.nhaSanXuat?.id;
-
+        this.doituongSelected = this.thuoc.doiTuongs as DoiTuong[];
+        this.thanhPhanThuocLSt = this.thuoc.thanhPhanThuocs as ThanhPhanThuoc[];
         if (this.thuoc.avatar) {
           this.imageUrl = this.thuoc.avatar;
+        }
+
+        if (this.thuoc.hanSuDung) {
+          const date = new Date(this.thuoc.hanSuDung);
+
+          this.thuoc.hanSuDung = `${date.getFullYear()}-${(
+            "0" +
+            (date.getMonth() + 1)
+          ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
         }
       }
     });
   }
 
   ngOnInit() {
+    this.addThanhPhanThuoc();
     this.getThuocByParam();
     this.getLoaiThuoc();
     this.getNSX();
@@ -137,11 +173,25 @@ export class ThuocCreatementComponent implements OnInit {
 
   onNSXChange(value: string) {
     this.thuoc.nhaSanXuatId = value;
-    console.log("nsxId", value);
+    // console.log("nsxId", value);
   }
 
   onDanhmucThuocChange(value: string) {
     this.thuoc.danhMucThuocId = value;
+  }
+
+  addThanhPhanThuoc() {
+    const thanhPhanThuocNew = {
+      id: "",
+      tenThanhPhan: "",
+      hamLuong: "",
+      donVi: "",
+    };
+    this.thanhPhanThuocLSt.push(thanhPhanThuocNew);
+  }
+
+  deleteThanhPhanThuoc(index: number) {
+    this.thanhPhanThuocLSt.splice(index, 1);
   }
 
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
@@ -168,6 +218,10 @@ export class ThuocCreatementComponent implements OnInit {
 
   handeSave() {
     console.log("thuoc", this.thuoc);
+
+    this.thuoc.doiTuongs = this.doituongSelected;
+    this.thuoc.thanhPhanThuocs = this.thanhPhanThuocLSt;
+
     if (!this.thuoc.id) {
       this.thuocService.createProduct(this.thuoc).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {

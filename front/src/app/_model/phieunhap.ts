@@ -4,7 +4,7 @@ import { NhaCungCap } from "./ncc";
 
 export class PhieuNhap {
   id?: string;
-  ngayNhap?: Date;
+  ngayNhap?: string;
   tongTien?: string;
   nguoiDungId?: string;
   nguoiDung?: NguoiDung;

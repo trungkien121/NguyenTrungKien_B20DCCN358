@@ -70,6 +70,7 @@ export class DoituongComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.doituongNew = {};
+    this.getData();
   }
 
   handeSave(doituong: DoiTuong) {

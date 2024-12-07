@@ -73,8 +73,8 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
         this.roleUser = userInfo.nhomQuyens ?? [];
 
         // Kiểm tra vai trò của người dùng
-        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN);
-        this.isCustomer = this.hasRole(AuthConstant.ROLE_KHACHHANG);
+        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
+        this.isCustomer = this.hasRole(AuthConstant.ROLE_KHACHHANG.toString());
 
         this.cdr.detectChanges();
         this.cdr.markForCheck();

@@ -17,6 +17,9 @@ import { Thuoc } from "src/app/_model/thuoc";
 import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
 import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant";
 import { DonhangService } from "src/app/_service/donhang.service";
+import { ThongBaoService } from "src/app/_service/thongbao.service";
+import { ThongBao } from "src/app/_model/thongbao";
+import { LOAITHONGBAO } from "src/app/_constant/loaithongbao.constant";
 
 @Component({
   selector: "app-checkout",
@@ -28,7 +31,8 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private toastService: ToastrService,
     private donhangService: DonhangService,
-    private gioHangService: GioHangService
+    private gioHangService: GioHangService,
+    private thongBaoService: ThongBaoService
   ) {}
   PhuongThucThanhToan = PhuongThucThanhToan;
 
@@ -113,7 +117,10 @@ export class CheckoutComponent implements OnInit {
 
         //rediret hóa đơn
 
+        //delete cart
+
         //add thông báo
+        this.addThongBao();
         // this.getData();
       } else {
         this.toastService.error("Lưu thất bại");
@@ -121,6 +128,42 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  addThongBao() {
+    let thongBao: ThongBao = {
+      loaiThongBao: LOAITHONGBAO.CA_NHAN,
+      ngayTao: new Date(),
+      noidung: "Bạn vừa tạo thành công 1 đơn hàng.",
+      tieuDe: "Mua hàng",
+      trangThai: false,
+      nguoiDungId: this.userInfo.id ? this.userInfo.id : "",
+      createAt: new Date(),
+      hinhAnh: this.gioHangLst[0].thuoc?.hinhAnh,
+    };
+
+    this.thongBaoService.create(thongBao).subscribe((resp) => {
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.toastService.success("Lưu thành công");
+        this.router.navigate(["/sys/product"]);
+      } else if (resp.status == CommonConstant.STATUS_OK_409) {
+        this.toastService.error(resp.msg);
+      } else {
+        this.toastService.error("Lưu thất bại");
+      }
+    });
+  }
+
+  deleteCart() {
+    this.gioHangLst.forEach((item) => {
+      this.gioHangService.deleteGH(item.id).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          // this.toastService.success("Xóa thành công");
+          this.getGH();
+        } else {
+          // this.toastService.error("Xóa thất bại");
+        }
+      });
+    });
+  }
   changePTTT(value: string) {
     if (value == "0")
       this.donhang.phuongThucThanhToan = PhuongThucThanhToan.TIEN_MAT;

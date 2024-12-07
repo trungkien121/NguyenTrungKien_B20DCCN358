@@ -1,31 +1,33 @@
 import { DanhMucThuoc } from "./danhmucthuoc";
+import { DoiTuong } from "./doituong";
 import { LoaiThuoc } from "./loaithuoc";
 import { NhaSanXuat } from "./nsx";
+import { ThanhPhanThuoc } from "./thanhphanthuoc";
 
 export class Thuoc {
   id?: string;
-  tenThuoc?: String;
-  maThuoc?: String;
-  maVach?: String;
+  tenThuoc?: string;
+  maThuoc?: string;
+  maVach?: string;
   loaiThuocId?: string;
   nhaSanXuatId?: string;
   danhMucThuocId?: string;
-  donVi?: String;
-  cheBao?: String;
-  quyCach?: String;
-  soDangKy?: String;
-  hanSuDung?: Date;
+  donVi?: string;
+  cheBao?: string;
+  quyCach?: string;
+  soDangKy?: string;
+  hanSuDung?: string;
   giaNhap?: number;
   giaBan?: number;
   soLuongTon?: number;
   nguongCanhBao?: number;
-  congDung?: String;
-  chiDinh?: String;
-  chongChiDinh?: String;
-  huongDanSuDung?: String;
-  moTaNgan?: String;
+  congDung?: string;
+  chiDinh?: string;
+  chongChiDinh?: string;
+  huongDanSuDung?: string;
+  moTaNgan?: string;
   trangThai?: boolean;
-  ghiChu?: String;
+  ghiChu?: string;
   doiTuongSD?: string;
 
   hinhAnh?: string;
@@ -35,4 +37,7 @@ export class Thuoc {
   loaiThuoc?: LoaiThuoc;
   nhaSanXuat?: NhaSanXuat;
   danhMucThuoc?: DanhMucThuoc;
+
+  doiTuongs?: DoiTuong[];
+  thanhPhanThuocs?: ThanhPhanThuoc[];
 }

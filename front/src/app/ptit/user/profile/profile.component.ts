@@ -8,6 +8,7 @@ import { lastValueFrom } from "rxjs";
 import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { jwtDecode } from "jwt-decode";
+import { ChangePassword } from "src/app/_model/changePws";
 
 @Component({
   selector: "app-profile",
@@ -22,6 +23,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private toastService: ToastrService
   ) {}
+
+  changePwd: ChangePassword = {};
 
   ngOnInit() {
     this.getUserInfo();
@@ -50,5 +53,54 @@ export class ProfileComponent implements OnInit {
         this.toastService.error("Update error!");
       }
     });
+  }
+
+  checkPwd() {
+    let check = true;
+    if (
+      this.changePwd.oldPwd == undefined ||
+      this.changePwd.oldPwd.trim().length == 0
+    ) {
+      check = false;
+      this.changePwd.oldPwd = "";
+      return check;
+    }
+
+    if (
+      this.changePwd.newPwd == undefined ||
+      this.changePwd.newPwd.trim().length == 0
+    ) {
+      check = false;
+      this.changePwd.newPwd = "";
+      return check;
+    }
+    if (
+      this.changePwd.confirmPwd == undefined ||
+      this.changePwd.confirmPwd.trim().length == 0
+    ) {
+      check = false;
+      this.changePwd.confirmPwd = "";
+      return check;
+    }
+
+    if (this.changePwd.confirmPwd != this.changePwd.newPwd) {
+      check = false;
+      return check;
+    }
+    return true;
+  }
+
+  changePassword() {
+    // this.nguoidungService.changePwd(ncc).subscribe((resp) => {
+    //   if (resp.status == CommonConstant.STATUS_OK_200) {
+    //     this.toastService.success("Cập nhật thành công");
+    //     this.getData();
+    //   } else if (resp.status == CommonConstant.STATUS_OK_409) {
+    //     this.toastService.error(resp.msg);
+    //     this.getData();
+    //   } else {
+    //     this.toastService.error("Cập nhật thất bại");
+    //   }
+    // });
   }
 }
