@@ -1,4 +1,6 @@
+import { TrangThaiGiaoHang } from "./../../../_constant/trangthaigioahang.constant";
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
@@ -13,6 +15,8 @@ import { DonhangService } from "src/app/_service/donhang.service";
   providers: [ConfirmationService, MessageService],
 })
 export class DonHangComponent implements OnInit {
+  TrangThaiGiaoHang = TrangThaiGiaoHang;
+
   donhangLst: Donhang[] = [];
   modelSearch: SearchModel = {
     keyWord: "",
@@ -33,7 +37,8 @@ export class DonHangComponent implements OnInit {
     private donhangService: DonhangService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +48,7 @@ export class DonHangComponent implements OnInit {
   getData() {
     this.donhangService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.donhangLst = res.data;
+        this.donhangLst = res.data.data;
         this.totalRow = res.data.totalElements;
       }
     });
@@ -56,5 +61,9 @@ export class DonHangComponent implements OnInit {
 
   onCategoryChange(newCategory: string) {
     // this.modelSearch.categorySearch = newCategory;
+  }
+
+  preUpdate(order: Donhang) {
+    this.router.navigate([`/sys/chitiet-donhang/${order.id}`]);
   }
 }

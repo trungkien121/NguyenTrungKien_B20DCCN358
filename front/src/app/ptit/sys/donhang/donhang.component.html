@@ -53,16 +53,16 @@
                 >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th>ID</th>
-                      <th>ID Khách Hàng</th>
-                      <th>Tên Khách Hàng</th>
-                      <th>Số Điện Thoại</th>
-                      <th>Địa Chỉ</th>
+                      <th>STT</th>
+                      <!-- <th>ID Khách Hàng</th> -->
+                      <th>Tên khách hàng</th>
+                      <th>Số điện thoại</th>
+                      <!-- <th>Địa Chỉ</th> -->
                       <th>Email</th>
-                      <th>Ngày Lập</th>
-                      <th>Tổng Tiền</th>
+                      <th>Ngày tao</th>
+                      <th>Tổng tiền</th>
                       <th>Trạng Thái Giao Hàng</th>
-                      <th>Ngày Giao</th>
+                      <th>Ngày giao</th>
                     </tr>
                   </ng-template>
                   <ng-template
@@ -71,16 +71,74 @@
                     let-rowIndex="rowIndex"
                   >
                     <tr [style]="{ cursor: 'pointer' }">
-                      <td>{{ order.id }}</td>
-                      <td>{{ order.khachHangId }}</td>
-                      <td>{{ order.tenKhachHang }}</td>
-                      <td>{{ order.soDienThoai }}</td>
-                      <td>{{ order.diaChi }}</td>
-                      <td>{{ order.email }}</td>
-                      <td>{{ order.ngayLap | date : "yyyy-MM-dd" }}</td>
-                      <td>{{ order.tongTien | currency }}</td>
-                      <td>{{ order.trangThaiGiaoHang }}</td>
-                      <td>{{ order.ngayGiao | date : "yyyy-MM-dd" }}</td>
+                      <td (click)="preUpdate(order)">{{ rowIndex + 1 }}</td>
+                      <!-- <td>{{ order.khachHang.id }}</td> -->
+                      <td (click)="preUpdate(order)">
+                        {{ order.tenKhachHang }}
+                      </td>
+                      <td (click)="preUpdate(order)">
+                        {{ order.soDienThoai }}
+                      </td>
+                      <!-- <td>{{ order.diaChi }}</td> -->
+                      <td (click)="preUpdate(order)">{{ order.email }}</td>
+                      <td (click)="preUpdate(order)">
+                        {{ order.createdAt | date : "dd-MM-yyyy" }}
+                      </td>
+                      <td (click)="preUpdate(order)">
+                        {{ order.tongTien | currency : "VND" : "symbol" }}
+                      </td>
+                      <td (click)="preUpdate(order)">
+                        <span
+                          class="badge bg-warning"
+                          *ngIf="
+                            order.trangThaiGiaoHang ==
+                            TrangThaiGiaoHang.DANG_XU_LY
+                          "
+                        >
+                          {{ order.trangThaiGiaoHang }}
+                        </span>
+
+                        <span
+                          class="badge bg-danger"
+                          *ngIf="
+                            order.trangThaiGiaoHang == TrangThaiGiaoHang.DA_HUY
+                          "
+                        >
+                          {{ order.trangThaiGiaoHang }}
+                        </span>
+
+                        <span
+                          class="badge bg-info"
+                          *ngIf="
+                            order.trangThaiGiaoHang ==
+                            TrangThaiGiaoHang.DANG_GIAO
+                          "
+                        >
+                          {{ order.trangThaiGiaoHang }}
+                        </span>
+
+                        <span
+                          class="badge bg-success"
+                          *ngIf="
+                            order.trangThaiGiaoHang == TrangThaiGiaoHang.DA_GIAO
+                          "
+                        >
+                          {{ order.trangThaiGiaoHang }}
+                        </span>
+
+                        <span
+                          class="badge bg-primary"
+                          *ngIf="
+                            order.trangThaiGiaoHang ==
+                            TrangThaiGiaoHang.TRA_HANG
+                          "
+                        >
+                          {{ order.trangThaiGiaoHang }}
+                        </span>
+                      </td>
+                      <td (click)="preUpdate(order)">
+                        {{ order.ngayGiao | date : "dd-MM-yyyy" }}
+                      </td>
                     </tr>
                   </ng-template>
                 </p-table>

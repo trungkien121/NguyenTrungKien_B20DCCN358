@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { SysRoutingModule } from "./sys-routing.module";
@@ -42,6 +42,7 @@ import { SelectDoiTUongComponent } from "./product/select-doituong/select-doituo
 import { PhieuNhapComponent } from "./phieunhap/phieunhap.component";
 import { PhieuNhapCreatementComponent } from "./phieunhap/phieunhap-createment/phieunhap-createment.component";
 import { SelectThuocComponent } from "./phieunhap/select-thuoc/select-thuoc.component";
+import { ChiTietDonHangComponent } from "./donhang/chitiet-donhang/chitiet-donhang.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { SelectThuocComponent } from "./phieunhap/select-thuoc/select-thuoc.comp
     PhieuNhapComponent,
     PhieuNhapCreatementComponent,
     SelectThuocComponent,
+    ChiTietDonHangComponent,
   ],
   imports: [
     CommonModule,
@@ -92,5 +94,6 @@ import { SelectThuocComponent } from "./phieunhap/select-thuoc/select-thuoc.comp
     ProgressSpinnerModule,
     TableModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SysModule {}
