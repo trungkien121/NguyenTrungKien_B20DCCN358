@@ -15,7 +15,7 @@ import { DonhangService } from "src/app/_service/donhang.service";
 export class DonHangComponent implements OnInit {
   donhangLst: Donhang[] = [];
   modelSearch: SearchModel = {
-    keyWord: "DANG_XU_LY",
+    keyWord: "",
     id: 0,
     currentPage: 0,
     size: 10,

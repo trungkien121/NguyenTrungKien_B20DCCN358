@@ -86,6 +86,18 @@ export class NguoidungService {
     });
   }
 
+  changePwd(user: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/change_matkhau`;
+    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+
+    let params = new HttpParams();
+
+    return this.http.put(`${apiUrl}`, user, {
+      headers: headers,
+      params: params,
+    });
+  }
+
   dangky(userInfo: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/nguoidung/dangky`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

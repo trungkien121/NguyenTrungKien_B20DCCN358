@@ -128,152 +128,158 @@
                   <!--end row-->
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane" id="changePassword" role="tabpanel">
-                  <form action="javascript:void(0);">
-                    <div class="row g-2">
-                      <div class="col-lg-4">
-                        <div>
-                          <label for="oldpasswordInput" class="form-label"
-                            >Old Password*</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="oldpasswordInput"
-                            placeholder="Enter current password"
-                          />
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-lg-4">
-                        <div>
-                          <label for="newpasswordInput" class="form-label"
-                            >New Password*</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="newpasswordInput"
-                            placeholder="Enter new password"
-                          />
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-lg-4">
-                        <div>
-                          <label for="confirmpasswordInput" class="form-label"
-                            >Confirm Password*</label
-                          >
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="confirmpasswordInput"
-                            placeholder="Confirm password"
-                          />
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-lg-12">
-                        <div class="mb-3">
-                          <a
-                            href="javascript:void(0);"
-                            class="link-primary text-decoration-underline"
-                            >Forgot Password ?</a
-                          >
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-lg-12">
-                        <div class="text-end">
-                          <button type="submit" class="btn btn-success">
-                            Change Password
-                          </button>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
-                    <!--end row-->
-                  </form>
-                  <div class="mt-4 mb-3 border-bottom pb-2">
-                    <div class="float-end">
-                      <a href="javascript:void(0);" class="link-primary"
-                        >All Logout</a
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="card mt-xxl-n5">
+            <div class="card-header">
+              <ul
+                class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#personalDetails"
+                    role="tab"
+                  >
+                    <i class="fas fa-home"></i>Đổi mật khẩu
+                  </a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    href="#changePassword"
+                    role="tab"
+                  >
+                    <i class="far fa-user"></i> Change Password
+                  </a>
+                </li> -->
+              </ul>
+            </div>
+            <div class="card-body p-4">
+              <div class="tab-content">
+                <div
+                  class="tab-pane active"
+                  id="changePassword"
+                  role="tabpanel"
+                >
+                  <div class="row g-2">
+                    <div class="col-lg-4">
+                      <label for="oldpasswordInput" class="form-label"
+                        >Mật khẩu cũ*</label
                       >
-                    </div>
-                    <h5 class="card-title">Login History</h5>
-                  </div>
-                  <div class="d-flex align-items-center mb-3">
-                    <div class="flex-shrink-0 avatar-sm">
+                      <input
+                        type="password"
+                        name="oldPwd"
+                        id="oldPwd"
+                        class="form-control"
+                        #oldPwd="ngModel"
+                        [(ngModel)]="changePwd.oldPwd"
+                        placeholder="Nhập mật khẩu cũ"
+                        required
+                      />
                       <div
-                        class="avatar-title bg-light text-primary rounded-3 fs-18 shadow"
+                        class="text-danger"
+                        *ngIf="
+                          oldPwd.invalid && (oldPwd.dirty || oldPwd.touched)
+                        "
                       >
-                        <i class="ri-smartphone-line"></i>
+                        Hãy nhập mật khẩu cũ
                       </div>
                     </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6>iPhone 12 Pro</h6>
-                      <p class="text-muted mb-0">
-                        Los Angeles, United States - March 16 at 2:47PM
-                      </p>
-                    </div>
-                    <div>
-                      <a href="javascript:void(0);">Logout</a>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center mb-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                      <div
-                        class="avatar-title bg-light text-primary rounded-3 fs-18 shadow"
-                      >
-                        <i class="ri-tablet-line"></i>
+
+                    <!--end col-->
+                    <div class="col-lg-4">
+                      <div>
+                        <label for="newpasswordInput" class="form-label"
+                          >Mật khẩu mới*</label
+                        >
+                        <input
+                          type="password"
+                          name="newPwd"
+                          id="newPwd"
+                          class="form-control"
+                          #newPwd="ngModel"
+                          class="form-control"
+                          id="newpasswordInput"
+                          [(ngModel)]="changePwd.newPwd"
+                          placeholder="Nhập mật khẩu mới"
+                          required
+                        />
+
+                        <div
+                          class="text-danger"
+                          *ngIf="
+                            newPwd.invalid && (newPwd.dirty || newPwd.touched)
+                          "
+                        >
+                          Hãy nhập mật khẩu mới
+                        </div>
                       </div>
                     </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6>Apple iPad Pro</h6>
-                      <p class="text-muted mb-0">
-                        Washington, United States - November 06 at 10:43AM
-                      </p>
-                    </div>
-                    <div>
-                      <a href="javascript:void(0);">Logout</a>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center mb-3">
-                    <div class="flex-shrink-0 avatar-sm">
-                      <div
-                        class="avatar-title bg-light text-primary rounded-3 fs-18 shadow"
-                      >
-                        <i class="ri-smartphone-line"></i>
+                    <!--end col-->
+                    <div class="col-lg-4">
+                      <div>
+                        <label for="confirmpasswordInput" class="form-label"
+                          >Xác nhận lại mật khẩu*</label
+                        >
+                        <input
+                          type="password"
+                          name="confirmPwd"
+                          id="confirmPwd"
+                          class="form-control"
+                          #congirmPwd="ngModel"
+                          class="form-control"
+                          id="confirmpasswordInput"
+                          [(ngModel)]="changePwd.confirmPwd"
+                          placeholder="Xác nhận lại mật khẩu"
+                          required
+                        />
+
+                        <div
+                          class="text-danger"
+                          *ngIf="
+                            congirmPwd.invalid &&
+                            (congirmPwd.dirty || congirmPwd.touched)
+                          "
+                        >
+                          Hãy nhập lại mật khẩu mới
+                        </div>
+
+                        <div
+                          class="text-danger"
+                          *ngIf="changePwd.confirmPwd != changePwd.newPwd"
+                        >
+                          Không giống với mật khẩu mới
+                        </div>
                       </div>
                     </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6>Galaxy S21 Ultra 5G</h6>
-                      <p class="text-muted mb-0">
-                        Conneticut, United States - June 12 at 3:24PM
-                      </p>
-                    </div>
-                    <div>
-                      <a href="javascript:void(0);">Logout</a>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0 avatar-sm">
-                      <div
-                        class="avatar-title bg-light text-primary rounded-3 fs-18 shadow"
-                      >
-                        <i class="ri-macbook-line"></i>
+                    <!--end col-->
+
+                    <!--end col-->
+                    <div class="col-lg-12">
+                      <div class="text-end">
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          (click)="changePassword()"
+                        >
+                          Đổi mật khẩu
+                        </button>
                       </div>
                     </div>
-                    <div class="flex-grow-1 ms-3">
-                      <h6>Dell Inspiron 14</h6>
-                      <p class="text-muted mb-0">
-                        Phoenix, United States - July 26 at 8:10AM
-                      </p>
-                    </div>
-                    <div>
-                      <a href="javascript:void(0);">Logout</a>
-                    </div>
+                    <!--end col-->
                   </div>
+                  <!--end row-->
                 </div>
                 <!--end tab-pane-->
               </div>
