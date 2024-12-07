@@ -57,11 +57,11 @@ export class NguoidungService {
     return true;
   }
 
-  getRoles(): Observable<any> {
-    const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
-    const url = environment.backApiUrl + "/nguoidung/getRoles";
-    return this.http.get<any>(url, { headers: headers });
-  }
+  // getRoles(): Observable<any> {
+  //   const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
+  //   const url = environment.backApiUrl + "/nguoidung/getRoles";
+  //   return this.http.get<any>(url, { headers: headers });
+  // }
 
   get(id: any): Observable<any> {
     const headers: HttpHeaders = HeadersUtil.getHeadersAuth();
