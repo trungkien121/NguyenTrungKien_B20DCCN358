@@ -1,0 +1,115 @@
+<p-dialog
+  header="Đối tượng"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  [draggable]="true"
+  [resizable]="false"
+  [modal]="true"
+  (onHide)="onCancel()"
+>
+  <div>
+    <div class="flex-shrink-0">
+      <div class="flax-shrink-0 hstack gap-2">
+        <a class="btn btn-success ms-auto" (click)="openNewDoiTuong()"
+          ><i class="ri-add-box-line align-bottom"></i>
+          Thêm đối tượng
+        </a>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="col-form-label" for="title"> Tìm kiếm </label>
+
+      <input
+        type="text"
+        name="title"
+        class="form-control"
+        id="title"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="menuName"></label>
+
+      <p-table
+        [value]="doituongLst"
+        [rowHover]="true"
+        dataKey="id"
+        [showCurrentPageReport]="true"
+        [rows]="10"
+        [alwaysShowPaginator]="true"
+        [paginator]="true"
+        currentPageReportTemplate=""
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Mô tả</th>
+
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-model let-rowIndex="rowIndex">
+          <tr [style]="{ cursor: 'pointer' }">
+            <td>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="selectScoreCard"
+                [id]="model.id"
+                (click)="selectDoituong(model)"
+                [checked]="isSelected(model.id)"
+              />
+            </td>
+            <td (click)="selectDoituong(model)">{{ rowIndex + 1 }}</td>
+            <td (click)="selectDoituong(model)">{{ model.tenDoiTuong }}</td>
+            <td (click)="selectDoituong(model)">{{ model.moTa }}</td>
+
+            <td>
+              <!-- <a
+                class="text-danger d-inline-block remove-item-btn"
+                data-bs-toggle="modal"
+                (click)="deleteDoituong(model)"
+              >
+                <i class="ri-delete-bin-line fs-2"></i>
+              </a> -->
+              <!-- <i
+                (click)="preDeleteScoreCard(scoreCard)"
+                class="ri-delete-bin-line fs-2 me-2"
+              ></i> -->
+              <i class="ri-edit-line fs-2" (click)="update(model)"></i>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="displayModal = false"
+      label="Hủy"
+      styleClass="btn btn-danger"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      label="Lưu"
+      (click)="onSave()"
+      styleClass="btn btn-success"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<!-- Dialog mới chồng lên dialog hiện tại -->
+
+<app-doituong-createment
+  [displayModal]="displayNewDialog"
+  [doituong]="doituongNew"
+  (cancel)="onCancelNewDoiTuong($event)"
+  (save)="onSaveNewDoiTuong($event)"
+>
+</app-doituong-createment>
