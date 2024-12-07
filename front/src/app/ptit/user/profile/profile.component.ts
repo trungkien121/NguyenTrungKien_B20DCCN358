@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
         this.toastService.success("Cập nhật thành công");
         this.changePwd = {};
         this.getUserInfo();
-      } else if (resp.status == CommonConstant.STATUS_OK_409) {
+      } else if (resp.status == CommonConstant.STATUS_OK_400) {
         this.toastService.error(resp.msg);
         this.getUserInfo();
       } else {
