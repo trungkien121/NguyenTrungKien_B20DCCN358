@@ -4,4 +4,6 @@ export class SearchModel {
   size?: number;
   id?: number;
   sortedField?: string;
+
+  loaiThuoc?: string;
 }

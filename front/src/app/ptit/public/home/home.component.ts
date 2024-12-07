@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
     currentPage: 0,
     size: 10,
     sortedField: "",
+    loaiThuoc: "",
   };
 
   totalRows: number = 0;
@@ -32,10 +33,17 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {}
 
+  onLoaiThuocChange(value: string) {
+    this.modelSearch.loaiThuoc = value;
+  }
+
   ngOnInit() {
     this.getData();
   }
 
+  search() {
+    this.getThuoc();
+  }
   getData() {
     this.getThuoc();
 
@@ -46,6 +54,9 @@ export class HomeComponent implements OnInit {
     this.loaithuocService.getLoaiThuocLst().subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.loaithuocLst = res.data;
+
+        if (this.loaithuocLst.length > 0)
+          this.modelSearch.loaiThuoc = this.loaithuocLst[0].tenLoai;
       }
     });
   }

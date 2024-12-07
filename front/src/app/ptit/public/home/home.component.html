@@ -21,6 +21,7 @@
                   type="text"
                   class="form-control search"
                   placeholder="Tìm kiếm..."
+                  [(ngModel)]="modelSearch.keyWord"
                 />
                 <i class="ri-search-line search-icon"></i>
               </div>
@@ -28,28 +29,25 @@
             <!--end col-->
             <div class="col-xl-2 ms-auto">
               <div>
-                <select
+                <!-- <select
                   class="form-control"
-                  data-choices
-                  data-choices-search-false
+                  [(ngModel)]="modelSearch.loaiThuoc"
+                  name="loaiThuoc"
                 >
-                  <option value="">Loại thuốc</option>
-                  <option value="All">All</option>
-                  <option value="Retailer">Retailer</option>
-                  <option value="Health & Medicine">Health & Medicine</option>
-                  <option value="Manufacturer">Manufacturer</option>
-                  <option value="Food Service">Food Service</option>
-                  <option value="Computers & Electronics">
-                    Computers & Electronics
+                  <option
+                    *ngFor="let loaiThuoc of loaithuocLst"
+                    [value]="loaiThuoc.tenLoai"
+                  >
+                    {{ loaiThuoc.tenLoai }}
                   </option>
-                </select>
+                </select> -->
               </div>
             </div>
             <!--end col-->
             <div class="col-lg-auto">
               <div class="hstack gap-2">
-                <button type="button" class="btn btn-danger">
-                  <i class="ri-equalizer-fill me-1 align-bottom"></i> Filters
+                <button type="button" class="btn btn-danger" (click)="search()">
+                  <i class="ri-equalizer-fill me-1 align-bottom"></i> Tìm kiếm
                 </button>
               </div>
             </div>
@@ -95,40 +93,6 @@
         </div>
       </div>
       <!--end row-->
-
-      <div class="row g-0 text-center text-sm-start align-items-center mb-3">
-        <div class="col-sm-6">
-          <div>
-            <p class="mb-sm-0">Showing 1 to 8 of 12 entries</p>
-          </div>
-        </div>
-        <!-- end col -->
-        <div class="col-sm-6">
-          <ul
-            class="pagination pagination-separated justify-content-center justify-content-sm-end mb-sm-0"
-          >
-            <li class="page-item disabled">
-              <a href="#" class="page-link"
-                ><i class="mdi mdi-chevron-left"></i
-              ></a>
-            </li>
-            <li class="page-item active">
-              <a href="#" class="page-link">1</a>
-            </li>
-            <li class="page-item"><a href="#" class="page-link">2</a></li>
-            <li class="page-item"><a href="#" class="page-link">3</a></li>
-            <li class="page-item"><a href="#" class="page-link">4</a></li>
-            <li class="page-item"><a href="#" class="page-link">5</a></li>
-            <li class="page-item">
-              <a href="#" class="page-link"
-                ><i class="mdi mdi-chevron-right"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
 
       <!-- Modal -->
       <div
