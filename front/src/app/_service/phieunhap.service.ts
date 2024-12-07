@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 export class PhieuNhapService {
   constructor(private http: HttpClient) {}
 
-  getLst(request?: any): Observable<any> {
+  getLst(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/phieu-nhap/search`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 

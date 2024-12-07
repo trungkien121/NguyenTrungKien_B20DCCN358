@@ -1,19 +1,6 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-      <div
-        *ngIf="displayDialog"
-        id="layer-popup"
-        [ngClass]="{ active: displayDialog }"
-      >
-        <app-phieunhap-createment
-          (cancel)="handleCancel($event)"
-          [phieunhap]="phieunhapNew"
-          (save)="handeSave($event)"
-        >
-        </app-phieunhap-createment>
-      </div>
-
       <app-confirm-dialog-common> </app-confirm-dialog-common>
 
       <!-- start page title -->
@@ -84,7 +71,7 @@
                 <button
                   type="button"
                   class="btn btn-success shadow-none"
-                  (click)="preAdd()"
+                  [routerLink]="['/sys/phieunhap-create']"
                 >
                   <i class="ri-add-circle-line align-middle me-1"></i>
                   Thêm phiếu nhập

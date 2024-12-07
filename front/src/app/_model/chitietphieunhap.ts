@@ -2,8 +2,8 @@ import { Thuoc } from "./thuoc";
 
 export class ChiTietPhieuNhap {
   id?: string;
-  donGia?: string;
-  soLuong?: string;
+  donGia?: number;
+  soLuong?: number;
   phieuNhapId?: string;
 
   thuocId?: string;

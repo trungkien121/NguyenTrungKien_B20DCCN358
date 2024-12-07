@@ -46,9 +46,12 @@ export class PhieuNhapComponent implements OnInit {
 
   getData() {
     this.phieunhapService.getLst(this.modelSearch).subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        this.phieunhapLst = res.data;
-      }
+      //   if (res.status == CommonConstant.STATUS_OK_200) {
+      this.phieunhapLst = res.data.data;
+      console.log("res", res);
+
+      console.log("phieunhap", this.phieunhapLst);
+      //   }
     });
   }
 

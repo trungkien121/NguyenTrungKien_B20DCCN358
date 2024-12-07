@@ -1,3 +1,4 @@
+import { PhieuNhapService } from "src/app/_service/phieunhap.service";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { jwtDecode } from "jwt-decode";
@@ -15,6 +16,8 @@ import { PhieuNhap } from "src/app/_model/phieunhap";
 import { Thuoc } from "src/app/_model/thuoc";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { NCCService } from "src/app/_service/ncc.service";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -26,28 +29,26 @@ export class PhieuNhapCreatementComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private nguoidungService: NguoidungService,
+    private phieunhapService: PhieuNhapService,
+    private toastService: ToastrService,
+    private router: Router,
     private nccService: NCCService
   ) {}
 
   nguoidungHoten: string = "";
 
-  @Input()
   phieunhap: PhieuNhap = {};
-
-  @Output()
-  save: EventEmitter<any> = new EventEmitter();
-
-  @Output()
-  cancel: EventEmitter<any> = new EventEmitter();
 
   @Input()
   chiTietPhieuNhapLst: ChiTietPhieuNhap[] = [];
 
   nccLst: NhaCungCap[] = [];
 
-  displayModal: boolean = true;
+  displayDialog: boolean = false;
 
   userInfo: NguoiDung = {};
+
+  thuocSelected: Thuoc[] = [];
 
   modelSearchNCC: SearchModel = {
     keyWord: "",
@@ -57,18 +58,50 @@ export class PhieuNhapCreatementComponent implements OnInit {
     sortedField: "",
   };
 
+  openSelectThuoc() {
+    this.thuocSelected = [];
+    this.chiTietPhieuNhapLst.forEach((item) => {
+      if (item.thuoc) this.thuocSelected.push(item.thuoc);
+    });
+
+    this.displayDialog = true;
+  }
+
+  handleCancel(displayDialog: boolean) {
+    this.displayDialog = displayDialog;
+    // this.courseNew = {};
+  }
+  handleSaveThuoc(thuocSelected: Thuoc[]) {
+    console.log("selected", thuocSelected);
+    this.thuocSelected = thuocSelected;
+
+    this.chiTietPhieuNhapLst = [];
+    this.thuocSelected.forEach((item) => {
+      this.chiTietPhieuNhapLst.push({
+        thuoc: item,
+        donGia: 0,
+        soLuong: 0,
+        thuocId: item.id,
+      });
+    });
+
+    console.log("chiTietPhieuNhapLst", this.chiTietPhieuNhapLst);
+
+    // this.applyScoreCard(scoreCard, this.typeTestActiveTab);
+  }
+
   addThuoc() {
     const thanhPhanThuocNew = {
       id: "",
-      donGia: "",
-      soLuong: "",
+      donGia: 0,
+      soLuong: 0,
       thuocId: "",
     };
     this.chiTietPhieuNhapLst.push(thanhPhanThuocNew);
   }
 
   ngOnInit() {
-    this.addThuoc();
+    // this.addThuoc();
     this.getUserInfo();
 
     let newDate = new Date();
@@ -88,10 +121,6 @@ export class PhieuNhapCreatementComponent implements OnInit {
         this.nccLst = res.data;
       }
     });
-  }
-
-  onCancel() {
-    this.cancel.emit(false);
   }
 
   async getUserInfo(): Promise<void> {
@@ -122,14 +151,41 @@ export class PhieuNhapCreatementComponent implements OnInit {
     return check;
   }
 
-  onSave() {
-    if (this.check(this.phieunhap)) {
-      this.displayModal = false;
-      this.save.emit(this.phieunhap);
-    }
-  }
-
   onNCChange(value: string) {
     this.phieunhap.nhaCungCapId = value;
+  }
+
+  deleteThuoc(index: number) {
+    this.chiTietPhieuNhapLst.splice(index, 1);
+  }
+
+  save() {
+    this.phieunhap.chiTietPhieuNhaps = this.chiTietPhieuNhapLst;
+
+    if (this.check(this.phieunhap)) {
+      if (!this.phieunhap.id) {
+        this.phieunhapService.create(this.phieunhap).subscribe((resp) => {
+          if (resp.status == CommonConstant.STATUS_OK_200) {
+            this.toastService.success("Lưu thành công");
+            this.router.navigate(["/sys/phieunhap"]);
+          } else if (resp.status == CommonConstant.STATUS_OK_409) {
+            this.toastService.error(resp.msg);
+          } else {
+            this.toastService.error("Lưu thất bại");
+          }
+        });
+      } else {
+        this.phieunhapService.update(this.phieunhap).subscribe((resp) => {
+          if (resp.status == CommonConstant.STATUS_OK_200) {
+            this.toastService.success("Cập nhật thành công");
+            this.router.navigate(["/sys/phieunhap"]);
+          } else if (resp.status == CommonConstant.STATUS_OK_409) {
+            this.toastService.error(resp.msg);
+          } else {
+            this.toastService.error("Cập nhật thất bại");
+          }
+        });
+      }
+    }
   }
 }
