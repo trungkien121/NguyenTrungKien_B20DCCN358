@@ -1,6 +1,5 @@
 package com.example.hieuthuoc.dto;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +16,8 @@ public class NguoiDungDTO {
     private String diaChi;
     private String soDienThoai;
     private Boolean trangThai = true;
-    private Date ngayTao;
     
+    private String matKhauMoi;
     private MultipartFile file;
 
 	private List<NhomQuyenDTO> nhomQuyens;

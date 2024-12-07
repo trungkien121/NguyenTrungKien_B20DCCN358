@@ -233,11 +233,14 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 	@Override
 	@Transactional
 	public ResponseDTO<NguoiDung> changeMatKhau(NguoiDungDTO nguoiDungDTO) {
-		NguoiDung nguoiDung = modelMapper.map(nguoiDungDTO, NguoiDung.class);
-		NguoiDung currentNguoiDung = nguoiDungRepo.findById(nguoiDung.getId()).orElse(null);
-		if (currentNguoiDung != null) {
-			currentNguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(nguoiDung.getMatKhau()));
-			return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công").data(currentNguoiDung).build();
+		NguoiDung nguoiDung = nguoiDungRepo.findById(nguoiDungDTO.getId()).orElse(null);
+		if (nguoiDung != null) {
+			String matKhau = new BCryptPasswordEncoder().encode(nguoiDungDTO.getMatKhau());
+			if(matKhau.equals(nguoiDung.getMatKhau())) {
+				nguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(nguoiDungDTO.getMatKhauMoi()));
+				return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công").data(nguoiDungRepo.save(nguoiDung)).build();
+			}
+			return ResponseDTO.<NguoiDung>builder().status(200).msg("Mật khẩu không chính xác.").build();
 		}
 		return ResponseDTO.<NguoiDung>builder().status(400).msg("Tài khoản không tồn tại.").build();
 	}
