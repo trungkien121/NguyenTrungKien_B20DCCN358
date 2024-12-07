@@ -111,7 +111,9 @@ export class ThuocComponent implements OnInit {
     });
   }
 
-  search() {}
+  search() {
+    this.getData();
+  }
 
   delete(thuoc: Thuoc) {
     this.thuocService.deleteProduct(thuoc.id).subscribe((resp) => {

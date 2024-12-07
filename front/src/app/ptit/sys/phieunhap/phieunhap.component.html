@@ -1,13 +1,28 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
+      <div
+        *ngIf="displayDialog"
+        id="layer-popup"
+        [ngClass]="{ active: displayDialog }"
+      >
+        <app-phieunhap-createment
+          (cancel)="handleCancel($event)"
+          [phieunhap]="phieunhapNew"
+          (save)="handeSave($event)"
+        >
+        </app-phieunhap-createment>
+      </div>
+
+      <app-confirm-dialog-common> </app-confirm-dialog-common>
+
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Khách Hàng</h4>
+            <h4 class="mb-sm-0">Phiếu nhập</h4>
           </div>
         </div>
       </div>
@@ -24,7 +39,7 @@
                 class="align-items-center p-3 justify-content-between d-flex"
               >
                 <div class="d-flex flex-column col-xl-9">
-                  <label for="titleDropdown">Tên Khách Hàng </label>
+                  <label for="titleDropdown">Tên người nhâp </label>
                   <input
                     type="text"
                     pInputText
@@ -63,15 +78,23 @@
                 <div class="flex-shrink-0">
                   <div class="text-muted">
                     <span class="fw-semibold">Total: </span>
-                    <span class="fw-semibold">{{ customerLst.length }}</span>
+                    <span class="fw-semibold">{{ phieunhapLst.length }}</span>
                   </div>
                 </div>
+                <button
+                  type="button"
+                  class="btn btn-success shadow-none"
+                  (click)="preAdd()"
+                >
+                  <i class="ri-add-circle-line align-middle me-1"></i>
+                  Thêm phiếu nhập
+                </button>
               </div>
               <div class="col-auto mb-3"></div>
 
               <div class="col-auto">
                 <p-table
-                  [value]="customerLst"
+                  [value]="phieunhapLst"
                   [rowHover]="true"
                   dataKey="id"
                   [showCurrentPageReport]="true"
@@ -82,43 +105,43 @@
                 >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th>ID</th>
-                      <th>Tên Đăng Nhập</th>
-                      <th>Họ và Tên</th>
-                      <th>Email</th>
-                      <th>Địa Chỉ</th>
-                      <th>Số Điện Thoại</th>
-                      <th>Trạng Thái</th>
-                      <th>Ngày Tạo</th>
+                      <th></th>
+                      <th>Nhà cung cấp</th>
+                      <th>Người nhập</th>
+                      <th>Ngày nhập</th>
+                      <th>Tổng tiền</th>
+                      <th></th>
                     </tr>
                   </ng-template>
                   <ng-template
                     pTemplate="body"
-                    let-customer
+                    let-model
                     let-rowIndex="rowIndex"
                   >
                     <tr [style]="{ cursor: 'pointer' }">
-                      <td>{{ customer.id }}</td>
-                      <td>{{ customer.tenDangNhap }}</td>
-                      <td>{{ customer.hoTen }}</td>
-                      <td>{{ customer.email }}</td>
-                      <td>{{ customer.diaChi }}</td>
-                      <td>{{ customer.soDienThoai }}</td>
-                      <td>
-                        <span
-                          class="badge bg-success"
-                          *ngIf="customer.trangThai == true"
-                        >
-                          Hoạt động
-                        </span>
-                        <span
-                          class="badge bg-success"
-                          *ngIf="customer.trangThai == false"
-                        >
-                          Không hoạt động
-                        </span>
+                      <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
+                      <td (click)="preUpdate(model)">
+                        {{ model.nhaCungCap.tenNhaCungCap }}
                       </td>
-                      <td>{{ customer.ngayTao | date : "dd/MM/yyyy" }}</td>
+                      <td (click)="preUpdate(model)">
+                        {{ model.nguoiDung.hoTen }}
+                      </td>
+                      <td (click)="preUpdate(model)">
+                        {{ model.ngayNhap | date }}
+                      </td>
+                      <td (click)="preUpdate(model)">
+                        {{ model.tongTien }}
+                      </td>
+                      <td>
+                        <a
+                          class="text-danger d-inline-block remove-item-btn"
+                          data-bs-toggle="modal"
+                          href="#delete"
+                          (click)="preDelete(model)"
+                        >
+                          <i class="ri-delete-bin-line fs-2"></i>
+                        </a>
+                      </td>
                     </tr>
                   </ng-template>
                 </p-table>

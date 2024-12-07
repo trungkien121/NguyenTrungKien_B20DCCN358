@@ -13,6 +13,7 @@ import { NSXComponent } from "./nsx/nsx.component";
 import { DanhmucThuocComponent } from "./danhmucthuoc/danhmucthuoc.component";
 import { DoituongComponent } from "./doituong/doituong.component";
 import { ChucNangComponent } from "./chucnang/chucnang.component";
+import { PhieuNhapComponent } from "./phieunhap/phieunhap.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -65,6 +66,10 @@ const routes: Routes = [
   {
     path: "chucnang",
     component: ChucNangComponent,
+  },
+  {
+    path: "phieunhap",
+    component: PhieuNhapComponent,
   },
 ];
 

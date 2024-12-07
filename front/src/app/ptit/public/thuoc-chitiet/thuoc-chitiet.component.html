@@ -43,13 +43,13 @@
                         <div class="flex-grow-1">
                           <h4>{{ thuoc.tenThuoc }}</h4>
                         </div>
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0" *ngIf="isAdmin == true">
                           <div>
                             <a
                               class="btn btn-light"
                               data-bs-toggle="tooltip"
                               data-bs-placement="top"
-                              title="Edit"
+                              title="Chỉnh sửa"
                               ><i class="ri-pencil-fill align-bottom"></i
                             ></a>
                           </div>
@@ -122,6 +122,35 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div class="mt-4 text-muted">
+                        <h5 class="fs-14">Thành phần thuốc:</h5>
+                        <p>
+                          <span
+                            *ngFor="
+                              let item of thuoc.thanhPhanThuocs;
+                              let last = last
+                            "
+                          >
+                            {{ item.tenThanhPhan }}({{ item.hamLuong }}
+                            {{ item.donVi }}){{ last ? "" : "," }}
+                          </span>
+                        </p>
+                      </div>
+
+                      <div class="mt-4 text-muted">
+                        <h5 class="fs-14">Đối tượng sử dụng:</h5>
+                        <p>
+                          <span
+                            *ngFor="
+                              let item of thuoc.doiTuongs;
+                              let last = last
+                            "
+                          >
+                            {{ item.tenDoiTuong }}{{ last ? "" : "," }}
+                          </span>
+                        </p>
                       </div>
 
                       <div class="mt-4 text-muted">

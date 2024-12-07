@@ -6,29 +6,29 @@ import {
   MessageService,
 } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
-import { DoiTuong } from "src/app/_model/doituong";
-import { LoaiThuoc } from "src/app/_model/loaithuoc";
-import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
-import { DoituongService } from "src/app/_service/doituong.service";
-import { LoaithuocService } from "src/app/_service/loaithuoc.service";
+import { NhaCungCap } from "src/app/_model/ncc";
+import { PhieuNhap } from "src/app/_model/phieunhap";
+import { NCCService } from "src/app/_service/ncc.service";
+import { PhieuNhapService } from "src/app/_service/phieunhap.service";
 
 @Component({
-  selector: "app-doituong",
-  templateUrl: "./doituong.component.html",
+  selector: "app-phieunhap",
+  templateUrl: "./phieunhap.component.html",
   providers: [ConfirmationService, MessageService],
 })
-export class DoituongComponent implements OnInit {
+export class PhieuNhapComponent implements OnInit {
   constructor(
-    private doituongService: DoituongService,
+    private phieunhapService: PhieuNhapService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
-  doituongLst: DoiTuong[] = [];
-  doituongNew: DoiTuong = {};
-  doituongDelete: DoiTuong = {};
+
+  phieunhapLst: PhieuNhap[] = [];
+  phieunhapNew: PhieuNhap = {};
+  phieunhapDelete: PhieuNhap = {};
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -38,8 +38,6 @@ export class DoituongComponent implements OnInit {
     sortedField: "",
   };
 
-  totalRow: number = 0;
-
   displayDialog: boolean = false;
 
   ngOnInit(): void {
@@ -47,10 +45,9 @@ export class DoituongComponent implements OnInit {
   }
 
   getData() {
-    this.doituongService.getDTLst(this.modelSearch).subscribe((res) => {
+    this.phieunhapService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.doituongLst = res.data;
-        this.totalRow = res.data.totalElements;
+        this.phieunhapLst = res.data;
       }
     });
   }
@@ -62,31 +59,37 @@ export class DoituongComponent implements OnInit {
   preAdd() {
     this.displayDialog = true;
   }
-  preUpdate(doituong: DoiTuong) {
+  preUpdate(model: PhieuNhap) {
     this.displayDialog = true;
-    this.doituongNew = doituong;
+    this.phieunhapNew = model;
   }
 
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
-    this.doituongNew = {};
+    this.phieunhapNew = {};
     this.getData();
   }
 
-  handeSave(doituong: DoiTuong) {
-    if (!doituong.id) {
-      this.doituongService.createDT(doituong).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
+  handeSave(model: PhieuNhap) {
+    if (!model.id) {
+      this.phieunhapService.create(model).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_201) {
           this.toastService.success("Lưu thành công");
           this.getData();
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
+          this.getData();
         } else {
-          this.toastService.error("Lưu thất bại");
+          this.toastService.error("Cập nhật thất bại");
         }
       });
     } else {
-      this.doituongService.updateDT(doituong).subscribe((resp) => {
+      this.phieunhapService.update(model).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Cập nhật thành công");
+          this.getData();
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
           this.getData();
         } else {
           this.toastService.error("Cập nhật thất bại");
@@ -95,8 +98,8 @@ export class DoituongComponent implements OnInit {
     }
   }
 
-  delete(doituong: DoiTuong) {
-    this.doituongService.deleteDT(doituong.id).subscribe((resp) => {
+  delete(model: PhieuNhap) {
+    this.phieunhapService.delete(model.id).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Xóa thành công");
         this.getData();
@@ -106,13 +109,13 @@ export class DoituongComponent implements OnInit {
     });
   }
 
-  preDelete(doituong: DoiTuong) {
+  preDelete(model: PhieuNhap) {
     this.confirmationService.confirm({
-      message: "Bạn có chắc muốn xóa đối tượng này?",
-      header: "Xác nhận xóa đối tượng",
+      message: "Bạn có chắc muốn xóa phiếu nhập này?",
+      header: "Xác nhận xóa phiếu nhập",
       icon: "pi pi-info-circle",
       accept: () => {
-        this.delete(doituong);
+        this.delete(model);
       },
       reject: (type: any) => {
         switch (type) {

@@ -7,6 +7,8 @@ import { HomeComponent } from "../public/home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { GiohangComponent } from "./giohang/giohang.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
+import { DonMuaComponent } from "./donmua/donmua.component";
+import { ThongBaoComponent } from "./thongbao/thongbao.component";
 
 const routes: Routes = [
   {
@@ -39,6 +41,18 @@ const routes: Routes = [
       {
         path: "checkout",
         component: CheckoutComponent,
+        // canActivate: [RoleGuard],
+        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+      },
+      {
+        path: "donmua",
+        component: DonMuaComponent,
+        // canActivate: [RoleGuard],
+        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+      },
+      {
+        path: "thongbao",
+        component: ThongBaoComponent,
         // canActivate: [RoleGuard],
         // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
       },

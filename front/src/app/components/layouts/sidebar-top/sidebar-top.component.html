@@ -108,6 +108,34 @@
             </ul>
           </div>
         </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarLayouts"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarLayouts"
+          >
+            <i class="mdi mdi-view-carousel-outline"></i>
+            <span data-key="t-layouts">Quản lý nhập hàng</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarLayouts">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  [routerLink]="['/sys/phieunhap']"
+                  class="nav-link"
+                  data-key="t-analytics"
+                >
+                  Nhập hàng
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item">
           <a
             class="nav-link menu-link"
@@ -129,16 +157,6 @@
                   data-key="t-analytics"
                 >
                   Đơn hàng
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/chucnang']"
-                  class="nav-link"
-                  data-key="t-analytics"
-                >
-                  Chức năng
                 </a>
               </li>
             </ul>

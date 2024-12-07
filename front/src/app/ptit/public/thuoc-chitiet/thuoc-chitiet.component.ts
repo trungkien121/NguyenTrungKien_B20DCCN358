@@ -29,6 +29,8 @@ export class ThuocChiTietComponent implements OnInit {
 
   gioHangId: number = 0;
 
+  isAdmin: boolean = false;
+
   constructor(
     private thuocService: ThuocService,
     private loaithuocService: LoaithuocService,
@@ -91,6 +93,14 @@ export class ThuocChiTietComponent implements OnInit {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userInfo = resp.data;
+
+        if (
+          this.userInfo.nhomQuyens?.some(
+            (quyen) => quyen.id == AuthConstant.ROLE_ADMIN
+          )
+        ) {
+          this.isAdmin = true;
+        }
         if (this.userInfo.id) {
           this.getGH();
         }

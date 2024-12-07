@@ -1,0 +1,132 @@
+<p-dialog
+  header="Thêm phiếu nhập"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+  [baseZIndex]="10000"
+  [draggable]="true"
+  [resizable]="false"
+  [modal]="true"
+  (onHide)="onCancel()"
+>
+  <div>
+    <div class="mb-3">
+      <label class="col-form-label" for="maNCC">
+        Người nhập <span class="text-danger">*</span>
+      </label>
+      <input
+        type="text"
+        name="maNCC"
+        class="form-control"
+        id="maNCC"
+        [(ngModel)]="nguoidungHoten"
+        disabled="true"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="tenNhaCungCap"
+        >Nhà cung cấp <span class="text-danger">*</span></label
+      >
+      <app-select-common
+        [optionValue]="'id'"
+        [optionLabel]="'tenNhaCungCap'"
+        [options]="nccLst"
+        [isOptionSelectType]="false"
+        [selectedOptionValue]="phieunhap.nhaCungCapId"
+        (selectionChange)="onNCChange($event)"
+      ></app-select-common>
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="diaChi">Ngày nhập </label>
+      <input
+        type="date"
+        name="diaChi"
+        class="form-control"
+        id="diaChi"
+        #diaChi="ngModel"
+        placeholder="Nhập địa chỉ nhà cung cấp"
+        [(ngModel)]="phieunhap.ngayNhap"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="col-form-label" for="email">Thuốc nhập </label>
+
+      <div
+        class="row align-items-center"
+        *ngFor="let item of chiTietPhieuNhapLst; let index = index"
+      >
+        <div class="col-lg-4">
+          <div class="mb-3">
+            <label class="form-label" for="manufacturer-name-input">
+              Tên thuốc
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="manufacturer-name-input"
+              placeholder="Nhập ngưỡng cảnh báo"
+              name="nguongCanhBao"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="mb-3">
+            <label class="form-label" for="manufacturer-brand-input">
+              Hàm lượng
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="manufacturer-brand-input"
+              placeholder="Nhập quy cách"
+              [(ngModel)]="item.soLuong"
+              name="quyCach"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="mb-3">
+            <label class="form-label" for="manufacturer-brand-input">
+              Đơn giá
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="manufacturer-brand-input"
+              placeholder="Nhập quy cách"
+              [(ngModel)]="item.donGia"
+              name="quyCach"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-1 d-flex justify-content-end">
+          <i
+            class="ri-delete-bin-line text-danger cursor-pointer"
+            style="font-size: 2rem"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="displayModal = false"
+      label="Hủy"
+      styleClass="btn btn-danger"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      label="Lưu"
+      (click)="onSave()"
+      styleClass="btn btn-success"
+    ></p-button>
+  </ng-template>
+</p-dialog>

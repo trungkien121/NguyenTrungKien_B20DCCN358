@@ -65,6 +65,7 @@ export class NCCComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.nccNew = {};
+    this.getData();
   }
 
   handeSave(ncc: NhaCungCap) {

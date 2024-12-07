@@ -25,6 +25,8 @@ import { defineElement } from "@lordicon/element";
 import { ProfileComponent } from "./profile/profile.component";
 import { GiohangComponent } from "./giohang/giohang.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
+import { DonMuaComponent } from "./donmua/donmua.component";
+import { ThongBaoComponent } from "./thongbao/thongbao.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { CheckoutComponent } from "./checkout/checkout.component";
     ProfileComponent,
     GiohangComponent,
     CheckoutComponent,
+    DonMuaComponent,
+    ThongBaoComponent,
   ],
 
   imports: [

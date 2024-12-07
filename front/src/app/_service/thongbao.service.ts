@@ -3,21 +3,36 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { HeadersUtil } from "../_util/headers-util";
 import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
-
+import { CommonConstant } from "../_constant/common.constants";
+import { BehaviorSubject, Observable, map } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
 export class ThongBaoService {
   constructor(private http: HttpClient) {}
 
+  private tbSubject = new BehaviorSubject<any>({});
+
+  getTBSubject() {
+    return this.tbSubject.asObservable();
+  }
+
   getLst(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/thongbao/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
-    return this.http.post(`${apiUrl}`, request, {
-      headers: headers,
-    });
+    return this.http
+      .post(`${apiUrl}`, request, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          if (res.status == CommonConstant.STATUS_OK_200) {
+            this.tbSubject.next(res.data);
+          }
+          //   return data; // Trả về kết quả từ server
+        })
+      );
   }
 
   create(request: any): Observable<any> {

@@ -66,6 +66,7 @@ export class LoaiThuocComponent implements OnInit {
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     this.loaithuocNew = {};
+    this.getData();
   }
 
   handeSave(loaithuoc: LoaiThuoc) {
