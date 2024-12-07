@@ -32,6 +32,11 @@ public class ThongBaoController {
     public ResponseDTO<PageDTO<List<ThongBao>>> getByNguoiDungId(@RequestBody SearchDTO searchDTO) {
         return thongBaoService.getByNguoiDungId(searchDTO);
     }
+    
+    @PostMapping("/search")
+    public ResponseDTO<PageDTO<List<ThongBao>>> searchByLoaiThongBao(@RequestBody SearchDTO searchDTO) {
+        return thongBaoService.getByLoaiThongBao(searchDTO);
+    }
 
     // Endpoint để lấy thông báo theo id
     @GetMapping("/get")

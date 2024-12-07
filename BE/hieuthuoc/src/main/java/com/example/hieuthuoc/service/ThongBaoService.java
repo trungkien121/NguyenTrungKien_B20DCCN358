@@ -19,11 +19,14 @@ import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.dto.ThongBaoDTO;
 import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.entity.ThongBao;
+import com.example.hieuthuoc.entity.ThongBao.LoaiThongBao;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.ThongBaoRepo;
 
 public interface ThongBaoService {
 	ResponseDTO<PageDTO<List<ThongBao>>> getByNguoiDungId(SearchDTO searchDTO);
+	
+	ResponseDTO<PageDTO<List<ThongBao>>> getByLoaiThongBao(SearchDTO searchDTO);
 
 	ResponseDTO<ThongBao> getById(Integer id);
 
@@ -67,6 +70,43 @@ class ThongBaoServiceImpl implements ThongBaoService {
 
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
 		Page<ThongBao> page = thongBaoRepo.findByNguoiDungId(searchDTO.getId(), pageRequest);
+
+		PageDTO<List<ThongBao>> pageDTO = new PageDTO<>();
+		pageDTO.setTotalElements(page.getTotalElements());
+		pageDTO.setTotalPages(page.getTotalPages());
+
+		List<ThongBao> thongBaos = page.getContent();
+		pageDTO.setData(thongBaos);
+
+		return ResponseDTO.<PageDTO<List<ThongBao>>>builder().status(200).msg("Thanh công").data(pageDTO).build();
+	}
+	
+	@Override
+	public ResponseDTO<PageDTO<List<ThongBao>>> getByLoaiThongBao(SearchDTO searchDTO) {
+		Sort sortBy = Sort.by("id").ascending();
+
+		if (StringUtils.hasText(searchDTO.getSortedField())) {
+			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
+		}
+
+		if (searchDTO.getCurrentPage() == null) {
+			searchDTO.setCurrentPage(0);
+		}
+
+		if (searchDTO.getSize() == null) {
+			searchDTO.setSize(10);
+		}
+
+		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
+		Page<ThongBao> page;
+		
+		if (searchDTO.getKeyWord() == null) {
+			page = thongBaoRepo.findAll(pageRequest);
+		}else {
+			LoaiThongBao loaiThongBao = LoaiThongBao.valueOf(searchDTO.getKeyWord());
+			page = thongBaoRepo.findByLoaiThongBao(loaiThongBao, pageRequest);
+		}
+
 
 		PageDTO<List<ThongBao>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
