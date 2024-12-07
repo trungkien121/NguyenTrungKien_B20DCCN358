@@ -11,4 +11,6 @@ export class NguoiDung {
   trangThai?: string;
   diaChi?: string;
   nhomQuyens?: Quyen[];
+
+  matKhauMoi?: string;
 }

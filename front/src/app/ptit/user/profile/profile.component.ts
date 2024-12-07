@@ -91,16 +91,21 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword() {
-    // this.nguoidungService.changePwd(ncc).subscribe((resp) => {
-    //   if (resp.status == CommonConstant.STATUS_OK_200) {
-    //     this.toastService.success("Cập nhật thành công");
-    //     this.getData();
-    //   } else if (resp.status == CommonConstant.STATUS_OK_409) {
-    //     this.toastService.error(resp.msg);
-    //     this.getData();
-    //   } else {
-    //     this.toastService.error("Cập nhật thất bại");
-    //   }
-    // });
+    let nguoiDungUpdate = this.user;
+    nguoiDungUpdate.matKhauMoi = this.changePwd.newPwd;
+    nguoiDungUpdate.matKhau = this.changePwd.oldPwd;
+
+    this.nguoidungService.changePwd(nguoiDungUpdate).subscribe((resp) => {
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.toastService.success("Cập nhật thành công");
+        this.changePwd = {};
+        this.getUserInfo();
+      } else if (resp.status == CommonConstant.STATUS_OK_409) {
+        this.toastService.error(resp.msg);
+        this.getUserInfo();
+      } else {
+        this.toastService.error("Cập nhật thất bại");
+      }
+    });
   }
 }
