@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/phieu-nhap")
+@RequestMapping("/phieunhap")
 public class PhieuNhapController {
 
     @Autowired
     private PhieuNhapService phieuNhapService;
 
-    // Lấy danh sách phiếu nhập với tìm kiếm và phân trang
+    // Lấy danh sách phiếu nhập với tìm kiếm theo tên nhà cung cấp và phân trang
     @PostMapping("/search")
-    public ResponseEntity<ResponseDTO<PageDTO<List<PhieuNhap>>>> getAll(@RequestBody SearchDTO searchDTO) {
-        return ResponseEntity.ok(phieuNhapService.getAll(searchDTO));
+    public ResponseEntity<ResponseDTO<PageDTO<List<PhieuNhap>>>> search(@RequestBody SearchDTO searchDTO) {
+        return ResponseEntity.ok(phieuNhapService.search(searchDTO));
     }
 
     // Lấy thông tin phiếu nhập theo ID

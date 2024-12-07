@@ -100,7 +100,7 @@ class ThongBaoServiceImpl implements ThongBaoService {
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
 		Page<ThongBao> page;
 		
-		if (searchDTO.getKeyWord() == null) {
+		if (searchDTO.getKeyWord() == null || searchDTO.getKeyWord().equals("")) {
 			page = thongBaoRepo.findAll(pageRequest);
 		}else {
 			LoaiThongBao loaiThongBao = LoaiThongBao.valueOf(searchDTO.getKeyWord());

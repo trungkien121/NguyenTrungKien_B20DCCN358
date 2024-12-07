@@ -1,5 +1,7 @@
 package com.example.hieuthuoc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class ChiTietPhieuNhap {
     private Integer id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "phieu_nhap_id")
     private PhieuNhap phieuNhap;
 

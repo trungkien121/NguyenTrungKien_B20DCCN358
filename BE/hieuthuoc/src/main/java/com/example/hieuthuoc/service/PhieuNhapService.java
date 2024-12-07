@@ -29,7 +29,7 @@ import com.example.hieuthuoc.repository.PhieuNhapRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
 
 public interface PhieuNhapService {
-	ResponseDTO<PageDTO<List<PhieuNhap>>> getAll(SearchDTO searchDTO);
+	ResponseDTO<PageDTO<List<PhieuNhap>>> search(SearchDTO searchDTO);
 
 	ResponseDTO<PhieuNhap> getById(Integer id);
 
@@ -58,7 +58,7 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	public ResponseDTO<PageDTO<List<PhieuNhap>>> getAll(SearchDTO searchDTO) {
+	public ResponseDTO<PageDTO<List<PhieuNhap>>> search(SearchDTO searchDTO) {
 		Sort sortBy = Sort.by("createdAt").ascending();
 
 		if (StringUtils.hasText(searchDTO.getSortedField())) {
@@ -72,12 +72,15 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 		if (searchDTO.getSize() == null) {
 			searchDTO.setSize(20);
 		}
-
-		if (searchDTO.getKeyWord() == null) {
-			searchDTO.setKeyWord("");
-		}
+		
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
-		Page<PhieuNhap> page = phieuNhapRepo.findAll(pageRequest);
+		Page<PhieuNhap> page;
+		
+		if (searchDTO.getKeyWord() == null || searchDTO.getKeyWord().equals("")) {
+			page = phieuNhapRepo.findAll(pageRequest);
+		}else {
+			page = phieuNhapRepo.findByNhaCungCapTen(searchDTO.getKeyWord() ,pageRequest);
+		}
 
 		PageDTO<List<PhieuNhap>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());

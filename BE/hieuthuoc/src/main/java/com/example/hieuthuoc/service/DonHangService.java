@@ -76,7 +76,7 @@ class DonHangServiceImpl implements DonHangService {
 		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
 		Page<DonHang> page;
 
-		if (searchDTO.getKeyWord() == null) {
+		if (searchDTO.getKeyWord() == null || searchDTO.getKeyWord().equals("")) {
 			page = donHangRepo.findAll(pageRequest);
 		} else {
 			
