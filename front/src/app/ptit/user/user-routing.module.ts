@@ -21,40 +21,42 @@ const routes: Routes = [
         component: HomeComponent,
         // resolve: { redirect: RedirectResolver },
         // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        // data: { guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN] },
       },
 
       {
         path: "profile",
         component: ProfileComponent,
-        // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        canActivate: [RoleGuard],
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
       },
 
       {
         path: "giohang",
         component: GiohangComponent,
-        // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        canActivate: [RoleGuard],
+        data: { guards: [AuthConstant.ROLE_KHACHHANG] },
       },
 
       {
         path: "checkout",
         component: CheckoutComponent,
-        // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        canActivate: [RoleGuard],
+        data: { guards: [AuthConstant.ROLE_KHACHHANG] },
       },
       {
         path: "donmua",
         component: DonMuaComponent,
-        // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        canActivate: [RoleGuard],
+        data: { guards: [AuthConstant.ROLE_KHACHHANG] },
       },
       {
         path: "thongbao",
         component: ThongBaoComponent,
-        // canActivate: [RoleGuard],
-        // data: { guards: [AuthConstant.ROLE_NORMAL, AuthConstant.ROLE_ADMIN] },
+        canActivate: [RoleGuard],
+        data: { guards: [AuthConstant.ROLE_KHACHHANG] },
       },
     ],
   },

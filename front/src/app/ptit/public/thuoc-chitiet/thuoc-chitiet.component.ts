@@ -96,7 +96,7 @@ export class ThuocChiTietComponent implements OnInit {
 
         if (
           this.userInfo.nhomQuyens?.some(
-            (quyen) => quyen.id == AuthConstant.ROLE_ADMIN
+            (quyen) => quyen.id == AuthConstant.ROLE_ADMIN.toString()
           )
         ) {
           this.isAdmin = true;

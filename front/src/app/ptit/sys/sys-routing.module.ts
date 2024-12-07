@@ -22,59 +22,111 @@ const routes: Routes = [
   {
     path: "",
     component: SysComponent,
-    children: [{ path: "", redirectTo: "article", pathMatch: "full" }],
+    children: [{ path: "", redirectTo: "product", pathMatch: "full" }],
   },
   {
     path: "product",
     component: ThuocComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "customer",
     component: CustomerComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "product-create",
     component: ThuocCreatementComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "product-create/:id",
     component: ThuocCreatementComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "ncc",
     component: NCCComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "nsx",
     component: NSXComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "donhang",
     component: DonHangComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "loaithuoc",
     component: LoaiThuocComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "danhmucThuoc",
     component: DanhmucThuocComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "doituong",
     component: DoituongComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "chucnang",
     component: ChucNangComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "phieunhap",
     component: PhieuNhapComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
   {
     path: "phieunhap-create",
     component: PhieuNhapCreatementComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
   },
 ];
 

@@ -10,6 +10,7 @@ import { GioHangService } from "src/app/_service/giohang.service";
 import { jwtDecode } from "jwt-decode";
 import { lastValueFrom } from "rxjs";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { Quyen } from "src/app/_model/auth/quyen";
 
 declare var $: any;
 
@@ -39,6 +40,8 @@ export class HeaderComponent implements OnInit {
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
       this.isAuthenticate = true;
     }
+
+    // this.getUserInfo();
   }
 
   async getUserInfo(): Promise<void> {
@@ -49,6 +52,10 @@ export class HeaderComponent implements OnInit {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userInfo = resp.data;
+
+        let temp: any = resp.data.nhomQuyens;
+        let roleStr: string[] = [...temp].map((role: Quyen) => role.id);
+        console.log("role", roleStr);
         if (this.userInfo.id) {
           this.getGH();
         }

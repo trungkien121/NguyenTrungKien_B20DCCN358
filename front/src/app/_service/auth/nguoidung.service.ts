@@ -50,10 +50,10 @@ export class NguoidungService {
   }
 
   checkAuthen(): boolean {
-    // if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
-    //   this.logIn();
-    //   return false;
-    // }
+    if (!Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
+      this.logIn();
+      return false;
+    }
     return true;
   }
 
