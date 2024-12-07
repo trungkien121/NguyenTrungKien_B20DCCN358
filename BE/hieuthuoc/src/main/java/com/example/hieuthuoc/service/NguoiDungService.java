@@ -233,16 +233,25 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 	@Override
 	@Transactional
 	public ResponseDTO<NguoiDung> changeMatKhau(NguoiDungDTO nguoiDungDTO) {
+		// Tìm người dùng theo ID
 		NguoiDung nguoiDung = nguoiDungRepo.findById(nguoiDungDTO.getId()).orElse(null);
-		if (nguoiDung != null) {
-			String matKhau = new BCryptPasswordEncoder().encode(nguoiDungDTO.getMatKhau());
-			if(matKhau.equals(nguoiDung.getMatKhau())) {
-				nguoiDung.setMatKhau(new BCryptPasswordEncoder().encode(nguoiDungDTO.getMatKhauMoi()));
-				return ResponseDTO.<NguoiDung>builder().status(200).msg("Thành công").data(nguoiDungRepo.save(nguoiDung)).build();
-			}
-			return ResponseDTO.<NguoiDung>builder().status(200).msg("Mật khẩu không chính xác.").build();
+		if (nguoiDung == null) {
+			return ResponseDTO.<NguoiDung>builder().status(400).msg("Tài khoản không tồn tại.").build();
 		}
-		return ResponseDTO.<NguoiDung>builder().status(400).msg("Tài khoản không tồn tại.").build();
+
+		// Kiểm tra mật khẩu hiện tại
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if (!passwordEncoder.matches(nguoiDungDTO.getMatKhau(), nguoiDung.getMatKhau())) {
+			return ResponseDTO.<NguoiDung>builder().status(400).msg("Mật khẩu không chính xác.").build();
+		}
+
+		// Mã hóa mật khẩu mới
+		nguoiDung.setMatKhau(passwordEncoder.encode(nguoiDungDTO.getMatKhauMoi()));
+
+		// Lưu lại thay đổi
+		nguoiDungRepo.save(nguoiDung);
+
+		return ResponseDTO.<NguoiDung>builder().status(200).msg("Đổi mật khẩu thành công.").data(nguoiDung).build();
 	}
 
 	@Override
@@ -276,8 +285,8 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 			if (nguoiDungDTO.getFile() != null && !nguoiDungDTO.getFile().isEmpty()) {
 				// Xoá đi ảnh trước đó trong cloudinary
 				uploadImageService.deleteImage(nguoiDung.getAvatar());
-				
-				//Thêm ảnh mới mới vào cloudinary
+
+				// Thêm ảnh mới mới vào cloudinary
 				String name = "NguoiDung_" + nguoiDungDTO.getId();
 				String avatarUrl = uploadImageService.uploadImage(nguoiDungDTO.getFile(), name);
 				nguoiDung.setAvatar(avatarUrl);
