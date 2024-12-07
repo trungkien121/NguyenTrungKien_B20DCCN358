@@ -74,12 +74,27 @@ export class ChiTietDonHangComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private nguoidungService: NguoidungService
   ) {}
 
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     // this.courseNew = {};
+  }
+
+  xacNhanDonHang() {
+    this.donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DANG_GIAO;
+    this.donHangService.update(this.donhang).subscribe((resp) => {
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.toastService.success("Cập nhật thành công");
+        this.router.navigate(["/sys/donhang"]);
+      } else if (resp.status == CommonConstant.STATUS_OK_409) {
+        this.toastService.error(resp.msg);
+      } else {
+        this.toastService.error("Cập nhật thất bại");
+      }
+    });
   }
 
   getDonHangByParam() {
