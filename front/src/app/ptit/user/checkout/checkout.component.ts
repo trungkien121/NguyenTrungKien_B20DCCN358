@@ -91,7 +91,7 @@ export class CheckoutComponent implements OnInit {
 
     this.donhang.chiTietDonHangs = [];
     this.gioHangLst.forEach((item: GioHangChiTiet) => {
-      // console.log("item", item);
+      console.log("item", item);
       let itemNew: ChiTietDonHang = {
         donGia: item.donGia,
         soLuong: item.soLuong,

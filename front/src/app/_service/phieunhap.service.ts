@@ -12,7 +12,7 @@ export class PhieuNhapService {
   constructor(private http: HttpClient) {}
 
   getLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/phieu-nhap/search`;
+    const apiUrl = environment.backApiUrl + `/phieunhap/search`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -21,7 +21,7 @@ export class PhieuNhapService {
   }
 
   create(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/phieu-nhap/create`;
+    const apiUrl = environment.backApiUrl + `/phieunhap/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.post(`${apiUrl}`, request, {
@@ -30,7 +30,7 @@ export class PhieuNhapService {
   }
 
   delete(id: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/phieu-nhap/delete`;
+    const apiUrl = environment.backApiUrl + `/phieunhap/delete`;
     let params = new HttpParams().set("id", id?.toString() || "");
 
     const headers: HttpHeaders = HeadersUtil.getHeaders();
@@ -42,7 +42,7 @@ export class PhieuNhapService {
   }
 
   update(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/phieu-nhap/update`;
+    const apiUrl = environment.backApiUrl + `/phieunhap/update`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http.put(`${apiUrl}`, request, {

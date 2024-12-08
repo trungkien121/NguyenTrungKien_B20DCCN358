@@ -53,9 +53,9 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="product-title-input"
-                        >Tên Thuốc <span class="text-danger">*</span></label
-                      >
+                      <label class="form-label" for="product-title-input">
+                        Tên Thuốc <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
                         class="form-control"
@@ -64,19 +64,21 @@
                         required
                         [(ngModel)]="thuoc.tenThuoc"
                         name="tenThuoc"
-                        value="{{ thuoc.tenThuoc }}"
+                        #tenThuoc="ngModel"
                       />
-                      <div class="invalid-feedback">
-                        Please enter a product title.
+                      <!-- Hiển thị lỗi khi trường invalid và đã touched -->
+                      <div *ngIf="tenThuoc.invalid && tenThuoc.touched" class="text-danger">
+                        Vui lòng nhập tên thuốc.
                       </div>
                     </div>
+                    
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Số đăng ký</label
-                      >
+                      <label class="form-label" for="manufacturer-name-input">
+                        Số Đăng Ký
+                      </label>
                       <input
                         type="text"
                         class="form-control"
@@ -84,17 +86,24 @@
                         placeholder="Nhập số đăng ký"
                         [(ngModel)]="thuoc.soDangKy"
                         name="soDangKy"
+                        #soDangKy="ngModel"
+                        pattern="^[a-zA-Z0-9]{5,15}$" 
                       />
+                      <!-- Hiển thị lỗi nếu không khớp pattern -->
+                      <div *ngIf="soDangKy.invalid && soDangKy.touched" class="text-danger">
+                        Số đăng ký phải chứa 5-15 ký tự (chữ hoặc số).
+                      </div>
                     </div>
+                    
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="product-code-input"
-                        >Mã Thuốc <span class="text-danger">*</span></label
-                      >
+                      <label class="form-label" for="product-code-input">
+                        Mã Thuốc <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
                         class="form-control"
@@ -103,19 +112,21 @@
                         required
                         [(ngModel)]="thuoc.maThuoc"
                         name="maThuoc"
-                        value="{{ thuoc.maThuoc }}"
+                        #maThuoc="ngModel"
                       />
-                      <div class="invalid-feedback">
-                        Please enter a product code.
+                      <!-- Hiển thị lỗi khi trường invalid và đã touched -->
+                      <div *ngIf="maThuoc.invalid && maThuoc.touched" class="text-danger">
+                        Vui lòng nhập mã thuốc.
                       </div>
                     </div>
+                    
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="product-barcode-input"
-                        >Mã Vạch</label
-                      >
+                      <label class="form-label" for="product-barcode-input">
+                        Mã Vạch <span class="text-danger">*</span>
+                      </label>
                       <input
                         type="text"
                         class="form-control"
@@ -124,11 +135,14 @@
                         required
                         [(ngModel)]="thuoc.maVach"
                         name="maVach"
+                        #maVach="ngModel"
                       />
-                      <div class="invalid-feedback">
-                        Please enter a barcode.
+                      <!-- Hiển thị lỗi nếu người dùng không nhập -->
+                      <div *ngIf="maVach.invalid && maVach.touched" class="text-danger">
+                        Vui lòng nhập mã vạch.
                       </div>
                     </div>
+                    
                   </div>
                 </div>
 
@@ -278,13 +292,11 @@
                   <!-- Giá Nhập -->
                   <div class="col-lg-4 col-sm-6">
                     <div class="mb-4">
-                      <label class="form-label" for="product-price-input"
-                        >Giá Nhập <span class="text-danger">*</span></label
-                      >
+                      <label class="form-label" for="product-price-input">
+                        Giá Nhập <span class="text-danger">*</span>
+                      </label>
                       <div class="input-group has-validation mb-3">
-                        <span class="input-group-text" id="product-price-addon"
-                          >VND</span
-                        >
+                        <span class="input-group-text" id="product-price-addon">VND</span>
                         <input
                           type="number"
                           class="form-control"
@@ -295,17 +307,24 @@
                           required
                           [(ngModel)]="thuoc.giaNhap"
                           name="giaNhap"
+                          #giaNhap="ngModel"
+                          min="0" 
                         />
                       </div>
+                      <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
+                      <div *ngIf="giaNhap.invalid && giaNhap.touched" class="text-danger">
+                        Vui lòng nhập giá hợp lệ .
+                      </div>
                     </div>
+                    
                   </div>
 
                   <!-- Giá Bán -->
                   <div class="col-lg-4 col-sm-6">
                     <div class="mb-4">
-                      <label class="form-label" for="product-sale-price-input"
-                        >Giá bán <span class="text-danger">*</span></label
-                      >
+                      <label class="form-label" for="product-sale-price-input">
+                        Giá Bán <span class="text-danger">*</span>
+                      </label>
                       <div class="input-group has-validation mb-3">
                         <span
                           class="input-group-text"
@@ -322,17 +341,24 @@
                           required
                           [(ngModel)]="thuoc.giaBan"
                           name="giaBan"
+                          #giaBan="ngModel"
+                          min="0" 
                         />
                       </div>
+                      <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
+                      <div *ngIf="giaBan.invalid && giaBan.touched" class="text-danger">
+                        Vui lòng nhập giá hợp lệ .
+                      </div>
                     </div>
+                    
                   </div>
 
                   <!-- Số Lượng Tồn -->
                   <div class="col-lg-4 col-sm-6">
                     <div class="mb-4">
-                      <label class="form-label" for="product-quantity-input"
-                        >Số lượng tồn <span class="text-danger">*</span></label
-                      >
+                      <label class="form-label" for="product-quantity-input">
+                        Số lượng tồn <span class="text-danger">*</span>
+                      </label>
                       <div class="input-group mb-3">
                         <input
                           type="number"
@@ -341,11 +367,19 @@
                           placeholder="Nhập số lượng tồn"
                           aria-label="Quantity"
                           aria-describedby="product-quantity-addon"
+                          required
                           [(ngModel)]="thuoc.soLuongTon"
                           name="soLuongTon"
+                          #soLuongTon="ngModel"
+                          min="0" 
                         />
                       </div>
+                      <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
+                      <div *ngIf="soLuongTon.invalid && soLuongTon.touched" class="text-danger">
+                        Vui lòng nhập số lượng hợp lệ .
+                      </div>
                     </div>
+                    
                   </div>
                 </div>
                 <!-- end row -->

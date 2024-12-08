@@ -216,34 +216,87 @@ export class ThuocCreatementComponent implements OnInit {
     }
   }
 
+  check(thuoc: Thuoc) {
+    let check = true;
+
+    // Kiểm tra tên thuốc
+    if (thuoc.tenThuoc == undefined || thuoc.tenThuoc.trim().length == 0) {
+      check = false;
+      this.thuoc.tenThuoc = ""; // Đặt lại giá trị của tên thuốc
+      return check;
+    }
+
+    // Kiểm tra giaNhap (giá nhập)
+    if (
+      thuoc.giaNhap == undefined ||
+      isNaN(thuoc.giaNhap) ||
+      thuoc.giaNhap <= 0
+    ) {
+      check = false;
+      this.thuoc.giaNhap = 0; // Đặt lại giá trị của giá nhập về 0
+      return check;
+    }
+
+    // Kiểm tra giaBan (giá bán)
+    if (thuoc.giaBan == undefined || isNaN(thuoc.giaBan) || thuoc.giaBan <= 0) {
+      check = false;
+      this.thuoc.giaBan = 0; // Đặt lại giá trị của giá bán về 0
+      return check;
+    }
+
+    if (thuoc.soLuongTon == undefined || isNaN(thuoc.soLuongTon) || thuoc.soLuongTon < 0 || !Number.isInteger(thuoc.soLuongTon)) {
+      check = false;
+      this.thuoc.soLuongTon = 0;  // Đặt lại giá trị của số lượng tồn về 0
+      return check;
+    }
+
+    // Kiểm tra mã thuốc
+    if (thuoc.maThuoc == undefined || thuoc.maThuoc.trim().length == 0) {
+      check = false;
+      this.thuoc.maThuoc = ""; 
+      return check;
+    }
+
+    // Ví dụ, kiểm tra mã vạch (nếu cần)
+    if (thuoc.maVach == undefined || thuoc.maVach.trim().length == 0) {
+      check = false;
+      this.thuoc.maVach = ""; // Đặt lại giá trị của mã vạch
+      return check;
+    }
+
+    return check;
+  }
+
   handeSave() {
-    console.log("thuoc", this.thuoc);
+    if (this.check(this.thuoc)) {
+      console.log("thuoc", this.thuoc);
 
-    this.thuoc.doiTuongs = this.doituongSelected;
-    this.thuoc.thanhPhanThuocs = this.thanhPhanThuocLSt;
+      this.thuoc.doiTuongs = this.doituongSelected;
+      this.thuoc.thanhPhanThuocs = this.thanhPhanThuocLSt;
 
-    if (!this.thuoc.id) {
-      this.thuocService.createProduct(this.thuoc).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Lưu thành công");
-          this.router.navigate(["/sys/product"]);
-        } else if (resp.status == CommonConstant.STATUS_OK_409) {
-          this.toastService.error(resp.msg);
-        } else {
-          this.toastService.error("Lưu thất bại");
-        }
-      });
-    } else {
-      this.thuocService.updateProduct(this.thuoc).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Cập nhật thành công");
-          this.router.navigate(["/sys/product"]);
-        } else if (resp.status == CommonConstant.STATUS_OK_409) {
-          this.toastService.error(resp.msg);
-        } else {
-          this.toastService.error("Cập nhật thất bại");
-        }
-      });
+      if (!this.thuoc.id) {
+        this.thuocService.createProduct(this.thuoc).subscribe((resp) => {
+          if (resp.status == CommonConstant.STATUS_OK_200) {
+            this.toastService.success("Lưu thành công");
+            this.router.navigate(["/sys/product"]);
+          } else if (resp.status == CommonConstant.STATUS_OK_409) {
+            this.toastService.error(resp.msg);
+          } else {
+            this.toastService.error("Lưu thất bại");
+          }
+        });
+      } else {
+        this.thuocService.updateProduct(this.thuoc).subscribe((resp) => {
+          if (resp.status == CommonConstant.STATUS_OK_200) {
+            this.toastService.success("Cập nhật thành công");
+            this.router.navigate(["/sys/product"]);
+          } else if (resp.status == CommonConstant.STATUS_OK_409) {
+            this.toastService.error(resp.msg);
+          } else {
+            this.toastService.error("Cập nhật thất bại");
+          }
+        });
+      }
     }
   }
 

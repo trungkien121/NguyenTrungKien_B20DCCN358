@@ -6,7 +6,6 @@ export class HeadersUtil {
   public static getHeaders(): HttpHeaders {
     return new HttpHeaders({
       "Content-Type": "application/json",
-      // "Content-Type":"x-www-form-urlencoded"
     });
   }
 
@@ -23,14 +22,14 @@ export class HeadersUtil {
     });
   }
 
-  public static getHeadersAuthCover(): HttpHeaders {
-    const token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
-    if (token == undefined || token == null) {
-      return HeadersUtil.getHeaders();
-    }
+  // public static getHeadersAuthCover(): HttpHeaders {
+  //   const token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
+  //   if (token == undefined || token == null) {
+  //     return HeadersUtil.getHeaders();
+  //   }
 
-    return new HttpHeaders({
-      Authorization: AuthConstant.TOKEN_TYPE_KEY + token,
-    });
-  }
+  //   return new HttpHeaders({
+  //     Authorization: AuthConstant.TOKEN_TYPE_KEY + token,
+  //   });
+  // }
 }

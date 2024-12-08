@@ -35,8 +35,8 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
   isAuthenticate: boolean = false;
 
-  isAdmin: boolean | null = null;
-  isCustomer: boolean | null = null;
+  isAdmin: boolean | null = true;
+  isCustomer: boolean | null = true;
 
   private langChangeSubscription!: Subscription;
 
