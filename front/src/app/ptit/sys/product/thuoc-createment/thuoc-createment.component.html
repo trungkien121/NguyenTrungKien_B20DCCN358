@@ -258,18 +258,24 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Đơn vị</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập đơn vị"
-                        [(ngModel)]="thuoc.donVi"
-                        name="donVi"
-                      />
+                      <label class="form-label" for="manufacturer-name-input">Đơn vị</label>
+                      <div class="position-relative">
+                        <select
+                          class="form-control custom-select"
+                          id="manufacturer-name-input"
+                          [(ngModel)]="thuoc.donVi"
+                          name="donVi"
+                        >
+                          <option [value]="'Hộp'">Hộp</option>
+                          <option [value]="'Viên'">Viên</option>
+                          <option [value]="'Vỉ'">Vỉ</option>
+                          <option [value]="'Chai'">Chai</option>
+                          <option [value]="'Tuýp'">Tuýp</option>
+                        </select>
+                      </div>
                     </div>
+                    
+                    
                   </div>
 
                   <div class="col-lg-6">
