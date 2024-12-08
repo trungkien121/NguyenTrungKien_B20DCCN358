@@ -1893,3 +1893,195 @@ Caused by: org.hibernate.query.sqm.PathElementException: Could not resolve attri
 2024-12-07T17:07:42.167+07:00  WARN 21016 --- [hieuthuoc] [http-nio-8888-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
 =======
 >>>>>>> b8bc34ea1ba9751c2964bd30bd8718423f4b2a08
+2024-12-08T11:21:24.990+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.11 with PID 19948 (C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-12-08T11:21:25.021+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-08T11:21:25.160+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.11 with PID 20272 (C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-12-08T11:21:25.173+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-08T11:21:25.702+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-08T11:21:25.703+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-08T11:21:25.847+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-08T11:21:25.849+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-08T11:21:30.737+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-08T11:21:30.997+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 247 ms. Found 24 JPA repository interfaces.
+2024-12-08T11:21:31.020+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-08T11:21:31.428+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 372 ms. Found 24 JPA repository interfaces.
+2024-12-08T11:21:32.682+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-08T11:21:32.734+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-08T11:21:32.735+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-08T11:21:32.878+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-12-08T11:21:32.879+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7174 ms
+2024-12-08T11:21:32.959+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-08T11:21:34.608+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@291a8857
+2024-12-08T11:21:34.611+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-08T11:21:34.631+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-12-08T11:21:34.833+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-08T11:21:34.902+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-08T11:21:34.904+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-08T11:21:34.993+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-08T11:21:35.198+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-08T11:21:35.296+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-08T11:21:35.883+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-12-08T11:21:35.883+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10029 ms
+2024-12-08T11:21:36.112+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-08T11:21:36.133+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-08T11:21:36.394+07:00  WARN 20272 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-08T11:21:36.397+07:00  WARN 20272 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-12-08T11:21:37.180+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@498391b5
+2024-12-08T11:21:37.187+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-08T11:21:37.207+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-12-08T11:21:37.649+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-08T11:21:37.790+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-08T11:21:37.887+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-08T11:21:38.667+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-08T11:21:38.824+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-08T11:21:38.832+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-12-08T11:21:40.104+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-08T11:21:42.267+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T11:21:42.529+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-08T11:21:43.389+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-08T11:21:43.421+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T11:21:44.123+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-08T11:21:44.475+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-12-08T11:21:44.476+07:00  WARN 20272 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-08T11:21:45.742+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-12-08T11:21:45.742+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-08T11:21:46.492+07:00  WARN 20272 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-08T11:21:47.627+07:00  WARN 20272 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-12-08T11:21:48.125+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-08T11:21:48.158+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-08T11:21:48.253+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path '/hieuthuoc'
+2024-12-08T11:21:48.270+07:00  INFO 20272 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Started HieuthuocApplication in 23.945 seconds (process running for 44.911)
+2024-12-08T11:21:49.353+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-12-08T11:21:49.843+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2024-12-08T11:21:49.884+07:00  WARN 19948 --- [hieuthuoc] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2024-12-08T11:21:49.895+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T11:21:49.902+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-08T11:21:49.917+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-08T11:21:49.942+07:00  INFO 19948 --- [hieuthuoc] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-12-08T11:21:49.981+07:00 ERROR 19948 --- [hieuthuoc] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8888 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8888 or configure this application to listen on another port.
+
+2024-12-08T11:22:00.460+07:00  INFO 20272 --- [hieuthuoc] [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-12-08T11:22:00.961+07:00  INFO 20272 --- [hieuthuoc] [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T11:22:00.971+07:00  INFO 20272 --- [hieuthuoc] [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-08T11:22:00.990+07:00  INFO 20272 --- [hieuthuoc] [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-08T11:22:34.445+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.11 with PID 16692 (C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-12-08T11:22:34.451+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-08T11:22:34.919+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-08T11:22:34.919+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-08T11:22:36.501+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-08T11:22:36.715+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 201 ms. Found 24 JPA repository interfaces.
+2024-12-08T11:22:38.148+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-08T11:22:38.183+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-08T11:22:38.184+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-08T11:22:38.286+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-12-08T11:22:38.287+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3366 ms
+2024-12-08T11:22:38.351+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-08T11:22:38.938+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bc5fab1
+2024-12-08T11:22:38.941+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-08T11:22:38.957+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-12-08T11:22:39.412+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-08T11:22:39.544+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-08T11:22:39.611+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-08T11:22:40.138+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-08T11:22:40.258+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-08T11:22:40.259+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-12-08T11:22:42.280+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-08T11:22:42.863+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T11:22:43.446+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-08T11:22:44.419+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-12-08T11:22:44.420+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-08T11:22:45.634+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-08T11:22:46.414+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-12-08T11:22:46.769+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-08T11:22:46.830+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path '/hieuthuoc'
+2024-12-08T11:22:46.847+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Started HieuthuocApplication in 13.123 seconds (process running for 14.025)
+2024-12-08T11:23:02.672+07:00  INFO 16692 --- [hieuthuoc] [http-nio-8888-exec-1] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-08T11:23:02.673+07:00  INFO 16692 --- [hieuthuoc] [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-08T11:23:02.679+07:00  INFO 16692 --- [hieuthuoc] [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2024-12-08T11:27:41.520+07:00  WARN 16692 --- [hieuthuoc] [http-nio-8888-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2024-12-08T11:46:10.512+07:00  WARN 16692 --- [hieuthuoc] [http-nio-8888-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'id' for method parameter type int is not present]
+2024-12-08T11:49:43.214+07:00  INFO 16692 --- [hieuthuoc] [http-nio-8888-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 5581 ms
+2024-12-08T11:49:43.290+07:00  WARN 16692 --- [hieuthuoc] [http-nio-8888-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: An established connection was aborted by the software in your host machine]
+2024-12-08T11:51:34.454+07:00  WARN 16692 --- [hieuthuoc] [http-nio-8888-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Integer>` from Integer value (token `JsonToken.VALUE_NUMBER_INT`)]
+2024-12-08T13:51:13.782+07:00  WARN 16692 --- [hieuthuoc] [http-nio-8888-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.ArrayList<java.lang.Integer>` from Integer value (token `JsonToken.VALUE_NUMBER_INT`)]
+2024-12-08T14:38:51.404+07:00  INFO 16692 --- [hieuthuoc] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+2024-12-08T14:38:51.802+07:00  INFO 16692 --- [hieuthuoc] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T14:38:51.868+07:00  INFO 16692 --- [hieuthuoc] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-12-08T14:38:51.898+07:00  INFO 16692 --- [hieuthuoc] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-12-08T14:38:52.280+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.11 with PID 16692 (C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-12-08T14:38:52.280+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-08T14:38:54.022+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-08T14:38:54.144+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 121 ms. Found 24 JPA repository interfaces.
+2024-12-08T14:38:54.386+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-08T14:38:54.387+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-08T14:38:54.388+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-08T14:38:54.470+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-12-08T14:38:54.470+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2180 ms
+2024-12-08T14:38:54.488+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-12-08T14:38:54.554+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@75d3f6e3
+2024-12-08T14:38:54.554+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-12-08T14:38:54.554+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-12-08T14:38:54.615+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-08T14:38:54.621+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-08T14:38:54.642+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-08T14:38:54.645+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-08T14:38:54.646+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-12-08T14:38:55.107+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-08T14:38:55.319+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T14:38:55.468+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-12-08T14:38:55.469+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-08T14:38:55.773+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-08T14:38:55.927+07:00  WARN 16692 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-12-08T14:38:56.015+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-08T14:38:56.038+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path '/hieuthuoc'
+2024-12-08T14:38:56.045+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Started HieuthuocApplication in 3.822 seconds (process running for 11783.223)
+2024-12-08T14:38:56.049+07:00  INFO 16692 --- [hieuthuoc] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-12-08T15:22:07.662+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Starting HieuthuocApplication using Java 17.0.11 with PID 21736 (C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc\target\classes started by Admin in C:\workspace\NguyenTrungKien_B20DCCN358\BE\hieuthuoc)
+2024-12-08T15:22:07.668+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-12-08T15:22:08.168+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-08T15:22:08.169+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-08T15:22:09.572+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-08T15:22:09.730+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 144 ms. Found 24 JPA repository interfaces.
+2024-12-08T15:22:10.946+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8888 (http)
+2024-12-08T15:22:10.965+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-08T15:22:10.965+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-08T15:22:11.042+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring embedded WebApplicationContext
+2024-12-08T15:22:11.043+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2872 ms
+2024-12-08T15:22:11.095+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-08T15:22:11.495+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51821446
+2024-12-08T15:22:11.497+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-08T15:22:11.508+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/hieuthuoc'
+2024-12-08T15:22:11.768+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-08T15:22:11.891+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-08T15:22:11.946+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-08T15:22:12.378+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-08T15:22:12.478+07:00  WARN 21736 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-08T15:22:12.479+07:00  WARN 21736 --- [hieuthuoc] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2024-12-08T15:22:13.969+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-08T15:22:14.284+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-08T15:22:14.795+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-08T15:22:15.717+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-12-08T15:22:15.717+07:00  WARN 21736 --- [hieuthuoc] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-08T15:22:16.902+07:00  WARN 21736 --- [hieuthuoc] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-08T15:22:17.702+07:00  WARN 21736 --- [hieuthuoc] [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2024-12-08T15:22:18.083+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-08T15:22:18.137+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8888 (http) with context path '/hieuthuoc'
+2024-12-08T15:22:18.155+07:00  INFO 21736 --- [hieuthuoc] [restartedMain] c.e.hieuthuoc.HieuthuocApplication       : Started HieuthuocApplication in 11.336 seconds (process running for 12.023)
+2024-12-08T15:22:56.516+07:00  INFO 21736 --- [hieuthuoc] [http-nio-8888-exec-2] o.a.c.c.C.[.[localhost].[/hieuthuoc]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-08T15:22:56.518+07:00  INFO 21736 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-08T15:22:56.525+07:00  INFO 21736 --- [hieuthuoc] [http-nio-8888-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2024-12-08T15:23:01.059+07:00  INFO 21736 --- [hieuthuoc] [http-nio-8888-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 3850 ms
