@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import {
   ConfirmationService,
@@ -23,7 +24,8 @@ export class PhieuNhapComponent implements OnInit {
     private phieunhapService: PhieuNhapService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   phieunhapLst: PhieuNhap[] = [];
@@ -63,8 +65,7 @@ export class PhieuNhapComponent implements OnInit {
     this.displayDialog = true;
   }
   preUpdate(model: PhieuNhap) {
-    this.displayDialog = true;
-    this.phieunhapNew = model;
+    this.router.navigate([`/sys/phieunhap-create/${model.id}`]);
   }
 
   handleCancel(displayDialog: boolean) {

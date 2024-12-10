@@ -130,6 +130,14 @@ const routes: Routes = [
     },
   },
   {
+    path: "phieunhap-create/:id",
+    component: PhieuNhapCreatementComponent,
+    canActivate: [RoleGuard],
+    data: {
+      guards: [AuthConstant.ROLE_ADMIN],
+    },
+  },
+  {
     path: "chitiet-donhang/:id",
     component: ChiTietDonHangComponent,
     canActivate: [RoleGuard],

@@ -81,7 +81,7 @@
                         id="diaChi"
                         #diaChi="ngModel"
                         placeholder="Nhập địa chỉ nhà cung cấp"
-                        [(ngModel)]="phieunhap.ngayNhap"
+                        [(ngModel)]="phieunhap.createdAt"
                       />
                     </div>
                   </div>
@@ -111,7 +111,7 @@
                   class="row align-items-center"
                   *ngFor="let item of chiTietPhieuNhapLst; let index = index"
                 >
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input">
                         Thuốc
@@ -128,7 +128,7 @@
                     </div>
                   </div>
 
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input">
                         Số lượng
@@ -137,14 +137,15 @@
                         type="text"
                         class="form-control"
                         id="manufacturer-brand-input"
-                        placeholder="Nhập quy cách"
+                        placeholder="Nhập số lượng"
                         [(ngModel)]="item.soLuong"
-                        name="quyCach"
+                        [value]="item.soLuong"
+                        name="soLuong-{{ item.id }}"
                       />
                     </div>
                   </div>
 
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input">
                         Đơn giá
@@ -153,9 +154,25 @@
                         type="text"
                         class="form-control"
                         id="manufacturer-brand-input"
-                        placeholder="Nhập quy cách"
+                        placeholder="Nhập đơn giá"
                         [(ngModel)]="item.donGia"
-                        name="quyCach"
+                        [value]="item.donGia"
+                        name="donGia-{{ item.id }}"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Tổng
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="manufacturer-brand-input"
+                        [value]="(item.donGia || 0) * (item.soLuong || 0)"
+                        disabled
                       />
                     </div>
                   </div>
@@ -167,6 +184,32 @@
                     ></i>
                   </div>
                 </div>
+
+                <!-- <div class="row align-items-center">
+                  <div class="col-lg-4">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-name-input">
+                        Tổng
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Số lượng
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Đơn giá
+                      </label>
+                    </div>
+                  </div>
+                </div> -->
               </div>
             </div>
           </div>
