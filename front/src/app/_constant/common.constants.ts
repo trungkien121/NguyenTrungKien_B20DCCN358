@@ -23,6 +23,7 @@ export class CommonConstant {
   public static readonly SHOW_ANSWER_TRUE = "TRUE";
 
   public static readonly STATUS_OK_200 = "200";
+  public static readonly STATUS_OK_401 = "401";
   public static readonly STATUS_OK_400 = "400";
   public static readonly STATUS_OK_201 = "201";
   public static readonly STATUS_OK_409 = "409";
