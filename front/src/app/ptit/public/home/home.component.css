@@ -1,14 +1,24 @@
 .responsive-img {
-    height: 200px;
-    width: auto; /* Để chiều rộng tự động điều chỉnh theo chiều cao */
-    object-fit: contain; /* Giữ nguyên tỷ lệ ảnh */
-  }
-  
-  .text-truncate {
-    display: inline-block;
-    max-width: 200px; /* Chiều rộng tối đa */
-    white-space: nowrap; /* Không xuống dòng */
-    overflow: hidden; /* Ẩn phần tràn */
-    text-overflow: ellipsis; /* Hiển thị dấu ba chấm */
-  }
-  
+  height: 200px;
+  width: auto; 
+  object-fit: contain; 
+}
+
+.text-truncate {
+  display: inline-block;
+  max-width: 200px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+#carouselExample {
+  max-width: 800px; 
+  margin: 0 auto; 
+}
+
+#carouselExample .carousel-item img {
+  max-height: 300px; 
+  object-fit: cover; 
+}
+
