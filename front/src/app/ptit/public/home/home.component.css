@@ -13,19 +13,67 @@
 }
 
 #carouselExample {
-  max-width: 800px; 
+  max-width: 1500px; 
   margin: 0 auto; 
 }
 
 #carouselExample .carousel-item img {
-  max-height: 300px; 
+  max-height: 700px; 
   object-fit: cover; 
+  border-radius: 20px;
 }
 
-#search{
-  background-color: #3964e7;
-  border: #3964e7;
+
+/* Nền màu xanh cho toàn bộ thanh tìm kiếm */
+.search-box-custom {
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 5px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto; /* Căn giữa */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Input tìm kiếm */
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 50px 0 0 50px;
+  outline: none;
+  color: #333333; /* Màu chữ trong input */
+  background: #ffffff; /* Nền input màu trắng */
+}
+
+.search-input::placeholder {
+  color: #9ca3af; /* Màu placeholder */
+}
+
+/* Nút tìm kiếm */
+.search-button {
+  background: #1d4ed8; /* Màu xanh đậm hơn nút */
+  border: none;
+  border-radius: 50px;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.search-button i {
+  font-size: 20px;
+  color: #ffffff; /* Màu icon trắng */
+}
+
+.search-button:hover {
+  background: #1742a3; /* Đổi màu nút khi hover */
+}
+
 
 .btn-custom-primary {
   background-color: #3964e7; /* Màu xanh lam tùy chỉnh */

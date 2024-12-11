@@ -18,8 +18,8 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 
 @Component({
   selector: "app-sidebar-top",
-  templateUrl: "./sidebar-top.component.html",
-  styleUrls: ["./sidebar-top.component.css"],
+  templateUrl: "./sidebar-top-admin.component.html",
+  styleUrls: ["./sidebar-top-admin.component.css"],
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SidebarLeftComponent implements OnInit, OnDestroy {

@@ -2,6 +2,41 @@
   <div class="page-content">
     <div class="container-fluid">
 
+      <!-- start page title -->
+      <!-- <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Thuốc</h4>
+          </div>
+        </div>
+      </div> -->
+      
+      <!-- end page title -->
+
+
+      <div class="search-container">
+        <div class="card">
+          <div class="card-header border-0 rounded">
+            <div class="search-box-custom">
+              <input
+                type="text"
+                class="form-control search-input"
+                placeholder="Tìm tên thuốc, thực phẩm chức năng..."
+                [(ngModel)]="modelSearch.keyWord"
+                (keydown.enter)="search()"
+              />
+              <button type="button" class="search-button" (click)="search()">
+                <i class="ri-search-line"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+
       <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <!-- Thêm phần tử carousel-indicators để tạo chấm tròn điều hướng -->
         <div class="carousel-indicators">
@@ -38,65 +73,6 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div>
-      
-
-      <!-- start page title -->
-      <div class="row">
-        <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
-            <h4 class="mb-sm-0">Thuốc</h4>
-          </div>
-        </div>
-      </div>
-      
-      <!-- end page title -->
-      <div class="card">
-        <div class="card-header border-0 rounded">
-          <div class="row g-2">
-            <div class="col-xl-3">
-              <div class="search-box">
-                <input
-                  type="text"
-                  class="form-control search"
-                  placeholder="Tìm kiếm..."
-                  [(ngModel)]="modelSearch.keyWord"
-                  (keydown.enter)="search()"
-                />
-                <i class="ri-search-line search-icon"></i>
-              </div>
-            </div>
-            <!--end col-->
-            <div class="col-xl-2 ms-auto">
-              <div>
-                <!-- <select
-                  class="form-control"
-                  [(ngModel)]="modelSearch.loaiThuoc"
-                  name="loaiThuoc"
-                >
-                  <option
-                    *ngFor="let loaiThuoc of loaithuocLst"
-                    [value]="loaiThuoc.tenLoai"
-                  >
-                    {{ loaiThuoc.tenLoai }}
-                  </option>
-                </select> -->
-              </div>
-            </div>
-            <!--end col-->
-            <div class="col-lg-auto">
-              <div class="hstack gap-2">
-                <button type="button" id="search" class="btn btn-danger" (click)="search()">
-                  <i class="ri-equalizer-fill me-1 align-bottom"></i> Tìm kiếm
-                </button>
-              </div>
-            </div>
-            <!--end col-->
-          </div>
-          <!--end row-->
-        </div>
       </div>
 
       <div class="row mt-4">

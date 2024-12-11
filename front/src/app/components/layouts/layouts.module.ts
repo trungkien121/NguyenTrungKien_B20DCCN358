@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
-import { SidebarLeftComponent } from "./sidebar-top/sidebar-top.component";
+import { SidebarLeftComponent } from "./sidebar-top/sidebar-top-admin.component";
 import { RouterModule } from "@angular/router";
 // Import ngx-translate và các module liên quan
 import { TranslateModule } from "@ngx-translate/core";
