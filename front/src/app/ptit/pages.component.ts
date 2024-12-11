@@ -20,6 +20,8 @@ export class PagesComponent implements OnInit, AfterViewInit {
   isAdmin$ = new BehaviorSubject<boolean>(false);
   isCustomer$ = new BehaviorSubject<boolean>(false);
 
+  isAdmin: boolean | null = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: NguoidungService,
@@ -56,6 +58,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
       // } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
       //   this.router.navigate(["/home"]);
       // }
+      this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
 
       this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN.toString()));
       this.isCustomer$.next(

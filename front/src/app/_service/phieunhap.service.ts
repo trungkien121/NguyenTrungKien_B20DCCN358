@@ -20,6 +20,18 @@ export class PhieuNhapService {
     });
   }
 
+  getPN(id: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/phieunhap/get`;
+    let params = new HttpParams().set("id", id?.toString() || "");
+
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+      params: params,
+    });
+  }
+
   create(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/phieunhap/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

@@ -10,8 +10,8 @@ export class PhieuNhap {
   nguoiDung?: NguoiDung;
   nhaCungCapId?: string;
   nhaCungCap?: NhaCungCap;
-  createAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 
   chiTietPhieuNhaps?: ChiTietPhieuNhap[];
 }

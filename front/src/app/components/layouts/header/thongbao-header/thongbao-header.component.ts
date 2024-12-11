@@ -8,6 +8,7 @@ import { ThongBaoService } from "src/app/_service/thongbao.service";
 @Component({
   selector: "app-thongbao-header",
   templateUrl: "./thongbao-header.component.html",
+  styleUrls: ["./thongbao-header.component.css"],
 })
 export class ThongbaoHeaderComponent implements OnInit, OnDestroy {
   constructor(

@@ -17,7 +17,7 @@ import { Thuoc } from "src/app/_model/thuoc";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { NCCService } from "src/app/_service/ncc.service";
 import { ToastrService } from "ngx-toastr";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 declare var $: any;
 
@@ -32,7 +32,8 @@ export class PhieuNhapCreatementComponent implements OnInit {
     private phieunhapService: PhieuNhapService,
     private toastService: ToastrService,
     private router: Router,
-    private nccService: NCCService
+    private nccService: NCCService,
+    private route: ActivatedRoute
   ) {}
 
   nguoidungHoten: string = "";
@@ -100,7 +101,37 @@ export class PhieuNhapCreatementComponent implements OnInit {
     this.chiTietPhieuNhapLst.push(thanhPhanThuocNew);
   }
 
+  getPhieuNhapByParam() {
+    this.route.queryParams.subscribe(async (params) => {
+      this.phieunhap.id = this.route.snapshot.paramMap.get("id") || "";
+      if (this.phieunhap.id) {
+        this.getPhieuNhapById(this.phieunhap.id);
+      }
+    });
+  }
+
+  getPhieuNhapById(id: string) {
+    this.phieunhapService.getPN(id).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.phieunhap = res.data;
+        this.chiTietPhieuNhapLst = this.phieunhap
+          .chiTietPhieuNhaps as ChiTietPhieuNhap[];
+        this.phieunhap.nguoiDungId = this.phieunhap.nguoiDung?.id;
+        this.phieunhap.nhaCungCapId = this.phieunhap.nhaCungCap?.id;
+
+        if (this.phieunhap.createdAt) {
+          const date = new Date(this.phieunhap.createdAt);
+          this.phieunhap.createdAt = `${date.getFullYear()}-${(
+            "0" +
+            (date.getMonth() + 1)
+          ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+        }
+      }
+    });
+  }
+
   ngOnInit() {
+    this.getPhieuNhapByParam();
     // this.addThuoc();
     this.getUserInfo();
 
@@ -160,7 +191,23 @@ export class PhieuNhapCreatementComponent implements OnInit {
   }
 
   save() {
-    this.phieunhap.chiTietPhieuNhaps = this.chiTietPhieuNhapLst;
+    this.phieunhap.chiTietPhieuNhaps = []; // Khởi tạo mảng rỗng
+
+    this.chiTietPhieuNhapLst.forEach((item: ChiTietPhieuNhap) => {
+      // Tạo đối tượng mới dựa trên item
+      let temp: ChiTietPhieuNhap = {
+        donGia: item.donGia,
+        soLuong: item.soLuong,
+        thuocId: item.thuoc?.id,
+        id: item.id,
+        phieuNhapId: item.phieuNhapId,
+      };
+
+      // Đẩy đối tượng vào mảng chiTietPhieuNhaps
+      if (this.phieunhap.chiTietPhieuNhaps) {
+        this.phieunhap.chiTietPhieuNhaps.push(temp);
+      }
+    });
 
     if (this.check(this.phieunhap)) {
       if (!this.phieunhap.id) {

@@ -18,8 +18,8 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 
 @Component({
   selector: "app-sidebar-top",
-  templateUrl: "./sidebar-top.component.html",
-  styleUrls: ["./sidebar-top.component.css"],
+  templateUrl: "./sidebar-top-admin.component.html",
+  styleUrls: ["./sidebar-top-admin.component.css"],
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SidebarLeftComponent implements OnInit, OnDestroy {
@@ -35,8 +35,8 @@ export class SidebarLeftComponent implements OnInit, OnDestroy {
   userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
   isAuthenticate: boolean = false;
 
-  isAdmin: boolean | null = true;
-  isCustomer: boolean | null = true;
+  isAdmin: boolean | null = false;
+  isCustomer: boolean | null = false;
 
   private langChangeSubscription!: Subscription;
 

@@ -4,14 +4,16 @@
       <div class="d-flex">
         <!-- LOGO -->
         <div class="navbar-brand-box horizontal-logo">
-          <a href="index.html" class="logo logo-dark">
+          <a href="index.html" class="logo logo-dark d-flex align-items-center">
             <span class="logo-sm">
-              <img src="assets/images/ptit.png" alt="" height="40" />
+              <img src="assets/images/logo.png" alt="" height="40" />
             </span>
             <span class="logo-lg">
-              <img src="assets/images/ptit.png" alt="" height="40" />
+              <img src="assets/images/logo.png" alt="" height="40" />
             </span>
           </a>
+          
+          
 
           <a href="index.html" class="logo logo-light">
             <span class="logo-sm">
@@ -81,8 +83,22 @@
             <i class="bx bx-shopping-bag fs-22"></i>
           </button>
         </div>
-
+        
+        <!-- thông báo -->
         <app-thongbao-header *ngIf="isAuthenticate"></app-thongbao-header>
+        <!-- <div *ngIf="isAuthenticate" class="header-item ms-1">
+          <button
+            type="button"
+            class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
+            id="notification-dropdown"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="bx bx-bell fs-22"></i> 
+          </button>
+        </div> -->
+        
 
         <div *ngIf="!isAuthenticate" class="d-flex ms-2" style="margin: 0px">
           <button type="button" class="btn btn-danger btn-sm" (click)="login()">
@@ -90,59 +106,40 @@
           </button>
         </div>
 
-        <div
-          *ngIf="isAuthenticate"
-          class="dropdown ms-sm-3 header-item topbar-user"
-        >
+        <div *ngIf="isAuthenticate" class="header-item ms-1">
           <button
             type="button"
-            class="btn shadow-none"
-            id="page-header-user-dropdown"
+            class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none"
+            id="user-dropdown"
             data-bs-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <span class="d-flex align-items-center">
-              <img
-                class="rounded-circle header-profile-user"
-                src="assets/images/users/user-dummy-img.jpg"
-                alt="Header Avatar"
-              />
-              <span class="text-start ms-xl-2">
-                <!-- <span
-                  class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"
-                  >{{ userInfo.fullName }}</span
-                > -->
-                <!-- <span
-                  class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"
-                  >Founder</span
-                > -->
-              </span>
-            </span>
+            <i class="bx bx-user fs-22"></i> 
           </button>
           <div class="dropdown-menu dropdown-menu-end" style="cursor: pointer">
-            <!-- item-->
-            <!-- <h6 class="dropdown-header">Welcome {{ userInfo.fullName }}!</h6> -->
+            <!-- Menu item -->
             <a class="dropdown-item" [routerLink]="['/user/profile']"
               ><i
                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"
               ></i>
               <span class="align-middle"> Hồ sơ </span>
             </a>
-
+        
             <a class="dropdown-item" [routerLink]="['/user/donmua']"
               ><i
                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"
               ></i>
               <span class="align-middle"> Đơn mua </span>
             </a>
-
+        
             <a class="dropdown-item" (click)="logout()"
               ><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
               <span class="align-middle" data-key="t-logout">Đăng xuất</span>
             </a>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

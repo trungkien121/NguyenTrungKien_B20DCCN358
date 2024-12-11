@@ -258,11 +258,11 @@ export class ThuocCreatementComponent implements OnInit {
     }
 
     // Ví dụ, kiểm tra mã vạch (nếu cần)
-    if (thuoc.maVach == undefined || thuoc.maVach.trim().length == 0) {
-      check = false;
-      this.thuoc.maVach = ""; // Đặt lại giá trị của mã vạch
-      return check;
-    }
+    // if (thuoc.maVach == undefined || thuoc.maVach.trim().length == 0) {
+    //   check = false;
+    //   this.thuoc.maVach = ""; // Đặt lại giá trị của mã vạch
+    //   return check;
+    // }
 
     return check;
   }
