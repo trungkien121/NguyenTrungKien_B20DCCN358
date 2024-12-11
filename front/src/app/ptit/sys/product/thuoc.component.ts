@@ -21,6 +21,7 @@ import { ThuocService } from "src/app/_service/thuoc.service";
 @Component({
   selector: "app-thuoc",
   templateUrl: "./thuoc.component.html",
+  styleUrls: ["./thuoc.component.css"],
   providers: [ConfirmationService, MessageService],
 })
 export class ThuocComponent implements OnInit {

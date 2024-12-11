@@ -1,0 +1,19 @@
+.btn-success {
+    background-color: #007bff; /* Màu xanh tùy chỉnh */
+    border-color: #0056b3; /* Đường viền màu xanh đậm hơn */
+    color: #ffffff; /* Màu chữ trắng */
+  }
+  
+  .btn-success:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+    border-color: #004085; /* Đường viền khi hover */
+  }
+  
+  .btn-success:focus,
+  .btn-success:active {
+    background-color: #004085; /* Màu xanh đậm hơn khi focus hoặc active */
+    border-color: #002752; /* Đường viền đậm nhất */
+    box-shadow: none; /* Loại bỏ hiệu ứng shadow */
+  }
+
+  
