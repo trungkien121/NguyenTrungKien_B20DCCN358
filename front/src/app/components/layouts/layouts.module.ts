@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ThongbaoHeaderComponent } from "./header/thongbao-header/thongbao-header.component";
+import { SidebarTopUserComponent } from "./sidebar-top/sidebar-top-user.component";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ThongbaoHeaderComponent } from "./header/thongbao-header/thongbao-heade
     FooterComponent,
     SidebarLeftComponent,
     ThongbaoHeaderComponent,
+    SidebarTopUserComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,12 @@ import { ThongbaoHeaderComponent } from "./header/thongbao-header/thongbao-heade
     // NgxTranslateModule,
   ],
   providers: [],
-  exports: [HeaderComponent, FooterComponent, SidebarLeftComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SidebarLeftComponent,
+    SidebarTopUserComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LayoutsModule {}
