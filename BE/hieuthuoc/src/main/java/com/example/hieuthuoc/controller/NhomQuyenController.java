@@ -33,7 +33,7 @@ public class NhomQuyenController {
 		return nhomQuyenService.getById(id);
 	}
 
-	@GetMapping("/list")
+	@PostMapping("/list")
 	public ResponseDTO<PageDTO<List<NhomQuyen>>> getByTenNhomQuyen(@RequestBody @Valid SearchDTO searchDTO) {
 		return nhomQuyenService.getByTenNhomQuyen(searchDTO);
 	}
