@@ -42,8 +42,7 @@ public class DonHang extends TimeAuditable{
 	private String soDienThoai;
 	private String diaChi;
 	private String email;
-	private Date ngayLap;
-	
+
 	private Double giamGia;
 	private Double tongTien;
 	

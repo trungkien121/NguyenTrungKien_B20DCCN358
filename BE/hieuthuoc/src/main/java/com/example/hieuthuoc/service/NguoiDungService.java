@@ -243,7 +243,7 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if (!passwordEncoder.matches(nguoiDungDTO.getMatKhau(), nguoiDung.getMatKhau())) {
 			return ResponseDTO.<NguoiDung>builder().status(400).msg("Mật khẩu không chính xác.").build();
-		}
+		} 
 
 		// Mã hóa mật khẩu mới
 		nguoiDung.setMatKhau(passwordEncoder.encode(nguoiDungDTO.getMatKhauMoi()));
