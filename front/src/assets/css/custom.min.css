@@ -12,3 +12,39 @@ body.fullscreen-enable::backdrop {
 .language-setting-item.active {
   display: inline-block;
 }
+
+.btn-success {
+  background-color: #007bff !important; /* Màu xanh tùy chỉnh */
+  border-color: #0056b3 !important; /* Đường viền màu xanh đậm hơn */
+  color: #ffffff !important; /* Màu chữ trắng */
+}
+
+.btn-success:hover {
+  background-color: #0056b3 !important; /* Màu xanh đậm hơn khi hover */
+  border-color: #004085 !important; /* Đường viền khi hover */
+}
+
+.btn-success:focus,
+.btn-success:active {
+  background-color: #004085 !important; /* Màu xanh đậm hơn khi focus hoặc active */
+  border-color: #002752 !important; /* Đường viền đậm nhất */
+  box-shadow: none !important; /* Loại bỏ hiệu ứng shadow */
+}
+
+.btn-info {
+  background-color: #007bff !important; /* Màu xanh tùy chỉnh */
+  border-color: #0056b3 !important; /* Đường viền màu xanh đậm hơn */
+  color: #ffffff !important; /* Màu chữ trắng */
+}
+
+.btn-info:hover {
+  background-color: #0056b3 !important; /* Màu xanh đậm hơn khi hover */
+  border-color: #004085 !important; /* Đường viền khi hover */
+}
+
+.btn-info:focus,
+.btn-info:active {
+  background-color: #004085 !important; /* Màu xanh đậm hơn khi focus hoặc active */
+  border-color: #002752 !important; /* Đường viền đậm nhất */
+  box-shadow: none !important; /* Loại bỏ hiệu ứng shadow */
+}

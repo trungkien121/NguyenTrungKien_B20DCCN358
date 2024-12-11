@@ -34,6 +34,8 @@ export class ChucNangComponent implements OnInit {
   AuthConstant = AuthConstant;
 
   chucNangLst: ChucNang[] = [];
+  chucNangByRoleLst: ChucNang[] = [];
+
   chucNangNew: ChucNang = {};
   chucNangDelete: ChucNang = {};
 
@@ -47,7 +49,7 @@ export class ChucNangComponent implements OnInit {
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
-    currentPage: 1,
+    currentPage: 0,
     size: 10,
     sortedField: "",
   };
@@ -57,7 +59,7 @@ export class ChucNangComponent implements OnInit {
   displayDialog: boolean = false;
 
   ngOnInit(): void {
-    // this.getData();
+    this.getData();
     this.getChucNangByQuyen(AuthConstant.ROLE_KHACHHANG);
 
     this.getRoleLst();
@@ -66,7 +68,7 @@ export class ChucNangComponent implements OnInit {
   getChucNangByQuyen(roleId: number) {
     this.nhomquyenService.get(roleId).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.chucNangLst = res.data.chucNangs;
+        this.chucNangByRoleLst = res.data.chucNangs;
       }
     });
   }
@@ -119,8 +121,6 @@ export class ChucNangComponent implements OnInit {
     });
   }
 
-  updateStatus() {}
-
   preDelete(chucnang: ChucNang) {
     this.confirmationService.confirm({
       message: "Bạn có chắc muốn loại chức năng này?",
@@ -148,5 +148,35 @@ export class ChucNangComponent implements OnInit {
         }
       },
     });
+  }
+
+  confirmUpdateNhomQuyen() {
+    console.log("role", this.chucNangByRoleLst);
+    this.nhomquyenService.update(this.chucNangByRoleLst).subscribe((resp) => {
+      if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.toastService.success("Cập nhật thành công");
+      } else if (resp.status == CommonConstant.STATUS_OK_409) {
+        this.toastService.error(resp.msg);
+      } else {
+        this.toastService.error("Cập nhật thất bại");
+      }
+    });
+  }
+  updateNhomQuyen(model: ChucNang): void {
+    const index = this.chucNangByRoleLst.findIndex(
+      (chucNang) => chucNang.id === model.id
+    );
+    if (index !== -1) {
+      // Nếu phần tử đã tồn tại, loại bỏ nó
+      this.chucNangByRoleLst.splice(index, 1);
+    } else {
+      // Nếu phần tử chưa tồn tại, thêm vào danh sách
+      this.chucNangByRoleLst.push(model);
+    }
+  }
+
+  isChecked(id: string | undefined): boolean {
+    // Kiểm tra nếu danh sách có phần tử với id trùng với model.id
+    return this.chucNangByRoleLst.some((chucNang) => chucNang.id === id);
   }
 }

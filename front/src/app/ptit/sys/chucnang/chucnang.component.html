@@ -107,6 +107,20 @@
                       </li>
                     </ul>
                   </div>
+                  <div class="col-auto">
+                    <div id="">
+                      <div class="my-n1 d-flex align-items-center text-muted">
+                        <button
+                          type="button"
+                          class="btn btn-success shadow-none"
+                          (click)="confirmUpdateNhomQuyen()"
+                        >
+                          <i class="ri-add-circle-line align-middle me-1"></i>
+                          Cập nhật
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- end card header -->
@@ -117,7 +131,7 @@
                   ></div>
                   <div class="col-auto mb-3"></div>
 
-                  <div class="col-auto">
+                  <div class="col-auto" *ngIf="chucNangLst.length > 0">
                     <p-table
                       [value]="chucNangLst"
                       [rowHover]="true"
@@ -130,7 +144,8 @@
                     >
                       <ng-template pTemplate="header">
                         <tr>
-                          <th>STT</th>
+                          <!-- <th>STT</th> -->
+                          <th></th>
                           <th>Tên</th>
 
                           <th>Mô tả</th>
@@ -144,16 +159,24 @@
                         let-rowIndex="rowIndex"
                       >
                         <tr [style]="{ cursor: 'pointer' }">
-                          <td (click)="preUpdate(model)">
-                            {{ rowIndex + 1 }}
+                          <td (click)="updateNhomQuyen(model)">
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [value]="model.id"
+                                id="productBrandRadio5"
+                                [checked]="isChecked(model.id)"
+                              />
+                            </div>
                           </td>
-                          <td (click)="preUpdate(model)">
+                          <td (click)="updateNhomQuyen(model)">
                             {{ model.tenChucNang }}
                           </td>
-                          <td (click)="preUpdate(model)">
+                          <td (click)="updateNhomQuyen(model)">
                             {{ model.moTa }}
                           </td>
-                          <td (click)="preUpdate(model)">
+                          <td (click)="updateNhomQuyen(model)">
                             {{ model.hanhDong }}
                           </td>
                           <td>
@@ -161,7 +184,7 @@
                               class="text-info d-inline-block remove-item-btn"
                               data-bs-toggle="modal"
                               href="#delete"
-                              (click)="preDelete(model)"
+                              (click)="preUpdate(model)"
                             >
                               <i class="ri-edit-line fs-2"></i>
                             </a>
