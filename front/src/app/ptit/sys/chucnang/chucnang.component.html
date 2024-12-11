@@ -21,127 +21,190 @@
           <div
             class="page-title-box d-sm-flex align-items-center justify-content-between"
           >
-            <h4 class="mb-sm-0">Danh mục thuốc</h4>
+            <h4 class="mb-sm-0">Chức năng</h4>
           </div>
         </div>
       </div>
       <!-- end page title -->
 
-      <!-- search -->
       <div class="row">
-        <div class="col-xl-12">
-          <div class="card">
-            <div
-              class="card-header border-0 align-items-center justify-content-end"
-            >
-              <div
-                class="align-items-center p-3 justify-content-between d-flex"
-              >
-                <div class="d-flex flex-column col-xl-9">
-                  <label for="titleDropdown">Tên danh mục thuốc </label>
-                  <input
-                    type="text"
-                    pInputText
-                    [(ngModel)]="modelSearch.keyWord"
-                  />
-                </div>
-
-                <div class="d-flex align-items-end col-xl-2">
-                  <button
-                    type="button"
-                    class="btn btn-info shadow-none mt-3"
-                    (click)="search()"
-                  >
-                    <i class="ri-search-line align-middle me-1"></i>
-                    Tìm Kiếm
-                  </button>
-                </div>
-              </div>
-
-              <!-- <div class="col-auto mb-3"></div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- content   -->
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card">
-            <div
-              class="card-header border-0 align-items-center justify-content-end"
-            >
-              <div
-                class="align-items-center p-3 justify-content-between d-flex"
-              >
-                <div class="flex-shrink-0">
-                  <div class="text-muted">
-                    <span class="fw-semibold">Tổng: </span>
-                    <span class="fw-semibold">{{ chucNangLst.length }}</span>
+        <div class="col-xl-12 col-lg-12">
+          <div>
+            <div class="card">
+              <div class="card-header border-0">
+                <div class="row g-4">
+                  <div class="col-sm-auto">
+                    <!-- <div>
+                      <a
+                        href="apps-ecommerce-add-product.html"
+                        class="btn btn-success"
+                        id="addproduct-btn"
+                        ><i class="ri-add-line align-bottom me-1"></i> Add
+                        Product</a
+                      >
+                    </div> -->
+                  </div>
+                  <div class="col-sm">
+                    <!-- <div class="d-flex justify-content-sm-end">
+                      <div class="search-box ms-2">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="searchProductList"
+                          placeholder="Search Products..."
+                        />
+                        <i class="ri-search-line search-icon"></i>
+                      </div>
+                    </div> -->
                   </div>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-success shadow-none"
-                  (click)="preAdd()"
-                >
-                  <i class="ri-add-circle-line align-middle me-1"></i>
-                  Thêm danh mục thuốc
-                </button>
               </div>
-              <div class="col-auto mb-3"></div>
 
-              <div class="col-auto">
-                <p-table
-                  [value]="chucNangLst"
-                  [rowHover]="true"
-                  dataKey="id"
-                  [showCurrentPageReport]="true"
-                  [rows]="10"
-                  [alwaysShowPaginator]="true"
-                  [paginator]="true"
-                  currentPageReportTemplate=""
-                >
-                  <ng-template pTemplate="header">
-                    <tr>
-                      <th>STT</th>
-                      <th>Tên</th>
-
-                      <th>Mô tả</th>
-                      <th>Hành động</th>
-                      <th></th>
-                    </tr>
-                  </ng-template>
-                  <ng-template
-                    pTemplate="body"
-                    let-model
-                    let-rowIndex="rowIndex"
-                  >
-                    <tr [style]="{ cursor: 'pointer' }">
-                      <td (click)="preUpdate(model)">{{ rowIndex + 1 }}</td>
-                      <td (click)="preUpdate(model)">
-                        {{ model.tenChucNang }}
-                      </td>
-                      <td (click)="preUpdate(model)">{{ model.moTa }}</td>
-                      <td (click)="preUpdate(model)">{{ model.hanhDong }}</td>
-                      <td>
+              <div class="card-header">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <ul
+                      class="nav nav-tabs-custom card-header-tabs border-bottom-0"
+                      role="tablist"
+                    >
+                      <!-- <li class="nav-item">
                         <a
-                          class="text-danger d-inline-block remove-item-btn"
-                          data-bs-toggle="modal"
-                          href="#delete"
-                          (click)="preDelete(model)"
+                          class="nav-link active fw-semibold"
+                          data-bs-toggle="tab"
+                          href="#productnav-all"
+                          role="tab"
                         >
-                          <i class="ri-delete-bin-line fs-2"></i>
+                          Tất cả
+                          <span
+                            class="badge badge-soft-danger align-middle rounded-pill ms-1"
+                            >{{ chucNangLst.length }}</span
+                          >
                         </a>
-                      </td>
-                    </tr>
-                  </ng-template>
-                </p-table>
+                      </li> -->
+                      <li class="nav-item">
+                        <a
+                          class="nav-link fw-semibold active"
+                          data-bs-toggle="tab"
+                          href="#productnav-published"
+                          role="tab"
+                          (click)="
+                            getChucNangByQuyen(AuthConstant.ROLE_KHACHHANG)
+                          "
+                        >
+                          Người dùng
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link fw-semibold"
+                          data-bs-toggle="tab"
+                          href="#productnav-draft"
+                          (click)="getChucNangByQuyen(AuthConstant.ROLE_ADMIN)"
+                          role="tab"
+                        >
+                          Quản trị viên
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
+              <!-- end card header -->
+              <div class="row m-2">
+                <div class="col-xl-12">
+                  <div
+                    class="align-items-center p-3 justify-content-between d-flex"
+                  ></div>
+                  <div class="col-auto mb-3"></div>
+
+                  <div class="col-auto">
+                    <p-table
+                      [value]="chucNangLst"
+                      [rowHover]="true"
+                      dataKey="id"
+                      [showCurrentPageReport]="true"
+                      [rows]="10"
+                      [alwaysShowPaginator]="true"
+                      [paginator]="true"
+                      currentPageReportTemplate=""
+                    >
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th>STT</th>
+                          <th>Tên</th>
+
+                          <th>Mô tả</th>
+                          <th>Hành động</th>
+                          <th></th>
+                        </tr>
+                      </ng-template>
+                      <ng-template
+                        pTemplate="body"
+                        let-model
+                        let-rowIndex="rowIndex"
+                      >
+                        <tr [style]="{ cursor: 'pointer' }">
+                          <td (click)="preUpdate(model)">
+                            {{ rowIndex + 1 }}
+                          </td>
+                          <td (click)="preUpdate(model)">
+                            {{ model.tenChucNang }}
+                          </td>
+                          <td (click)="preUpdate(model)">
+                            {{ model.moTa }}
+                          </td>
+                          <td (click)="preUpdate(model)">
+                            {{ model.hanhDong }}
+                          </td>
+                          <td>
+                            <a
+                              class="text-info d-inline-block remove-item-btn"
+                              data-bs-toggle="modal"
+                              href="#delete"
+                              (click)="preDelete(model)"
+                            >
+                              <i class="ri-edit-line fs-2"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+
+                  <!-- end tab pane -->
+
+                  <!-- end tab pane -->
+
+                  <div
+                    class="tab-pane"
+                    id="productnav-draft"
+                    role="tabpanel"
+                    *ngIf="chucNangLst.length == 0"
+                  >
+                    <div class="py-4 text-center">
+                      <lord-icon
+                        src="https://cdn.lordicon.com/msoeawqm.json"
+                        trigger="loop"
+                        colors="primary:#405189,secondary:#0ab39c"
+                        style="width: 72px; height: 72px"
+                      >
+                      </lord-icon>
+                      <h5 class="mt-4">Sorry! No Result Found</h5>
+                    </div>
+                  </div>
+                  <!-- end tab pane -->
+                </div>
+                <!-- end tab content -->
+              </div>
+              <!-- end col -->
             </div>
+            <!-- end row -->
           </div>
+          <!-- container-fluid -->
         </div>
+        <!-- End Page-content -->
       </div>
+      <!-- end main content-->
     </div>
   </div>
 </div>

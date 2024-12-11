@@ -2,6 +2,8 @@
   <app-header></app-header>
 
   <app-sidebar-top *ngIf="isAdmin == true"></app-sidebar-top>
+  <app-sidebar-top-user *ngIf="isAdmin == false"></app-sidebar-top-user>
+
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>

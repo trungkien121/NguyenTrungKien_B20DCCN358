@@ -6,13 +6,16 @@ import {
   ConfirmEventType,
   MessageService,
 } from "primeng/api";
+import { AuthConstant } from "src/app/_constant/auth.constant";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { Quyen } from "src/app/_model/auth/quyen";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { ChucNangService } from "src/app/_service/chucnang.service";
 import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
+import { NhomQuyenService } from "src/app/_service/nhomquyen.service";
 
 @Component({
   selector: "app-chucnang",
@@ -24,16 +27,27 @@ export class ChucNangComponent implements OnInit {
     private chucnangService: ChucNangService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private nhomquyenService: NhomQuyenService
   ) {}
+
+  AuthConstant = AuthConstant;
+
   chucNangLst: ChucNang[] = [];
   chucNangNew: ChucNang = {};
   chucNangDelete: ChucNang = {};
 
+  nhomquyenLst: Quyen[] = [];
+
+  // chucNangUserLst: ChucNang[] = [];
+  // chucNangAdminLst: ChucNang[] = [];
+
+  tab: number = 1;
+
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
-    currentPage: 0,
+    currentPage: 1,
     size: 10,
     sortedField: "",
   };
@@ -43,7 +57,18 @@ export class ChucNangComponent implements OnInit {
   displayDialog: boolean = false;
 
   ngOnInit(): void {
-    this.getData();
+    // this.getData();
+    this.getChucNangByQuyen(AuthConstant.ROLE_KHACHHANG);
+
+    this.getRoleLst();
+  }
+
+  getChucNangByQuyen(roleId: number) {
+    this.nhomquyenService.get(roleId).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.chucNangLst = res.data.chucNangs;
+      }
+    });
   }
 
   getData() {
@@ -55,6 +80,14 @@ export class ChucNangComponent implements OnInit {
     });
   }
 
+  getRoleLst() {
+    this.nhomquyenService.getLst(this.modelSearch).subscribe((res: any) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.nhomquyenLst = res.data;
+      }
+    });
+  }
+
   search() {
     this.getData();
   }
@@ -62,6 +95,7 @@ export class ChucNangComponent implements OnInit {
   preAdd() {
     this.displayDialog = true;
   }
+
   preUpdate(chucnang: ChucNang) {
     this.displayDialog = true;
     this.chucNangNew = chucnang;
@@ -69,31 +103,10 @@ export class ChucNangComponent implements OnInit {
 
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
-    this.chucNangNew = {};
     this.getData();
   }
 
-  handeSave(chucnang: ChucNang) {
-    if (!chucnang.id) {
-      this.chucnangService.create(chucnang).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Lưu thành công");
-          this.getData();
-        } else {
-          this.toastService.error("Lưu thất bại");
-        }
-      });
-    } else {
-      this.chucnangService.update(chucnang).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Cập nhật thành công");
-          this.getData();
-        } else {
-          this.toastService.error("Cập nhật thất bại");
-        }
-      });
-    }
-  }
+  handeSave(chucnang: ChucNang) {}
 
   delete(chucnang: ChucNang) {
     this.chucnangService.delete(chucnang.id).subscribe((resp) => {
@@ -106,10 +119,12 @@ export class ChucNangComponent implements OnInit {
     });
   }
 
+  updateStatus() {}
+
   preDelete(chucnang: ChucNang) {
     this.confirmationService.confirm({
-      message: "Bạn có chắc muốn xóa chức năng này?",
-      header: "Xác nhận xóa chức năng",
+      message: "Bạn có chắc muốn loại chức năng này?",
+      header: "Xác nhận loại bỏ quyền chức năng",
       icon: "pi pi-info-circle",
       accept: () => {
         this.delete(chucnang);

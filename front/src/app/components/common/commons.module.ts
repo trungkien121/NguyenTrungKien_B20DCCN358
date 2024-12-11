@@ -5,9 +5,9 @@ import { SelectCommonComponent } from "./selectCommon/selectCommon.component";
 import { ConfirmDialogCommonComponent } from "./confirmDialogCommon/confirmDialogCommon.component";
 
 @NgModule({
-  declarations: [SelectCommonComponent, ConfirmDialogCommonComponent],
+  declarations: [SelectCommonComponent],
   imports: [CommonModule, FormsModule],
-  exports: [SelectCommonComponent, ConfirmDialogCommonComponent],
+  exports: [SelectCommonComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CommonsModule {}

@@ -22,6 +22,7 @@
         placeholder="Nhập tên danh mục thuốc"
         #title="ngModel"
         [(ngModel)]="chucnang.tenChucNang"
+        disabled="true"
         required
       />
     </div>
@@ -44,6 +45,7 @@
         id="mota"
         placeholder="Nhập mô tả loại thuốc"
         [(ngModel)]="chucnang.moTa"
+        disabled="true"
       >
       </textarea>
     </div>
@@ -56,12 +58,13 @@
         class="form-control"
         id="mota"
         placeholder="Nhập mô tả loại thuốc"
+        disabled="true"
         [(ngModel)]="chucnang.hanhDong"
       >
       </textarea>
     </div>
   </div>
-
+  <!-- 
   <ng-template pTemplate="footer">
     <p-button
       icon="pi pi-times"
@@ -75,5 +78,5 @@
       (click)="onSave()"
       styleClass="btn btn-success"
     ></p-button>
-  </ng-template>
+  </ng-template> -->
 </p-dialog>
