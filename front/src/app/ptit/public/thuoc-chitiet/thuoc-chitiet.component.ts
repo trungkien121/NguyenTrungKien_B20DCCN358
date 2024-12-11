@@ -20,6 +20,7 @@ import { ThuocService } from "src/app/_service/thuoc.service";
 @Component({
   selector: "app-thuoc-chitiet",
   templateUrl: "./thuoc-chitiet.component.html",
+  styleUrls: ["./thuoc-chitiet.component.css"],
 })
 export class ThuocChiTietComponent implements OnInit {
   thuoc: Thuoc = {};

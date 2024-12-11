@@ -58,18 +58,17 @@
                         <div class="flex-shrink-0 ms-2">
                           <div>
                             <a
-                              class="btn btn-danger"
+                              class="btn btn-custom-primary"
                               data-bs-toggle="tooltip"
                               data-bs-placement="top"
                               title="Thêm vào giỏ hàng"
                               (click)="addProductInCart()"
-                              ><i
-                                class="ri-shopping-cart-fill align-bottom"
-                              ></i>
-                              Giỏ hàng</a
                             >
+                              <i class="ri-shopping-cart-fill align-bottom"></i>
+                              Giỏ hàng
+                            </a>
                           </div>
-                        </div>
+                        </div>                                               
                       </div>
 
                       <div
@@ -86,7 +85,7 @@
                       </div>
 
                       <div class="row mt-4">
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-sm-6">
                           <div class="p-2 border border-dashed rounded">
                             <div class="d-flex align-items-center">
                               <div class="avatar-sm me-2">
@@ -98,7 +97,7 @@
                               </div>
                               <div class="flex-grow-1">
                                 <p class="text-muted mb-1">Giá :</p>
-                                <h5 class="mb-0">{{ thuoc.giaBan+'.000đ'+'/'+thuoc.donVi }}</h5>
+                                <h5 class="mb-0">{{ thuoc.giaBan+'.000đ '+'/ '+thuoc.donVi }}</h5>
                               </div>
                             </div>
                           </div>

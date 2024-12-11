@@ -511,17 +511,17 @@
                           >
                         </h5>
                         <p class="text-muted mb-0">
-                          {{ item.thuoc?.giaBan }} x {{ item.soLuong }}
+                          {{ item.thuoc?.giaBan }} x {{ item.soLuong }} 
                         </p>
                       </td>
                       <td class="text-end">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }}
+                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) + '.000'}}
                       </td>
                     </tr>
 
                     <tr>
                       <td class="fw-semibold" colspan="2">Sub Total :</td>
-                      <td class="fw-semibold text-end">{{ tongTien }}</td>
+                      <td class="fw-semibold text-end">{{ tongTien + '.000'}}</td>
                     </tr>
                     <tr>
                       <td colspan="2">
@@ -538,7 +538,7 @@
                     <tr class="table-active">
                       <th colspan="2">Tổng :</th>
                       <td class="text-end">
-                        <span class="fw-semibold"> {{ tongTien }} VNĐ </span>
+                        <span class="fw-semibold"> {{ tongTien + '.000'}} VNĐ </span>
                       </td>
                     </tr>
                   </tbody>

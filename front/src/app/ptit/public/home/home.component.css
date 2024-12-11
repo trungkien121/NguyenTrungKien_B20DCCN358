@@ -22,3 +22,34 @@
   object-fit: cover; 
 }
 
+#search{
+  background-color: #3964e7;
+  border: #3964e7;
+}
+
+.btn-custom-primary {
+  background-color: #3964e7; /* Màu xanh lam tùy chỉnh */
+  border-color: #3964e7;
+  color: white;
+}
+
+.card{
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.card-link {
+  text-decoration: none; /* Loại bỏ gạch chân mặc định của thẻ <a> */
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.card-link:hover .card {
+  transform: scale(1.02); /* Phóng to nhẹ khi hover */
+  box-shadow: 0px 4px 10px #3964e7; /* Hiệu ứng đổ bóng */
+}
+
+.card-link:active .card {
+  transform: scale(0.98); /* Hiệu ứng bấm xuống */
+}

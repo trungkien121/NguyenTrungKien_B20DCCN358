@@ -44,6 +44,7 @@
                     />
                   </div>
                 </div>
+
                 <div class="col-sm">
                   <h5 class="fs-14 text-truncate">
                     <a href="ecommerce-product-detail.html" class="text-dark">{{
@@ -86,12 +87,13 @@
                     </button>
                   </div>
                 </div>
+                
                 <div class="col-sm-auto">
                   <div class="text-lg-end">
                     <p class="text-muted mb-1">Giá:</p>
                     <h5 class="fs-14">
                       <span id="ticket_price" class="product-price"
-                        >{{ item.thuoc?.giaBan }} VNĐ</span
+                        >{{ item.thuoc?.giaBan + '.000'}} VNĐ</span
                       >
                     </h5>
                   </div>
@@ -130,7 +132,7 @@
                     <div>Tổng :</div>
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) }}
+                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0)+ '.000' }}
                         VNĐ
                       </span>
                     </h5>
@@ -218,7 +220,7 @@
                       <tr>
                         <td>Tổng:</td>
                         <td class="text-end" id="cart-subtotal">
-                          {{ tongTien }} VNĐ
+                          {{ tongTien + '.000'}} VNĐ
                         </td>
                       </tr>
                       <tr>
@@ -234,7 +236,7 @@
                         <th>Total (USD) :</th>
                         <td class="text-end">
                           <span class="fw-semibold" id="cart-total">
-                            {{ tongTien }} VNĐ
+                            {{ tongTien + '.000'}} VNĐ
                           </span>
                         </td>
                       </tr>
