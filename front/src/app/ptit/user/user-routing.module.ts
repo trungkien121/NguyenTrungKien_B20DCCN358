@@ -9,6 +9,7 @@ import { GiohangComponent } from "./giohang/giohang.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { DonMuaComponent } from "./donmua/donmua.component";
 import { ThongBaoComponent } from "./thongbao/thongbao.component";
+import { DonHangUserComponent } from "./donhang/donhang-user.component";
 
 const routes: Routes = [
   {
@@ -34,29 +35,55 @@ const routes: Routes = [
       },
 
       {
+        path: "profile",
+        component: ProfileComponent,
+        canActivate: [RoleGuard],
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
+      },
+
+      {
+        path: "donhang",
+        component: DonHangUserComponent,
+        canActivate: [RoleGuard],
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
+      },
+
+      {
         path: "giohang",
         component: GiohangComponent,
         canActivate: [RoleGuard],
-        data: { guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN] },
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
       },
 
       {
         path: "checkout",
         component: CheckoutComponent,
         canActivate: [RoleGuard],
-        data: { guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN] },
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
       },
       {
         path: "donmua",
         component: DonMuaComponent,
         canActivate: [RoleGuard],
-        data: { guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN] },
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
       },
       {
         path: "thongbao",
         component: ThongBaoComponent,
         canActivate: [RoleGuard],
-        data: { guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN] },
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
       },
     ],
   },

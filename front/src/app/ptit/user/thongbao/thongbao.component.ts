@@ -29,6 +29,8 @@ export class ThongBaoComponent implements OnInit {
     private toastService: ToastrService
   ) {}
 
+  user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+
   userInfo: NguoiDung = {};
   thongbaoId: number = 0;
   thongbaoLst: ThongBao[] = [];
