@@ -1,6 +1,7 @@
 import { ChucNang } from "./../../../../_model/chucnang";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { CommonConstant } from "src/app/_constant/common.constants";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 
@@ -11,6 +12,7 @@ declare var $: any;
   templateUrl: "./chucnang-createment.component.html",
 })
 export class ChucNangCreatementComponent implements OnInit {
+  CommonConstant = CommonConstant;
   constructor(public translate: TranslateService) {}
 
   @Input()
@@ -23,6 +25,8 @@ export class ChucNangCreatementComponent implements OnInit {
   cancel: EventEmitter<any> = new EventEmitter();
 
   displayModal: boolean = true;
+
+  typeModal = CommonConstant.TYPE_VIEW;
 
   ngOnInit() {}
 
@@ -50,6 +54,14 @@ export class ChucNangCreatementComponent implements OnInit {
     if (this.check(this.chucnang)) {
       this.displayModal = false;
       this.save.emit(this.chucnang);
+    }
+  }
+
+  updateTypeModal() {
+    if (this.typeModal == CommonConstant.TYPE_UPDATE) {
+      this.typeModal = CommonConstant.TYPE_VIEW;
+    } else if (this.typeModal == CommonConstant.TYPE_VIEW) {
+      this.typeModal = CommonConstant.TYPE_UPDATE;
     }
   }
 }

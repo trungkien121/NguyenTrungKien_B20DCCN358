@@ -67,11 +67,13 @@
                         #tenThuoc="ngModel"
                       />
                       <!-- Hiển thị lỗi khi trường invalid và đã touched -->
-                      <div *ngIf="tenThuoc.invalid && tenThuoc.touched" class="text-danger">
+                      <div
+                        *ngIf="tenThuoc.invalid && tenThuoc.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập tên thuốc.
                       </div>
                     </div>
-                    
                   </div>
 
                   <div class="col-lg-6">
@@ -87,14 +89,16 @@
                         [(ngModel)]="thuoc.soDangKy"
                         name="soDangKy"
                         #soDangKy="ngModel"
-                        pattern="^[a-zA-Z0-9]{5,15}$" 
+                        pattern="^[a-zA-Z0-9]{5,15}$"
                       />
                       <!-- Hiển thị lỗi nếu không khớp pattern -->
-                      <div *ngIf="soDangKy.invalid && soDangKy.touched" class="text-danger">
+                      <div
+                        *ngIf="soDangKy.invalid && soDangKy.touched"
+                        class="text-danger"
+                      >
                         Số đăng ký phải chứa 5-15 ký tự (chữ hoặc số).
                       </div>
                     </div>
-                    
                   </div>
                 </div>
 
@@ -115,18 +119,20 @@
                         #maThuoc="ngModel"
                       />
                       <!-- Hiển thị lỗi khi trường invalid và đã touched -->
-                      <div *ngIf="maThuoc.invalid && maThuoc.touched" class="text-danger">
+                      <div
+                        *ngIf="maThuoc.invalid && maThuoc.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập mã thuốc.
                       </div>
                     </div>
-                    
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="form-label" for="product-barcode-input">
                         <!-- Mã Vạch <span class="text-danger">*</span> -->
-                         Mã Vạch
+                        Mã Vạch
                       </label>
                       <input
                         type="text"
@@ -139,11 +145,13 @@
                         #maVach="ngModel"
                       />
                       <!-- Hiển thị lỗi nếu người dùng không nhập -->
-                      <div *ngIf="maVach.invalid && maVach.touched" class="text-danger">
+                      <div
+                        *ngIf="maVach.invalid && maVach.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập mã vạch.
                       </div>
                     </div>
-                    
                   </div>
                 </div>
 
@@ -258,7 +266,9 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input">Đơn vị</label>
+                      <label class="form-label" for="manufacturer-name-input"
+                        >Đơn vị</label
+                      >
                       <div class="position-relative">
                         <select
                           class="form-control custom-select"
@@ -274,8 +284,6 @@
                         </select>
                       </div>
                     </div>
-                    
-                    
                   </div>
 
                   <div class="col-lg-6">
@@ -303,7 +311,9 @@
                         Giá Nhập <span class="text-danger">*</span>
                       </label>
                       <div class="input-group has-validation mb-3">
-                        <span class="input-group-text" id="product-price-addon">VND</span>
+                        <span class="input-group-text" id="product-price-addon"
+                          >VND</span
+                        >
                         <input
                           type="number"
                           class="form-control"
@@ -315,15 +325,17 @@
                           [(ngModel)]="thuoc.giaNhap"
                           name="giaNhap"
                           #giaNhap="ngModel"
-                          min="0" 
+                          min="0"
                         />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div *ngIf="giaNhap.invalid && giaNhap.touched" class="text-danger">
+                      <div
+                        *ngIf="giaNhap.invalid && giaNhap.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập giá hợp lệ .
                       </div>
                     </div>
-                    
                   </div>
 
                   <!-- Giá Bán -->
@@ -349,15 +361,17 @@
                           [(ngModel)]="thuoc.giaBan"
                           name="giaBan"
                           #giaBan="ngModel"
-                          min="0" 
+                          min="0"
                         />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div *ngIf="giaBan.invalid && giaBan.touched" class="text-danger">
+                      <div
+                        *ngIf="giaBan.invalid && giaBan.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập giá hợp lệ .
                       </div>
                     </div>
-                    
                   </div>
 
                   <!-- Số Lượng Tồn -->
@@ -378,15 +392,17 @@
                           [(ngModel)]="thuoc.soLuongTon"
                           name="soLuongTon"
                           #soLuongTon="ngModel"
-                          min="0" 
+                          min="0"
                         />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div *ngIf="soLuongTon.invalid && soLuongTon.touched" class="text-danger">
+                      <div
+                        *ngIf="soLuongTon.invalid && soLuongTon.touched"
+                        class="text-danger"
+                      >
                         Vui lòng nhập số lượng hợp lệ .
                       </div>
                     </div>
-                    
                   </div>
                 </div>
                 <!-- end row -->
@@ -654,66 +670,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- <div>
-                    <div class="dropzone">
-                      <div class="fallback">
-                        <input
-                          name="file"
-                          type="file"
-                          multiple="multiple"
-                          (change)="onFilesSelected($event)"
-                        />
-                      </div>
-                      <div class="dz-message needsclick">
-                        <div class="mb-3">
-                          <i
-                            class="display-4 text-muted ri-upload-cloud-2-fill"
-                          ></i>
-                        </div>
-                        <h5>Thả tệp vào đây hoặc nhấp để tải lên.</h5>
-                      </div>
-                    </div>
-
-                    <ul class="list-unstyled mb-0" id="dropzone-preview">
-                      <li class="mt-2" *ngFor="let file of files">
-                        <div class="border rounded">
-                          <div class="d-flex p-2">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar-sm bg-light rounded">
-                                <img
-                                  [src]="file.thumbnail"
-                                  class="img-fluid rounded d-block"
-                                  alt="Product Image"
-                                />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <div class="pt-1">
-                                <h5 class="fs-14 mb-1">{{ file.name }}</h5>
-                                <p class="fs-13 text-muted mb-0">
-                                  {{ file.size | number }} bytes
-                                </p>
-                                <strong
-                                  class="error text-danger"
-                                  *ngIf="file.error"
-                                  >{{ file.error }}</strong
-                                >
-                              </div>
-                            </div>
-                            <div class="flex-shrink-0 ms-3">
-                              <button
-                                class="btn btn-sm btn-danger"
-                                (click)="removeFile(file)"
-                              >
-                                Xóa
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div> -->
                 </div>
               </div>
 

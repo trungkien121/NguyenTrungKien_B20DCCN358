@@ -33,6 +33,11 @@ export class ChucNangComponent implements OnInit {
 
   AuthConstant = AuthConstant;
 
+  nhomQuyenUpdate: Quyen = {
+    id: "",
+    tenNhomQuyen: "",
+  };
+
   chucNangLst: ChucNang[] = [];
   chucNangByRoleLst: ChucNang[] = [];
 
@@ -44,7 +49,7 @@ export class ChucNangComponent implements OnInit {
   // chucNangUserLst: ChucNang[] = [];
   // chucNangAdminLst: ChucNang[] = [];
 
-  tab: number = 1;
+  roleId: number = 1;
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -66,6 +71,7 @@ export class ChucNangComponent implements OnInit {
   }
 
   getChucNangByQuyen(roleId: number) {
+    this.roleId = roleId;
     this.nhomquyenService.get(roleId).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.chucNangByRoleLst = res.data.chucNangs;
@@ -85,7 +91,7 @@ export class ChucNangComponent implements OnInit {
   getRoleLst() {
     this.nhomquyenService.getLst(this.modelSearch).subscribe((res: any) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.nhomquyenLst = res.data;
+        this.nhomquyenLst = res.data.data;
       }
     });
   }
@@ -151,8 +157,18 @@ export class ChucNangComponent implements OnInit {
   }
 
   confirmUpdateNhomQuyen() {
-    console.log("role", this.chucNangByRoleLst);
-    this.nhomquyenService.update(this.chucNangByRoleLst).subscribe((resp) => {
+    this.nhomQuyenUpdate.id = this.roleId.toString();
+    this.nhomQuyenUpdate.chucNangs = this.chucNangByRoleLst;
+
+    const matchedRole = this.nhomquyenLst.find(
+      (quyen: Quyen) => quyen.id == this.roleId.toString()
+    );
+
+    if (matchedRole) {
+      this.nhomQuyenUpdate.tenNhomQuyen = matchedRole.tenNhomQuyen;
+    }
+
+    this.nhomquyenService.update(this.nhomQuyenUpdate).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Cập nhật thành công");
       } else if (resp.status == CommonConstant.STATUS_OK_409) {

@@ -1,5 +1,9 @@
 <p-dialog
-  header="Thêm chức năng"
+  [header]="
+    typeModal == CommonConstant.TYPE_VIEW
+      ? 'Xem chức năng'
+      : 'Chỉnh sửa chức năng'
+  "
   [(visible)]="displayModal"
   [modal]="true"
   [style]="{ width: '50vw' }"
@@ -10,6 +14,30 @@
   (onHide)="onCancel()"
 >
   <div>
+    <div class="flex-shrink-0">
+      <!-- Nút Cập nhật -->
+      <button
+        *ngIf="typeModal == CommonConstant.TYPE_UPDATE"
+        type="button"
+        class="btn btn-success shadow-none"
+        (click)="updateTypeModal()"
+      >
+        <i class="ri-edit-line align-middle me-1"></i>
+        Xem
+      </button>
+
+      <!-- Nút Xem -->
+      <button
+        *ngIf="typeModal != CommonConstant.TYPE_UPDATE"
+        type="button"
+        class="btn btn-primary shadow-none"
+        (click)="updateTypeModal()"
+      >
+        <i class="ri-eye-line align-middle me-1"></i>
+        Cập nhật
+      </button>
+    </div>
+
     <div class="mb-3">
       <label class="col-form-label" for="title">
         Tên <span class="text-danger">*</span></label
@@ -22,7 +50,7 @@
         placeholder="Nhập tên danh mục thuốc"
         #title="ngModel"
         [(ngModel)]="chucnang.tenChucNang"
-        disabled="true"
+        [disabled]="typeModal == CommonConstant.TYPE_VIEW"
         required
       />
     </div>
@@ -45,7 +73,7 @@
         id="mota"
         placeholder="Nhập mô tả loại thuốc"
         [(ngModel)]="chucnang.moTa"
-        disabled="true"
+        [disabled]="typeModal == CommonConstant.TYPE_VIEW"
       >
       </textarea>
     </div>
@@ -58,7 +86,7 @@
         class="form-control"
         id="mota"
         placeholder="Nhập mô tả loại thuốc"
-        disabled="true"
+        [disabled]="typeModal == CommonConstant.TYPE_VIEW"
         [(ngModel)]="chucnang.hanhDong"
       >
       </textarea>

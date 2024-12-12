@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   changePwd: ChangePassword = {};
+  imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
 
   ngOnInit() {
     this.getUserInfo();
@@ -49,6 +50,13 @@ export class ProfileComponent implements OnInit {
 
         // Cập nhật lại userInfo trong localStorage
         localStorage.setItem("userInfo", JSON.stringify(this.userUpdate));
+
+        // this.router
+        //   .navigateByUrl("/", { skipLocationChange: true })
+        //   .then(() => {
+        //     this.router.navigate([this.router.url]);
+        //   });
+        window.location.reload();
       } else {
         this.toastService.error("Update error!");
       }
@@ -107,5 +115,22 @@ export class ProfileComponent implements OnInit {
         this.toastService.error("Cập nhật thất bại");
       }
     });
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result; // Cập nhật đường dẫn hình ảnh
+      };
+
+      reader.readAsDataURL(file); // Đọc tệp hình ảnh
+
+      // Lưu tệp vào thuộc tính thuoc.file
+      this.userUpdate.file = file;
+    }
   }
 }

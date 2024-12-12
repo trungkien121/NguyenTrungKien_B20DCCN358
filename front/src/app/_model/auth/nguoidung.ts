@@ -12,6 +12,7 @@ export class NguoiDung {
   diaChi?: string;
   nhomQuyens?: Quyen[];
 
-  avartar?: string;
+  file?: File;
+  avatar?: string;
   matKhauMoi?: string;
 }

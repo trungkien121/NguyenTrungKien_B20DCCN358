@@ -10,11 +10,9 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
-import { NhaCungCap } from "src/app/_model/ncc";
 import { NhaSanXuat } from "src/app/_model/nsx";
 import { Thuoc } from "src/app/_model/thuoc";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
-import { NCCService } from "src/app/_service/ncc.service";
 import { NSXService } from "src/app/_service/nsx.service";
 import { ThuocService } from "src/app/_service/thuoc.service";
 
