@@ -1,0 +1,348 @@
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Hồ sơ của tôi</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xxl-3">
+          <div class="card mt-n5">
+            <div class="card-body p-4">
+              <div class="text-center">
+                <div
+                  class="profile-user position-relative d-inline-block mx-auto mb-4"
+                >
+                  <img
+                    [src]="imageUrl"
+                    class="rounded-circle avatar-xl img-thumbnail user-profile-image shadow"
+                    alt="user-profile-image"
+                    *ngIf="imageUrl"
+                  />
+                  <img
+                    [src]="userUpdate.avatar"
+                    class="rounded-circle avatar-xl img-thumbnail user-profile-image shadow"
+                    *ngIf="userUpdate.avatar && !imageUrl"
+                    alt="user-profile-image"
+                  />
+
+                  <img
+                    src="assets/images/no_image.png"
+                    class="rounded-circle avatar-xl img-thumbnail user-profile-image shadow"
+                    *ngIf="!userUpdate.avatar && !imageUrl"
+                    alt="user-profile-image"
+                  />
+
+                  <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                    <input
+                      id="profile-img-file-input"
+                      type="file"
+                      class="profile-img-file-input"
+                      accept="image/png, image/gif, image/jpeg"
+                      (change)="onImageSelected($event)"
+                    />
+                    <label
+                      for="profile-img-file-input"
+                      class="profile-photo-edit avatar-xs"
+                    >
+                      <span
+                        class="avatar-title rounded-circle bg-light text-body shadow"
+                      >
+                        <i class="ri-camera-fill"></i>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <h5 class="fs-16 mb-1">
+                  {{ user.hoTen }} / {{ user.soDienThoai }}
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="mb-3 d-flex align-items-center bg-soft-info">
+                <div class="avatar-xs d-block flex-shrink-0 me-3">
+                  <i
+                    class="mdi mdi-account-circle text-muted fs-3 align-middle me-1"
+                  ></i>
+                </div>
+                <div>Thông tin cá nhân</div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <div class="avatar-xs d-block flex-shrink-0 me-3">
+                  <i class="bx bx-bell fs-24 align-middle"></i>
+                </div>
+                <div>Thông báo</div>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="avatar-xs d-block flex-shrink-0 me-3">
+                  <i class="ri-store-2-fill me-1 align-bottom fs-3"></i>
+                </div>
+                <div>Đơn mua</div>
+              </div>
+            </div>
+          </div>
+          <!--end card-->
+        </div>
+        <!--end col-->
+        <div class="col-xxl-9">
+          <div class="card mt-n5">
+            <div class="card-header">
+              <ul
+                class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#personalDetails"
+                    role="tab"
+                  >
+                    <i class="fas fa-home"></i>Thông tin
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body p-4">
+              <div class="tab-content">
+                <div
+                  class="tab-pane active"
+                  id="personalDetails"
+                  role="tabpanel"
+                >
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="firstnameInput" class="form-label"
+                          >Họ tên</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="firstnameInput"
+                          placeholder="Enter your firstname"
+                          [(ngModel)]="userUpdate.hoTen"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="lastnameInput" class="form-label"
+                          >Tên đăng nhập</label
+                        >
+                        <input
+                          disabled="true"
+                          type="text"
+                          class="form-control"
+                          id="lastnameInput"
+                          placeholder="Enter your lastname"
+                          [(ngModel)]="userUpdate.tenDangNhap"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="phonenumberInput" class="form-label"
+                          >Số điện thoại</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="phonenumberInput"
+                          placeholder="Enter your phone number"
+                          [(ngModel)]="userUpdate.soDienThoai"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email</label>
+                        <input
+                          disabled="true"
+                          type="email"
+                          class="form-control"
+                          id="emailInput"
+                          placeholder="Enter your email"
+                          [(ngModel)]="userUpdate.email"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-12">
+                      <div class="hstack gap-2 justify-content-end">
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          (click)="updateUser()"
+                        >
+                          Cập nhật
+                        </button>
+                        <!-- <button type="button" class="btn btn-soft-success">
+                            Cancel
+                          </button> -->
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </div>
+                <!--end tab-pane-->
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header">
+              <ul
+                class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                role="tablist"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#personalDetails"
+                    role="tab"
+                  >
+                    <i class="fas fa-home"></i>Đổi mật khẩu
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body p-4">
+              <div class="tab-content">
+                <div
+                  class="tab-pane active"
+                  id="changePassword"
+                  role="tabpanel"
+                >
+                  <div class="row g-2">
+                    <div class="col-lg-4">
+                      <label for="oldpasswordInput" class="form-label"
+                        >Mật khẩu cũ*</label
+                      >
+                      <input
+                        type="password"
+                        name="oldPwd"
+                        id="oldPwd"
+                        class="form-control"
+                        #oldPwd="ngModel"
+                        [(ngModel)]="changePwd.oldPwd"
+                        placeholder="Nhập mật khẩu cũ"
+                        required
+                      />
+                      <div
+                        class="text-danger"
+                        *ngIf="
+                          oldPwd.invalid && (oldPwd.dirty || oldPwd.touched)
+                        "
+                      >
+                        Hãy nhập mật khẩu cũ
+                      </div>
+                    </div>
+
+                    <!--end col-->
+                    <div class="col-lg-4">
+                      <div>
+                        <label for="newpasswordInput" class="form-label"
+                          >Mật khẩu mới*</label
+                        >
+                        <input
+                          type="password"
+                          name="newPwd"
+                          id="newPwd"
+                          class="form-control"
+                          #newPwd="ngModel"
+                          class="form-control"
+                          id="newpasswordInput"
+                          [(ngModel)]="changePwd.newPwd"
+                          placeholder="Nhập mật khẩu mới"
+                          required
+                        />
+
+                        <div
+                          class="text-danger"
+                          *ngIf="
+                            newPwd.invalid && (newPwd.dirty || newPwd.touched)
+                          "
+                        >
+                          Hãy nhập mật khẩu mới
+                        </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-4">
+                      <div>
+                        <label for="confirmpasswordInput" class="form-label"
+                          >Xác nhận lại mật khẩu*</label
+                        >
+                        <input
+                          type="password"
+                          name="confirmPwd"
+                          id="confirmPwd"
+                          class="form-control"
+                          #congirmPwd="ngModel"
+                          class="form-control"
+                          id="confirmpasswordInput"
+                          [(ngModel)]="changePwd.confirmPwd"
+                          placeholder="Xác nhận lại mật khẩu"
+                          required
+                        />
+
+                        <div
+                          class="text-danger"
+                          *ngIf="
+                            congirmPwd.invalid &&
+                            (congirmPwd.dirty || congirmPwd.touched)
+                          "
+                        >
+                          Hãy nhập lại mật khẩu mới
+                        </div>
+
+                        <div
+                          class="text-danger"
+                          *ngIf="changePwd.confirmPwd != changePwd.newPwd"
+                        >
+                          Không giống với mật khẩu mới
+                        </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <!--end col-->
+                    <div class="col-lg-12">
+                      <div class="text-end">
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          (click)="changePassword()"
+                        >
+                          Đổi mật khẩu
+                        </button>
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </div>
+                <!--end tab-pane-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
