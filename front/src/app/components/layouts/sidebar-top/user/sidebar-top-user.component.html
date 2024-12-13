@@ -33,7 +33,35 @@
             aria-controls="sidebarDashboards"
           >
             <i class="mdi mdi-speedometer"></i>
-            <span data-key="t-dashboards"> Quản lý thuốc</span>
+            <span data-key="t-dashboards"> Thuốc giảm đau, hạ sốt, kháng viêm  </span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarDashboards">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  [routerLink]="['/sys/loaithuoc']"
+                  class="nav-link"
+                  data-key="t-analytics"
+                >
+                
+                </a>
+              </li>
+
+              
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarDashboards"
+          >
+            <i class="mdi mdi-speedometer"></i>
+            <span data-key="t-dashboards"> Thuốc kháng sinh, kháng nấm </span>
           </a>
           <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
@@ -43,59 +71,9 @@
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Thuốc
+                  Vitamin a
                 </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/ncc']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Nhà cung cấp
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/nsx']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Nhà sản xuất
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/loaithuoc']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Loại thuốc
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/danhmucThuoc']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Danh mục thuốc
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/doituong']"
-                  class="nav-link"
-                  data-key="t-ecommerce"
-                >
-                  Đối tượng
-                </a>
-              </li>
+              </li>  
             </ul>
           </div>
         </li>
@@ -103,26 +81,25 @@
         <li class="nav-item">
           <a
             class="nav-link menu-link"
-            href="#sidebarLayouts"
             data-bs-toggle="collapse"
             role="button"
             aria-expanded="false"
-            aria-controls="sidebarLayouts"
+            aria-controls="sidebarDashboards"
           >
-            <i class="mdi mdi-view-carousel-outline"></i>
-            <span data-key="t-layouts">Quản lý nhập hàng</span>
+            <i class="mdi mdi-speedometer"></i>
+            <span data-key="t-dashboards"> Thuốc tiêu hoá & gan mật </span>
           </a>
-          <div class="collapse menu-dropdown" id="sidebarLayouts">
+          <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
                 <a
-                  [routerLink]="['/sys/phieunhap']"
+                  [routerLink]="['/sys/product']"
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Nhập hàng
+                  Vitamin a
                 </a>
-              </li>
+              </li>  
             </ul>
           </div>
         </li>
@@ -130,26 +107,25 @@
         <li class="nav-item">
           <a
             class="nav-link menu-link"
-            href="#sidebarLayouts"
             data-bs-toggle="collapse"
             role="button"
             aria-expanded="false"
-            aria-controls="sidebarLayouts"
+            aria-controls="sidebarDashboards"
           >
-            <i class="mdi mdi-view-carousel-outline"></i>
-            <span data-key="t-layouts">Quản lý đơn hàng</span>
+            <i class="mdi mdi-speedometer"></i>
+            <span data-key="t-dashboards"> Thuốc da liễu </span>
           </a>
-          <div class="collapse menu-dropdown" id="sidebarLayouts">
+          <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
                 <a
-                  [routerLink]="['/sys/donhang']"
+                  [routerLink]="['/sys/product']"
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Đơn hàng
+                  Vitamin a
                 </a>
-              </li>
+              </li>  
             </ul>
           </div>
         </li>
@@ -157,59 +133,30 @@
         <li class="nav-item">
           <a
             class="nav-link menu-link"
-            href="#sidebarLayouts"
             data-bs-toggle="collapse"
             role="button"
             aria-expanded="false"
-            aria-controls="sidebarLayouts"
+            aria-controls="sidebarDashboards"
           >
-            <i class="mdi mdi-view-carousel-outline"></i>
-            <span data-key="t-layouts">Quản lý khách hàng</span>
+            <i class="mdi mdi-speedometer"></i>
+            <span data-key="t-dashboards">  Thuốc Mắt, Tai, Mũi, Họng </span>
           </a>
-          <div class="collapse menu-dropdown" id="sidebarLayouts">
+          <div class="collapse menu-dropdown" id="sidebarDashboards">
             <ul class="nav nav-sm flex-column">
               <li class="nav-item">
                 <a
-                  [routerLink]="['/sys/customer']"
+                  [routerLink]="['/sys/product']"
                   class="nav-link"
                   data-key="t-analytics"
                 >
-                  Khách hàng
+                  <!-- Vitamin a -->
                 </a>
-              </li>
-
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/sys/chucnang']"
-                  class="nav-link"
-                  data-key="t-analytics"
-                >
-                  Chức năng
-                </a>
-              </li>
+              </li>  
             </ul>
           </div>
         </li>
 
-        <li class="nav-item">
-          <a
-            class="nav-link menu-link"
-            [routerLink]="['/home']"
-            role="button"
-            aria-expanded="false"
-            aria-controls="sidebarLayouts"
-          >
-            <i class="mdi mdi-view-carousel-outline"></i>
-            <span data-key="t-layouts">Trang chủ</span>
-          </a>
-        </li>
-        <!-- <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" href="#adminPanel">Quản Lí Home</a>
-          </li>
         
-          <li class="nav-item" *ngIf="isCustomer">
-            <a class="nav-link" href="#customerHome">Khách Hàng Home</a>
-          </li> -->
       </ul>
     </div>
   </div>
