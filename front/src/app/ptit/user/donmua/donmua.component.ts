@@ -20,6 +20,8 @@ import { SearchModel } from "src/app/_model/common/Search";
 import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant";
 import { ChiTietDonHang } from "src/app/_model/chitietdonhang";
 import { DonHang } from "src/app/_model/hoadon";
+import { DanhGia } from "src/app/_model/danhgia";
+import { DanhgiaService } from "src/app/_service/danhgia.service";
 
 @Component({
   selector: "app-mua",
@@ -36,6 +38,7 @@ export class DonMuaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private donhangService: DonhangService,
+    private danhgiaService: DanhgiaService,
 
     private toastService: ToastrService
   ) {}
@@ -43,6 +46,13 @@ export class DonMuaComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
 
   donhangLst: DonHang[] = [];
+  donhangDanhGia: DonHang = {};
+
+  danhGia: DanhGia = {
+    danhGia: "",
+    diemSo: 5,
+  };
+
   totalRow: number = 0;
 
   modelSearch: SearchModel = {
@@ -54,6 +64,28 @@ export class DonMuaComponent implements OnInit {
   };
 
   tab: number = 0;
+
+  danhGiaDH() {
+    this.danhGia.nguoiDungId = this.user.id;
+    console.log(this.donhangDanhGia);
+
+    this.donhangDanhGia.chiTietDonHangs?.forEach((item: ChiTietDonHang) => {
+      this.danhGia.thuocId = item.thuoc?.id;
+      this.danhgiaService.create(this.danhGia).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          this.toastService.success("Lưu thành công");
+          // this.router.navigate(["/sys/product"]);
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
+        } else {
+          this.toastService.error("Lưu thất bại");
+        }
+      });
+    });
+  }
+  updateDiemSo(newScore: number): void {
+    this.danhGia.diemSo = newScore;
+  }
 
   logout() {
     this.nguoidungService.logOut(true);
@@ -147,6 +179,20 @@ export class DonMuaComponent implements OnInit {
     donhang.chiTietDonHangs?.forEach((item: ChiTietDonHang) => {
       item.thuocId = item.thuoc?.id;
     });
+  }
+
+  traDonHang(donhang: DonHang) {
+    if (donhang.khachHang) {
+      donhang.khachHangId = donhang.khachHang.id;
+    }
+
+    donhang.chiTietDonHangs?.forEach((item: ChiTietDonHang) => {
+      item.thuocId = item.thuoc?.id;
+    });
+
+    donhang.trangThaiGiaoHang = TrangThaiGiaoHang.TRA_HANG;
+
+    this.updateDonHang(donhang);
   }
 
   huyDonHang(donhang: DonHang) {

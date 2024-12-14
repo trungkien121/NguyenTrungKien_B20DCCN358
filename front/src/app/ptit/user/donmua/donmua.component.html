@@ -2,17 +2,8 @@
   <div class="page-content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
-            <h4 class="mb-sm-0">Hồ sơ của tôi</h4>
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-xxl-3">
-          <div class="card mt-n5">
+          <div class="card">
             <div class="card-body p-4">
               <div class="text-center">
                 <div
@@ -369,6 +360,148 @@
                       </div>
                     </div>
                   </div>
+
+                  <div
+                    class="modal fade"
+                    id="showModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header bg-light p-3">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            Đánh giá sản phẩm
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="close-modal"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <input type="hidden" id="id-field" />
+
+                          <div
+                            class="row gy-3 mb-3"
+                            *ngFor="let item of donhangDanhGia.chiTietDonHangs"
+                          >
+                            <div class="col-sm-auto">
+                              <div class="avatar-lg bg-light rounded p-1">
+                                <img
+                                  [src]="item.thuoc?.avatar"
+                                  alt=""
+                                  class="img-fluid d-block"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col-sm">
+                              <h5 class="fs-14 text-truncate">
+                                <a
+                                  href="ecommerce-product-detail.html"
+                                  class="text-dark"
+                                  >{{ item.thuoc?.tenThuoc }}</a
+                                >
+                              </h5>
+                              <ul class="list-inline text-muted">
+                                <li class="list-inline-item">
+                                  Số lượng :
+                                  <span class="fw-medium">{{
+                                    item.soLuong
+                                  }}</span>
+                                </li>
+                                <!-- <li class="list-inline-item">
+                                    Size : <span class="fw-medium">M</span>
+                                  </li> -->
+                              </ul>
+                            </div>
+
+                            <div class="col-sm-auto">
+                              <div class="text-lg-end">
+                                <p class="text-muted mb-1">Giá:</p>
+                                <h5 class="fs-14">
+                                  <span
+                                    id="ticket_price"
+                                    class="product-price text-danger"
+                                  >
+                                    {{
+                                      (item.donGia || 0) * (item.soLuong || 0)
+                                        | number : "1.0-0"
+                                    }}
+                                    VNĐ</span
+                                  >
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mb-3" id="modal-id">
+                            <div
+                              class="d-flex flex-wrap gap-2 align-items-center mt-3"
+                            >
+                              <div class="fw-semibold">Chất lượng sản phẩm</div>
+
+                              <div class="text-muted fs-16">
+                                <span
+                                  *ngFor="
+                                    let star of [].constructor(5);
+                                    let i = index
+                                  "
+                                  class="mdi mdi-star"
+                                  [class.text-warning]="
+                                    i < (danhGia.diemSo || 0)
+                                  "
+                                  [class.text-muted]="
+                                    i >= (danhGia.diemSo || 0)
+                                  "
+                                  (click)="updateDiemSo(i + 1)"
+                                  style="cursor: pointer"
+                                ></span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mb-3" id="modal-id">
+                            <label for="orderId" class="form-label"
+                              >Đánh giá</label
+                            >
+                            <textarea
+                              type="text"
+                              id="orderId"
+                              class="form-control"
+                              placeholder="Nhập đánh giá"
+                              [(ngModel)]="danhGia.danhGia"
+                            >
+                            </textarea>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <div class="hstack gap-2 justify-content-end">
+                            <button
+                              type="button"
+                              class="btn btn-light"
+                              data-bs-dismiss="modal"
+                            >
+                              Trở lại
+                            </button>
+                            <button
+                              type="submit"
+                              class="btn btn-success"
+                              (click)="danhGiaDH()"
+                              id="add-btn"
+                              data-bs-dismiss="modal"
+                            >
+                              Đánh giá
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="card-footer">
@@ -429,7 +562,15 @@
                         "
                       >
                         <div>
-                          <button type="submit" class="btn btn-info me-2">
+                          <button
+                            type="submit"
+                            class="btn btn-info me-2"
+                            id="danhgia"
+                            data-bs-target="#showModal"
+                            data-bs-toggle="modal"
+                            id="create-btn"
+                            (click)="donhangDanhGia = donhang"
+                          >
                             Đánh giá
                           </button>
                         </div>
@@ -445,13 +586,14 @@
                           <button
                             type="submit"
                             class="btn btn-outline-info me-2"
+                            (click)="traDonHang(donhang)"
                           >
                             Yêu cầu trả hàng/ hoàn tiền
                           </button>
                         </div>
                       </div>
 
-                      <div
+                      <!-- <div
                         class="d-flex flex-wrap my-n1"
                         *ngIf="
                           donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_HUY
@@ -465,7 +607,7 @@
                             Xem chi tiết đơn hủy
                           </button>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="d-flex align-items-center gap-2 text-muted">
                         <div>Tổng :</div>

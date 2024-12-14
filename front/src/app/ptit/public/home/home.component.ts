@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
     this.getUserInfo();
   }
 
-
   async getUserInfo(): Promise<void> {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
@@ -148,7 +147,7 @@ export class HomeComponent implements OnInit {
     this.gioHangService.createGH(gioHang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Lưu thành công");
-        this.router.navigate([`/user/giohang`]);
+        // this.router.navigate([`/user/giohang`]);
       } else {
         this.toastService.error("Lưu thất bại");
       }
