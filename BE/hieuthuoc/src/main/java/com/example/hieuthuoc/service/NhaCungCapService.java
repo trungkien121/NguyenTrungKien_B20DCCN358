@@ -57,7 +57,8 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 		if (!currentNhaCungCap.isPresent()) {
 			return ResponseDTO.<NhaCungCap>builder().status(404).msg("Không tìm thấy nhà cung cấp").build();
 		}
-		if (nhaCungCapRepo.existsByMaNCC(nhaCungCap.getMaNCC())) {
+		if (nhaCungCap.getMaNCC().equals(currentNhaCungCap.get().getMaNCC()) == false
+				&& nhaCungCapRepo.existsByMaNCC(nhaCungCap.getMaNCC())) {
 			return ResponseDTO.<NhaCungCap>builder().status(409).msg("Mã Nhà cung cấp đã tồn tại").build();
 		}
 		NhaCungCap updatedNhaCungCap = nhaCungCapRepo.save(nhaCungCap);

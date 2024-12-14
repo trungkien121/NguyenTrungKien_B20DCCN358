@@ -22,9 +22,12 @@ import com.example.hieuthuoc.entity.ChiTietDonHang;
 import com.example.hieuthuoc.entity.DonHang;
 import com.example.hieuthuoc.entity.DonHang.TrangThaiGiaoHang;
 import com.example.hieuthuoc.entity.NguoiDung;
+import com.example.hieuthuoc.entity.ThongBao;
+import com.example.hieuthuoc.entity.ThongBao.LoaiThongBao;
 import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.repository.DonHangRepo;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
+import com.example.hieuthuoc.repository.ThongBaoRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
 
 public interface DonHangService {
@@ -55,6 +58,9 @@ class DonHangServiceImpl implements DonHangService {
 	@Autowired
 	private ThuocRepo thuocRepo;
 
+	@Autowired
+	private ThongBaoRepo thongBaoRepo;
+
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -79,9 +85,9 @@ class DonHangServiceImpl implements DonHangService {
 		if (searchDTO.getKeyWord() == null || searchDTO.getKeyWord().equals("")) {
 			page = donHangRepo.findAll(pageRequest);
 		} else {
-			
+
 			TrangThaiGiaoHang trangThaiGiaoHang = TrangThaiGiaoHang.valueOf(searchDTO.getKeyWord());
-			
+
 			page = donHangRepo.findByTrangThaiGiaoHang(trangThaiGiaoHang, pageRequest);
 
 		}
@@ -111,7 +117,41 @@ class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = donHangRepo.findById(donHangDTO.getId()).orElse(null);
 		if (donHang != null) {
 			donHang.setTrangThaiGiaoHang(DonHang.TrangThaiGiaoHang.valueOf(donHangDTO.getTrangThaiGiaoHang()));
-			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang)).build();
+			DonHang updateDonHang = donHangRepo.save(donHang);
+
+			if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)
+					|| donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_HUY)) {
+				if (updateDonHang.getNguoiDung() != null) {
+					ThongBao thongBao = new ThongBao();
+
+					String tieuDe;
+					String noidung;
+
+					if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)) {
+						tieuDe = "Đơn hàng đã giao thành công";
+						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được giao thành công.";
+					} else {
+						tieuDe = "Đơn hàng đã hủy thành công";
+						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được hủy thành công.";
+					}
+
+					String linkLienKet = "/donhang/get?id=" + updateDonHang.getId();
+					LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
+
+					List<NguoiDung> nguoiDungs = new ArrayList<>();
+					nguoiDungs.add(updateDonHang.getNguoiDung());
+
+					thongBao.setTieuDe(tieuDe);
+					thongBao.setNoiDung(noidung);
+					thongBao.setLinkLienKet(linkLienKet);
+					thongBao.setLoaiThongBao(loaiThongBao);
+					thongBao.setNguoiNhan(nguoiDungs);
+
+					thongBaoRepo.save(thongBao);
+				}
+			}
+
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(updateDonHang).build();
 		}
 		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
 	}
@@ -121,7 +161,8 @@ class DonHangServiceImpl implements DonHangService {
 		DonHang donHang = donHangRepo.findById(donHangDTO.getId()).orElse(null);
 		if (donHang != null) {
 			donHang.setTrangThaiThanhToan(DonHang.TrangThaiThanhToan.valueOf(donHangDTO.getTrangThaiThanhToan()));
-			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(donHangRepo.save(donHang)).build();
+			DonHang updateDonHang = donHangRepo.save(donHang);
+			return ResponseDTO.<DonHang>builder().status(200).msg("Thành công").data(updateDonHang).build();
 		}
 		return ResponseDTO.<DonHang>builder().status(200).msg("Không tìm thấy đơn hàng").build();
 	}
@@ -135,6 +176,7 @@ class DonHangServiceImpl implements DonHangService {
 			NguoiDung khachHang = nguoiDungRepo.findById(donHangDTO.getKhachHangId()).orElse(null);
 			if (khachHang != null) {
 				donHang.setKhachHang(khachHang);
+
 			}
 		}
 
@@ -171,7 +213,29 @@ class DonHangServiceImpl implements DonHangService {
 
 		donHang.setTongTien(tongTien);
 		donHang.setChiTietDonHangs(chiTietDonHangs);
-		return ResponseDTO.<DonHang>builder().status(200).msg("ok").data(donHangRepo.save(donHang)).build();
+
+		DonHang createDonHang = donHangRepo.save(donHang);
+
+		if (createDonHang.getNguoiDung() != null) {
+			ThongBao thongBao = new ThongBao();
+			String tieuDe = "Đặt đơn hàng thành công";
+			String noidung = "Đơn hàng ID = " + createDonHang.getId() + " đã được đặt thành công.";
+			String linkLienKet = "/donhang/get?id=" + createDonHang.getId();
+			LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
+
+			List<NguoiDung> nguoiDungs = new ArrayList<>();
+			nguoiDungs.add(createDonHang.getNguoiDung());
+
+			thongBao.setTieuDe(tieuDe);
+			thongBao.setNoiDung(noidung);
+			thongBao.setLinkLienKet(linkLienKet);
+			thongBao.setLoaiThongBao(loaiThongBao);
+			thongBao.setNguoiNhan(nguoiDungs);
+
+			thongBaoRepo.save(thongBao);
+		}
+
+		return ResponseDTO.<DonHang>builder().status(200).msg("ok").data(createDonHang).build();
 	}
 
 	@Override
