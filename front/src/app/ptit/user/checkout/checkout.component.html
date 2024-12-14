@@ -258,7 +258,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-sm-6 mt-0">
+                      <!-- <div class="col-lg-3 col-sm-6 mt-0">
                         <div
                           data-bs-toggle="collapse"
                           data-bs-target="#paymentmethodCollapse.show"
@@ -353,9 +353,9 @@
                             </label>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
 
-                      <div class="collapse show" id="paymentmethodCollapse">
+                      <!-- <div class="collapse show" id="paymentmethodCollapse">
                         <div class="card p-4 border shadow-none mb-0 mt-4">
                           <div class="row gy-3">
                             <div class="col-md-12">
@@ -412,7 +412,7 @@
                           <i data-feather="lock" class="text-muted icon-xs"></i>
                           Your transaction is secured with SSL encryption
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="d-flex align-items-start gap-3 mt-3">
                       <button
@@ -431,37 +431,6 @@
                 </div>
                 <!-- end tab pane -->
 
-                <div
-                  class="tab-pane fade"
-                  id="pills-finish"
-                  role="tabpanel"
-                  aria-labelledby="pills-finish-tab"
-                >
-                  <div class="text-center py-5">
-                    <div class="mb-4">
-                      <lord-icon
-                        src="https://cdn.lordicon.com/lupuorrc.json"
-                        trigger="loop"
-                        colors="primary:#0ab39c,secondary:#405189"
-                        style="width: 120px; height: 120px"
-                      ></lord-icon>
-                    </div>
-                    <h5>Thank you ! Your Order is Completed !</h5>
-                    <p class="text-muted">
-                      You will receive an order confirmation email with details
-                      of your order.
-                    </p>
-
-                    <h3 class="fw-semibold">
-                      Order ID:
-                      <a
-                        href="apps-ecommerce-order-details.html"
-                        class="text-decoration-underline"
-                        >VZ2451</a
-                      >
-                    </h3>
-                  </div>
-                </div>
                 <!-- end tab pane -->
               </div>
               <!-- end tab content -->
@@ -511,17 +480,22 @@
                           >
                         </h5>
                         <p class="text-muted mb-0">
-                          {{ item.thuoc?.giaBan }} x {{ item.soLuong }} 
+                          {{ item.thuoc?.giaBan }} x {{ item.soLuong }}
                         </p>
                       </td>
                       <td class="text-end">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0) + '.000'}}
+                        {{
+                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0) +
+                            ".000"
+                        }}
                       </td>
                     </tr>
 
                     <tr>
                       <td class="fw-semibold" colspan="2">Sub Total :</td>
-                      <td class="fw-semibold text-end">{{ tongTien + '.000'}}</td>
+                      <td class="fw-semibold text-end">
+                        {{ tongTien + ".000" }}
+                      </td>
                     </tr>
                     <tr>
                       <td colspan="2">
@@ -538,7 +512,9 @@
                     <tr class="table-active">
                       <th colspan="2">Tổng :</th>
                       <td class="text-end">
-                        <span class="fw-semibold"> {{ tongTien + '.000'}} VNĐ </span>
+                        <span class="fw-semibold">
+                          {{ tongTien + ".000" }} VNĐ
+                        </span>
                       </td>
                     </tr>
                   </tbody>

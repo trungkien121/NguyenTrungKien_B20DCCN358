@@ -19,7 +19,6 @@ export class GiohangComponent implements OnInit {
   constructor(
     private nguoidungService: NguoidungService,
     private gioHangService: GioHangService,
-
     private router: Router,
     private toastService: ToastrService
   ) {}
@@ -53,13 +52,13 @@ export class GiohangComponent implements OnInit {
   getGH() {
     this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        if (res.data.chiTietGioHangs.length > 0) {
+        if (res.data.chiTietGioHangs.length >= 0) {
           this.gioHangId = res.data.id;
           this.gioHangLst = res.data.chiTietGioHangs;
 
           this.gioHangLst.forEach((item: GioHangChiTiet) => {
-            this.tongTien += (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
-          })
+            this.tongTien += (item.soLuong || 0) * (item.thuoc?.giaBan || 0);
+          });
         }
       }
     });

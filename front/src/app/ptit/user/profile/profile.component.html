@@ -67,7 +67,10 @@
 
           <div class="card">
             <div class="card-body">
-              <div class="mb-3 d-flex align-items-center bg-soft-info">
+              <div
+                class="mb-3 d-flex align-items-center bg-soft-info cursor-pointer"
+                [routerLink]="['/user/profile']"
+              >
                 <div class="avatar-xs d-block flex-shrink-0 me-3">
                   <i
                     class="mdi mdi-account-circle text-muted fs-3 align-middle me-1"
@@ -75,17 +78,35 @@
                 </div>
                 <div>Thông tin cá nhân</div>
               </div>
-              <div class="d-flex align-items-center mb-3">
+              <div
+                class="d-flex align-items-center mb-3 cursor-pointer"
+                [routerLink]="['/user/thongbao']"
+              >
                 <div class="avatar-xs d-block flex-shrink-0 me-3">
                   <i class="bx bx-bell fs-24 align-middle"></i>
                 </div>
                 <div>Thông báo</div>
               </div>
-              <div class="d-flex align-items-center">
+              <div
+                class="d-flex align-items-center cursor-pointer mb-3"
+                [routerLink]="['/user/donmua']"
+              >
                 <div class="avatar-xs d-block flex-shrink-0 me-3">
-                  <i class="ri-store-2-fill me-1 align-bottom fs-3"></i>
+                  <i class="ri-store-2-fill me-1 align-middle fs-3"></i>
                 </div>
                 <div>Đơn mua</div>
+              </div>
+
+              <div
+                class="d-flex align-items-center cursor-pointer"
+                (click)="logout()"
+              >
+                <div class="avatar-xs d-block flex-shrink-0 me-3">
+                  <i
+                    class="mdi mdi-logout text-muted fs-3 align-middle me-1"
+                  ></i>
+                </div>
+                <div>Đăng xuất</div>
               </div>
             </div>
           </div>

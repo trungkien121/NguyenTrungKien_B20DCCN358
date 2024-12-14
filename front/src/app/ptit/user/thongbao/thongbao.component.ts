@@ -30,12 +30,18 @@ export class ThongBaoComponent implements OnInit {
   ) {}
 
   user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+  userUpdate: NguoiDung = {};
 
   userInfo: NguoiDung = {};
   thongbaoId: number = 0;
   thongbaoLst: ThongBao[] = [];
 
+  imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
   tongTien: number = 0;
+
+  logout() {
+    this.nguoidungService.logOut(true);
+  }
 
   ngOnInit() {
     this.getUserInfo();
@@ -103,5 +109,22 @@ export class ThongBaoComponent implements OnInit {
       item.soLuong = item.soLuong + 1;
     }
     this.updateGioHang(item);
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result; // Cập nhật đường dẫn hình ảnh
+      };
+
+      reader.readAsDataURL(file); // Đọc tệp hình ảnh
+
+      // Lưu tệp vào thuộc tính thuoc.file
+      this.userUpdate.file = file;
+    }
   }
 }

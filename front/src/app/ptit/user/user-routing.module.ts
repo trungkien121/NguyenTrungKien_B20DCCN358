@@ -44,15 +44,6 @@ const routes: Routes = [
       },
 
       {
-        path: "donhang",
-        component: DonHangUserComponent,
-        canActivate: [RoleGuard],
-        data: {
-          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
-        },
-      },
-
-      {
         path: "giohang",
         component: GiohangComponent,
         canActivate: [RoleGuard],

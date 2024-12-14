@@ -12,8 +12,6 @@
               <img src="assets/images/logo.png" alt="" height="40" />
             </span>
           </a>
-          
-          
 
           <a href="index.html" class="logo logo-light">
             <span class="logo-sm">
@@ -83,7 +81,7 @@
             <i class="bx bx-shopping-bag fs-22"></i>
           </button>
         </div>
-        
+
         <!-- thông báo -->
         <app-thongbao-header *ngIf="isAuthenticate"></app-thongbao-header>
         <!-- <div *ngIf="isAuthenticate" class="header-item ms-1">
@@ -98,7 +96,6 @@
             <i class="bx bx-bell fs-22"></i> 
           </button>
         </div> -->
-        
 
         <div *ngIf="!isAuthenticate" class="d-flex ms-2" style="margin: 0px">
           <button type="button" class="btn btn-danger btn-sm" (click)="login()">
@@ -115,7 +112,7 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <i class="bx bx-user fs-22"></i> 
+            <i class="bx bx-user fs-22"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-end" style="cursor: pointer">
             <!-- Menu item -->
@@ -125,21 +122,19 @@
               ></i>
               <span class="align-middle"> Hồ sơ </span>
             </a>
-        
-            <a class="dropdown-item" [routerLink]="['/user/donmua']"
-              ><i
-                class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"
-              ></i>
+
+            <a class="dropdown-item" [routerLink]="['/user/donmua']">
+              <i class="ri-store-2-fill me-1 align-middle fs-4"></i>
+
               <span class="align-middle"> Đơn mua </span>
             </a>
-        
+
             <a class="dropdown-item" (click)="logout()"
               ><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
               <span class="align-middle" data-key="t-logout">Đăng xuất</span>
             </a>
           </div>
         </div>
-        
       </div>
     </div>
   </div>

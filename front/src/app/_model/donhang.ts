@@ -16,5 +16,8 @@ export class Donhang {
   trangThaiGiaoHang?: TrangThaiGiaoHang;
   phuongThucThanhToan?: PhuongThucThanhToan;
   trangThaiThanhToan?: TrangThaiThanhToan;
+
+  chiTietDonHangs?: ChiTietDonHang[];
+
   ngayGiao?: Date;
 }

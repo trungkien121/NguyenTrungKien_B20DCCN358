@@ -21,4 +21,6 @@ export class DonHang {
   trangThaiGiaoHang?: TrangThaiGiaoHang;
   phuongThucThanhToan?: PhuongThucThanhToan;
   trangThaiThanhToan?: TrangThaiThanhToan;
+
+  tongTien?: number;
 }

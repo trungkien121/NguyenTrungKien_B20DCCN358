@@ -133,4 +133,8 @@ export class ProfileComponent implements OnInit {
       this.userUpdate.file = file;
     }
   }
+
+  logout() {
+    this.nguoidungService.logOut(true);
+  }
 }

@@ -244,16 +244,21 @@ export class ThuocCreatementComponent implements OnInit {
       return check;
     }
 
-    if (thuoc.soLuongTon == undefined || isNaN(thuoc.soLuongTon) || thuoc.soLuongTon < 0 || !Number.isInteger(thuoc.soLuongTon)) {
+    if (
+      thuoc.soLuongTon == undefined ||
+      isNaN(thuoc.soLuongTon) ||
+      thuoc.soLuongTon < 0 ||
+      !Number.isInteger(thuoc.soLuongTon)
+    ) {
       check = false;
-      this.thuoc.soLuongTon = 0;  // Đặt lại giá trị của số lượng tồn về 0
+      this.thuoc.soLuongTon = 0; // Đặt lại giá trị của số lượng tồn về 0
       return check;
     }
 
     // Kiểm tra mã thuốc
     if (thuoc.maThuoc == undefined || thuoc.maThuoc.trim().length == 0) {
       check = false;
-      this.thuoc.maThuoc = ""; 
+      this.thuoc.maThuoc = "";
       return check;
     }
 
@@ -299,30 +304,4 @@ export class ThuocCreatementComponent implements OnInit {
       }
     }
   }
-
-  // // Hàm xử lý khi nhiều tệp được chọn từ dropzone
-  // onFilesSelected(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files) {
-  //     for (let i = 0; i < input.files.length; i++) {
-  //       const file = input.files[i];
-  //       const reader = new FileReader();
-
-  //       reader.onload = (e: any) => {
-  //         this.files.push({
-  //           name: file.name,
-  //           size: file.size,
-  //           thumbnail: e.target.result, // Đường dẫn hình ảnh thu nhỏ
-  //         });
-  //       };
-
-  //       reader.readAsDataURL(file); // Đọc từng tệp hình ảnh
-  //     }
-  //   }
-  // }
-
-  // // Hàm xóa tệp khỏi danh sách
-  // removeFile(file: { name: string }) {
-  //   this.files = this.files.filter((f) => f.name !== file.name); // Xóa tệp khỏi danh sách
-  // }
 }
