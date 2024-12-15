@@ -48,7 +48,6 @@
                             <a
                               class="btn btn-light"
                               data-bs-toggle="tooltip"
-                              (click)="updateThuoc()"
                               data-bs-placement="top"
                               title="Chỉnh sửa"
                               ><i class="ri-pencil-fill align-bottom"></i
@@ -69,7 +68,7 @@
                               Giỏ hàng
                             </a>
                           </div>
-                        </div>
+                        </div>                                               
                       </div>
 
                       <div
@@ -98,11 +97,7 @@
                               </div>
                               <div class="flex-grow-1">
                                 <p class="text-muted mb-1">Giá :</p>
-                                <h5 class="mb-0">
-                                  {{
-                                    thuoc.giaBan + ".000đ " + "/ " + thuoc.donVi
-                                  }}
-                                </h5>
+                                <h5 class="mb-0">{{ thuoc.giaBan+'.000đ '+'/ '+thuoc.donVi }}</h5>
                               </div>
                             </div>
                           </div>

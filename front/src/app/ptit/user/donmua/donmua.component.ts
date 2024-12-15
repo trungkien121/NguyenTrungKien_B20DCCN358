@@ -235,7 +235,4 @@ export class DonMuaComponent implements OnInit {
       }
     });
   }
-  xemChiTiet(donhang: DonHang) {
-    this.router.navigate(["/user/donmua-chitiet", donhang.id]);
-  }
 }

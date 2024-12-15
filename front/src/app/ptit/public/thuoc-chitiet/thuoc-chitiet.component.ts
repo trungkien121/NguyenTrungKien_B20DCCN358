@@ -109,9 +109,6 @@ export class ThuocChiTietComponent implements OnInit {
     }
   }
 
-  updateThuoc() {
-    this.router.navigate(["/sys/product-create", this.thuoc.id]);
-  }
   getGH() {
     this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {

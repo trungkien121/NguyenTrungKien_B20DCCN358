@@ -28,7 +28,6 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { DonMuaComponent } from "./donmua/donmua.component";
 import { ThongBaoComponent } from "./thongbao/thongbao.component";
 import { DonHangUserComponent } from "./donhang/donhang-user.component";
-import { DonMuaChiTietComponent } from "./donmua-chitiet/donmua-chitiet.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { DonMuaChiTietComponent } from "./donmua-chitiet/donmua-chitiet.componen
     DonMuaComponent,
     ThongBaoComponent,
     DonHangUserComponent,
-    DonMuaChiTietComponent,
   ],
 
   imports: [
