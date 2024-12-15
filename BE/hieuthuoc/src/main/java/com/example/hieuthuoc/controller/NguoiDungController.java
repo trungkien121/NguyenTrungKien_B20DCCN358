@@ -54,9 +54,10 @@ public class NguoiDungController {
 		return nguoiDungService.forgotMatKhau(email);
 	}
 
-	@PostMapping("change_avatar")
-	public ResponseDTO<NguoiDung> changeAvatar(@RequestPart @Valid NguoiDungDTO nguoiDungDTO, @RequestPart("file") MultipartFile file) {
-		if(file != null && !file.isEmpty()) {
+	@PutMapping("change_avatar")
+	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO,
+			@RequestPart(value = "file", required = false) MultipartFile file) {
+		if (file != null && !file.isEmpty()) {
 			nguoiDungDTO.setFile(file);
 		}
 		return nguoiDungService.changeAvatar(nguoiDungDTO);
