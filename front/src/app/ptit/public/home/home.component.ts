@@ -115,10 +115,10 @@ export class HomeComponent implements OnInit {
 
   getThuoc() {
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
-      // if (res.status == CommonConstant.STATUS_OK_200) {
-      this.productLst = res.data.data;
-      this.totalRows = res.data.totalElements;
-      // }
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.productLst = res.data.data;
+        this.totalRows = res.data.totalElements;
+      }
     });
   }
 

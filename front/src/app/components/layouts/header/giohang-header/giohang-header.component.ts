@@ -28,6 +28,7 @@ export class GiohangHeaderComponent implements OnInit {
 
   tongTien: number = 0;
   isHoverDropdown: boolean = false;
+  isFirst: boolean = true;
 
   ngOnInit() {
     this.getUserInfo();
@@ -45,6 +46,7 @@ export class GiohangHeaderComponent implements OnInit {
         // Tự động tắt sau 3 giây nếu cần
         setTimeout(() => {
           this.isHoverDropdown = false;
+          this.isFirst = false;
         }, 3000);
       }
     });

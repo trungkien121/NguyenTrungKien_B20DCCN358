@@ -14,6 +14,7 @@ import { DonhangService } from "src/app/_service/donhang.service";
 import { DonHang } from "src/app/_model/hoadon";
 import { ThongBaoService } from "src/app/_service/thongbao.service";
 import { ThongBao } from "src/app/_model/thongbao";
+import { SearchModel } from "src/app/_model/common/Search";
 
 @Component({
   selector: "app-thongbao",
@@ -39,11 +40,30 @@ export class ThongBaoComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
   tongTien: number = 0;
 
+  lstNoti: ThongBao[] = [];
+  countTotal: number = 0;
+
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 10,
+    sortedField: "",
+    loaiThuoc: "",
+  };
+
   logout() {
     this.nguoidungService.logOut(true);
   }
 
   ngOnInit() {
+    this.thongbaoService.getLst(this.modelSearch).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.lstNoti = res.data.data;
+        this.countTotal = res.data.totalElements;
+      }
+    });
+
     this.getUserInfo();
   }
 
@@ -57,74 +77,8 @@ export class ThongBaoComponent implements OnInit {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userInfo = resp.data;
         if (this.userInfo.id) {
-          this.getGH();
         }
       }
-    }
-  }
-
-  getGH() {
-    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        if (res.data.chiTietGioHangs.length > 0) {
-        }
-      }
-    });
-  }
-
-  deleteGioHang(item: GioHangChiTiet) {
-    this.gioHangService.deleteGH(item.id).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Xóa thành công");
-        this.getGH();
-      } else {
-        this.toastService.error("Xóa thất bại");
-      }
-    });
-  }
-
-  updateGioHang(item: GioHangChiTiet) {
-    this.gioHangService.updateGH(item).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        // this.toastService.success("Cập nhật thành công");
-        this.getGH();
-      } else {
-        this.toastService.error("Cập nhật thất bại");
-      }
-    });
-  }
-
-  minusQuantity(item: GioHangChiTiet) {
-    if (item.soLuong) {
-      if (item.soLuong == 1) {
-      } else {
-        item.soLuong = item.soLuong - 1;
-        this.updateGioHang(item);
-      }
-    }
-  }
-
-  addQuantity(item: GioHangChiTiet) {
-    if (item.soLuong) {
-      item.soLuong = item.soLuong + 1;
-    }
-    this.updateGioHang(item);
-  }
-
-  onImageSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result; // Cập nhật đường dẫn hình ảnh
-      };
-
-      reader.readAsDataURL(file); // Đọc tệp hình ảnh
-
-      // Lưu tệp vào thuộc tính thuoc.file
-      this.userUpdate.file = file;
     }
   }
 }

@@ -114,7 +114,9 @@
 
                             <tr class="border-top border-top-dashed">
                               <th scope="row">Tổng tiền :</th>
-                              <th class="text-end">{{ tongTien }}</th>
+                              <th class="text-end">
+                                {{ tongTien | number : "1.0-0" }}
+                              </th>
                             </tr>
                           </tbody>
                         </table>
@@ -204,8 +206,18 @@
                           {{ donhang.createdAt | date : "dd-MM-yyyy HH:mm" }}
                         </p>
 
-                        <h6 class="mb-1">Người bán hàng đã xác nhận đơn.</h6>
-                        <p class="text-muted mb-0">Thu, 16 Dec 2021 - 5:48AM</p>
+                        <h6
+                          *ngIf="
+                            donhang.trangThaiGiaoHang ==
+                              TrangThaiGiaoHang.DANG_GIAO ||
+                            donhang.trangThaiGiaoHang ==
+                              TrangThaiGiaoHang.DA_GIAO
+                          "
+                          class="mb-1"
+                        >
+                          Người bán hàng đã xác nhận đơn.
+                        </h6>
+                        <!-- <p class="text-muted mb-0">Thu, 16 Dec 2021 - 5:48AM</p> -->
                       </div>
                     </div>
                   </div>
@@ -417,21 +429,13 @@
             <div class="card-body">
               <div class="d-flex align-items-center mb-2">
                 <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Transactions:</p>
+                  <p class="text-muted mb-0">Phương thức:</p>
                 </div>
                 <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">#VLZ124561278124</h6>
+                  <h6 class="mb-0">Tiền mặt</h6>
                 </div>
               </div>
-              <div class="d-flex align-items-center mb-2">
-                <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Payment Method:</p>
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">Debit Card</h6>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-2">
+              <!-- <div class="d-flex align-items-center mb-2">
                 <div class="flex-shrink-0">
                   <p class="text-muted mb-0">Card Holder Name:</p>
                 </div>
@@ -446,13 +450,13 @@
                 <div class="flex-grow-1 ms-2">
                   <h6 class="mb-0">xxxx xxxx xxxx 2456</h6>
                 </div>
-              </div>
+              </div> -->
               <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Total Amount:</p>
+                  <p class="text-muted mb-0">Tổng tiền:</p>
                 </div>
                 <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">$415.96</h6>
+                  <h6 class="mb-0">{{ tongTien | number : "1.0-0" }} VNĐ</h6>
                 </div>
               </div>
             </div>
@@ -466,22 +470,4 @@
     <!-- container-fluid -->
   </div>
   <!-- End Page-content -->
-
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          © Velzon.
-        </div>
-        <div class="col-sm-6">
-          <div class="text-sm-end d-none d-sm-block">
-            Design & Develop by Themesbrand
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
 </div>
