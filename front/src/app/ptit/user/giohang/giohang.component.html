@@ -14,7 +14,7 @@
       <!-- end page title -->
 
       <div class="row mb-3">
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <div class="row align-items-center gy-3 mb-3">
             <div class="col-sm">
               <div>
@@ -95,7 +95,7 @@
                     <p class="text-muted mb-1">Giá:</p>
                     <h5 class="fs-14">
                       <span id="ticket_price" class="product-price"
-                        >{{ item.thuoc?.giaBan + ".000" }} VNĐ</span
+                        >{{ item.thuoc?.giaBan | number : "1.0-0" }} VNĐ</span
                       >
                     </h5>
                   </div>
@@ -135,8 +135,8 @@
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
                         {{
-                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0) +
-                            ".000"
+                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
+                            | number : "1.0-0"
                         }}
                         VNĐ
                       </span>
@@ -193,67 +193,6 @@
           </div>
         </div>
         <!-- end col -->
-
-        <div class="col-xl-4">
-          <div class="sticky-side-div">
-            <div class="card">
-              <div class="card-header border-bottom-dashed">
-                <h5 class="card-title mb-0">Hóa đơn</h5>
-              </div>
-              <!-- <div class="card-header bg-soft-light border-bottom-dashed">
-                <div class="text-center">
-                  <h6 class="mb-2">
-                    Have a <span class="fw-semibold">promo</span> code ?
-                  </h6>
-                </div>
-                <div class="hstack gap-3 px-3 mx-n3">
-                  <input
-                    class="form-control me-auto"
-                    type="text"
-                    placeholder="Enter coupon code"
-                    aria-label="Add Promo Code here..."
-                  />
-                  <button type="button" class="btn btn-success w-xs">
-                    Apply
-                  </button>
-                </div>
-              </div> -->
-              <div class="card-body pt-2">
-                <div class="table-responsive">
-                  <table class="table table-borderless mb-0">
-                    <tbody>
-                      <tr>
-                        <td>Tổng:</td>
-                        <td class="text-end" id="cart-subtotal">
-                          {{ tongTien + ".000" }} VNĐ
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Giảm giá:</td>
-                        <td class="text-end" id="cart-discount">- 0</td>
-                      </tr>
-                      <tr>
-                        <td>Phí vận chuyển :</td>
-                        <td class="text-end" id="cart-shipping">0</td>
-                      </tr>
-
-                      <tr class="table-active">
-                        <th>Total (USD) :</th>
-                        <td class="text-end">
-                          <span class="fw-semibold" id="cart-total">
-                            {{ tongTien + ".000" }} VNĐ
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- end table-responsive -->
-              </div>
-            </div>
-          </div>
-          <!-- end stickey -->
-        </div>
       </div>
       <!-- end row -->
     </div>
