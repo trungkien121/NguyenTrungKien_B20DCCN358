@@ -133,6 +133,23 @@
   transform: translate3d(0px, 58px, 0px);
 }
 
+.hover-dropdown .dropdown-menu {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-dropdown.hover-active .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  inset: 0px 0px auto auto;
+  margin: 0px;
+  transform: translate3d(0px, 58px, 0px);
+}
+
 /* .hover-dropdown .dropdown-menu {
   display: none;
   opacity: 0;

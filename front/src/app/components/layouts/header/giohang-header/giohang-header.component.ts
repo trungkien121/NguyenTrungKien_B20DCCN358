@@ -27,17 +27,27 @@ export class GiohangHeaderComponent implements OnInit {
   gioHangLst: GioHangChiTiet[] = [];
 
   tongTien: number = 0;
+  isHoverDropdown: boolean = false;
 
   ngOnInit() {
     this.getUserInfo();
 
-    // this.gioHangService.getGioHangSubject().subscribe((giohangs) => {
-    //   console.log("giohangs", giohangs);
-    //   this.gioHangId = giohangs.id;
+    this.gioHangService.getGioHangSubject().subscribe((giohangs) => {
+      this.gioHangId = giohangs.id!;
 
-    //   // Kiểm tra xem giohangs có phải là mảng không
-    //   this.gioHangLst = giohangs.chiTietGioHangs as GioHangChiTiet[]; // Gán giá trị nếu là mảng
-    // });
+      // Kiểm tra xem giohangs có phải là mảng không
+      this.gioHangLst = giohangs.chiTietGioHangs as GioHangChiTiet[]; // Gán giá trị nếu là mảng
+
+      // Kích hoạt dropdown hover nếu có thay đổi
+      if (this.gioHangLst.length > 0) {
+        this.isHoverDropdown = true;
+
+        // Tự động tắt sau 3 giây nếu cần
+        setTimeout(() => {
+          this.isHoverDropdown = false;
+        }, 3000);
+      }
+    });
   }
 
   async getUserInfo(): Promise<void> {
@@ -56,7 +66,7 @@ export class GiohangHeaderComponent implements OnInit {
   }
 
   getGH() {
-    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
+    this.gioHangService.getGHSubject(this.userInfo.id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         if (res.data.chiTietGioHangs.length >= 0) {
           this.gioHangId = res.data.id;
@@ -73,7 +83,8 @@ export class GiohangHeaderComponent implements OnInit {
   deleteGioHang(item: GioHangChiTiet) {
     this.gioHangService.deleteGH(item.id).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Xóa thành công");
+        // this.toastService.success("Xóa thành công");
+        this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
         this.getGH();
       } else {
         this.toastService.error("Xóa thất bại");

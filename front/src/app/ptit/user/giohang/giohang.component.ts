@@ -31,6 +31,13 @@ export class GiohangComponent implements OnInit {
 
   ngOnInit() {
     this.getUserInfo();
+
+    this.gioHangService.getGioHangSubject().subscribe((giohangs) => {
+      this.gioHangId = giohangs.id!;
+
+      // Kiểm tra xem giohangs có phải là mảng không
+      this.gioHangLst = giohangs.chiTietGioHangs as GioHangChiTiet[]; // Gán giá trị nếu là mảng
+    });
   }
 
   async getUserInfo(): Promise<void> {
@@ -67,9 +74,10 @@ export class GiohangComponent implements OnInit {
   deleteGioHang(item: GioHangChiTiet) {
     this.gioHangService.deleteGH(item.id).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Xóa thành công");
+        // this.toastService.success("Xóa thành công");
+        this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
         this.getGH();
-        window.location.reload();
+        // window.location.reload();
       } else {
         this.toastService.error("Xóa thất bại");
       }
@@ -81,6 +89,7 @@ export class GiohangComponent implements OnInit {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         // this.toastService.success("Cập nhật thành công");
         this.getGH();
+        this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
       } else {
         this.toastService.error("Cập nhật thất bại");
       }
