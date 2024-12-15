@@ -131,4 +131,27 @@ export class NguoidungService {
       params: params,
     });
   }
+
+  changeAvatar(model: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nguoidung/change_avatar`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    const formData = new FormData(); // Thêm dữ liệu JSON của `thuocDTO` vào FormData
+
+    const nguoiDungDTO = {
+      ...model, // Các trường trong `thuoc`
+      file: undefined, // Xóa thuộc tính `file` nếu đã gửi dưới dạng MultipartFile
+    };
+    formData.append(
+      "nguoiDungDTO",
+      new Blob([JSON.stringify(nguoiDungDTO)], { type: "application/json" })
+    );
+
+    // Thêm tệp (File) vào FormData
+    if (model.file) {
+      formData.append("file", model.file);
+    }
+
+    return this.http.post(`${apiUrl}`, formData, {});
+  }
 }

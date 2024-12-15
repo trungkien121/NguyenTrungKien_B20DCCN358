@@ -148,6 +148,7 @@ export class HomeComponent implements OnInit {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Lưu thành công");
         // this.router.navigate([`/user/giohang`]);
+        window.location.reload();
       } else {
         this.toastService.error("Lưu thất bại");
       }
