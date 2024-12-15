@@ -221,7 +221,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
+                  <!-- <div class="accordion-item border-0">
                     <div class="accordion-header" id="headingTwo">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -260,8 +260,13 @@
                         <p class="text-muted mb-0">Fri, 17 Dec 2021 - 9:45AM</p>
                       </div>
                     </div>
-                  </div>
-                  <div class="accordion-item border-0">
+                  </div> -->
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DANG_GIAO
+                    "
+                  >
                     <div class="accordion-header" id="headingThree">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -280,8 +285,8 @@
                           </div>
                           <div class="flex-grow-1 ms-3">
                             <h6 class="fs-15 mb-1 fw-semibold">
-                              Shipping -
-                              <span class="fw-normal">Thu, 16 Dec 2021</span>
+                              Đang vận chuyển
+                              <!-- <span class="fw-normal">Thu, 16 Dec 2021</span> -->
                             </h6>
                           </div>
                         </div>
@@ -294,13 +299,20 @@
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body ms-2 ps-5 pt-0">
-                        <h6 class="fs-14">RQK Logistics - MFDS1400457854</h6>
-                        <h6 class="mb-1">Your item has been shipped.</h6>
-                        <p class="text-muted mb-0">Sat, 18 Dec 2021 - 4.54PM</p>
+                        <!-- <h6 class="fs-14">RQK Logistics - MFDS1400457854</h6> -->
+                        <h6 class="mb-1">
+                          Đon hàng của bạn đã được vẫn chuyển.
+                        </h6>
+                        <!-- <p class="text-muted mb-0">Sat, 18 Dec 2021 - 4.54PM</p> -->
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_GIAO
+                    "
+                  >
                     <div class="accordion-header" id="headingFour">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -318,31 +330,37 @@
                           </div>
                           <div class="flex-grow-1 ms-3">
                             <h6 class="fs-14 mb-0 fw-semibold">
-                              Out For Delivery
+                              Đã giao thành công
                             </h6>
                           </div>
                         </div>
                       </a>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
-                    <div class="accordion-header" id="headingFive">
+
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_HUY
+                    "
+                  >
+                    <div class="accordion-header" id="headingFour">
                       <a
                         class="accordion-button p-2 shadow-none"
                         data-bs-toggle="collapse"
-                        href="#collapseFile"
+                        href="#collapseFour"
                         aria-expanded="false"
                       >
                         <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 avatar-xs">
                             <div
-                              class="avatar-title bg-light text-success rounded-circle shadow"
+                              class="avatar-title bg-danger rounded-circle shadow"
                             >
-                              <i class="mdi mdi-package-variant"></i>
+                              <i class="ri-truck-line"></i>
                             </div>
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <h6 class="fs-14 mb-0 fw-semibold">Delivered</h6>
+                            <h6 class="fs-14 mb-0 fw-semibold">Đã hủy hàng</h6>
                           </div>
                         </div>
                       </a>
