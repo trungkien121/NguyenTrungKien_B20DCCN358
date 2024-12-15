@@ -73,7 +73,7 @@ export class PhieuNhapCreatementComponent implements OnInit {
     // this.courseNew = {};
   }
   handleSaveThuoc(thuocSelected: Thuoc[]) {
-    console.log("selected", thuocSelected);
+    // console.log("selected", thuocSelected);
     this.thuocSelected = thuocSelected;
 
     this.chiTietPhieuNhapLst = [];
@@ -86,7 +86,7 @@ export class PhieuNhapCreatementComponent implements OnInit {
       });
     });
 
-    console.log("chiTietPhieuNhapLst", this.chiTietPhieuNhapLst);
+    // console.log("chiTietPhieuNhapLst", this.chiTietPhieuNhapLst);
 
     // this.applyScoreCard(scoreCard, this.typeTestActiveTab);
   }

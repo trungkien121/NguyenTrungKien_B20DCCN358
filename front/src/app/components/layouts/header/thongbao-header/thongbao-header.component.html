@@ -31,7 +31,12 @@
 
       <div id="notificationItemsTabContent">
         <div class="py-2 ps-2" id="all-noti-tab" *ngIf="countTotal > 0">
-          <div data-simplebar style="max-height: 300px" class="pe-2">
+          <div
+            data-simplebar
+            style="max-height: 300px"
+            class="pe-2"
+            *ngIf="lstNoti"
+          >
             <div
               *ngFor="let noti of lstNoti | slice : 0 : 5"
               [ngClass]="{ active: noti.trangThai == false }"
@@ -46,7 +51,7 @@
                 <div class="flex-1">
                   <a class="stretched-link" [href]="noti.linkLienKet">
                     <h6 class="mt-0 mb-1 fs-13 fw-semibold">
-                      {{ noti.nguoiDungId }}
+                      <!-- {{ noti.nguoiNhan?.hoTen }} -->
                     </h6>
                   </a>
                   <div class="fs-13 text-muted">
@@ -58,7 +63,7 @@
                   <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
                     <span
                       ><i class="mdi mdi-clock-outline"></i>
-                      {{ noti.ngayTao }}</span
+                      {{ noti.createdAt | date : "dd/MM/yyyy HH:mm:ss" }}</span
                     >
                   </p>
                 </div>

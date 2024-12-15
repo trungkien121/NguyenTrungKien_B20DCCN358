@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
-import { ToastrService } from "ngx-toastr";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { GioHangService } from "src/app/_service/giohang.service";
 import { Cookie } from "ng2-cookies";
@@ -10,16 +8,17 @@ import { AuthConstant } from "src/app/_constant/auth.constant";
 import { jwtDecode } from "jwt-decode";
 import { lastValueFrom } from "rxjs";
 import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: "app-giohang",
-  templateUrl: "./giohang.component.html",
+  selector: "app-giohang-header",
+  styleUrls: ["./giohang-header.component.css"],
+  templateUrl: "./giohang-header.component.html",
 })
-export class GiohangComponent implements OnInit {
+export class GiohangHeaderComponent implements OnInit {
   constructor(
     private nguoidungService: NguoidungService,
     private gioHangService: GioHangService,
-    private router: Router,
     private toastService: ToastrService
   ) {}
 
@@ -28,6 +27,8 @@ export class GiohangComponent implements OnInit {
   gioHangLst: GioHangChiTiet[] = [];
 
   tongTien: number = 0;
+  isHoverDropdown: boolean = false;
+  isFirst: boolean = true;
 
   ngOnInit() {
     this.getUserInfo();
@@ -37,6 +38,17 @@ export class GiohangComponent implements OnInit {
 
       // Kiểm tra xem giohangs có phải là mảng không
       this.gioHangLst = giohangs.chiTietGioHangs as GioHangChiTiet[]; // Gán giá trị nếu là mảng
+
+      // Kích hoạt dropdown hover nếu có thay đổi
+      if (this.gioHangLst.length > 0) {
+        this.isHoverDropdown = true;
+
+        // Tự động tắt sau 3 giây nếu cần
+        setTimeout(() => {
+          this.isHoverDropdown = false;
+          this.isFirst = false;
+        }, 3000);
+      }
     });
   }
 
@@ -44,7 +56,6 @@ export class GiohangComponent implements OnInit {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
     const userInfo = jwtDecode(_token) as NguoiDung;
-    console.log("Thông tin token:", userInfo.id);
     if (userInfo.id) {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
@@ -57,7 +68,7 @@ export class GiohangComponent implements OnInit {
   }
 
   getGH() {
-    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
+    this.gioHangService.getGHSubject(this.userInfo.id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         if (res.data.chiTietGioHangs.length >= 0) {
           this.gioHangId = res.data.id;
@@ -77,39 +88,9 @@ export class GiohangComponent implements OnInit {
         // this.toastService.success("Xóa thành công");
         this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
         this.getGH();
-        // window.location.reload();
       } else {
         this.toastService.error("Xóa thất bại");
       }
     });
-  }
-
-  updateGioHang(item: GioHangChiTiet) {
-    this.gioHangService.updateGH(item).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        // this.toastService.success("Cập nhật thành công");
-        this.getGH();
-        this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
-      } else {
-        this.toastService.error("Cập nhật thất bại");
-      }
-    });
-  }
-
-  minusQuantity(item: GioHangChiTiet) {
-    if (item.soLuong) {
-      if (item.soLuong == 1) {
-      } else {
-        item.soLuong = item.soLuong - 1;
-        this.updateGioHang(item);
-      }
-    }
-  }
-
-  addQuantity(item: GioHangChiTiet) {
-    if (item.soLuong) {
-      item.soLuong = item.soLuong + 1;
-    }
-    this.updateGioHang(item);
   }
 }

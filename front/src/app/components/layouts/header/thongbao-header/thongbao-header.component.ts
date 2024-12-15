@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { SearchModel } from "src/app/_model/common/Search";
 import { ThongBao } from "src/app/_model/thongbao";
 import { ThongBaoService } from "src/app/_service/thongbao.service";
 
@@ -23,34 +24,38 @@ export class ThongbaoHeaderComponent implements OnInit, OnDestroy {
   countUnRead: number = 0;
   countTotal: number = 0;
 
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 10,
+    sortedField: "",
+    loaiThuoc: "",
+  };
+
   ngOnInit() {
-    // Lấy danh sách thông báo
-    // this.thongbaoService.getTBSubject().subscribe((notis: any) => {
-    //   this.lstNoti = notis.lst;
-    //   this.countUnRead = notis.countUnread;
-    //   this.countTotal = notis.count;
+    this.thongbaoService.getLst(this.modelSearch).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.lstNoti = res.data.data;
+        this.countTotal = res.data.totalElements;
 
-    //   // localStorage.setItem("notis", JSON.stringify(notis));
-
-    //   //   if (this.lstNoti) {
-    //   //     this.lstNoti.forEach((noti) => {
-    //   //       noti.timeSendAgo = DateDiffUtil.getTimeDifference(
-    //   //         noti.regDt,
-    //   //         new Date()
-    //   //       );
-    //   //     });
-    //   //   }
-    // });
-
-    // Gọi hàm getNotist() để lấy dữ liệu từ server
-    this.thongbaoService.getLst({}).subscribe();
+        this.caculateUnRead();
+      }
+    });
   }
 
+  caculateUnRead() {
+    this.countUnRead = 0;
+    this.lstNoti.forEach((noti: ThongBao) => {
+      if (noti.trangThai == false) {
+        this.countUnRead += 1;
+      }
+    });
+  }
   showAllNotification() {
     let params: { tab?: string } = {};
 
-    params["tab"] = CommonConstant.TAB_NOTI;
-    this.router.navigate(["/user/profile"], { queryParams: params });
+    this.router.navigate(["/user/thongbao"], { queryParams: params });
   }
 
   updateNoti(thongbao: ThongBao) {

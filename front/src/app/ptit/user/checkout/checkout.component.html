@@ -485,35 +485,36 @@
                       </td>
                       <td class="text-end">
                         {{
-                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0) +
-                            ".000"
+                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
+                            | number : "1.0-0"
                         }}
                       </td>
                     </tr>
 
                     <tr>
                       <td class="fw-semibold" colspan="2">Sub Total :</td>
-                      <td class="fw-semibold text-end">
-                        {{ tongTien + ".000" }}
+                      <td class="fw-semibold text-end text-info">
+                        {{ tongTien || 0 | number : "1.0-0" }}
                       </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td colspan="2">
                         Giảm giá:
-                        <!-- <span class="text-muted">(VELZON15)</span> : -->
+                        <span class="text-muted">(VELZON15)</span> :
                       </td>
                       <td class="text-end">-0</td>
                     </tr>
                     <tr>
                       <td colspan="2">Phí vận chuyển :</td>
                       <td class="text-end">0</td>
-                    </tr>
+                    </tr> -->
 
                     <tr class="table-active">
                       <th colspan="2">Tổng :</th>
                       <td class="text-end">
-                        <span class="fw-semibold">
-                          {{ tongTien + ".000" }} VNĐ
+                        <span class="fw-semibold text-info">
+                          {{ tongTien || 0 | number : "1.0-0" }}
+                          VNĐ
                         </span>
                       </td>
                     </tr>

@@ -28,26 +28,6 @@
                     *ngIf="!userUpdate.avatar && !imageUrl"
                     alt="user-profile-image"
                   />
-
-                  <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
-                    <input
-                      id="profile-img-file-input"
-                      type="file"
-                      class="profile-img-file-input"
-                      accept="image/png, image/gif, image/jpeg"
-                      (change)="onImageSelected($event)"
-                    />
-                    <label
-                      for="profile-img-file-input"
-                      class="profile-photo-edit avatar-xs"
-                    >
-                      <span
-                        class="avatar-title rounded-circle bg-light text-body shadow"
-                      >
-                        <i class="ri-camera-fill"></i>
-                      </span>
-                    </label>
-                  </div>
                 </div>
                 <h5 class="fs-16 mb-1">
                   {{ user.hoTen }} / {{ user.soDienThoai }}
@@ -593,7 +573,7 @@
                         </div>
                       </div>
 
-                      <!-- <div
+                      <div
                         class="d-flex flex-wrap my-n1"
                         *ngIf="
                           donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_HUY
@@ -603,11 +583,12 @@
                           <button
                             type="submit"
                             class="btn btn-outline-info me-2"
+                            (click)="xemChiTiet(donhang)"
                           >
-                            Xem chi tiết đơn hủy
+                            Xem chi tiết
                           </button>
                         </div>
-                      </div> -->
+                      </div>
 
                       <div class="d-flex align-items-center gap-2 text-muted">
                         <div>Tổng :</div>

@@ -14,7 +14,7 @@
       <!-- end page title -->
 
       <div class="row mb-3">
-        <div class="col-xl-8">
+        <div class="col-xl-12">
           <div class="row align-items-center gy-3 mb-3">
             <div class="col-sm">
               <div>
@@ -47,9 +47,11 @@
 
                 <div class="col-sm">
                   <h5 class="fs-14 text-truncate">
-                    <a href="ecommerce-product-detail.html" class="text-dark">{{
-                      item.thuoc?.tenThuoc
-                    }}</a>
+                    <a
+                      [routerLink]="['/thuoc-chitiet/', item.thuoc?.id]"
+                      class="text-dark"
+                      >{{ item.thuoc?.tenThuoc }}</a
+                    >
                   </h5>
                   <ul class="list-inline text-muted">
                     <li class="list-inline-item">
@@ -87,13 +89,13 @@
                     </button>
                   </div>
                 </div>
-                
+
                 <div class="col-sm-auto">
                   <div class="text-lg-end">
                     <p class="text-muted mb-1">Giá:</p>
                     <h5 class="fs-14">
                       <span id="ticket_price" class="product-price"
-                        >{{ item.thuoc?.giaBan + '.000'}} VNĐ</span
+                        >{{ item.thuoc?.giaBan | number : "1.0-0" }} VNĐ</span
                       >
                     </h5>
                   </div>
@@ -132,7 +134,10 @@
                     <div>Tổng :</div>
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
-                        {{ (item.soLuong || 0) * (item.thuoc?.giaBan || 0)+ '.000' }}
+                        {{
+                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
+                            | number : "1.0-0"
+                        }}
                         VNĐ
                       </span>
                     </h5>
@@ -183,11 +188,12 @@
               ><i
                 class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"
               ></i>
-              Checkout</a
+              Mua</a
             >
           </div>
         </div>
         <!-- end col -->
+        <<<<<<< HEAD =======
 
         <div class="col-xl-4">
           <div class="sticky-side-div">
@@ -220,7 +226,7 @@
                       <tr>
                         <td>Tổng:</td>
                         <td class="text-end" id="cart-subtotal">
-                          {{ tongTien + '.000'}} VNĐ
+                          {{ tongTien + ".000" }} VNĐ
                         </td>
                       </tr>
                       <tr>
@@ -236,7 +242,7 @@
                         <th>Total (USD) :</th>
                         <td class="text-end">
                           <span class="fw-semibold" id="cart-total">
-                            {{ tongTien + '.000'}} VNĐ
+                            {{ tongTien + ".000" }} VNĐ
                           </span>
                         </td>
                       </tr>
@@ -249,6 +255,7 @@
           </div>
           <!-- end stickey -->
         </div>
+        >>>>>>> 5b80132498c4edb5c5d4fa8936c4decfce2cd2ec
       </div>
       <!-- end row -->
     </div>

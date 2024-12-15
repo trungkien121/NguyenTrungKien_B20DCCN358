@@ -1,3 +1,5 @@
+import { NguoiDung } from "./auth/nguoidung";
+
 export class ThongBao {
   id?: string;
   loaiThongBao?: string;
@@ -10,4 +12,7 @@ export class ThongBao {
   updatedAt?: Date;
   hinhAnh?: string;
   linkLienKet?: string;
+  createdAt?: string;
+
+  nguoiNhan?: NguoiDung;
 }
