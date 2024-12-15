@@ -15,6 +15,9 @@ import { jwtDecode } from "jwt-decode";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
+import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { SearchModel } from "src/app/_model/common/Search";
 
 @Component({
   selector: "app-sidebar-top-user",
@@ -25,9 +28,29 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 export class SidebarTopUserComponent implements OnInit {
   constructor(
     private nguoidungService: NguoidungService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private dmThuocService: DanhmucThuocService
   ) {}
+
+  dmThuocLst: DanhMucThuoc[] = [];
+
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 10,
+    sortedField: "",
+  };
+
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+    this.getData();
+  }
+
+  getData() {
+    this.dmThuocService.getDMTLst(this.modelSearch).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.dmThuocLst = res.data;
+      }
+    });
   }
 }

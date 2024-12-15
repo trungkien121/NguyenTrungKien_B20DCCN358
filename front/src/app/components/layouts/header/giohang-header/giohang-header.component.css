@@ -1,0 +1,158 @@
+#page-topbar {
+  background-color: #3964e7; /* Màu xanh dương nhạt */
+}
+
+/* Nút giỏ hàng */
+#page-headerr-cartt-dropdown {
+  background-color: white;
+  color: black; /* Màu biểu tượng */
+  border: none; /* Xóa viền nếu cần */
+}
+
+/* Nút phóng to */
+[data-toggle="fullscreen"] {
+  background-color: white;
+  color: black; /* Màu biểu tượng */
+  border: none; /* Xóa viền nếu cần */
+}
+
+/* Thêm hiệu ứng hover */
+#page-headerr-cartt-dropdown:hover,
+[data-toggle="fullscreen"]:hover {
+  background-color: #f0f0f0; /* Màu xám nhạt khi hover */
+  color: black;
+}
+
+/* Nút Đăng nhập */
+.btn-danger.btn-sm {
+  background-color: white;
+  color: black; /* Màu chữ */
+  border: none; /* Xóa viền nếu cần */
+}
+
+/* Hiệu ứng hover cho nút Đăng nhập */
+.btn-danger.btn-sm:hover {
+  background-color: #f0f0f0; /* Màu xám nhạt khi hover */
+  color: black;
+}
+
+/* Đảm bảo căn giữa theo chiều ngang */
+.logo-dark {
+  display: flex;
+  align-items: center; /* Căn giữa dọc */
+}
+
+.logo-sm img {
+  display: block; /* Tránh khoảng trống xung quanh hình ảnh */
+}
+
+.logo-text {
+  font-size: 18px; /* Kích thước chữ */
+  font-weight: bold; /* Đậm chữ */
+  line-height: 1.2; /* Khoảng cách giữa các dòng */
+  color: white; /* Màu chữ */
+  text-align: left; /* Văn bản căn trái */
+}
+
+/* Nút dropdown user */
+#user-dropdown {
+  background-color: white; /* Nền trắng */
+  color: black; /* Màu biểu tượng */
+  border: none; /* Xóa viền */
+}
+
+/* Hover hiệu ứng */
+#user-dropdown:hover {
+  background-color: #f0f0f0; /* Màu xám nhạt khi hover */
+  color: black;
+}
+
+/* Định dạng menu dropdown */
+.dropdown-menu {
+  background-color: white; /* Nền trắng */
+  border-radius: 6px; /* Bo góc nhẹ */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
+
+.dropdown-item {
+  color: black; /* Màu chữ */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Màu nền khi hover */
+  color: black; /* Màu chữ khi hover */
+}
+
+/* Nút thông báo */
+#notification-dropdown {
+  background-color: white; /* Nền trắng */
+  color: black; /* Màu biểu tượng */
+  border: none; /* Xóa viền */
+}
+
+/* Hover hiệu ứng */
+#notification-dropdown:hover {
+  background-color: #f0f0f0; /* Màu xám nhạt khi hover */
+  color: black;
+}
+
+/* Đảm bảo icon được căn chỉnh */
+#notification-dropdown i {
+  font-size: 22px; /* Kích thước icon */
+}
+
+/* Dropdown menu cho thông báo */
+.dropdown-menu {
+  background-color: white; /* Nền trắng */
+  border-radius: 6px; /* Bo góc nhẹ */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
+
+.dropdown-item {
+  color: black; /* Màu chữ */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Màu nền khi hover */
+  color: black; /* Màu chữ khi hover */
+}
+
+.dropdown-header {
+  font-size: 14px; /* Kích thước chữ nhỏ */
+  font-weight: bold;
+  color: #6c757d; /* Màu xám */
+}
+
+.hover-dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  inset: 0px 0px auto auto;
+  margin: 0px;
+  transform: translate3d(0px, 58px, 0px);
+}
+
+.hover-dropdown .dropdown-menu {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-dropdown.hover-active .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  inset: 0px 0px auto auto;
+  margin: 0px;
+  transform: translate3d(0px, 58px, 0px);
+}
+
+/* .hover-dropdown .dropdown-menu {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+} */

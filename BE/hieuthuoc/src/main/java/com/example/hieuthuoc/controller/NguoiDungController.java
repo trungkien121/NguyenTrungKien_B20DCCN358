@@ -55,8 +55,9 @@ public class NguoiDungController {
 	}
 
 	@PutMapping("change_avatar")
-	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO,@RequestPart("file") MultipartFile file) {
-		if(file != null && !file.isEmpty()) {
+	public ResponseDTO<NguoiDung> changeAvatar(@RequestBody NguoiDungDTO nguoiDungDTO,
+			@RequestPart(value = "file", required = false) MultipartFile file) {
+		if (file != null && !file.isEmpty()) {
 			nguoiDungDTO.setFile(file);
 		}
 		return nguoiDungService.changeAvatar(nguoiDungDTO);

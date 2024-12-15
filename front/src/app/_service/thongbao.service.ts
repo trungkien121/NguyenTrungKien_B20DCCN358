@@ -18,7 +18,7 @@ export class ThongBaoService {
   }
 
   getLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thongbao/list`;
+    const apiUrl = environment.backApiUrl + `/thongbao/search`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http
@@ -30,7 +30,7 @@ export class ThongBaoService {
           if (res.status == CommonConstant.STATUS_OK_200) {
             this.tbSubject.next(res.data);
           }
-          //   return data; // Trả về kết quả từ server
+          return res; // Trả về kết quả từ server
         })
       );
   }

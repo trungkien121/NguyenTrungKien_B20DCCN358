@@ -9,6 +9,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ThongbaoHeaderComponent } from "./header/thongbao-header/thongbao-header.component";
 import { SidebarTopUserComponent } from "./sidebar-top/user/sidebar-top-user.component";
+import { GiohangHeaderComponent } from "./header/giohang-header/giohang-header.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SidebarTopUserComponent } from "./sidebar-top/user/sidebar-top-user.com
     SidebarLeftComponent,
     ThongbaoHeaderComponent,
     SidebarTopUserComponent,
+    GiohangHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { SidebarTopUserComponent } from "./sidebar-top/user/sidebar-top-user.com
     FooterComponent,
     SidebarLeftComponent,
     SidebarTopUserComponent,
+    GiohangHeaderComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

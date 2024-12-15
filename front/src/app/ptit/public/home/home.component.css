@@ -1,28 +1,23 @@
 .responsive-img {
   height: 200px;
-  width: auto; 
-  object-fit: contain; 
+  width: auto;
+  object-fit: contain;
 }
 
 .text-truncate {
   display: inline-block;
-  max-width: 200px; 
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-#carouselExample {
-  max-width: 1500px; 
-  margin: 0 auto; 
-}
 
 #carouselExample .carousel-item img {
-  max-height: 700px; 
-  object-fit: cover; 
+  max-height: 700px;
+  object-fit: cover;
   border-radius: 20px;
 }
-
 
 /* Nền màu xanh cho toàn bộ thanh tìm kiếm */
 .search-box-custom {
@@ -74,14 +69,13 @@
   background: #1742a3; /* Đổi màu nút khi hover */
 }
 
-
 .btn-custom-primary {
   background-color: #3964e7; /* Màu xanh lam tùy chỉnh */
   border-color: #3964e7;
   color: white;
 }
 
-.card{
+.card {
   border-radius: 16px;
   overflow: hidden;
 }
@@ -101,3 +95,48 @@
 .card-link:active .card {
   transform: scale(0.98); /* Hiệu ứng bấm xuống */
 }
+
+.responsive-img {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  width: 200px; /* Chiều rộng khung chứa */
+  height: 200px; /* Chiều cao khung chứa */
+}
+
+.text-container {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* Slider */
+
+.carousel-item img {
+  aspect-ratio: 16 / 5; /* Tỉ lệ 16:5 */
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Ảnh bên phải */
+.right-image {
+  aspect-ratio: 16 / 5; /* Tỉ lệ 16:5, giống slider */
+  object-fit: cover;
+  width: 100%;
+  margin-bottom: 16px; /* Khoảng cách giữa 2 ảnh */
+  border-radius: 20px;
+}
+
+/* Responsive cho thiết bị nhỏ */
+@media (max-width: 768px) {
+  .right-image {
+    margin-bottom: 12px;
+  }
+}
+

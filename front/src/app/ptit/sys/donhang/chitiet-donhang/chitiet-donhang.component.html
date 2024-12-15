@@ -114,7 +114,9 @@
 
                             <tr class="border-top border-top-dashed">
                               <th scope="row">Tổng tiền :</th>
-                              <th class="text-end">{{ tongTien }}</th>
+                              <th class="text-end">
+                                {{ tongTien | number : "1.0-0" }}
+                              </th>
                             </tr>
                           </tbody>
                         </table>
@@ -204,12 +206,22 @@
                           {{ donhang.createdAt | date : "dd-MM-yyyy HH:mm" }}
                         </p>
 
-                        <h6 class="mb-1">Người bán hàng đã xác nhận đơn.</h6>
-                        <p class="text-muted mb-0">Thu, 16 Dec 2021 - 5:48AM</p>
+                        <h6
+                          *ngIf="
+                            donhang.trangThaiGiaoHang ==
+                              TrangThaiGiaoHang.DANG_GIAO ||
+                            donhang.trangThaiGiaoHang ==
+                              TrangThaiGiaoHang.DA_GIAO
+                          "
+                          class="mb-1"
+                        >
+                          Người bán hàng đã xác nhận đơn.
+                        </h6>
+                        <!-- <p class="text-muted mb-0">Thu, 16 Dec 2021 - 5:48AM</p> -->
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
+                  <!-- <div class="accordion-item border-0">
                     <div class="accordion-header" id="headingTwo">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -248,8 +260,13 @@
                         <p class="text-muted mb-0">Fri, 17 Dec 2021 - 9:45AM</p>
                       </div>
                     </div>
-                  </div>
-                  <div class="accordion-item border-0">
+                  </div> -->
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DANG_GIAO
+                    "
+                  >
                     <div class="accordion-header" id="headingThree">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -268,8 +285,8 @@
                           </div>
                           <div class="flex-grow-1 ms-3">
                             <h6 class="fs-15 mb-1 fw-semibold">
-                              Shipping -
-                              <span class="fw-normal">Thu, 16 Dec 2021</span>
+                              Đang vận chuyển
+                              <!-- <span class="fw-normal">Thu, 16 Dec 2021</span> -->
                             </h6>
                           </div>
                         </div>
@@ -282,13 +299,20 @@
                       data-bs-parent="#accordionExample"
                     >
                       <div class="accordion-body ms-2 ps-5 pt-0">
-                        <h6 class="fs-14">RQK Logistics - MFDS1400457854</h6>
-                        <h6 class="mb-1">Your item has been shipped.</h6>
-                        <p class="text-muted mb-0">Sat, 18 Dec 2021 - 4.54PM</p>
+                        <!-- <h6 class="fs-14">RQK Logistics - MFDS1400457854</h6> -->
+                        <h6 class="mb-1">
+                          Đon hàng của bạn đã được vẫn chuyển.
+                        </h6>
+                        <!-- <p class="text-muted mb-0">Sat, 18 Dec 2021 - 4.54PM</p> -->
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_GIAO
+                    "
+                  >
                     <div class="accordion-header" id="headingFour">
                       <a
                         class="accordion-button p-2 shadow-none"
@@ -306,31 +330,37 @@
                           </div>
                           <div class="flex-grow-1 ms-3">
                             <h6 class="fs-14 mb-0 fw-semibold">
-                              Out For Delivery
+                              Đã giao thành công
                             </h6>
                           </div>
                         </div>
                       </a>
                     </div>
                   </div>
-                  <div class="accordion-item border-0">
-                    <div class="accordion-header" id="headingFive">
+
+                  <div
+                    class="accordion-item border-0"
+                    *ngIf="
+                      donhang.trangThaiGiaoHang == TrangThaiGiaoHang.DA_HUY
+                    "
+                  >
+                    <div class="accordion-header" id="headingFour">
                       <a
                         class="accordion-button p-2 shadow-none"
                         data-bs-toggle="collapse"
-                        href="#collapseFile"
+                        href="#collapseFour"
                         aria-expanded="false"
                       >
                         <div class="d-flex align-items-center">
                           <div class="flex-shrink-0 avatar-xs">
                             <div
-                              class="avatar-title bg-light text-success rounded-circle shadow"
+                              class="avatar-title bg-danger rounded-circle shadow"
                             >
-                              <i class="mdi mdi-package-variant"></i>
+                              <i class="ri-truck-line"></i>
                             </div>
                           </div>
                           <div class="flex-grow-1 ms-3">
-                            <h6 class="fs-14 mb-0 fw-semibold">Delivered</h6>
+                            <h6 class="fs-14 mb-0 fw-semibold">Đã hủy hàng</h6>
                           </div>
                         </div>
                       </a>
@@ -417,21 +447,13 @@
             <div class="card-body">
               <div class="d-flex align-items-center mb-2">
                 <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Transactions:</p>
+                  <p class="text-muted mb-0">Phương thức:</p>
                 </div>
                 <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">#VLZ124561278124</h6>
+                  <h6 class="mb-0">Tiền mặt</h6>
                 </div>
               </div>
-              <div class="d-flex align-items-center mb-2">
-                <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Payment Method:</p>
-                </div>
-                <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">Debit Card</h6>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-2">
+              <!-- <div class="d-flex align-items-center mb-2">
                 <div class="flex-shrink-0">
                   <p class="text-muted mb-0">Card Holder Name:</p>
                 </div>
@@ -446,13 +468,13 @@
                 <div class="flex-grow-1 ms-2">
                   <h6 class="mb-0">xxxx xxxx xxxx 2456</h6>
                 </div>
-              </div>
+              </div> -->
               <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
-                  <p class="text-muted mb-0">Total Amount:</p>
+                  <p class="text-muted mb-0">Tổng tiền:</p>
                 </div>
                 <div class="flex-grow-1 ms-2">
-                  <h6 class="mb-0">$415.96</h6>
+                  <h6 class="mb-0">{{ tongTien | number : "1.0-0" }} VNĐ</h6>
                 </div>
               </div>
             </div>
@@ -466,22 +488,4 @@
     <!-- container-fluid -->
   </div>
   <!-- End Page-content -->
-
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          © Velzon.
-        </div>
-        <div class="col-sm-6">
-          <div class="text-sm-end d-none d-sm-block">
-            Design & Develop by Themesbrand
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
 </div>

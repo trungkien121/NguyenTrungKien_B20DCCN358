@@ -91,7 +91,7 @@ export class CheckoutComponent implements OnInit {
 
     this.donhang.chiTietDonHangs = [];
     this.gioHangLst.forEach((item: GioHangChiTiet) => {
-      console.log("item", item);
+      // console.log("item", item);
       let itemNew: ChiTietDonHang = {
         donGia: item.donGia,
         soLuong: item.soLuong,
@@ -102,12 +102,12 @@ export class CheckoutComponent implements OnInit {
 
     this.donhangService.create(this.donhang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Lưu thành công");
+        // this.toastService.success("Lưu thành công");
         //if success, delete cart
         this.gioHangLst.forEach((item: GioHangChiTiet) => {
           this.gioHangService.deleteGH(item.id).subscribe((resp) => {
             if (resp.status == CommonConstant.STATUS_OK_200) {
-              this.toastService.success("Xóa thành công");
+              // this.toastService.success("Xóa thành công");
               this.getGH();
             } else {
               this.toastService.error("Xóa thất bại");

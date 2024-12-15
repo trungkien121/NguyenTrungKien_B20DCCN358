@@ -27,7 +27,6 @@ import { GiohangComponent } from "./giohang/giohang.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { DonMuaComponent } from "./donmua/donmua.component";
 import { ThongBaoComponent } from "./thongbao/thongbao.component";
-import { DonHangUserComponent } from "./donhang/donhang-user.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { DonHangUserComponent } from "./donhang/donhang-user.component";
     CheckoutComponent,
     DonMuaComponent,
     ThongBaoComponent,
-    DonHangUserComponent,
   ],
 
   imports: [
