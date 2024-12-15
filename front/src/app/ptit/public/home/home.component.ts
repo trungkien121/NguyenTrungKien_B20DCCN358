@@ -146,8 +146,9 @@ export class HomeComponent implements OnInit {
 
     this.gioHangService.createGH(gioHang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Lưu thành công");
+        // this.toastService.success("Lưu thành công");
         // this.router.navigate([`/user/giohang`]);
+        this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
       } else {
         this.toastService.error("Lưu thất bại");
       }
