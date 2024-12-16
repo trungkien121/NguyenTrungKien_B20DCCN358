@@ -14,7 +14,6 @@ import {
   ConfirmEventType,
   MessageService,
 } from "primeng/api";
-import { Donhang } from "src/app/_model/donhang";
 import { DonhangService } from "src/app/_service/donhang.service";
 import { SearchModel } from "src/app/_model/common/Search";
 import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant";
@@ -59,7 +58,7 @@ export class DonMuaComponent implements OnInit {
     keyWord: "",
     id: 0,
     currentPage: 0,
-    size: 10,
+    size: 100,
     sortedField: "",
   };
 

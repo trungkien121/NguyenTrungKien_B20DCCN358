@@ -5,12 +5,13 @@ import { NguoiDung } from "./auth/nguoidung";
 import { ChiTietDonHang } from "./chitietdonhang";
 
 export class DonHang {
-  createdAt?: Date;
-  updateAt?: Date;
+  createdAt?: string;
+  updateAt?: string;
   id?: string;
   khachHangId?: string;
   khachHang?: NguoiDung;
   nguoiDung?: NguoiDung;
+  nguoiDungId?: string;
   tenKhachHang?: string;
   soDienThoai?: string;
   diaChi?: string;

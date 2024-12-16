@@ -9,11 +9,13 @@ import { AuthConstant } from "src/app/_constant/auth.constant";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { SearchModel } from "src/app/_model/common/Search";
+import { DanhGia } from "src/app/_model/danhgia";
 import { GioHang } from "src/app/_model/giohang";
 import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { Thuoc } from "src/app/_model/thuoc";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
+import { DanhgiaService } from "src/app/_service/danhgia.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 import { ThuocService } from "src/app/_service/thuoc.service";
 
@@ -32,12 +34,21 @@ export class ThuocChiTietComponent implements OnInit {
 
   isAdmin: boolean = false;
 
+  danhgiaLst: DanhGia[] = [];
+  modelSearch: SearchModel = {
+    keyWord: "",
+    id: 0,
+    currentPage: 0,
+    size: 100,
+    sortedField: "",
+  };
   constructor(
     private thuocService: ThuocService,
     private loaithuocService: LoaithuocService,
     private router: Router,
     private route: ActivatedRoute,
     private gioHangService: GioHangService,
+    private danhgiaService: DanhgiaService,
     private nguoidungService: NguoidungService,
     private toastService: ToastrService
   ) {}
@@ -62,6 +73,17 @@ export class ThuocChiTietComponent implements OnInit {
     this.thuocService.getProduct(id).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.thuoc = res.data;
+
+        this.getDanhGiaByThuocId();
+      }
+    });
+  }
+
+  getDanhGiaByThuocId() {
+    this.modelSearch.id = Number(this.thuoc.id);
+    this.danhgiaService.getLst(this.modelSearch).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.danhgiaLst = res.data.data;
       }
     });
   }
@@ -85,7 +107,6 @@ export class ThuocChiTietComponent implements OnInit {
       this.router.navigate([`/login`]);
     }
   }
-  
 
   async getUserInfo(): Promise<void> {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);

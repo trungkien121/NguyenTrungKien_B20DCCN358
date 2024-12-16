@@ -44,6 +44,8 @@ import { PhieuNhapCreatementComponent } from "./phieunhap/phieunhap-createment/p
 import { SelectThuocComponent } from "./phieunhap/select-thuoc/select-thuoc.component";
 import { ChiTietDonHangComponent } from "./donhang/chitiet-donhang/chitiet-donhang.component";
 import { ThongKecComponent } from "./thongke/thongke.component";
+import { DonHangCreateComponent } from "./donhang-create/donhang-create.component";
+import { SelectKhachHangComponent } from "./donhang-create/select-khachhang/select-khachhang.component";
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { ThongKecComponent } from "./thongke/thongke.component";
     SelectThuocComponent,
     ChiTietDonHangComponent,
     ThongKecComponent,
+    DonHangCreateComponent,
+    SelectKhachHangComponent,
   ],
   imports: [
     CommonModule,

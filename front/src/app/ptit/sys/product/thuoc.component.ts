@@ -43,7 +43,7 @@ export class ThuocComponent implements OnInit {
     keyWord: "",
     id: 0,
     currentPage: 0,
-    size: 10,
+    size: 100,
     sortedField: "",
   };
 

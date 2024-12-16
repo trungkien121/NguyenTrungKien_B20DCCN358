@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
-import { Donhang } from "src/app/_model/donhang";
+import { DonHang } from "src/app/_model/hoadon";
 import { DonhangService } from "src/app/_service/donhang.service";
 
 @Component({
@@ -17,12 +17,12 @@ import { DonhangService } from "src/app/_service/donhang.service";
 export class DonHangComponent implements OnInit {
   TrangThaiGiaoHang = TrangThaiGiaoHang;
 
-  donhangLst: Donhang[] = [];
+  donhangLst: DonHang[] = [];
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
     currentPage: 0,
-    size: 10,
+    size: 100,
     sortedField: "",
   };
   optionLabel: string = "";
@@ -63,7 +63,7 @@ export class DonHangComponent implements OnInit {
     // this.modelSearch.categorySearch = newCategory;
   }
 
-  preUpdate(order: Donhang) {
+  preUpdate(order: DonHang) {
     this.router.navigate([`/sys/chitiet-donhang/${order.id}`]);
   }
 }

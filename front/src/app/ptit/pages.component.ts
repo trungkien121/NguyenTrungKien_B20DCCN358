@@ -53,17 +53,22 @@ export class PagesComponent implements OnInit, AfterViewInit {
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
       }
 
-      //      if (this.hasRole(AuthConstant.ROLE_ADMIN)) {
-      //   this.router.navigate(["/sys"]);
-      // } else if (this.hasRole(AuthConstant.ROLE_KHACHHANG)) {
-      //   this.router.navigate(["/home"]);
-      // }
-      this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
+      const currentUrl = this.router.url;
+      let check = false;
+      // Kiểm tra nếu URL hiện tại bắt đầu với '/sys' hoặc '/user'
+      if (currentUrl.startsWith("/sys") || currentUrl.startsWith("/user")) {
+        check = true; // Không thực hiện chuyển hướng
+      }
 
-      this.isAdmin$.next(this.hasRole(AuthConstant.ROLE_ADMIN.toString()));
-      this.isCustomer$.next(
+      if (!check && this.hasRole(AuthConstant.ROLE_ADMIN.toString())) {
+        this.router.navigate(["/sys"]);
+      } else if (
+        !check &&
         this.hasRole(AuthConstant.ROLE_KHACHHANG.toString())
-      );
+      ) {
+        this.router.navigate(["/user"]);
+      }
+      this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
     }
   }
 
