@@ -8,3 +8,77 @@
   background-color: #3964e7 ; 
   border-color: #3964e7 ;
 }
+
+.rating {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
+.text-muted {
+  font-size: 16px;
+}
+
+.text-warning {
+  color: #ffc107; /* Màu vàng cho sao */
+}
+
+.gap-2 {
+  gap: 8px; /* Khoảng cách giữa các phần tử */
+}
+
+.price .current-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các mục */
+}
+
+.product-details li {
+  display: grid;
+  grid-template-columns: 150px 1fr; /* Cột 1 cố định 150px, cột 2 tự giãn */
+  gap: 10px; /* Khoảng cách giữa cột nhãn và giá trị */
+  align-items: center; /* Canh giữa theo chiều dọc */
+  padding: 8px 0;
+  border-bottom: 1px solid #eaeaea; /* Đường gạch chân nhẹ giữa các hàng */
+}
+
+.product-details .label {
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+}
+
+.product-details .value {
+  color: #555;
+  word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
+  font-size: 16px;
+}
+
+/* Tạo nút với viền tròn hai bên */
+.btn-custom-primary {
+  background-color: #0078ff; /* Màu nền xanh */
+  color: #fff; /* Màu chữ trắng */
+  font-size: 18px; /* Cỡ chữ */
+  font-weight: 500; /* Độ đậm chữ */
+  border: none; /* Bỏ viền */
+  padding: 12px 24px; /* Kích thước padding cho nút */
+  text-transform: uppercase; /* Chữ in hoa */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động mượt */
+  border-radius: 30px; /* Viền tròn hai bên */
+}
+
+.btn-custom-primary:hover {
+  background-color: #005cbf; /* Màu xanh đậm khi hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng khi di chuột */
+  color: #fff; /* Giữ màu chữ trắng khi hover */
+}
+
+.btn-custom-primary i {
+  margin-right: 8px; /* Tạo khoảng cách giữa icon và chữ */
+  font-size: 18px; /* Kích thước icon */
+}

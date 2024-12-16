@@ -85,6 +85,7 @@ export class ThuocChiTietComponent implements OnInit {
       this.router.navigate([`/login`]);
     }
   }
+  
 
   async getUserInfo(): Promise<void> {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
