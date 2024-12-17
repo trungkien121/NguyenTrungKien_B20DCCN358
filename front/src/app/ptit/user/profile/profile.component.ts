@@ -9,6 +9,7 @@ import { Cookie } from "ng2-cookies";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { jwtDecode } from "jwt-decode";
 import { ChangePassword } from "src/app/_model/changePws";
+import { Quyen } from "src/app/_model/auth/quyen";
 
 @Component({
   selector: "app-profile",
@@ -26,6 +27,9 @@ export class ProfileComponent implements OnInit {
 
   changePwd: ChangePassword = {};
   imageUrl: string | ArrayBuffer | null = null; // Biến để lưu đường dẫn hình ảnh đã chọn
+  userInfo: NguoiDung = {};
+  roleUser: Quyen[] = [];
+  isAdmin: boolean | null = false;
 
   ngOnInit() {
     this.getUserInfo();
@@ -39,8 +43,20 @@ export class ProfileComponent implements OnInit {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userUpdate = resp.data;
+
+        this.userInfo = resp.data;
+
+        this.roleUser = this.userInfo.nhomQuyens ?? [];
+
+        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
       }
     }
+  }
+
+  hasRole(roleId: string): boolean {
+    return this.roleUser
+      ? this.roleUser.some((role) => role.id == roleId)
+      : false;
   }
 
   async updateUser() {

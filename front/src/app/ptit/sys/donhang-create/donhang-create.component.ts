@@ -13,6 +13,8 @@ import { lastValueFrom } from "rxjs";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { PhuongThucThanhToan } from "src/app/_constant/phuongthucthanhtoan.constant";
+import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant";
+import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { ChiTietDonHang } from "src/app/_model/chitietdonhang";
 import { ChiTietPhieuNhap } from "src/app/_model/chitietphieunhap";
@@ -69,6 +71,8 @@ export class DonHangCreateComponent implements OnInit {
     size: 10,
     sortedField: "",
   };
+
+  phuongThucThanhToanLst: OptionSelect[] = [];
 
   openSelectThuoc() {
     this.thuocSelected = [];
@@ -141,6 +145,17 @@ export class DonHangCreateComponent implements OnInit {
       "0" +
       (date.getMonth() + 1)
     ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+
+    this.phuongThucThanhToanLst = [
+      {
+        value: PhuongThucThanhToan.CHUYEN_KHOAN,
+        name: "Chuyển khoản",
+      },
+      {
+        value: PhuongThucThanhToan.TIEN_MAT,
+        name: "Tiền mặt",
+      },
+    ];
   }
 
   async getUserInfo(): Promise<void> {
@@ -171,7 +186,7 @@ export class DonHangCreateComponent implements OnInit {
   }
 
   onHinhThucThanhToanChange(value: string) {
-    if (value == "1")
+    if (value == PhuongThucThanhToan.TIEN_MAT)
       this.donhang.phuongThucThanhToan = PhuongThucThanhToan.TIEN_MAT;
     else {
       this.donhang.phuongThucThanhToan = PhuongThucThanhToan.CHUYEN_KHOAN;
@@ -188,7 +203,7 @@ export class DonHangCreateComponent implements OnInit {
     this.chiTietDonHangLst.forEach((item: ChiTietDonHang) => {
       // Tạo đối tượng mới dựa trên item
       let temp: ChiTietDonHang = {
-        donGia: item.donGia,
+        donGia: item.thuoc?.giaBan,
         soLuong: item.soLuong,
         thuocId: item.thuoc?.id,
         id: item.id,
@@ -200,6 +215,10 @@ export class DonHangCreateComponent implements OnInit {
         this.donhang.chiTietDonHangs.push(temp);
       }
     });
+    this.donhang.trangThaiThanhToan = TrangThaiThanhToan.DA_THANH_TOAN;
+    this.donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DA_GIAO;
+
+    console.log("donhang", this.donhang);
 
     if (this.check(this.donhang)) {
       if (!this.donhang.id) {

@@ -15,6 +15,7 @@ import { DonHang } from "src/app/_model/hoadon";
 import { ThongBaoService } from "src/app/_service/thongbao.service";
 import { ThongBao } from "src/app/_model/thongbao";
 import { SearchModel } from "src/app/_model/common/Search";
+import { Quyen } from "src/app/_model/auth/quyen";
 
 @Component({
   selector: "app-thongbao",
@@ -52,6 +53,9 @@ export class ThongBaoComponent implements OnInit {
     loaiThuoc: "",
   };
 
+  roleUser: Quyen[] = [];
+  isAdmin: boolean | null = false;
+
   logout() {
     this.nguoidungService.logOut(true);
   }
@@ -76,9 +80,19 @@ export class ThongBaoComponent implements OnInit {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userInfo = resp.data;
+
+        this.roleUser = this.userInfo.nhomQuyens ?? [];
+
+        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
         if (this.userInfo.id) {
         }
       }
     }
+  }
+
+  hasRole(roleId: string): boolean {
+    return this.roleUser
+      ? this.roleUser.some((role) => role.id == roleId)
+      : false;
   }
 }

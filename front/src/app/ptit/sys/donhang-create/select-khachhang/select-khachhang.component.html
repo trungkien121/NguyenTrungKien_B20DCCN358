@@ -10,16 +10,26 @@
   (onHide)="onCancel()"
 >
   <div>
-    <div class="mb-3">
-      <label class="col-form-label" for="title"> Tìm kiếm </label>
+    <div class="mb-3 d-flex">
+      <div class="d-flex flex-column col-xl-9">
+        <label for="titleDropdown">Tên Khách Hàng </label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="modelSearch.keyWord"
+        />
+      </div>
 
-      <input
-        type="text"
-        name="title"
-        class="form-control"
-        id="title"
-        required
-      />
+      <div class="d-flex align-items-end col-xl-2 ms-2">
+        <button
+          type="button"
+          class="btn btn-info shadow-none mt-3"
+          (click)="search()"
+        >
+          <i class="ri-search-line align-middle me-1"></i>
+          Tìm Kiếm
+        </button>
+      </div>
     </div>
 
     <div class="mb-3">

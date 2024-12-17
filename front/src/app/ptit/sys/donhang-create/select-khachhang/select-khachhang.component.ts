@@ -56,6 +56,10 @@ export class SelectKhachHangComponent implements OnInit {
     this.getKH();
   }
 
+  search() {
+    this.getKH();
+  }
+
   getKH() {
     this.nguoidungService.getUserLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {

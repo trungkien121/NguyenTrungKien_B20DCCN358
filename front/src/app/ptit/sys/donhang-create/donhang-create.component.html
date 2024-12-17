@@ -59,6 +59,7 @@
                         type="text"
                         name="maNCC"
                         class="form-control me-3"
+                        disabled="true"
                         id="maNCC"
                         [(ngModel)]="nguoidungHoten"
                       />
@@ -83,9 +84,9 @@
                         <span class="text-danger">*</span></label
                       >
                       <app-select-common
-                        [optionValue]="'id'"
-                        [optionLabel]="'tenNhaCungCap'"
-                        [options]="nccLst"
+                        [optionValue]="'value'"
+                        [optionLabel]="'name'"
+                        [options]="phuongThucThanhToanLst"
                         [isOptionSelectType]="false"
                         [selectedOptionValue]="donhang.phuongThucThanhToan"
                         (selectionChange)="onHinhThucThanhToanChange($event)"
@@ -178,9 +179,8 @@
                         type="text"
                         class="form-control"
                         id="manufacturer-brand-input"
-                        placeholder="Nhập đơn giá"
-                        [(ngModel)]="item.donGia"
-                        [value]="item.donGia"
+                        disabled
+                        [value]="item.thuoc?.giaBan"
                         name="donGia-{{ item.id }}"
                       />
                     </div>
@@ -195,7 +195,9 @@
                         type="text"
                         class="form-control"
                         id="manufacturer-brand-input"
-                        [value]="(item.donGia || 0) * (item.soLuong || 0)"
+                        [value]="
+                          (item.thuoc?.giaBan || 0) * (item.soLuong || 0)
+                        "
                         disabled
                       />
                     </div>

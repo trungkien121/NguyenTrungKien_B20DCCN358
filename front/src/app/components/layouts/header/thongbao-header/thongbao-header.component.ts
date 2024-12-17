@@ -1,9 +1,15 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { jwtDecode } from "jwt-decode";
+import { Cookie } from "ng2-cookies";
+import { lastValueFrom, Subscription } from "rxjs";
+import { AuthConstant } from "src/app/_constant/auth.constant";
 import { CommonConstant } from "src/app/_constant/common.constants";
+import { NguoiDung } from "src/app/_model/auth/nguoidung";
+import { Quyen } from "src/app/_model/auth/quyen";
 import { SearchModel } from "src/app/_model/common/Search";
 import { ThongBao } from "src/app/_model/thongbao";
+import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { ThongBaoService } from "src/app/_service/thongbao.service";
 
 @Component({

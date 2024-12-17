@@ -29,6 +29,9 @@ export class HeaderComponent implements OnInit {
   gioHangId: number = 0;
   gioHangLst: GioHangChiTiet[] = [];
 
+  isAdmin: boolean | null = false;
+  roleUser: Quyen[] = [];
+
   constructor(
     private nguoidungService: NguoidungService,
     private gioHangService: GioHangService,
@@ -39,9 +42,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
       this.isAuthenticate = true;
-    }
 
-    // this.getUserInfo();
+      this.getUserInfo();
+    }
   }
 
   async getUserInfo(): Promise<void> {
@@ -53,36 +56,17 @@ export class HeaderComponent implements OnInit {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userInfo = resp.data;
 
-        let temp: any = resp.data.nhomQuyens;
-        let roleStr: string[] = [...temp].map((role: Quyen) => role.id);
-        console.log("role", roleStr);
-        if (this.userInfo.id) {
-          this.getGH();
-        }
+        this.roleUser = this.userInfo.nhomQuyens ?? [];
+
+        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
       }
     }
   }
 
-  getGH() {
-    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        if (res.data.chiTietGioHangs.length > 0) {
-          this.gioHangId = res.data.chiTietGioHangs[0].id;
-          this.gioHangLst = res.data.chiTietGioHangs;
-        }
-      }
-    });
-  }
-
-  deleteGioHang(item: GioHangChiTiet) {
-    this.gioHangService.deleteGH(item.id).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Xóa thành công");
-        this.getGH();
-      } else {
-        this.toastService.error("Xóa thất bại");
-      }
-    });
+  hasRole(roleId: string): boolean {
+    return this.roleUser
+      ? this.roleUser.some((role) => role.id == roleId)
+      : false;
   }
 
   logout() {

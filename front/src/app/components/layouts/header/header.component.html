@@ -66,7 +66,9 @@
           </button>
         </div>
 
-        <app-giohang-header *ngIf="isAuthenticate"></app-giohang-header>
+        <app-giohang-header
+          *ngIf="isAuthenticate && !isAdmin"
+        ></app-giohang-header>
 
         <!-- thông báo -->
         <app-thongbao-header *ngIf="isAuthenticate"></app-thongbao-header>
@@ -97,7 +99,11 @@
               <span class="align-middle"> Hồ sơ </span>
             </a>
 
-            <a class="dropdown-item" [routerLink]="['/user/donmua']">
+            <a
+              *ngIf="!isAdmin"
+              class="dropdown-item"
+              [routerLink]="['/user/donmua']"
+            >
               <i class="ri-store-2-fill me-1 align-middle fs-4"></i>
 
               <span class="align-middle"> Đơn mua </span>
