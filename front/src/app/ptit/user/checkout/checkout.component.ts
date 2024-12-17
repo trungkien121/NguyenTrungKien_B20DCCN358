@@ -133,7 +133,7 @@ export class CheckoutComponent implements OnInit {
     let thongBao: ThongBao = {
       loaiThongBao: LOAITHONGBAO.CA_NHAN,
       ngayTao: new Date(),
-      noidung: "Bạn vừa tạo thành công 1 đơn hàng.",
+      noiDung: "Bạn vừa tạo thành công 1 đơn hàng.",
       tieuDe: "Mua hàng",
       trangThai: false,
       nguoiDungId: this.userInfo.id ? this.userInfo.id : "",

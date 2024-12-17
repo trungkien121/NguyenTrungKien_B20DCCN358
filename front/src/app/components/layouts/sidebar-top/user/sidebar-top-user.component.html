@@ -6,38 +6,35 @@
       <!-- Lặp qua danh sách danh mục -->
       <li
         class="nav-item position-relative"
-        *ngFor="let item of dmThuocLst"
+        *ngFor="let item of loaiThuocLst| slice:0:4"
         (mouseenter)="onMouseEnter(item)"
         (mouseleave)="onMouseLeave()"
       >
         <a class="nav-link menu-link">
-          <span>{{ item.tenDanhMuc }}</span>
+          <span>{{ item.tenLoai }}</span>
         </a>
 
-        <!-- Popup hiển thị ngay dưới tên danh mục -->
         <div class="popup-large" *ngIf="selectedItem === item">
           <div class="row">
-            <!-- Cột 3/12: Hiển thị loại thuốc -->
-            <div class="col-xl-3 border-end p-3">
-              <h5>Loại <span>{{ item.tenDanhMuc }}</span></h5>
+            <!-- <div class="col-xl-3 border-end p-3">
+              <h5>Loại <span>{{ item.tenLoai }}</span></h5>
               <ul class="list-group">
-                <!-- <li
+                <li
                   class="list-group-item"
                   *ngFor="let loai of item.loaiThuocLst"
                 >
                   {{ loai.tenLoaiThuoc }}
-                </li> -->
+                </li>
               </ul>
             </div>
 
-            <!-- Cột 9/12: Hiển thị thuốc -->
             <div class="col-xl-9 p-3">
-              <h5>Danh Sách <span>{{ item.tenDanhMuc }}</span></h5>
-              <!-- <div *ngFor="let thuoc of item.thuocLst" class="mb-2">
+              <h5>Danh Sách <span>{{ item.tenLoai }}</span></h5>
+              <div *ngFor="let thuoc of item.thuocLst" class="mb-2">
                 <strong>{{ thuoc.tenThuoc }}</strong>
                 <p>Mô tả: {{ thuoc.moTa }}</p>
-              </div> -->
-            </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </li>

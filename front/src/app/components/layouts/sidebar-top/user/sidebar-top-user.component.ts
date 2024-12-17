@@ -18,6 +18,8 @@ import { CommonConstant } from "src/app/_constant/common.constants";
 import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { SearchModel } from "src/app/_model/common/Search";
+import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 
 @Component({
   selector: "app-sidebar-top-user",
@@ -29,10 +31,12 @@ export class SidebarTopUserComponent implements OnInit {
   constructor(
     private nguoidungService: NguoidungService,
     private cdr: ChangeDetectorRef,
-    private dmThuocService: DanhmucThuocService
+    private dmThuocService: DanhmucThuocService,
+    private loaiThuocService: LoaithuocService,
   ) {}
 
-  dmThuocLst: DanhMucThuoc[] = [];
+  // dmThuocLst: DanhMucThuoc[] = [];
+  loaiThuocLst: LoaiThuoc[]=[];
 
   selectedItem: DanhMucThuoc | null = null;
   modelSearch: SearchModel = {
@@ -48,9 +52,9 @@ export class SidebarTopUserComponent implements OnInit {
   }
 
   getData() {
-    this.dmThuocService.getDMTLst(this.modelSearch).subscribe((res) => {
+    this.loaiThuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.dmThuocLst = res.data;
+        this.loaiThuocLst = res.data;
       }
     });
   }
