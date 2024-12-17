@@ -225,7 +225,7 @@ export class DonHangCreateComponent implements OnInit {
         this.donhangService.create(this.donhang).subscribe((resp) => {
           if (resp.status == CommonConstant.STATUS_OK_200) {
             this.toastService.success("Lưu thành công");
-            this.router.navigate(["/sys/phieunhap"]);
+            this.router.navigate(["/sys/donhang"]);
           } else if (resp.status == CommonConstant.STATUS_OK_409) {
             this.toastService.error(resp.msg);
           } else {
@@ -236,7 +236,7 @@ export class DonHangCreateComponent implements OnInit {
         this.phieunhapService.update(this.donhang).subscribe((resp) => {
           if (resp.status == CommonConstant.STATUS_OK_200) {
             this.toastService.success("Cập nhật thành công");
-            this.router.navigate(["/sys/phieunhap"]);
+            this.router.navigate(["/sys/donhang"]);
           } else if (resp.status == CommonConstant.STATUS_OK_409) {
             this.toastService.error(resp.msg);
           } else {

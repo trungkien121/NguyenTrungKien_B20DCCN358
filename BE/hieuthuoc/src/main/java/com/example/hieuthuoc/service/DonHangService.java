@@ -236,7 +236,7 @@ class DonHangServiceImpl implements DonHangService {
 			ThongBao thongBao = new ThongBao();
 			String tieuDe = "Đặt đơn hàng thành công";
 			String noidung = "Đơn hàng ID = " + createDonHang.getId() + " đã được đặt thành công.";
-			String linkLienKet = "/donhang/get?id=" + createDonHang.getId();
+			String linkLienKet = "http://localhost:4200/user/donmua-chitiet/" + createDonHang.getId();
 			LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
 
 			List<NguoiDung> nguoiDungs = new ArrayList<>();
