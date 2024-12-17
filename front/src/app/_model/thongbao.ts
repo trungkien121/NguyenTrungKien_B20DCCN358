@@ -4,7 +4,7 @@ export class ThongBao {
   id?: string;
   loaiThongBao?: string;
   ngayTao?: Date;
-  noidung?: string;
+  noiDung?: string;
   tieuDe?: string;
   trangThai?: boolean;
   nguoiDungId?: string;

@@ -45,6 +45,7 @@ export class ThuocComponent implements OnInit {
     currentPage: 0,
     size: 100,
     sortedField: "",
+    loaiThuoc: "",
   };
 
   totalRows: number = 0;
@@ -167,6 +168,6 @@ export class ThuocComponent implements OnInit {
   }
 
   onCategoryChange(newCategory: string) {
-    // this.modelSearch.categorySearch = newCategory;
+    this.modelSearch.loaiThuoc = newCategory;
   }
 }
