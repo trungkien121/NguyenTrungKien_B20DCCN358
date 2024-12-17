@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class TonKhoDTO {
     private Integer id;
-    private ThuocDTO thuoc; // ID của thuốc
-    private int soLo;
+    private Integer thuocId; // ID của thuốc
+    private String soLo;
     private Date hanSuDung;
     private Integer soLuong;
     private String viTri;

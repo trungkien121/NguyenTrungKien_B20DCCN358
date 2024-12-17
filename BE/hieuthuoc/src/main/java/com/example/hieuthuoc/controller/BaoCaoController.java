@@ -17,28 +17,28 @@ import com.example.hieuthuoc.repository.DonHangRepo;
 @RestController
 @RequestMapping("/baocao")
 public class BaoCaoController {
-//
-//	@Autowired
-//	DonHangRepo donHangRepo;
-//
-//	@GetMapping("/doanhthutheongay")
-//	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoNgay(
-//			@RequestParam("ngay") @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngay) {
-//		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoNgay(ngay);
-//		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
-//	}
-//
-//	@GetMapping("/doanhthutheothang")
-//	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoThang(@RequestParam("nam") int nam,
-//			@RequestParam("thang") int thang) {
-//		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoThang(nam,
-//				thang);
-//		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
-//	}
-//
-//	@GetMapping("/doanhthutheongay")
-//	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoNam(@RequestParam("nam") int nam) {
-//		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoNam(nam);
-//		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
-//	}
+
+	@Autowired
+	DonHangRepo donHangRepo;
+
+	@GetMapping("/doanhthutheongay")
+	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoNgay(
+			@RequestParam("ngay") @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngay) {
+		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoNgay(ngay);
+		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
+	}
+
+	@GetMapping("/doanhthutheothang")
+	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoThang(@RequestParam("nam") int nam,
+			@RequestParam("thang") int thang) {
+		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoThang(nam,
+				thang);
+		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
+	}
+
+	@GetMapping("/doanhthutheonam")
+	public ResponseDTO<List<DoanhThuDTO>> doanhThuTheoNam(@RequestParam("nam") int nam) {
+		List<DoanhThuDTO> doanhThuDTOs = donHangRepo.doanhThuTheoNam(nam);
+		return ResponseDTO.<List<DoanhThuDTO>>builder().status(200).msg("Thành công.").data(doanhThuDTOs).build();
+	}
 }

@@ -21,23 +21,50 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer> {
 
 	Page<DonHang> findAll(Pageable pageable);
 
-//	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " + "FUNCTION('HOUR', dh.createdAt), "
-//			+ "SUM(dh.tongTien), " + "COUNT(dh.id)) " + "FROM DonHang dh "
-//			+ "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + "AND FUNCTION('DATE', dh.createdAt) = :ngay "
-//			+ "GROUP BY FUNCTION('HOUR', dh.createdAt) " + "ORDER BY FUNCTION('HOUR', dh.createdAt)")
-//	List<DoanhThuDTO> doanhThuTheoNgay(@Param("ngay") Date ngay);
-//
-//	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " + "FUNCTION('DAY', dh.createdAt), "
-//			+ "SUM(dh.tongTien), " + "COUNT(dh.id)) " + "FROM DonHang dh "
-//			+ "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + "AND FUNCTION('YEAR', dh.createdAt) = :nam "
-//			+ "AND FUNCTION('MONTH', dh.createdAt) = :thang " + "GROUP BY FUNCTION('DAY', dh.createdAt) "
-//			+ "ORDER BY FUNCTION('DAY', dh.createdAt)")
-//	List<DoanhThuDTO> doanhThuTheoThang(@Param("nam") int nam, @Param("thang") int thang);
-//
-//	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " + "FUNCTION('MONTH', dh.createdAt), "
-//			+ "SUM(dh.tongTien), " + "COUNT(dh.id)) " + "FROM DonHang dh "
-//			+ "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + "AND FUNCTION('YEAR', dh.createdAt) = :nam "
-//			+ "GROUP BY FUNCTION('MONTH', dh.createdAt) " + "ORDER BY FUNCTION('MONTH', dh.createdAt)")
-//	List<DoanhThuDTO> doanhThuTheoNam(@Param("nam") int nam);
+	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " +
+		       "HOUR(dh.createdAt), " + 
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN dh.tongTien ELSE 0 END), " + // Tổng doanh thu của các đơn hàng đã thanh toán và chưa trả lại
+		       "COUNT(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN 1 ELSE NULL END), " + // Tổng số đơn hàng đã thanh toán và chưa trả lại
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang = 'TRA_HANG' THEN 1 ELSE 0 END)) " + // Tổng số đơn hàng trả lại (bao gồm cả đã thanh toán và chưa thanh toán)
+		       "FROM DonHang dh " +
+		       "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + // Lọc các đơn hàng đã thanh toán
+		       "AND DATE(dh.createdAt) = :ngay " + // Lọc theo ngày
+		       "GROUP BY HOUR(dh.createdAt) " + // Nhóm theo giờ
+		       "ORDER BY HOUR(dh.createdAt)")
+		List<DoanhThuDTO> doanhThuTheoNgay(@Param("ngay") Date ngay);
+
+
+
+
+	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " +
+		       "MONTH(dh.createdAt), " +  // Lọc theo tháng
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN dh.tongTien ELSE 0 END), " + // Tổng doanh thu của các đơn hàng đã thanh toán và chưa trả lại
+		       "COUNT(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN 1 ELSE NULL END), " + // Tổng số đơn hàng đã thanh toán và chưa trả lại
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang = 'TRA_HANG' THEN 1 ELSE 0 END)) " + // Tổng số đơn hàng trả lại
+		       "FROM DonHang dh " +
+		       "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + // Lọc các đơn hàng đã thanh toán
+		       "AND YEAR(dh.createdAt) = :nam " +  // Lọc theo năm
+		       "AND MONTH(dh.createdAt) = :thang " +  // Lọc theo tháng
+		       "GROUP BY MONTH(dh.createdAt) " + // Nhóm theo tháng
+		       "ORDER BY MONTH(dh.createdAt)")
+		List<DoanhThuDTO> doanhThuTheoThang(@Param("nam") int nam, @Param("thang") int thang);
+
+
+
+
+	@Query("SELECT new com.example.hieuthuoc.dto.DoanhThuDTO( " +
+		       "YEAR(dh.createdAt), " +  // Lọc theo năm
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN dh.tongTien ELSE 0 END), " + // Tổng doanh thu của các đơn hàng đã thanh toán và chưa trả lại
+		       "COUNT(CASE WHEN dh.trangThaiGiaoHang != 'TRA_HANG' THEN 1 ELSE NULL END), " + // Tổng số đơn hàng đã thanh toán và chưa trả lại
+		       "SUM(CASE WHEN dh.trangThaiGiaoHang = 'TRA_HANG' THEN 1 ELSE 0 END)) " + // Tổng số đơn hàng trả lại
+		       "FROM DonHang dh " +
+		       "WHERE dh.trangThaiThanhToan = 'DA_THANH_TOAN' " + // Lọc các đơn hàng đã thanh toán
+		       "AND YEAR(dh.createdAt) = :nam " +  // Lọc theo năm
+		       "GROUP BY YEAR(dh.createdAt) " + // Nhóm theo năm
+		       "ORDER BY YEAR(dh.createdAt)")
+		List<DoanhThuDTO> doanhThuTheoNam(@Param("nam") int nam);
+
+
+
 
 }

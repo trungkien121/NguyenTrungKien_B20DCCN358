@@ -1,6 +1,8 @@
 package com.example.hieuthuoc.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +27,12 @@ import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.entity.ThongBao;
 import com.example.hieuthuoc.entity.ThongBao.LoaiThongBao;
 import com.example.hieuthuoc.entity.Thuoc;
+import com.example.hieuthuoc.entity.TonKho;
 import com.example.hieuthuoc.repository.DonHangRepo;
 import com.example.hieuthuoc.repository.NguoiDungRepo;
 import com.example.hieuthuoc.repository.ThongBaoRepo;
 import com.example.hieuthuoc.repository.ThuocRepo;
+import com.example.hieuthuoc.repository.TonKhoRepo;
 
 public interface DonHangService {
 	ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(SearchDTO searchDTO);
@@ -60,6 +64,9 @@ class DonHangServiceImpl implements DonHangService {
 
 	@Autowired
 	private ThongBaoRepo thongBaoRepo;
+
+	@Autowired
+	TonKhoRepo tonKhoRepo;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -121,7 +128,7 @@ class DonHangServiceImpl implements DonHangService {
 
 			if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)
 					|| donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_HUY)) {
-				if (updateDonHang.getNguoiDung() != null) {
+				if (updateDonHang.getNguoiDung() != null || updateDonHang.getKhachHang() != null) {
 					ThongBao thongBao = new ThongBao();
 
 					String tieuDe;
@@ -130,6 +137,15 @@ class DonHangServiceImpl implements DonHangService {
 					if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)) {
 						tieuDe = "Đơn hàng đã giao thành công";
 						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được giao thành công.";
+
+						// Cập nhật số lượng thuốc trong kho
+						try {
+							updateSoLuongKho(updateDonHang.getChiTietDonHangs());
+						} catch (Exception e) {
+							System.out.println("Lỗi khi cập nhật số lượng kho: " + e.getMessage());
+							e.printStackTrace();
+						}
+
 					} else {
 						tieuDe = "Đơn hàng đã hủy thành công";
 						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được hủy thành công.";
@@ -183,7 +199,7 @@ class DonHangServiceImpl implements DonHangService {
 		if (donHangDTO.getNguoiDungId() != null) {
 			NguoiDung nguoiDung = nguoiDungRepo.findById(donHangDTO.getNguoiDungId()).orElse(null);
 			if (nguoiDung != null) {
-				donHang.setKhachHang(nguoiDung);
+				donHang.setNguoiDung(nguoiDung);
 			}
 		}
 		if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
@@ -292,6 +308,24 @@ class DonHangServiceImpl implements DonHangService {
 	public ResponseDTO<Void> delete(Integer id) {
 		donHangRepo.deleteById(id);
 		return ResponseDTO.<Void>builder().status(200).msg("Thành công.").build();
+	}
+
+	public void updateSoLuongKho(List<ChiTietDonHang> chiTietDonHangs) {
+		for (ChiTietDonHang chiTietDonHang : chiTietDonHangs) {
+
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, 3);
+			Date ngayCanSoSanh = calendar.getTime();
+
+			TonKho tonKho = tonKhoRepo.findNearestTonKhoByThuocIdAndHanSuDungBefore(chiTietDonHang.getThuoc().getId(),
+					ngayCanSoSanh);
+
+			int soLuong = tonKho.getSoLuong() - chiTietDonHang.getSoLuong();
+			tonKho.setSoLuong(soLuong);
+
+			tonKhoRepo.save(tonKho);
+
+		}
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.example.hieuthuoc.entity;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -28,8 +30,10 @@ public class ChiTietPhieuNhap {
     @JoinColumn(name = "thuoc_id")
     private Thuoc thuoc;
 
+    private Date hanSuDung;
     private Integer soLuong;
     private Double donGia;
+    
 
     // getters and setters
 }

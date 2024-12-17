@@ -29,7 +29,7 @@ public class TonKho extends TimeAuditable{
     @JoinColumn(name = "thuoc_id")
     private Thuoc thuoc;
 
-    private int soLo;
+    private String soLo;
     private Date hanSuDung;
     private Integer soLuong;
     private String viTri;

@@ -9,4 +9,5 @@ public class DoanhThuDTO {
 	private Integer thoiGian;
     private Double tongDoanhThu;
     private Long tongDonHang;
+    private Long tongDonHangTraLai;
 }
