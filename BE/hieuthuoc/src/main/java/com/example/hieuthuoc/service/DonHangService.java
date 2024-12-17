@@ -22,7 +22,9 @@ import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.ChiTietDonHang;
 import com.example.hieuthuoc.entity.DonHang;
+import com.example.hieuthuoc.entity.DonHang.PhuongThucThanhToan;
 import com.example.hieuthuoc.entity.DonHang.TrangThaiGiaoHang;
+import com.example.hieuthuoc.entity.DonHang.TrangThaiThanhToan;
 import com.example.hieuthuoc.entity.NguoiDung;
 import com.example.hieuthuoc.entity.ThongBao;
 import com.example.hieuthuoc.entity.ThongBao.LoaiThongBao;
@@ -196,11 +198,35 @@ class DonHangServiceImpl implements DonHangService {
 			}
 		}
 
+		donHang.setPhuongThucThanhToan(DonHang.PhuongThucThanhToan.valueOf(donHangDTO.getPhuongThucThanhToan()));
+		
+		donHang.setTrangThaiGiaoHang(donHangDTO.getTrangThaiGiaoHang() != null
+				? DonHang.TrangThaiGiaoHang.valueOf(donHangDTO.getTrangThaiGiaoHang())
+				: TrangThaiGiaoHang.DANG_XU_LY);
+
+		donHang.setTrangThaiThanhToan(TrangThaiThanhToan.CHUA_THANH_TOAN);
+		
+		if ("CHUYEN_KHOAN".equalsIgnoreCase(donHangDTO.getPhuongThucThanhToan())) {
+			donHang.setTrangThaiThanhToan(TrangThaiThanhToan.DA_THANH_TOAN);
+		}
+		
+
 		if (donHangDTO.getNguoiDungId() != null) {
 			NguoiDung nguoiDung = nguoiDungRepo.findById(donHangDTO.getNguoiDungId()).orElse(null);
 			if (nguoiDung != null) {
 				donHang.setNguoiDung(nguoiDung);
 			}
+
+			if ("CHUYEN_KHOAN".equalsIgnoreCase(donHangDTO.getPhuongThucThanhToan())) {
+				donHang.setTrangThaiThanhToan(TrangThaiThanhToan.CHUA_THANH_TOAN);
+				donHang.setTrangThaiGiaoHang(TrangThaiGiaoHang.DA_GIAO);
+			} else if ("TIEN_MAT".equalsIgnoreCase(donHangDTO.getPhuongThucThanhToan())) {
+				donHang.setTrangThaiThanhToan(TrangThaiThanhToan.DA_THANH_TOAN);
+				donHang.setTrangThaiGiaoHang(TrangThaiGiaoHang.DA_GIAO);
+			} else {
+				throw new IllegalArgumentException("Phương thức thanh toán không hợp lệ");
+			}
+
 		}
 		if (donHangDTO.getKhachHangId() == null && donHangDTO.getNguoiDungId() == null) {
 			return ResponseDTO.<DonHang>builder().status(409).msg("Không có người tạo đơn").build();
@@ -223,9 +249,7 @@ class DonHangServiceImpl implements DonHangService {
 
 		}
 
-		donHang.setTrangThaiGiaoHang(TrangThaiGiaoHang.DANG_XU_LY);
-		donHang.setPhuongThucThanhToan(DonHang.PhuongThucThanhToan.valueOf(donHangDTO.getPhuongThucThanhToan()));
-		donHang.setTrangThaiThanhToan(DonHang.TrangThaiThanhToan.valueOf(donHangDTO.getTrangThaiThanhToan()));
+
 
 		donHang.setTongTien(tongTien);
 		donHang.setChiTietDonHangs(chiTietDonHangs);
