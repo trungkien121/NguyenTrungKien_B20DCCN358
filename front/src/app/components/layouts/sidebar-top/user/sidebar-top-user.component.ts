@@ -34,6 +34,7 @@ export class SidebarTopUserComponent implements OnInit {
 
   dmThuocLst: DanhMucThuoc[] = [];
 
+  selectedItem: DanhMucThuoc | null = null;
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
@@ -52,5 +53,14 @@ export class SidebarTopUserComponent implements OnInit {
         this.dmThuocLst = res.data;
       }
     });
+  }
+
+  onMouseEnter(item: DanhMucThuoc) {
+    this.selectedItem = item;
+  }
+
+  // Sự kiện khi chuột rời khỏi mục
+  onMouseLeave() {
+    this.selectedItem = null;
   }
 }

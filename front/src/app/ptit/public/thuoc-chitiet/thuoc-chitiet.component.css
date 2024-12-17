@@ -82,3 +82,67 @@
   margin-right: 8px; /* Tạo khoảng cách giữa icon và chữ */
   font-size: 18px; /* Kích thước icon */
 }
+
+/* Menu bên trái */
+.nav-link {
+  color: #495057;
+  padding: 10px 15px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #e9ecef;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+/* Cột trái và phải căn chỉnh padding */
+.border-end {
+  border-right: 1px solid #e0e0e0;
+}
+
+.pe-4 {
+  padding-right: 1.5rem; /* Khoảng cách bên phải menu */
+}
+
+.ps-4 {
+  padding-left: 1.5rem; /* Khoảng cách bên trái nội dung */
+}
+
+/* Thay đổi kích thước chữ cho các liên kết trong cột bên trái */
+.nav-link {
+  font-size: 18px; /* Thay đổi kích thước chữ */
+  font-weight: bold; /* Đặt chữ đậm */
+}
+
+
+/* Nội dung bên phải */
+h5 {
+  font-size: 18px;
+  color: #212529;
+}
+
+p, li {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #495057;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.container-fluid {
+  background-color: #fff;
+  padding: 16px;
+}
+

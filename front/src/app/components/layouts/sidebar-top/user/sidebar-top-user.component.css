@@ -3,3 +3,24 @@
     font-weight: 800;
 }
 
+/* Đảm bảo popup nằm ngay dưới tên danh mục */
+.popup-large {
+    position: absolute;
+    top: 100%; /* Đặt ngay bên dưới phần tử cha */
+    left: 0; /* Căn theo mép trái */
+    width: 60vw; /* Chiếm 3/5 màn hình lớn */
+    height: 70vh; /* Chiều cao 70% màn hình */
+    background-color: #fff; /* Màu nền */
+    border: 1px solid #ddd; /* Viền nhẹ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    border-radius: 8px; /* Bo tròn viền */
+    z-index: 1000; /* Hiển thị trên tất cả phần khác */
+    padding: 20px; /* Khoảng cách bên trong */
+    overflow-y: auto; /* Tạo thanh cuộn nếu nội dung quá dài */
+  }
+  
+  /* Đảm bảo vị trí tương đối cho nav-item */
+  .nav-item {
+    position: relative;
+  }
+  

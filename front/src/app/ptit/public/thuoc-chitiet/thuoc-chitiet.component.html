@@ -4,9 +4,7 @@
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">Chi tiết thuốc</h4>
           </div>
         </div>
@@ -23,11 +21,7 @@
                         <div class="swiper-wrapper">
                           <div class="swiper-slide">
                             <div class="nav-slide-item">
-                              <img
-                                [src]="thuoc.avatar"
-                                alt=""
-                                class="img-fluid d-block"
-                              />
+                              <img [src]="thuoc.avatar" alt="" class="img-fluid d-block" />
                             </div>
                           </div>
                         </div>
@@ -45,21 +39,14 @@
                         </div>
                         <div class="flex-shrink-0" *ngIf="isAdmin == true">
                           <div>
-                            <a
-                              [routerLink]="['/sys/product-create/', thuoc.id]"
-                              class="btn btn-light"
-                              data-bs-toggle="tooltip"
-                              data-bs-placement="top"
-                              title="Chỉnh sửa"
-                              ><i class="ri-pencil-fill align-bottom"></i
-                            ></a>
+                            <a [routerLink]="['/sys/product-create/', thuoc.id]" class="btn btn-light"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa"><i
+                                class="ri-pencil-fill align-bottom"></i></a>
                           </div>
                         </div>
                       </div>
 
-                      <div
-                        class="d-flex flex-wrap gap-2 align-items-center mt-3"
-                      >
+                      <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
                         <div class="rating mb-0">
                           <span class="fw-bold">{{ thuoc.maThuoc }}</span> |
                         </div>
@@ -118,14 +105,14 @@
                         <div class="price">
                           <span class="current-price">{{
                             thuoc.giaBan + " / " + thuoc.donVi
-                          }}</span>
+                            }}</span>
                         </div>
 
                         <ul class="product-details list-unstyled mt-4">
                           <li>
-                            <div class="label">Danh mục:</div>
+                            <div class="label">Loại thuốc:</div>
                             <div class="value">
-                              {{ thuoc.danhMucThuoc?.tenDanhMuc }}
+                              {{ thuoc.loaiThuoc?.tenLoai }}
                             </div>
                           </li>
                           <li>
@@ -141,12 +128,10 @@
                           <li>
                             <div class="label">Thành phần:</div>
                             <div class="value">
-                              <span
-                                *ngFor="
+                              <span *ngFor="
                                   let item of thuoc.thanhPhanThuocs;
                                   let last = last
-                                "
-                              >
+                                ">
                                 {{ item.tenThanhPhan }} ({{ item.hamLuong }}
                                 {{ item.donVi }}){{ last ? "" : "," }}
                               </span>
@@ -161,15 +146,9 @@
                         <div class="d-flex justify-content-end">
                           <div class="flex-shrink-0 ms-2">
                             <div>
-                              <a
-                                class="btn btn-custom-primary"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                (click)="addProductInCart()"
-                              >
-                                <i
-                                  class="ri-shopping-cart-fill align-bottom"
-                                ></i>
+                              <a class="btn btn-custom-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                (click)="addProductInCart()">
+                                <i class="ri-shopping-cart-fill align-bottom"></i>
                                 Chọn mua
                               </a>
                             </div>
@@ -234,6 +213,80 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
+              <div class="card-body p-0">
+                <div class="container-fluid mt-4 px-0">
+                  <div class="row gx-0">
+                    <!-- Cột bên trái: Menu điều hướng -->
+                    <div class="col-md-2 border-end p-0">
+                      <ul class="nav flex-column">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#mo-ta-san-pham">Mô tả sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#thanh-phan">Thành phần</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#cong-dung">Công dụng</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#cach-dung">Cách dùng</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#tac-dung-phu">Tác dụng phụ</a>
+                        </li>
+                      </ul>
+                    </div>
+        
+                    <!-- Cột bên phải: Nội dung động -->
+                    <div class="col-md-10 p-0">
+                      <!-- Mô tả sản phẩm -->
+                      <div id="mo-ta-san-pham" class="mb-4">
+                        <h5 class="fw-bold">Mô tả sản phẩm</h5>
+                        <p>{{ thuoc.moTaNgan }}</p>
+                      </div>
+        
+                      <!-- Thành phần -->
+                      <div id="thanh-phan" class="mb-4">
+                        <h5 class="fw-bold">Thành phần</h5>
+                        <ul>
+                          <li *ngFor="let tp of thuoc.thanhPhanThuocs">
+                            {{ tp.tenThanhPhan }} - {{ tp.hamLuong }} {{ tp.donVi }}
+                          </li>
+                        </ul>
+                      </div>
+        
+                      <!-- Công dụng -->
+                      <div id="cong-dung" class="mb-4">
+                        <h5 class="fw-bold">Công dụng</h5>
+                        <p>{{ thuoc.congDung }}</p>
+                      </div>
+        
+                      <!-- Cách dùng -->
+                      <div id="cach-dung" class="mb-4">
+                        <h5 class="fw-bold">Cách dùng</h5>
+                        <p>{{ thuoc.huongDanSuDung }}</p>
+                      </div>
+        
+                      <!-- Tác dụng phụ -->
+                      <div id="tac-dung-phu" class="mb-4">
+                        <h5 class="fw-bold">Lưu ý</h5>
+                        <p>{{ thuoc.ghiChu }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
               <div class="card-body">
                 <div class="">
                   <div>
@@ -277,17 +330,9 @@
                             </div>
                             <div class="col">
                               <div class="p-2">
-                                <div
-                                  class="progress bg-soft-success animated-progress progress-sm"
-                                >
-                                  <div
-                                    class="progress-bar bg-success"
-                                    role="progressbar"
-                                    style="width: 50.16%"
-                                    aria-valuenow="50.16"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
+                                <div class="progress bg-soft-success animated-progress progress-sm">
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: 50.16%"
+                                    aria-valuenow="50.16" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -307,17 +352,9 @@
                             </div>
                             <div class="col">
                               <div class="p-2">
-                                <div
-                                  class="progress bg-soft-success animated-progress progress-sm"
-                                >
-                                  <div
-                                    class="progress-bar bg-success"
-                                    role="progressbar"
-                                    style="width: 19.32%"
-                                    aria-valuenow="19.32"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
+                                <div class="progress bg-soft-success animated-progress progress-sm">
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: 19.32%"
+                                    aria-valuenow="19.32" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -337,17 +374,9 @@
                             </div>
                             <div class="col">
                               <div class="p-2">
-                                <div
-                                  class="progress bg-soft-success animated-progress progress-sm"
-                                >
-                                  <div
-                                    class="progress-bar bg-success"
-                                    role="progressbar"
-                                    style="width: 18.12%"
-                                    aria-valuenow="18.12"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
+                                <div class="progress bg-soft-success animated-progress progress-sm">
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: 18.12%"
+                                    aria-valuenow="18.12" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -367,17 +396,9 @@
                             </div>
                             <div class="col">
                               <div class="p-2">
-                                <div
-                                  class="progress bg-soft-warning animated-progress progress-sm"
-                                >
-                                  <div
-                                    class="progress-bar bg-warning"
-                                    role="progressbar"
-                                    style="width: 7.42%"
-                                    aria-valuenow="7.42"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
+                                <div class="progress bg-soft-warning animated-progress progress-sm">
+                                  <div class="progress-bar bg-warning" role="progressbar" style="width: 7.42%"
+                                    aria-valuenow="7.42" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -398,17 +419,9 @@
                             </div>
                             <div class="col">
                               <div class="p-2">
-                                <div
-                                  class="progress bg-soft-danger animated-progress progress-sm"
-                                >
-                                  <div
-                                    class="progress-bar bg-danger"
-                                    role="progressbar"
-                                    style="width: 4.98%"
-                                    aria-valuenow="4.98"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
+                                <div class="progress bg-soft-danger animated-progress progress-sm">
+                                  <div class="progress-bar bg-danger" role="progressbar" style="width: 4.98%"
+                                    aria-valuenow="4.98" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                               </div>
                             </div>
@@ -430,19 +443,13 @@
                           <h5 class="fs-14">Đánh giá:</h5>
                         </div>
 
-                        <div
-                          class="me-lg-n3 pe-lg-4"
-                          data-simplebar
-                          style="max-height: 225px"
-                        >
+                        <div class="me-lg-n3 pe-lg-4" data-simplebar style="max-height: 225px">
                           <ul class="list-unstyled mb-0">
                             <li class="py-2" *ngFor="let item of danhgiaLst">
                               <div class="border border-dashed rounded p-3">
                                 <div class="d-flex align-items-start mb-3">
                                   <div class="hstack gap-3">
-                                    <div
-                                      class="badge rounded-pill bg-success mb-0"
-                                    >
+                                    <div class="badge rounded-pill bg-success mb-0">
                                       <i class="mdi mdi-star"></i>
                                       {{ item.diemSo }}
                                     </div>
@@ -465,8 +472,8 @@
                                   <div class="flex-shrink-0">
                                     <p class="text-muted fs-13 mb-0">
                                       {{
-                                        item.createdAt
-                                          | date : "dd/MM/yyyy HH:mm:ss"
+                                      item.createdAt
+                                      | date : "dd/MM/yyyy HH:mm:ss"
                                       }}
                                     </p>
                                   </div>
