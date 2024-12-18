@@ -71,7 +71,9 @@
         ></app-giohang-header>
 
         <!-- thông báo -->
-        <app-thongbao-header *ngIf="isAuthenticate"></app-thongbao-header>
+        <app-thongbao-header
+          *ngIf="isAuthenticate && !isAdmin"
+        ></app-thongbao-header>
 
         <div *ngIf="!isAuthenticate" class="d-flex ms-2" style="margin: 0px">
           <button type="button" class="btn btn-danger btn-sm" (click)="login()">

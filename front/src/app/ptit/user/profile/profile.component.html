@@ -79,6 +79,7 @@
                 <div>Thông tin cá nhân</div>
               </div>
               <div
+                *ngIf="!isAdmin"
                 class="d-flex align-items-center mb-3 cursor-pointer"
                 [routerLink]="['/user/thongbao']"
               >

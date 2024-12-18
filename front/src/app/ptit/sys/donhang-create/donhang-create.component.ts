@@ -24,10 +24,12 @@ import { DonHang } from "src/app/_model/hoadon";
 import { NhaCungCap } from "src/app/_model/ncc";
 import { PhieuNhap } from "src/app/_model/phieunhap";
 import { Thuoc } from "src/app/_model/thuoc";
+import { TuongTacThuoc } from "src/app/_model/tuongTacThuoc";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { DonhangService } from "src/app/_service/donhang.service";
 import { NCCService } from "src/app/_service/ncc.service";
 import { PhieuNhapService } from "src/app/_service/phieunhap.service";
+import { TuongTacThuocService } from "src/app/_service/tuongtacthuoc.service";
 
 @Component({
   selector: "app-donhang-creare",
@@ -40,7 +42,7 @@ export class DonHangCreateComponent implements OnInit {
     private nguoidungService: NguoidungService,
     private phieunhapService: PhieuNhapService,
     private donhangService: DonhangService,
-
+    private tuongTacThuocService: TuongTacThuocService,
     private toastService: ToastrService,
     private router: Router,
     private nccService: NCCService,
@@ -71,6 +73,8 @@ export class DonHangCreateComponent implements OnInit {
     size: 10,
     sortedField: "",
   };
+
+  listTuongTacThuoc: TuongTacThuoc[] = [];
 
   phuongThucThanhToanLst: OptionSelect[] = [];
 
@@ -113,6 +117,65 @@ export class DonHangCreateComponent implements OnInit {
         donGia: 0,
         soLuong: 0,
         thuocId: item.id,
+      });
+    });
+
+    this.addTuongTacThuoc();
+    this.getTuongTacThuocApi();
+  }
+
+  addTuongTacThuoc() {
+    // Duyệt qua thuocSelected và thêm các tương tác vào listTuongTacThuoc
+
+    if (this.thuocSelected.length >= 2) {
+      this.listTuongTacThuoc = [];
+
+      for (let i = 0; i < this.thuocSelected.length; i++) {
+        for (let j = i + 1; j < this.thuocSelected.length; j++) {
+          const thuoc1 = this.thuocSelected[i];
+          const thuoc2 = this.thuocSelected[j];
+
+          // Kiểm tra thanhPhanThuoc của từng thuốc
+          if (thuoc1.thanhPhanThuocs && thuoc2.thanhPhanThuocs) {
+            for (const thanhPhan1 of thuoc1.thanhPhanThuocs) {
+              for (const thanhPhan2 of thuoc2.thanhPhanThuocs) {
+                // Tạo đối tượng TuongTacThuoc
+                const tuongTac: TuongTacThuoc = {
+                  id: undefined, // ID sẽ được backend tự sinh nếu cần
+                  hoatChat1: thanhPhan1.tenThanhPhan, // Ví dụ sử dụng thuộc tính tên hoạt chất
+                  hoatChat2: thanhPhan2.tenThanhPhan,
+                  coChe: "", // Thêm cơ chế (nếu có logic)
+                  hauQua: "", // Thêm hậu quả (nếu có logic)
+                  xuTri: "", // Thêm cách xử lý (nếu có logic)
+                  thuoc1,
+                  thuoc2,
+                };
+
+                // Thêm vào danh sách tương tác
+                this.listTuongTacThuoc.push(tuongTac);
+              }
+            }
+          }
+        }
+      }
+    } else {
+      console.warn("Chọn ít nhất 2 thuốc để tạo danh sách tương tác.");
+      this.listTuongTacThuoc = [];
+    }
+  }
+
+  getTuongTacThuocApi() {
+    this.listTuongTacThuoc.forEach((item: TuongTacThuoc) => {
+      this.tuongTacThuocService.get(item).subscribe((res) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          item.id = res.data.id;
+          item.hoatChat2 = res.data.hoatChat2;
+          item.hoatChat1 = res.data.hoatChat1;
+          item.coChe = res.data.coChe;
+          item.hauQua = res.data.hauQua;
+          item.xuTri = res.data.xuTri;
+        } else if (res.status == CommonConstant.STATUS_OK_404) {
+        }
       });
     });
   }
@@ -195,6 +258,10 @@ export class DonHangCreateComponent implements OnInit {
 
   deleteThuoc(index: number) {
     this.chiTietDonHangLst.splice(index, 1);
+    this.thuocSelected.splice(index, 1);
+
+    this.addTuongTacThuoc();
+    this.getTuongTacThuocApi();
   }
 
   save() {

@@ -137,23 +137,30 @@
   ></lord-icon> -->
 
                             <img
-                              src="assets/images/users/avatar-2.jpg"
+                              [src]="
+                                noti &&
+                                noti.nguoiNhan[0] &&
+                                noti.nguoiNhan[0].avatar
+                                  ? noti.nguoiNhan[0].avatar
+                                  : 'assets/images/users/avatar-2.jpg'
+                              "
                               class="me-3 rounded-circle avatar-xs"
                               alt="user-pic"
                             />
+
                             <div class="ms-2">
                               <h5 class="fs-14 text-danger fw-semibold">
                                 {{ noti.title }}
                               </h5>
                               <p class="text-black mb-1">
-                                {{ noti.content }}
+                                {{ noti.noiDung }}
                               </p>
                               <a
-                                [href]="noti.linkUri"
+                                [href]="noti.linkLienKet"
                                 type="button"
                                 class="btn ps-0 btn-sm btn-link text-danger text-uppercase"
                               >
-                                <!-- Xem chi tiết -->
+                                Xem chi tiết
                               </a>
                             </div>
                           </div>

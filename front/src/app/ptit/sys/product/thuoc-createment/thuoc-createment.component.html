@@ -214,6 +214,7 @@
                       <app-select-common
                         [optionValue]="'value'"
                         [options]="statusOptions"
+                        [selectedOptionValue]="thuoc.trangThai"
                         [isOptionSelectType]="true"
                         (selectionChange)="onStatusChange($event)"
                       ></app-select-common>
@@ -557,6 +558,7 @@
                         placeholder="Nhập ngưỡng cảnh báo"
                         [(ngModel)]="item.tenThanhPhan"
                         name="nguongCanhBao"
+                        name="ten-{{ item.id }}"
                       />
                     </div>
                   </div>
@@ -573,6 +575,7 @@
                         placeholder="Nhập quy cách"
                         [(ngModel)]="item.hamLuong"
                         name="quyCach"
+                        name="hamLuong-{{ item.id }}"
                       />
                     </div>
                   </div>
@@ -589,6 +592,7 @@
                         placeholder="Nhập quy cách"
                         [(ngModel)]="item.donVi"
                         name="quyCach"
+                        name="donVi-{{ item.id }}"
                       />
                     </div>
                   </div>

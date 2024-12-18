@@ -88,49 +88,6 @@ export class SelectKhachHangComponent implements OnInit {
     }
   }
 
-  openNewDoiTuong() {
-    this.displayNewDialog = true;
-  }
-
-  onSaveNewDoiTuong(doituong: DoiTuong) {
-    if (!doituong.id) {
-      this.doituongService.createDT(doituong).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Lưu thành công");
-          this.getKH();
-        } else {
-          this.toastService.error("Lưu thất bại");
-        }
-      });
-    } else {
-      this.doituongService.updateDT(doituong).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Cập nhật thành công");
-          this.getKH();
-        } else {
-          this.toastService.error("Cập nhật thất bại");
-        }
-      });
-    }
-
-    this.displayNewDialog = false;
-  }
-
-  onCancelNewDoiTuong(event: any) {
-    this.displayNewDialog = false;
-  }
-
-  deleteDoituong(doituong: DoiTuong) {
-    this.doituongService.deleteDT(doituong.id).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Xóa thành công");
-        this.getKH();
-      } else {
-        this.toastService.error("Xóa thất bại");
-      }
-    });
-  }
-
   update(doituong: DoiTuong) {
     this.displayNewDialog = true;
     this.doituongNew = doituong;

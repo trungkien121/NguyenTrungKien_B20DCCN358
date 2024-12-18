@@ -26,7 +26,7 @@ export class Thuoc {
   chongChiDinh?: string;
   huongDanSuDung?: string;
   moTaNgan?: string;
-  trangThai?: boolean;
+  trangThai?: string;
   ghiChu?: string;
   doiTuongSD?: string;
 

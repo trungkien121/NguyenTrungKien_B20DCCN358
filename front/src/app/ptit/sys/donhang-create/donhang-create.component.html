@@ -238,6 +238,43 @@
                   </div> -->
               </div>
             </div>
+
+            <div class="card">
+              <div class="card-body">
+                <div class="row align-items-end">
+                  <div class="col-lg-12">
+                    <div class="mb-3">
+                      <div class="text-muted">
+                        <h5 class="fs-14 fw-semibold text-danger">Chú ý :</h5>
+                        <!-- <p>
+                          Tommy Hilfiger men striped pink sweatshirt. Crafted
+                          with cotton. Material composition is 100% organic
+                          cotton. This is one of the world’s leading designer
+                          lifestyle brands and is internationally recognized for
+                          celebrating the essence of classic American cool
+                          style, featuring preppy with a twist designs.
+                        </p> -->
+                        <ul class="list-unstyled">
+                          <li
+                            class="py-1"
+                            *ngFor="let item of listTuongTacThuoc"
+                          >
+                            <i
+                              class="mdi mdi-circle-medium me-1 text-muted align-middle"
+                            >
+                              Thuốc {{ item.thuoc1?.tenThuoc }} có
+                              {{ item.hoatChat1 }} và Thuốc
+                              {{ item.thuoc2?.tenThuoc }} có
+                              {{ item.hoatChat2 }} có thể {{ item.hauQua }}
+                            </i>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
