@@ -4,40 +4,33 @@
       <li class="menu-title"><span>Menu</span></li>
 
       <!-- Lặp qua danh sách danh mục -->
-      <li
-        class="nav-item position-relative"
-        *ngFor="let item of loaiThuocLst| slice:0:4"
-        (mouseenter)="onMouseEnter(item)"
-        (mouseleave)="onMouseLeave()"
-      >
+      <li class="nav-item position-relative" *ngFor="let item of loaiThuocLst | slice:0:4" (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave()">
         <a class="nav-link menu-link">
           <span>{{ item.tenLoai }}</span>
         </a>
-
+      
         <div class="popup-large" *ngIf="selectedItem === item">
-          <div class="row">
-            <!-- <div class="col-xl-3 border-end p-3">
-              <h5>Loại <span>{{ item.tenLoai }}</span></h5>
-              <ul class="list-group">
-                <li
-                  class="list-group-item"
-                  *ngFor="let loai of item.loaiThuocLst"
-                >
-                  {{ loai.tenLoaiThuoc }}
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-xl-9 p-3">
-              <h5>Danh Sách <span>{{ item.tenLoai }}</span></h5>
-              <div *ngFor="let thuoc of item.thuocLst" class="mb-2">
-                <strong>{{ thuoc.tenThuoc }}</strong>
-                <p>Mô tả: {{ thuoc.moTa }}</p>
+          <!-- Nút "Xem tất cả" -->
+          <!-- <div *ngIf="item.dsThuoc.length > 4" class="view-all-btn">
+            <button (click)="showAllItems(item)">Xem tất cả</button>
+          </div> -->
+          <div class="view-all-btn">
+            <h4>Bán chạy nhất |</h4>
+            <button class="view-all-button">Xem tất cả ></button>
+          </div>          
+          <div class="items-container">
+            <!-- Hiển thị tối đa 4 item -->
+            <div class="item-card" *ngFor="let thuoc of item.dsThuoc | slice:0:4" (click)="showDetail(thuoc)">
+              <img [src]="thuoc.avatar" alt="Hình ảnh thuốc" class="item-image" />
+              <div class="item-info">
+                <h5 class="item-name">{{ thuoc.tenThuoc }}</h5>
+                <p class="item-price">{{ thuoc.giaBan + '.000đ' }}</p>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </li>
+      
     </ul>
   </div>
 </div>

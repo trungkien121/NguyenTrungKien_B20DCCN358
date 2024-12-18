@@ -20,6 +20,12 @@ import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { SearchModel } from "src/app/_model/common/Search";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
+import { Thuoc } from "src/app/_model/thuoc";
+import { Router } from "@angular/router";
+import { ThuocService } from "src/app/_service/thuoc.service";
+import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
+import { GioHangService } from "src/app/_service/giohang.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-sidebar-top-user",
@@ -33,6 +39,10 @@ export class SidebarTopUserComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private dmThuocService: DanhmucThuocService,
     private loaiThuocService: LoaithuocService,
+    private router: Router,
+    private thuocService: ThuocService,
+    private gioHangService: GioHangService,
+    private toastService: ToastrService
   ) {}
 
   // dmThuocLst: DanhMucThuoc[] = [];
@@ -45,20 +55,41 @@ export class SidebarTopUserComponent implements OnInit {
     currentPage: 0,
     size: 100,
     sortedField: "",
+    loaiThuoc:""
   };
+
+  totalRows: number = 0;
+  gioHangId: number = 0;
+  userInfo: NguoiDung = {};
 
   ngOnInit(): void {
     this.getData();
+
+  }
+
+
+  showDetail(thuoc: Thuoc) {
+    this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
   }
 
   getData() {
     this.loaiThuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.loaiThuocLst = res.data;
+        for (let i = 0; i < 4; i++) {
+          const loaiThuoc = this.loaiThuocLst[i];
+          this.modelSearch.loaiThuoc=loaiThuoc.tenLoai;
+          // this.getThuoc();
+          this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
+            // if (res.status == CommonConstant.STATUS_OK_200) {
+            this.loaiThuocLst[i].dsThuoc = res.data.data;
+            // }
+          });
+        }
       }
     });
-  }
-
+  }   
+    
   onMouseEnter(item: DanhMucThuoc) {
     this.selectedItem = item;
   }
