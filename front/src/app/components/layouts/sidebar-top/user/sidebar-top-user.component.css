@@ -3,24 +3,135 @@
     font-weight: 800;
 }
 
-/* Đảm bảo popup nằm ngay dưới tên danh mục */
-.popup-large {
-    position: absolute;
-    top: 100%; /* Đặt ngay bên dưới phần tử cha */
-    left: 0; /* Căn theo mép trái */
-    width: 60vw; /* Chiếm 3/5 màn hình lớn */
-    height: 70vh; /* Chiều cao 70% màn hình */
-    background-color: #fff; /* Màu nền */
-    border: 1px solid #ddd; /* Viền nhẹ */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
-    border-radius: 8px; /* Bo tròn viền */
-    z-index: 1000; /* Hiển thị trên tất cả phần khác */
-    padding: 20px; /* Khoảng cách bên trong */
-    overflow-y: auto; /* Tạo thanh cuộn nếu nội dung quá dài */
-  }
-  
+
+.view-all-btn {
+  display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử ngang hàng */
+  justify-content: flex-start;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 10px;
+  margin-left: 25px;
+  width: 100%;
+}
+
+.view-all-btn h4 {
+  margin: 0; /* Loại bỏ margin mặc định */
+  font-size: 20px; /* Kích thước chữ */
+  font-weight: bold; /* In đậm chữ */
+}
+
+.view-all-button {
+  background: none; /* Loại bỏ nền của nút */
+  color: #007bff; /* Màu chữ xanh */
+  border: none; /* Loại bỏ viền của nút */
+  font-size: 1rem; /* Kích thước chữ của nút */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.view-all-button:hover {
+  color: #0056b3; /* Đổi màu chữ khi hover */
+}
+
+
   /* Đảm bảo vị trí tương đối cho nav-item */
   .nav-item {
     position: relative;
+  }
+  
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-transform: capitalize;
+    transition: color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng màu chữ và nền */
+  }
+  
+  .nav-link:hover {
+    color: #007bff; /* Đổi màu chữ khi hover */
+    background-color: #f0f8ff; /* Thêm màu nền nhẹ khi hover */
+  }
+  
+  /* Đảm bảo tên loại thuốc không bị dịch chuyển */
+  .nav-link span {
+    display: block;
+    transition: transform 0.3s ease; /* Cải thiện hiệu ứng khi hover */
+  }
+  
+  .nav-item:hover .nav-link span {
+    transform: translateX(0); /* Giữ tên loại thuốc ở vị trí cũ */
+  }
+  
+
+  
+  .popup-large {
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Khoảng cách giữa các thẻ */
+    justify-content: center; /* Căn giữa các item */
+  }
+  
+  .item-card {
+    width: calc(25% - 16px); /* Tối đa 5 item mỗi hàng */
+    min-width: 150px; /* Kích thước tối thiểu cho màn hình nhỏ */
+    max-width: 180px; /* Kích thước tối đa để đồng nhất */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .item-card:hover {
+    transform: translateY(-6px); /* Hiệu ứng hover nổi nhẹ */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover; /* Giữ hình ảnh vừa khung */
+    border-bottom: 1px solid #eee;
+  }
+  
+  .item-info {
+    padding: 10px;
+  }
+  
+  .item-name {
+    font-size: 1rem; /* Tăng kích thước chữ để dễ đọc */
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4; /* Khoảng cách giữa các dòng */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Cắt chữ nếu dài */
+    white-space: normal; /* Cho phép xuống dòng */
+    margin-bottom: 6px;
+  }
+  
+  .item-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #007bff;
   }
   
