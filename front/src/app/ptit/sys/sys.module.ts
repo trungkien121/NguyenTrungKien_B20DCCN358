@@ -46,6 +46,7 @@ import { ChiTietDonHangComponent } from "./donhang/chitiet-donhang/chitiet-donha
 import { ThongKecComponent } from "./thongke/thongke.component";
 import { DonHangCreateComponent } from "./donhang-create/donhang-create.component";
 import { SelectKhachHangComponent } from "./donhang-create/select-khachhang/select-khachhang.component";
+import { HighchartsChartModule } from "highcharts-angular";
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { SelectKhachHangComponent } from "./donhang-create/select-khachhang/sele
     AngMusicPlayerModule,
     ProgressSpinnerModule,
     TableModule,
+    HighchartsChartModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

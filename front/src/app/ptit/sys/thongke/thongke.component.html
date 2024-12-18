@@ -23,31 +23,59 @@
       <!-- end page title -->
 
       <div class="row">
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
           <!-- card -->
           <div class="card card-animate">
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    Total Earnings
+                    Hóa đơn - Ngày
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <h5 class="text-success fs-14 mb-0">
+                  <h5
+                    class="text-success fs-14 mb-0"
+                    *ngIf="homnay.tongHoaDonHomNay > homqua.tongHoaDonHomQua"
+                  >
                     <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                    +16.24 %
+                    +
+                    {{
+                      calculatePercentageIncrease(
+                        homnay.tongHoaDonHomNay,
+                        homqua.tongHoaDonHomQua
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-danger fs-14 mb-0"
+                    *ngIf="homnay.tongHoaDonHomNay < homqua.tongHoaDonHomQua"
+                  >
+                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
+                    {{
+                      calculatePercentageIncrease(
+                        homnay.tongHoaDonHomNay,
+                        homqua.tongHoaDonHomQua
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-muted fs-14 mb-0"
+                    *ngIf="homnay.tongHoaDonHomNay == homqua.tongHoaDonHomQua"
+                  >
+                    +0.00 %
                   </h5>
                 </div>
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    $<span class="counter-value" data-target="559.25">0</span>k
+                    <span>{{ homnay.tongHoaDonHomNay }}</span>
                   </h4>
-                  <a href="#" class="text-decoration-underline"
-                    >View net earnings</a
-                  >
                 </div>
                 <div class="avatar-sm flex-shrink-0">
                   <span
@@ -64,68 +92,68 @@
         </div>
         <!-- end col -->
 
-        <div class="col-xl-3 col-md-6">
-          <!-- card -->
-          <div class="card card-animate bg-info">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <div class="flex-grow-1">
-                  <p class="text-uppercase fw-medium text-white-50 mb-0">
-                    Orders
-                  </p>
-                </div>
-                <div class="flex-shrink-0">
-                  <h5 class="text-warning fs-14 mb-0">
-                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
-                    -3.57 %
-                  </h5>
-                </div>
-              </div>
-              <div class="d-flex align-items-end justify-content-between mt-4">
-                <div>
-                  <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-white">
-                    <span class="counter-value" data-target="36894">0</span>
-                  </h4>
-                  <a href="#" class="text-decoration-underline text-white-50"
-                    >View all orders</a
-                  >
-                </div>
-                <div class="avatar-sm flex-shrink-0">
-                  <span class="avatar-title bg-soft-light rounded fs-3 shadow">
-                    <i class="bx bx-shopping-bag text-white"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <!-- end card body -->
-          </div>
-          <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
           <!-- card -->
           <div class="card card-animate">
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    Customers
+                    Đơn hàng trả lại- Ngày
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <h5 class="text-success fs-14 mb-0">
+                  <h5
+                    class="text-success fs-14 mb-0"
+                    *ngIf="
+                      homnay.tongDonHangTraLaiHomNay >
+                      homqua.tongDonHangTraLaiHomQua
+                    "
+                  >
                     <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                    +29.08 %
+                    +
+                    {{
+                      calculatePercentageIncrease(
+                        homnay.tongDonHangTraLaiHomNay,
+                        homqua.tongDonHangTraLaiHomQua
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-danger fs-14 mb-0"
+                    *ngIf="
+                      homnay.tongDonHangTraLaiHomNay <
+                      homqua.tongDonHangTraLaiHomQua
+                    "
+                  >
+                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
+                    {{
+                      calculatePercentageIncrease(
+                        homnay.tongDonHangTraLaiHomNay,
+                        homqua.tongDonHangTraLaiHomQua
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-muted fs-14 mb-0"
+                    *ngIf="
+                      homnay.tongDonHangTraLaiHomNay ==
+                      homqua.tongDonHangTraLaiHomQua
+                    "
+                  >
+                    +0.00 %
                   </h5>
                 </div>
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    <span class="counter-value" data-target="183.35">0</span>M
+                    <span>{{ homnay.tongDonHangTraLaiHomNay }}</span>
                   </h4>
-                  <a href="#" class="text-decoration-underline">See details</a>
                 </div>
                 <div class="avatar-sm flex-shrink-0">
                   <span
@@ -142,28 +170,59 @@
         </div>
         <!-- end col -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
           <!-- card -->
           <div class="card card-animate">
             <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    My Balance
+                    Doanh thu - Tháng
                   </p>
                 </div>
                 <div class="flex-shrink-0">
-                  <h5 class="text-muted fs-14 mb-0">+0.00 %</h5>
+                  <h5
+                    class="text-success fs-14 mb-0"
+                    *ngIf="doanhThuThangNay > doanhThuThangTruoc"
+                  >
+                    <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                    +
+                    {{
+                      calculatePercentageIncrease(
+                        doanhThuThangNay,
+                        doanhThuThangTruoc
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-danger fs-14 mb-0"
+                    *ngIf="doanhThuThangNay < doanhThuThangTruoc"
+                  >
+                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
+                    {{
+                      calculatePercentageIncrease(
+                        doanhThuThangNay,
+                        doanhThuThangTruoc
+                      )
+                    }}
+                    %
+                  </h5>
+
+                  <h5
+                    class="text-muted fs-14 mb-0"
+                    *ngIf="doanhThuThangNay == doanhThuThangTruoc"
+                  >
+                    +0.00 %
+                  </h5>
                 </div>
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    $<span class="counter-value" data-target="165.89">0</span>k
+                    <span>{{ doanhThuThangNay | number : "1.0-0" }} VNĐ</span>
                   </h4>
-                  <a href="#" class="text-decoration-underline"
-                    >Withdraw money</a
-                  >
                 </div>
                 <div class="avatar-sm flex-shrink-0">
                   <span
@@ -181,6 +240,68 @@
         <!-- end col -->
       </div>
       <!-- end row-->
+
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0 align-items-center d-flex">
+              <h4 class="card-title mb-0 flex-grow-1">Doanh thu</h4>
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-soft-secondary btn-sm shadow-none"
+                >
+                  ALL
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-soft-secondary btn-sm shadow-none"
+                >
+                  1M
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-soft-secondary btn-sm shadow-none"
+                >
+                  6M
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-soft-primary btn-sm shadow-none"
+                >
+                  1Y
+                </button>
+              </div>
+            </div>
+            <!-- end card header -->
+
+            <div class="card-header p-0 border-0 bg-soft-light" id="container">
+              <highcharts-chart
+                [Highcharts]="highcharts"
+                [options]="chartOptions"
+                style="width: 100%; height: 100%; display: block"
+              ></highcharts-chart>
+            </div>
+            <!-- end card header -->
+
+            <div class="card-body p-0 pb-2">
+              <div class="w-100">
+                <div
+                  id="customer_impression_charts"
+                  data-colors='["--vz-success", "--vz-primary", "--vz-danger"]'
+                  class="apex-charts"
+                  dir="ltr"
+                ></div>
+              </div>
+            </div>
+            <!-- end card body -->
+          </div>
+          <!-- end card -->
+        </div>
+        <!-- end col -->
+
+        <!-- end col -->
+      </div>
     </div>
     <!-- container-fluid -->
   </div>

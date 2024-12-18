@@ -21,6 +21,7 @@ import { ChiTietDonHang } from "src/app/_model/chitietdonhang";
 import { DonHang } from "src/app/_model/hoadon";
 import { DanhGia } from "src/app/_model/danhgia";
 import { DanhgiaService } from "src/app/_service/danhgia.service";
+import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
 
 @Component({
   selector: "app-mua",
@@ -218,6 +219,7 @@ export class DonMuaComponent implements OnInit {
     });
 
     donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DA_GIAO;
+    donhang.trangThaiThanhToan = TrangThaiThanhToan.DA_THANH_TOAN;
 
     this.updateDonHang(donhang);
   }

@@ -29,7 +29,7 @@ export class BaoCaoService {
     const apiUrl = environment.backApiUrl + `/baocao/doanhthutheongay`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
-    let params = new HttpParams().set("ngay", request.nam?.toString() || "");
+    let params = new HttpParams().set("ngay", request || "");
 
     return this.http.get(`${apiUrl}`, {
       headers: headers,

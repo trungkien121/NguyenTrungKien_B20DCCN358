@@ -31,4 +31,7 @@ export class CommonConstant {
 
   public static readonly TYPE_VIEW = "V";
   public static readonly TYPE_UPDATE = "U";
+
+  public static readonly THANG = "T";
+  public static readonly NAM = "N";
 }
