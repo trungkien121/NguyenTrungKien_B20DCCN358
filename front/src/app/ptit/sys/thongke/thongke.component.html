@@ -246,31 +246,57 @@
           <div class="card">
             <div class="card-header border-0 align-items-center d-flex">
               <h4 class="card-title mb-0 flex-grow-1">Doanh thu</h4>
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-soft-secondary btn-sm shadow-none"
+              <div class="flex-shrink-0 d-flex">
+                <div class="d-flex">
+                  <label class="list-group-item">
+                    <input
+                      class="form-check-input me-1"
+                      name="exampleRadios"
+                      type="radio"
+                      value=""
+                      (click)="selectThang()"
+                      [checked]="typeDoanhThu == CommonConstant.THANG"
+                    />
+                    Theo tháng
+                  </label>
+                  <label class="list-group-item">
+                    <input
+                      class="form-check-input me-1"
+                      name="exampleRadios"
+                      type="radio"
+                      value=""
+                      (click)="selectNam()"
+                      [checked]="typeDoanhThu == CommonConstant.NAM"
+                    />
+                    Theo năm
+                  </label>
+                </div>
+                <select
+                  class="form-select form-select-sm"
+                  *ngIf="typeDoanhThu == CommonConstant.NAM"
                 >
-                  ALL
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-soft-secondary btn-sm shadow-none"
+                  <option
+                    *ngFor="let nam of nams"
+                    [value]="nam"
+                    [selected]="nam == namSelected.toString()"
+                  >
+                    {{ nam }}
+                  </option>
+                </select>
+
+                <select
+                  class="form-select form-select-sm"
+                  *ngIf="typeDoanhThu == CommonConstant.THANG"
+                  (change)="selectAMonth($event)"
                 >
-                  1M
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-soft-secondary btn-sm shadow-none"
-                >
-                  6M
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-soft-primary btn-sm shadow-none"
-                >
-                  1Y
-                </button>
+                  <option
+                    *ngFor="let thang of months"
+                    [value]="thang"
+                    [selected]="thang == thangSelected.toString()"
+                  >
+                    {{ thang }}
+                  </option>
+                </select>
               </div>
             </div>
             <!-- end card header -->

@@ -1,3 +1,4 @@
+import { CommonConstant } from "./../../../_constant/common.constants";
 import { Component, OnInit } from "@angular/core";
 import * as Highcharts from "highcharts";
 import { ToastrService } from "ngx-toastr";
@@ -6,8 +7,8 @@ import {
   ConfirmEventType,
   MessageService,
 } from "primeng/api";
-import { CommonConstant } from "src/app/_constant/common.constants";
 import { BaoCao } from "src/app/_model/baocao";
+import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
@@ -35,20 +36,8 @@ export class ThongKecComponent implements OnInit {
 
   doanhThuTheoThang: number[] = [];
 
-  months = [
-    "Tháng 1",
-    "Tháng 2",
-    "Tháng 3",
-    "Tháng 4",
-    "Tháng 5",
-    "Tháng 6",
-    "Tháng 7",
-    "Tháng 8",
-    "Tháng 9",
-    "Tháng 10",
-    "Tháng 11",
-    "Tháng 12",
-  ];
+  months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+  nams = ["2022", "2023", "2024"];
 
   homnay: any = {
     tongHoaDonHomNay: 0,
@@ -77,14 +66,7 @@ export class ThongKecComponent implements OnInit {
       text: "",
     },
     xAxis: {
-      categories: [
-        "Tháng 1",
-        "Tháng 2",
-        "Tháng 3",
-        "Tháng 4",
-        "Tháng 5",
-        "Tháng 6",
-      ], // Các tháng
+      categories: [], // Các tháng
       title: {
         text: "Tháng",
       },
@@ -113,6 +95,8 @@ export class ThongKecComponent implements OnInit {
     },
   };
 
+  CommonConstant = CommonConstant;
+
   // Hàm tính số ngày trong tháng
   getDaysInMonth(month: number, year: number): number {
     return new Date(year, month, 0).getDate(); // Trả về số ngày trong tháng
@@ -124,8 +108,6 @@ export class ThongKecComponent implements OnInit {
     this.getDoanhThuThangTruoc();
 
     const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth(); // Lấy tháng hiện tại (0-11)
 
     this.thangSelected = Number.parseInt((today.getMonth() + 1).toString());
     this.namSelected = Number.parseInt(today.getFullYear().toString());
@@ -133,56 +115,41 @@ export class ThongKecComponent implements OnInit {
     this.getDoanhThuThangNay();
 
     if (this.typeDoanhThu == CommonConstant.THANG) {
-      const daysInMonth = this.getDaysInMonth(currentMonth + 1, currentYear); // Lấy số ngày trong tháng hiện tại
-      const daysArray = Array.from(
-        { length: daysInMonth },
-        (_, i) => `${i + 1}`
-      ); // Tạo mảng các ngày trong tháng
-
-      console.log("days", daysArray);
-      // Cập nhật categories là các ngày trong tháng
-      this.chartOptions.xAxis = {
-        categories: daysArray, // Các ngày trong tháng
-        title: {
-          text: "Ngày trong tháng",
-        },
-      };
-      this.getDoanhThuThang();
-
-      this.chartOptions.series = [
-        {
-          type: "column",
-          name: "Doanh thu",
-          // data: Array(daysInMonth).fill(1000), // Dữ liệu giả định cho doanh thu
-          data: this.doanhThuTheoThang,
-        },
-      ];
-
-      setTimeout(() => {
-        Highcharts.chart("container", this.chartOptions); // Cập nhật lại chart
-      });
+      this.getDoThiThang(this.thangSelected, this.namSelected);
     } else if (this.typeDoanhThu === CommonConstant.NAM) {
-      // Cập nhật categories là các tháng trong năm
-      this.chartOptions.xAxis = {
-        categories: this.months, // Các tháng trong năm
-        title: {
-          text: "Tháng trong năm",
-        },
-      };
-      // Dữ liệu giả định cho doanh thu theo tháng
-      this.chartOptions.series = [
-        {
-          type: "column",
-          name: "Doanh thu",
-          data: [
-            2000, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500,
-            8000,
-          ], // Dữ liệu doanh thu theo tháng
-        },
-      ];
+      this.getDoThiNam(this.namSelected);
     }
   }
 
+  getDoThiThang(thang: number, nam: number) {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // Lấy tháng hiện tại (0-11)
+
+    const daysInMonth = this.getDaysInMonth(currentMonth + 1, currentYear); // Lấy số ngày trong tháng hiện tại
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => `${i + 1}`); // Tạo mảng các ngày trong tháng
+
+    console.log("days", daysArray);
+    // Cập nhật categories là các ngày trong tháng
+    this.chartOptions.xAxis = {
+      categories: daysArray, // Các ngày trong tháng
+      title: {
+        text: "Ngày trong tháng",
+      },
+    };
+    this.getDoanhThuThang(thang, nam);
+  }
+
+  getDoThiNam(nam: number) {
+    this.chartOptions.xAxis = {
+      categories: this.months, // Các tháng trong năm
+      title: {
+        text: "Tháng trong năm",
+      },
+    };
+    // Dữ liệu giả định cho doanh thu theo tháng
+    this.getDoanhThuNam(nam);
+  }
   getHoaDonHomNay() {
     const today = new Date().toISOString(); // Chuyển sang định dạng ISO
     this.baocaoService.getDoanhThuTheoNgay(today).subscribe((res) => {
@@ -211,22 +178,44 @@ export class ThongKecComponent implements OnInit {
     });
   }
 
-  getDoanhThuNam() {
-    this.baocaoService.getDoanhThuTheoNam(this.namSelected).subscribe((res) => {
+  getDoanhThuNam(nam: number) {
+    this.baocaoService.getDoanhThuTheoNam(nam).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         let data = res.data as BaoCao[];
-        this.doanhThuThangNay = 0;
+
+        const doanhThuTheoThang = Array(12).fill(0); // Tạo mảng với số ngày trong tháng, giá trị mặc định là 0
+
         data.forEach((element: BaoCao) => {
-          this.doanhThuThangNay += element.tongDoanhThu || 0;
+          // `thoiGian` là ngày trong tháng
+          if (element.thoiGian) {
+            if (element.thoiGian >= 1 && element.thoiGian <= 12) {
+              doanhThuTheoThang[element.thoiGian - 1] =
+                element.tongDoanhThu || 0;
+            }
+          }
+        });
+
+        // Cập nhật các thông tin khác nếu cần
+
+        this.chartOptions.series = [
+          {
+            type: "column",
+            name: "Doanh thu",
+            data: doanhThuTheoThang, // Dữ liệu giả định cho doanh thu
+          },
+        ];
+
+        setTimeout(() => {
+          Highcharts.chart("container", this.chartOptions); // Cập nhật lại chart
         });
       }
     });
   }
 
-  getDoanhThuThang() {
+  getDoanhThuThang(thang: number, nam: number) {
     let request = {
-      nam: this.namSelected,
-      thang: this.thangSelected,
+      nam: nam,
+      thang: thang,
     };
 
     this.baocaoService.getDoanhThuTheoThang(request).subscribe((res) => {
@@ -234,10 +223,7 @@ export class ThongKecComponent implements OnInit {
         let data = res.data as BaoCao[];
 
         // Tính số ngày trong tháng hiện tại
-        const daysInMonth = this.getDaysInMonth(
-          this.thangSelected,
-          this.namSelected
-        );
+        const daysInMonth = this.getDaysInMonth(thang, nam);
 
         // Mảng doanh thu của tất cả các ngày trong tháng, khởi tạo với giá trị 0
         const doanhThuTheoNgay = Array(daysInMonth).fill(0); // Tạo mảng với số ngày trong tháng, giá trị mặc định là 0
@@ -255,7 +241,6 @@ export class ThongKecComponent implements OnInit {
 
         this.doanhThuTheoThang = doanhThuTheoNgay;
         // Cập nhật các thông tin khác nếu cần
-        console.log(doanhThuTheoNgay); // Mảng doanh thu theo ngày trong tháng
 
         this.chartOptions.series = [
           {
@@ -264,6 +249,10 @@ export class ThongKecComponent implements OnInit {
             data: doanhThuTheoNgay, // Dữ liệu giả định cho doanh thu
           },
         ];
+
+        setTimeout(() => {
+          Highcharts.chart("container", this.chartOptions); // Cập nhật lại chart
+        });
       }
     });
   }
@@ -320,5 +309,40 @@ export class ThongKecComponent implements OnInit {
     }
     const percentIncrease = ((homnay - homqua) / homqua) * 100;
     return percentIncrease.toFixed(2); // Giới hạn 2 chữ số thập phân
+  }
+
+  dataOptionsChange(value: string) {
+    if (this.typeDoanhThu == CommonConstant.THANG) {
+      this.thangSelected = Number.parseInt(value);
+    } else {
+      this.namSelected = Number.parseInt(value);
+    }
+  }
+
+  selectThang() {
+    const today = new Date();
+
+    this.typeDoanhThu = CommonConstant.THANG;
+    this.chartOptions.series = [];
+
+    this.thangSelected = Number.parseInt((today.getMonth() + 1).toString());
+    this.namSelected = Number.parseInt(today.getFullYear().toString());
+    this.getDoThiThang(this.thangSelected, this.namSelected);
+  }
+  selectNam() {
+    const today = new Date();
+
+    this.typeDoanhThu = CommonConstant.NAM;
+    this.chartOptions.series = [];
+    this.namSelected = Number.parseInt(today.getFullYear().toString());
+
+    this.getDoThiNam(this.namSelected);
+  }
+
+  selectAMonth(event: any) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.thangSelected = Number.parseInt(selectedValue);
+
+    this.getDoThiThang(this.thangSelected, this.namSelected);
   }
 }

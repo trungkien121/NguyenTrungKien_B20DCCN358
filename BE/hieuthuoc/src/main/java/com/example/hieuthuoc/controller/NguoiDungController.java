@@ -55,7 +55,7 @@ public class NguoiDungController {
 	}
 
 	@PutMapping("change_avatar")
-	public ResponseDTO<NguoiDung> changeAvatar(@RequestPart NguoiDungDTO nguoiDungDTO,
+	public ResponseDTO<NguoiDung> changeAvatar(@RequestPart(value = "nguoiDungDTO", required = false) NguoiDungDTO nguoiDungDTO,
 			@RequestPart(value = "file", required = false) MultipartFile file) throws Exception {
 		if (file != null && !file.isEmpty()) {
 			nguoiDungDTO.setFile(file);

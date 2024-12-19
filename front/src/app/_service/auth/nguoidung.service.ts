@@ -152,6 +152,6 @@ export class NguoidungService {
       formData.append("file", model.file);
     }
 
-    return this.http.post(`${apiUrl}`, formData, {});
+    return this.http.put(`${apiUrl}`, formData, {});
   }
 }
