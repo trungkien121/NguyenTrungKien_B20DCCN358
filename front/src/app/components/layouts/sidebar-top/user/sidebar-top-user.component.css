@@ -33,36 +33,30 @@
 }
 
 
-  /* Đảm bảo vị trí tương đối cho nav-item */
-  .nav-item {
-    position: relative;
-  }
-  
-  .nav-link {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    text-transform: capitalize;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng màu chữ và nền */
-  }
-  
-  .nav-link:hover {
-    color: #007bff; /* Đổi màu chữ khi hover */
-    background-color: #f0f8ff; /* Thêm màu nền nhẹ khi hover */
-  }
-  
-  /* Đảm bảo tên loại thuốc không bị dịch chuyển */
-  .nav-link span {
-    display: block;
-    transition: transform 0.3s ease; /* Cải thiện hiệu ứng khi hover */
-  }
-  
-  .nav-item:hover .nav-link span {
-    transform: translateX(0); /* Giữ tên loại thuốc ở vị trí cũ */
-  }
+.nav-item {
+  position: relative;
+}
+
+.nav-item .menu-link {
+  display: inline-block;
+  color: #000; /* Màu mặc định */
+  text-decoration: none;
+  font-weight: 500; /* Đảm bảo font-weight cố định */
+  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+.nav-item .menu-link:hover {
+  color: #007bff; /* Màu chữ khi hover */
+  text-decoration: underline; /* Chỉ thay đổi giao diện, không thay đổi kích thước */
+  transform: none; /* Không phóng to */
+}
+
+.nav-item span {
+  display: inline-block;
+  width: 100%; /* Chiều rộng cố định */
+  line-height: 1.2; /* Đảm bảo khoảng cách dòng cố định */
+}
+
   
 
   

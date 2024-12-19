@@ -67,6 +67,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
         this.getThuocTheoLoai(); // Gọi hàm để lấy thuốc theo loại
         this.getUserInfo();
       }); 
+      
   }
  
   
@@ -74,6 +75,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     this.getThuocTheoLoai();
   }
 
+  
   getThuocTheoLoai() {
     const modelSearch = { loaiThuoc: this.loaiThuoc }; // Tạo đối tượng modelSearch với tên loại thuốc
     this.thuocService.getProductLst(modelSearch).subscribe((res) => {
