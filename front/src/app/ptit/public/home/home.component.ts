@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     currentPage: 0,
     size: 100,
     sortedField: "",
-    loaiThuoc: "",
   };
 
   totalRows: number = 0;
@@ -51,10 +50,6 @@ export class HomeComponent implements OnInit {
     private toastService: ToastrService
   ) {}
 
-  onLoaiThuocChange(value: string) {
-    this.modelSearch.loaiThuoc = value;
-  }
-
   ngOnInit() {
     this.getData();
   }
@@ -64,8 +59,6 @@ export class HomeComponent implements OnInit {
   }
   getData() {
     this.getThuoc();
-
-    this.getLoaiThuoc();
 
     this.getUserInfo();
   }
@@ -98,17 +91,6 @@ export class HomeComponent implements OnInit {
         if (res.data.id) {
           this.gioHangId = res.data.id;
         }
-      }
-    });
-  }
-
-  getLoaiThuoc() {
-    this.loaithuocService.getLoaiThuocLst().subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        this.loaithuocLst = res.data;
-
-        if (this.loaithuocLst.length > 0)
-          this.modelSearch.loaiThuoc = this.loaithuocLst[0].tenLoai;
       }
     });
   }
