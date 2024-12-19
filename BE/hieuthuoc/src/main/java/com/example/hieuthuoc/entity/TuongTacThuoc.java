@@ -1,5 +1,6 @@
 package com.example.hieuthuoc.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,11 @@ public class TuongTacThuoc {
     
 	private String hoatChat1;
 	private String hoatChat2;
+	
+	@Column(columnDefinition = "TEXT")
 	private String coChe;
+	@Column(columnDefinition = "TEXT")
 	private String hauQua;
+	@Column(columnDefinition = "TEXT")
 	private String xuTri;
 }
