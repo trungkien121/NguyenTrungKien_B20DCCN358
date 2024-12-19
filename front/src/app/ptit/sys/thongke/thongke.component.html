@@ -274,6 +274,7 @@
                 <select
                   class="form-select form-select-sm"
                   *ngIf="typeDoanhThu == CommonConstant.NAM"
+                  (change)="selectAYear($event)"
                 >
                   <option
                     *ngFor="let nam of nams"

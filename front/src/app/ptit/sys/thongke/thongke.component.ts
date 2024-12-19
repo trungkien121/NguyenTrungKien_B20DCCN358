@@ -345,4 +345,11 @@ export class ThongKecComponent implements OnInit {
 
     this.getDoThiThang(this.thangSelected, this.namSelected);
   }
+
+  selectAYear(event: any) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.namSelected = Number.parseInt(selectedValue);
+
+    this.getDoThiNam(this.namSelected);
+  }
 }
