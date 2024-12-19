@@ -22,12 +22,16 @@
   color: #ffc107; /* Màu vàng cho sao */
 }
 
+h3{
+  color: #000;
+  font-size: 25px;
+}
 .gap-2 {
   gap: 8px; /* Khoảng cách giữa các phần tử */
 }
 
 .price .current-price {
-  font-size: 1.5rem;
+  font-size: 30px;
   font-weight: bold;
   color: #007bff;
 }
@@ -49,12 +53,12 @@
 
 .product-details .label {
   font-weight: bold;
-  color: #333;
+  color: #495057;
   font-size: 16px;
 }
 
 .product-details .value {
-  color: #555;
+  color: #000000;
   word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
   font-size: 16px;
 }
@@ -122,13 +126,13 @@
 /* Nội dung bên phải */
 h5 {
   font-size: 18px;
-  color: #212529;
+  color: #495057;
 }
 
 p, li {
   font-size: 15px;
   line-height: 1.8;
-  color: #495057;
+  color: #000000;
 }
 
 ul {
@@ -146,3 +150,31 @@ ul {
   padding: 16px;
 }
 
+.copyable-text {
+  cursor: pointer;
+  color: #007bff;
+
+  font-family: 'Poppins', sans-serif;
+  transition: color 0.3s;
+}
+
+.copyable-text:hover {
+  color: #0056b3;
+}
+
+.copy-message {
+  margin-top: 5px;
+  font-size: 14px;
+  color: green;
+  font-weight: bold;
+  animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

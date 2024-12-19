@@ -57,66 +57,19 @@
                         </div>
                       </div>
 
-                      <!-- <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
-                        <div class="rating mb-0">
-                          <span class="fw-bold">{{ thuoc.maThuoc }}</span> |
+                      <div>
+                        <h5 (click)="copyToClipboard(thuoc.maThuoc)" class="copyable-text">
+                          {{ thuoc.maThuoc }}
+                        </h5>
+                        <div *ngIf="showCopyMessage" class="copy-message">
+                          Đã sao chép mã thuốc!
                         </div>
-
-                        <div class="text-muted d-flex align-items-center fs-16">
-                          <span class="mdi mdi-star text-warning"></span>
-                          <span class="mdi mdi-star text-warning"></span>
-                          <span class="mdi mdi-star text-warning"></span>
-                          <span class="mdi mdi-star text-warning"></span>
-                          <span class="mdi mdi-star text-warning"></span>
-                        </div>
-
-                        <div class="text-muted fs-16">
-                          ( 5.50k Customer Review )
-                        </div>
-                      </div> -->
+                      </div>
+                      
 
                       <div class="row mt-4">
-                        <!-- <div class="col-lg-4 col-sm-6">
-                          <div class="p-2 border border-dashed rounded">
-                            <div class="d-flex align-items-center">
-                              <div class="avatar-sm me-2">
-                                <div
-                                  class="avatar-title rounded bg-transparent text-success fs-24"
-                                >
-                                  <i class="ri-money-dollar-circle-fill"></i>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <p class="text-muted mb-1">Giá :</p>
-                                <h5 class="mb-0">{{ thuoc.giaBan+'.000đ '+'/ '+thuoc.donVi }}</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6">
-                          <div class="p-2 border border-dashed rounded">
-                            <div class="d-flex align-items-center">
-                              <div class="avatar-sm me-2">
-                                <div
-                                  class="avatar-title rounded bg-transparent text-success fs-24"
-                                >
-                                  <i class="ri-stack-fill"></i>
-                                </div>
-                              </div>
-                              <div class="flex-grow-1">
-                                <p class="text-muted mb-1">Có sẵn:</p>
-                                <h5 class="mb-0">{{ thuoc.soLuongTon }}</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-
                         <div class="price">
-                          <span class="current-price">{{
-                            thuoc.giaBan + " / " + thuoc.donVi
-                          }}</span>
+                          <span class="current-price">{{ thuoc.giaBan | number : "1.0-0"  }}đ / {{thuoc.donVi}}</span>
                         </div>
 
                         <ul class="product-details list-unstyled mt-4">
@@ -174,46 +127,7 @@
                           </div>
                         </div>
 
-                        <!-- <div class="mt-4 text-muted">
-                          <h5 class="fs-14">Thành phần thuốc:</h5>
-                          <p>
-                            <span *ngFor="
-                              let item of thuoc.thanhPhanThuocs;
-                              let last = last
-                            ">
-                              {{ item.tenThanhPhan }}({{ item.hamLuong }}
-                              {{ item.donVi }}){{ last ? "" : "," }}
-                            </span>
-                          </p>
-                        </div>
-
-                        <div class="mt-4 text-muted">
-                          <h5 class="fs-14">Đối tượng sử dụng:</h5>
-                          <p>
-                            <span *ngFor="
-                              let item of thuoc.doiTuongs;
-                              let last = last
-                            ">
-                              {{ item.tenDoiTuong }}{{ last ? "" : "," }}
-                            </span>
-                          </p>
-                        </div>
-
-                        <div class="mt-4 text-muted">
-                          <h5 class="fs-14">Hướng dẫn sử dụng :</h5>
-                          <p>
-                            {{ thuoc.huongDanSuDung }}
-                          </p>
-                        </div>
-
-                        <div class="mt-4 text-muted">
-                          <h5 class="fs-14">Mô tả ngắn:</h5>
-                          <p>
-                            {{ thuoc.moTaNgan }}
-                          </p>
-                        </div> -->
-
-                        <!-- end card body -->
+                        
                       </div>
                     </div>
                     <!-- end col -->
@@ -235,30 +149,7 @@
               <div class="card-body p-0">
                 <div class="container-fluid mt-4 px-0">
                   <div class="row gx-0">
-                    <!-- Cột bên trái: Menu điều hướng -->
-                    <!-- <div class="col-md-2 border-end p-0">
-                      <ul class="nav flex-column">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#mo-ta-san-pham"
-                            >Mô tả sản phẩm</a
-                          >
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#thanh-phan">Thành phần</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#cong-dung">Công dụng</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#cach-dung">Cách dùng</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#tac-dung-phu"
-                            >Tác dụng phụ</a
-                          >
-                        </li>
-                      </ul>
-                    </div> -->
+                    
 
                     <!-- Cột bên phải: Nội dung động -->
                     <div class="col-md-10 p-0">

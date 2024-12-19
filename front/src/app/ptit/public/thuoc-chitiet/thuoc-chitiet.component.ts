@@ -34,6 +34,8 @@ export class ThuocChiTietComponent implements OnInit {
 
   isAdmin: boolean = false;
 
+  showCopyMessage = false;
+
   danhgiaLst: DanhGia[] = [];
   modelSearch: SearchModel = {
     keyWord: "",
@@ -157,5 +159,22 @@ export class ThuocChiTietComponent implements OnInit {
         this.toastService.error("Lưu thất bại");
       }
     });
+  }
+
+  copyToClipboard(value?: string): void {
+    if (value) {
+      navigator.clipboard.writeText(value).then(() => {
+        this.showCopyMessage = true;
+
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(() => {
+          this.showCopyMessage = false;
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    } else {
+      console.error('No text to copy');
+    }
   }
 }
