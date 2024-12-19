@@ -20,6 +20,7 @@ import { DonhangService } from "src/app/_service/donhang.service";
 import { ThongBaoService } from "src/app/_service/thongbao.service";
 import { ThongBao } from "src/app/_model/thongbao";
 import { LOAITHONGBAO } from "src/app/_constant/loaithongbao.constant";
+import { VnPayService } from "src/app/_service/vnpay.service";
 
 @Component({
   selector: "app-checkout",
@@ -32,6 +33,7 @@ export class CheckoutComponent implements OnInit {
     private toastService: ToastrService,
     private donhangService: DonhangService,
     private gioHangService: GioHangService,
+    private vnPayService: VnPayService,
     private thongBaoService: ThongBaoService
   ) {}
   PhuongThucThanhToan = PhuongThucThanhToan;
@@ -103,25 +105,47 @@ export class CheckoutComponent implements OnInit {
     this.donhangService.create(this.donhang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         // this.toastService.success("Lưu thành công");
+        console.log(
+          "dara",
+          this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN
+        );
+
         //if success, delete cart
         this.gioHangLst.forEach((item: GioHangChiTiet) => {
           this.gioHangService.deleteGH(item.id).subscribe((resp) => {
             if (resp.status == CommonConstant.STATUS_OK_200) {
               // this.toastService.success("Xóa thành công");
               this.getGH();
-              this.router.navigate(["/user/donmua"]);
+              // this.router.navigate(["/user/donmua"]);
             } else {
               this.toastService.error("Xóa thất bại");
             }
           });
         });
 
+        if (
+          this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN
+        ) {
+          console.log("hehe");
+          this.vnPayService.create(this.tongTien).subscribe((resp) => {
+            if (resp.status == CommonConstant.STATUS_OK_200) {
+              this.toastService.success("Lưu thành công");
+              // this.router.navigate(["/sys/product"]);
+              window.location.href = resp.data;
+            } else if (resp.status == CommonConstant.STATUS_OK_409) {
+              this.toastService.error(resp.msg);
+            } else {
+              this.toastService.error("Lưu thất bại");
+            }
+          });
+        }
+
         //rediret hóa đơn
 
         //delete cart
 
         //add thông báo
-        this.addThongBao();
+        // this.addThongBao();
         // this.getData();
       } else {
         this.toastService.error("Lưu thất bại");
@@ -166,13 +190,13 @@ export class CheckoutComponent implements OnInit {
     });
   }
   changePTTT(value: string) {
-    if (value == "0")
+    if (value == "1")
       this.donhang.phuongThucThanhToan = PhuongThucThanhToan.TIEN_MAT;
-    else if (value == "1")
-      this.donhang.phuongThucThanhToan = PhuongThucThanhToan.CHUYEN_KHOAN;
     else if (value == "2")
-      this.donhang.phuongThucThanhToan = PhuongThucThanhToan.THE_NGAN_HANG;
+      this.donhang.phuongThucThanhToan = PhuongThucThanhToan.CHUYEN_KHOAN;
     else if (value == "3")
+      this.donhang.phuongThucThanhToan = PhuongThucThanhToan.THE_NGAN_HANG;
+    else if (value == "4")
       this.donhang.phuongThucThanhToan = PhuongThucThanhToan.VI_DIEN_TU;
   }
 }
