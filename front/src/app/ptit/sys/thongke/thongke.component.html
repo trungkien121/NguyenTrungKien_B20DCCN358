@@ -30,10 +30,10 @@
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    Hóa đơn - Ngày
+                    Hóa đơn
                   </p>
                 </div>
-                <div class="flex-shrink-0">
+                <!-- <div class="flex-shrink-0">
                   <h5
                     class="text-success fs-14 mb-0"
                     *ngIf="homnay.tongHoaDonHomNay > homqua.tongHoaDonHomQua"
@@ -69,12 +69,12 @@
                   >
                     +0.00 %
                   </h5>
-                </div>
+                </div> -->
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    <span>{{ homnay.tongHoaDonHomNay }}</span>
+                    <span>{{ tongHoaDon }}</span>
                   </h4>
                 </div>
                 <div class="avatar-sm flex-shrink-0">
@@ -99,10 +99,10 @@
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    Đơn hàng trả lại- Ngày
+                    Đơn hàng trả lại
                   </p>
                 </div>
-                <div class="flex-shrink-0">
+                <!-- <div class="flex-shrink-0">
                   <h5
                     class="text-success fs-14 mb-0"
                     *ngIf="
@@ -147,12 +147,12 @@
                   >
                     +0.00 %
                   </h5>
-                </div>
+                </div> -->
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    <span>{{ homnay.tongDonHangTraLaiHomNay }}</span>
+                    <span>{{ tongHoaDonTraLai }}</span>
                   </h4>
                 </div>
                 <div class="avatar-sm flex-shrink-0">
@@ -177,10 +177,10 @@
               <div class="d-flex align-items-center">
                 <div class="flex-grow-1">
                   <p class="text-uppercase fw-medium text-muted mb-0">
-                    Doanh thu - Tháng
+                    Doanh thu
                   </p>
                 </div>
-                <div class="flex-shrink-0">
+                <!-- <div class="flex-shrink-0">
                   <h5
                     class="text-success fs-14 mb-0"
                     *ngIf="doanhThuThangNay > doanhThuThangTruoc"
@@ -216,12 +216,12 @@
                   >
                     +0.00 %
                   </h5>
-                </div>
+                </div> -->
               </div>
               <div class="d-flex align-items-end justify-content-between mt-4">
                 <div>
                   <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                    <span>{{ doanhThuThangNay | number : "1.0-0" }} VNĐ</span>
+                    <span>{{ tongDoanhThu | number : "1.0-0" }} VNĐ</span>
                   </h4>
                 </div>
                 <div class="avatar-sm flex-shrink-0">

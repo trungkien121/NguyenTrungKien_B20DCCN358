@@ -153,6 +153,18 @@
                     ></i>
                     Hủy đơn hàng</a
                   >
+                  <a
+                    *ngIf="
+                      donhang.trangThaiGiaoHang != TrangThaiGiaoHang.DA_HUY &&
+                      donhang.trangThaiGiaoHang != TrangThaiGiaoHang.TRA_HANG
+                    "
+                    (click)="daNhanHang()"
+                    class="btn btn-soft-success btn-sm mt-2 mt-sm-0 shadow-none ms-2"
+                    ><i
+                      class="mdi mdi-archive-remove-outline align-middle me-1"
+                    ></i>
+                    Đã nhận hàng</a
+                  >
                 </div>
               </div>
             </div>

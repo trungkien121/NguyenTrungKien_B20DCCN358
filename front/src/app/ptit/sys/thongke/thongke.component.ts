@@ -49,6 +49,10 @@ export class ThongKecComponent implements OnInit {
     tongDonHangTraLaiHomQua: 0,
   };
 
+  tongHoaDon: number = 0;
+  tongHoaDonTraLai: number = 0;
+  tongDoanhThu: number = 0;
+
   doanhThuThangNay: number = 0;
   doanhThuThangTruoc: number = 0;
 
@@ -183,9 +187,23 @@ export class ThongKecComponent implements OnInit {
       if (res.status == CommonConstant.STATUS_OK_200) {
         let data = res.data as BaoCao[];
 
+        this.tongDoanhThu = 0;
+        this.tongHoaDon = 0;
+        this.tongHoaDonTraLai = 0;
+
         const doanhThuTheoThang = Array(12).fill(0); // Tạo mảng với số ngày trong tháng, giá trị mặc định là 0
 
         data.forEach((element: BaoCao) => {
+          if (element.tongDoanhThu) {
+            this.tongDoanhThu += element.tongDoanhThu;
+          }
+          if (element.tongDonHang) {
+            this.tongHoaDon += element.tongDonHang;
+          }
+          if (element.tongDonHangTraLai) {
+            this.tongHoaDonTraLai += element.tongDonHangTraLai;
+          }
+
           // `thoiGian` là ngày trong tháng
           if (element.thoiGian) {
             if (element.thoiGian >= 1 && element.thoiGian <= 12) {
@@ -222,6 +240,10 @@ export class ThongKecComponent implements OnInit {
       if (res.status == CommonConstant.STATUS_OK_200) {
         let data = res.data as BaoCao[];
 
+        this.tongDoanhThu = 0;
+        this.tongHoaDon = 0;
+        this.tongHoaDonTraLai = 0;
+
         // Tính số ngày trong tháng hiện tại
         const daysInMonth = this.getDaysInMonth(thang, nam);
 
@@ -230,6 +252,15 @@ export class ThongKecComponent implements OnInit {
 
         // Duyệt qua dữ liệu từ BE và cập nhật giá trị vào mảng doanhThuTheoNgay
         data.forEach((element: BaoCao) => {
+          if (element.tongDoanhThu) {
+            this.tongDoanhThu += element.tongDoanhThu;
+          }
+          if (element.tongDonHang) {
+            this.tongHoaDon += element.tongDonHang;
+          }
+          if (element.tongDonHangTraLai) {
+            this.tongHoaDonTraLai += element.tongDonHangTraLai;
+          }
           // `thoiGian` là ngày trong tháng
           if (element.thoiGian) {
             if (element.thoiGian >= 1 && element.thoiGian <= daysInMonth) {
@@ -329,6 +360,7 @@ export class ThongKecComponent implements OnInit {
     this.namSelected = Number.parseInt(today.getFullYear().toString());
     this.getDoThiThang(this.thangSelected, this.namSelected);
   }
+
   selectNam() {
     const today = new Date();
 

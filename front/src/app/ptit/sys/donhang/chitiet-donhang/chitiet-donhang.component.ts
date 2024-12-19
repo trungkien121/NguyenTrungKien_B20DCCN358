@@ -73,6 +73,13 @@ export class ChiTietDonHangComponent implements OnInit {
     this.updateDonHang();
   }
 
+  daNhanHang() {
+    this.preSave();
+    this.donhang.trangThaiGiaoHang = TrangThaiGiaoHang.DA_GIAO;
+
+    this.updateDonHang();
+  }
+
   updateDonHang() {
     this.donHangService.update(this.donhang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
