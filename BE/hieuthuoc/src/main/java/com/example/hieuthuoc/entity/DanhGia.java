@@ -2,6 +2,7 @@ package com.example.hieuthuoc.entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +37,8 @@ public class DanhGia extends TimeAuditable{
     private DanhGia danhGiaGoc;
 
     private Integer diemSo;
+    
+	@Column(columnDefinition = "TEXT")
     private String danhGia;
 
     // getters and setters

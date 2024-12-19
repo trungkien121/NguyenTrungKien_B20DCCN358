@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -31,7 +32,10 @@ public class ThongBao extends TimeAuditable {
 	private Integer id;
 
 	private String tieuDe;
+	
+	@Column(columnDefinition = "TEXT")
 	private String noiDung;
+	
 	private String hinhAnh; // Đường dẫn hình ảnh minh họa
 	private String linkLienKet; // Link liên kết
 	

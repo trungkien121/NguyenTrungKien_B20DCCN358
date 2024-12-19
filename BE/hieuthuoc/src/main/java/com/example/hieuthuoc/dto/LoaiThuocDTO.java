@@ -7,6 +7,5 @@ public class LoaiThuocDTO {
     private Integer id;
     private String tenLoai;
     private String moTa;
-
     // Có thể thêm các trường khác nếu cần
 }

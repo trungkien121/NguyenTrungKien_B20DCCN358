@@ -2,6 +2,7 @@ package com.example.hieuthuoc.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,10 @@ public class KhuyenMai {
 	private Integer id;
 
 	private String tenChuongTrinh;
+	
+	@Column(columnDefinition = "TEXT")
 	private String moTa;
+	
 	private Date ngayBatDau;
 	private Date ngayKetThuc;
 	private Boolean trangThai;
