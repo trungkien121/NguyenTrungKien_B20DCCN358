@@ -25,20 +25,22 @@ import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 export class HomeComponent implements OnInit {
   productLst: Thuoc[] = [];
   loaithuocLst: LoaiThuoc[] = [];
+  paginatedProductLst: Thuoc[] = [];
 
   gioHangId: number = 0;
   userInfo: NguoiDung = {};
   thuoc: Thuoc = {};
-
+  currentPage = 1;
+  totalPage = 1;
+  pages: number[] = [];
+  itemsPerPage: number = CommonConstant.ROW_OF_PAGE_12;
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
     currentPage: 0,
-    size: 100,
+    size: 1000,
     sortedField: "",
   };
-
-  totalRows: number = 0;
 
   constructor(
     private thuocService: ThuocService,
@@ -97,11 +99,29 @@ export class HomeComponent implements OnInit {
 
   getThuoc() {
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
-      // if (res.status == CommonConstant.STATUS_OK_200) {
       this.productLst = res.data.data;
-      this.totalRows = res.data.totalElements;
-      // }
+
+      // Calculate total pages
+      this.totalPage = Math.ceil(this.productLst.length / this.itemsPerPage);
+
+      // Generate page numbers
+      this.pages = Array.from({ length: this.totalPage }, (_, i) => i + 1);
+      this.updatePaginatedList();
     });
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPage) {
+      return; // Prevent invalid page navigation
+    }
+    this.currentPage = page;
+    this.updatePaginatedList();
+  }
+
+  updatePaginatedList(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedProductLst = this.productLst.slice(startIndex, endIndex);
   }
 
   showDetail(thuoc: Thuoc) {

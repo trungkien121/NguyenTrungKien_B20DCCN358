@@ -161,7 +161,7 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-xl-2 col-lg-6" *ngFor="let item of productLst">
+        <div class="col-xl-2 col-lg-6" *ngFor="let item of paginatedProductLst">
           <a (click)="showDetail(item)" class="card-link">
             <div class="card ribbon-box right overflow-hidden">
               <div class="card-body text-center p-4">
@@ -209,20 +209,26 @@
             <ul
               class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0"
             >
-              <li class="page-item disabled">
-                <a href="#" class="page-link">←</a>
+              <!-- Previous Page -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)">←</a>
               </li>
-              <li class="page-item">
-                <a href="#" class="page-link">1</a>
+
+              <!-- Page Numbers -->
+              <li
+                class="page-item"
+                *ngFor="let page of pages"
+                [class.active]="page == currentPage"
+              >
+                <a class="page-link" (click)="changePage(page)">{{ page }}</a>
               </li>
-              <li class="page-item active">
-                <a href="#" class="page-link">2</a>
-              </li>
-              <li class="page-item">
-                <a href="#" class="page-link">3</a>
-              </li>
-              <li class="page-item">
-                <a href="#" class="page-link">→</a>
+
+              <!-- Next Page -->
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPage"
+              >
+                <a class="page-link" (click)="changePage(currentPage + 1)">→</a>
               </li>
             </ul>
           </div>
