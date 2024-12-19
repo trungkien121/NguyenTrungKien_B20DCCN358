@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
   totalPage = 1;
   pages: number[] = [];
   itemsPerPage: number = CommonConstant.ROW_OF_PAGE_12;
+  maxVisiblePages: number = 3;
+
   modelSearch: SearchModel = {
     keyWord: "",
     id: 0,
@@ -105,8 +107,9 @@ export class HomeComponent implements OnInit {
       this.totalPage = Math.ceil(this.productLst.length / this.itemsPerPage);
 
       // Generate page numbers
-      this.pages = Array.from({ length: this.totalPage }, (_, i) => i + 1);
+      // this.pages = Array.from({ length: this.totalPage }, (_, i) => i + 1);
       this.updatePaginatedList();
+      this.updateVisiblePages();
     });
   }
 
@@ -116,12 +119,32 @@ export class HomeComponent implements OnInit {
     }
     this.currentPage = page;
     this.updatePaginatedList();
+    this.updateVisiblePages();
   }
 
   updatePaginatedList(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedProductLst = this.productLst.slice(startIndex, endIndex);
+  }
+  updateVisiblePages(): void {
+    const half = Math.floor(this.maxVisiblePages / 2);
+
+    // Đảm bảo trang hiện tại nằm ở giữa nếu có thể
+    let startPage = Math.max(this.currentPage - half, 1);
+    let endPage = startPage + this.maxVisiblePages - 1;
+
+    // Điều chỉnh nếu endPage vượt quá tổng số trang
+    if (endPage > this.totalPage) {
+      endPage = this.totalPage;
+      startPage = Math.max(endPage - this.maxVisiblePages + 1, 1);
+    }
+
+    // Tạo danh sách các trang hiển thị
+    this.pages = Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
   }
 
   showDetail(thuoc: Thuoc) {

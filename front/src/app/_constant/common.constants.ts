@@ -13,7 +13,7 @@ export class CommonConstant {
   public static readonly TAB_OVERVIEW = "OVERVIEW";
   public static readonly TAB_RESULT = "RESULT";
 
-  public static readonly ROW_OF_PAGE_12 = 12;
+  public static readonly ROW_OF_PAGE_12 = 2;
 
   public static readonly NAME_PARAM_REPLY_COMMENT = "replyId";
 
