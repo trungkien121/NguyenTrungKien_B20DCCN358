@@ -136,7 +136,7 @@ class ThuocServiceImpl implements ThuocService {
 		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
 		Page<Thuoc> page = thuocRepo.search(searchThuocDTO.getKeyWord(), searchThuocDTO.getLoaiThuoc(),
 				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getMaxGiaBan(),
-				searchThuocDTO.getTenDoiTuong(), pageRequest);
+				searchThuocDTO.getTenDoiTuong(), searchThuocDTO.getTrangThai(), pageRequest);
 
 		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
