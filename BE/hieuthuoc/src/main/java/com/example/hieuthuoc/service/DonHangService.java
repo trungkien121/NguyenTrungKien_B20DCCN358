@@ -255,7 +255,7 @@ class DonHangServiceImpl implements DonHangService {
 
 		DonHang createDonHang = donHangRepo.save(donHang);
 
-		if (createDonHang.getNguoiDung() != null) {
+		if (createDonHang.getKhachHang() != null) {
 			ThongBao thongBao = new ThongBao();
 			String tieuDe = "Đặt đơn hàng thành công";
 			String noidung = "Đơn hàng ID = " + createDonHang.getId() + " đã được đặt thành công.";
