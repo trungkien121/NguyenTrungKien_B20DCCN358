@@ -22,7 +22,6 @@ import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.entity.ChiTietDonHang;
 import com.example.hieuthuoc.entity.DonHang;
-import com.example.hieuthuoc.entity.DonHang.PhuongThucThanhToan;
 import com.example.hieuthuoc.entity.DonHang.TrangThaiGiaoHang;
 import com.example.hieuthuoc.entity.DonHang.TrangThaiThanhToan;
 import com.example.hieuthuoc.entity.NguoiDung;
@@ -130,7 +129,7 @@ class DonHangServiceImpl implements DonHangService {
 
 			if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)
 					|| donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_HUY)) {
-				if (updateDonHang.getNguoiDung() != null || updateDonHang.getKhachHang() != null) {
+				if (updateDonHang.getKhachHang() != null) {
 					ThongBao thongBao = new ThongBao();
 
 					String tieuDe;
@@ -157,7 +156,7 @@ class DonHangServiceImpl implements DonHangService {
 					LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
 
 					List<NguoiDung> nguoiDungs = new ArrayList<>();
-					nguoiDungs.add(updateDonHang.getNguoiDung());
+					nguoiDungs.add(updateDonHang.getKhachHang());
 
 					thongBao.setTieuDe(tieuDe);
 					thongBao.setNoiDung(noidung);

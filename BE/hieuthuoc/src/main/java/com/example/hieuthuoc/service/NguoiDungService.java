@@ -284,7 +284,9 @@ class NguoiDungServiceImpl implements NguoiDungService, UserDetailsService {
 
 			if (nguoiDungDTO.getFile() != null && !nguoiDungDTO.getFile().isEmpty()) {
 				// Xoá đi ảnh trước đó trong cloudinary
-				uploadImageService.deleteImage(nguoiDung.getAvatar());
+				if(nguoiDung.getAvatar() != null) {
+					uploadImageService.deleteImage(nguoiDung.getAvatar());
+				}
 
 				// Thêm ảnh mới mới vào cloudinary
 				String name = "NguoiDung_" + nguoiDungDTO.getId();
