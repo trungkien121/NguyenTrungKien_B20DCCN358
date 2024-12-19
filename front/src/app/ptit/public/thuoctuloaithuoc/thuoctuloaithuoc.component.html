@@ -1,0 +1,72 @@
+<div iv class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        
+        <div *ngIf="dsThuoc && dsThuoc.length > 0">
+          <div class="category-name">
+            <h3>{{ loaiThuoc }}</h3> <!-- Hiển thị tên loại thuốc -->
+          </div>
+        </div>
+
+        <div class="search-container">
+          <div class="card">
+            <div class="card-header border-0 rounded">
+              <div class="search-box-custom">
+                <input
+                  type="text"
+                  class="form-control search-input"
+                  placeholder="Tìm tên thuốc, thực phẩm chức năng..."
+                  [(ngModel)]="modelSearch.keyWord"
+                  (keydown.enter)="search()"
+                />
+                <button type="button" class="search-button" (click)="search()">
+                  <i class="ri-search-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        <div class="row mt-4" >
+          <div class="col-xl-2 col-lg-6" *ngFor="let thuoc of dsThuoc">
+            <a (click)="showDetail(thuoc)" class="card-link">
+              <div class="card ribbon-box right overflow-hidden">
+                <div class="card-body text-center p-4" >
+                  <img [src]="thuoc.avatar" alt="" class="responsive-img" />
+                  <div class="text-container">
+                    <h5 class="mb-1 mt-4">
+                      <span class="link-primary text-truncate">
+                        {{ thuoc.tenThuoc }}
+                      </span>
+                    </h5>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                      <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-lg-12">
+                      <h5>{{ thuoc.giaBan | number : "1.0-0"  }}đ / {{thuoc.donVi}}</h5>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <button 
+                      class="btn btn-custom-primary w-100" 
+                      (click)="addProductInCart(thuoc); $event.stopPropagation()">
+                      Mua
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

@@ -106,7 +106,7 @@
                 </div>
                 <div class="row mt-4">
                   <div class="col-lg-12">
-                    <h5>{{ item.giaBan + '.000đ ' + '/ ' + item.donVi }}</h5>
+                    <h5>{{ item.giaBan | number : "1.0-0"  }}đ / {{item.donVi}}</h5>
                   </div>
                 </div>
                 <div class="mt-4">

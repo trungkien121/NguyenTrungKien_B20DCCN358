@@ -10,6 +10,7 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { DonMuaComponent } from "./donmua/donmua.component";
 import { ThongBaoComponent } from "./thongbao/thongbao.component";
 import { DonMuaChiTietComponent } from "./donmua-chitiet/donmua-chitiet.component";
+import { ThuocTuLoaiThuocComponent } from "../public/thuoctuloaithuoc/thuoctuloaithuoc.component";
 
 const routes: Routes = [
   {
@@ -71,6 +72,14 @@ const routes: Routes = [
       {
         path: "donmua-chitiet/:id",
         component: DonMuaChiTietComponent,
+        canActivate: [RoleGuard],
+        data: {
+          guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],
+        },
+      },
+      {
+        path: "thuoctuloaithuoc/:loaiThuoc",
+        component: ThuocTuLoaiThuocComponent,
         canActivate: [RoleGuard],
         data: {
           guards: [AuthConstant.ROLE_KHACHHANG, AuthConstant.ROLE_ADMIN],

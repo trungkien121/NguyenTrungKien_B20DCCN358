@@ -68,6 +68,10 @@ export class SidebarTopUserComponent implements OnInit {
   }
 
 
+  showAllItems(loaiThuoc: LoaiThuoc) {
+    this.router.navigate([`user/thuoctuloaithuoc/${loaiThuoc.tenLoai}`]);
+  }
+
   showDetail(thuoc: Thuoc) {
     this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
   }

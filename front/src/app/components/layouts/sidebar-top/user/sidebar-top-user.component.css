@@ -89,7 +89,7 @@
   .item-card {
     width: calc(25% - 16px); /* Tối đa 5 item mỗi hàng */
     min-width: 150px; /* Kích thước tối thiểu cho màn hình nhỏ */
-    max-width: 180px; /* Kích thước tối đa để đồng nhất */
+    max-width: 300px; /* Kích thước tối đa để đồng nhất */
     background: #fff;
     border-radius: 10px;
     overflow: hidden;

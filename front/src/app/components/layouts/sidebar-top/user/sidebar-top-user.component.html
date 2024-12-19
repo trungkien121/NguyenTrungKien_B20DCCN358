@@ -10,13 +10,9 @@
         </a>
       
         <div class="popup-large" *ngIf="selectedItem === item">
-          <!-- Nút "Xem tất cả" -->
-          <!-- <div *ngIf="item.dsThuoc.length > 4" class="view-all-btn">
-            <button (click)="showAllItems(item)">Xem tất cả</button>
-          </div> -->
           <div class="view-all-btn">
             <h4>Bán chạy nhất |</h4>
-            <button class="view-all-button">Xem tất cả ></button>
+            <button (click)="showAllItems(item)" class="view-all-button">Xem tất cả ></button>
           </div>          
           <div class="items-container">
             <!-- Hiển thị tối đa 4 item -->
@@ -24,7 +20,7 @@
               <img [src]="thuoc.avatar" alt="Hình ảnh thuốc" class="item-image" />
               <div class="item-info">
                 <h5 class="item-name">{{ thuoc.tenThuoc }}</h5>
-                <p class="item-price">{{ thuoc.giaBan + '.000đ' }}</p>
+                <p class="item-price">{{ thuoc.giaBan | number : "1.0-0"  }}đ / {{thuoc.donVi}}</p>
               </div>
             </div>
           </div>
