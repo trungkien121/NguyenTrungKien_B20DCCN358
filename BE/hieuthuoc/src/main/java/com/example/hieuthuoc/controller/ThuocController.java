@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
 import com.example.hieuthuoc.entity.Thuoc;
@@ -29,6 +30,12 @@ public class ThuocController {
 
 	@Autowired
 	ThuocService thuocService;
+	
+	@PostMapping("/get_thuoc_ban_chay")
+	public ResponseDTO<PageDTO<List<Thuoc>>> getThuocBanChay(@RequestBody @Valid SearchDTO searchDTO)
+			throws Exception {
+		return thuocService.getThuocBanChay(searchDTO);
+	}
 
 	@PostMapping("/search")
 	public ResponseDTO<PageDTO<List<Thuoc>>> search(@RequestBody @Valid SearchThuocDTO searchThuocDTO)

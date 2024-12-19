@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.example.hieuthuoc.dto.PageDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
 import com.example.hieuthuoc.entity.DanhMucThuoc;
@@ -23,6 +24,7 @@ import com.example.hieuthuoc.entity.LoaiThuoc;
 import com.example.hieuthuoc.entity.NhaSanXuat;
 import com.example.hieuthuoc.entity.ThanhPhanThuoc;
 import com.example.hieuthuoc.entity.Thuoc;
+import com.example.hieuthuoc.repository.ChiTietDonHangRepo;
 import com.example.hieuthuoc.repository.DanhMucThuocRepo;
 import com.example.hieuthuoc.repository.DoiTuongRepo;
 import com.example.hieuthuoc.repository.DoiTuongSdThuocRepo;
@@ -41,6 +43,8 @@ public interface ThuocService {
 	ResponseDTO<Thuoc> getById(Integer id);
 
 	ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO);
+	
+	ResponseDTO<PageDTO<List<Thuoc>>> getThuocBanChay(SearchDTO searchDTO);
 
 }
 
@@ -67,11 +71,48 @@ class ThuocServiceImpl implements ThuocService {
 
 	@Autowired
 	ThanhPhanThuocRepo thanhPhanThuocRepo;
+	
+	@Autowired
+	ChiTietDonHangRepo chiTietDonHangRepo;
 
 	@Autowired
 	UploadImageService uploadImageService;
 
 	ModelMapper modelMapper = new ModelMapper();
+	
+
+	@Override
+	public ResponseDTO<PageDTO<List<Thuoc>>> getThuocBanChay(SearchDTO searchDTO) {
+		Sort sortBy = Sort.by("tenThuoc").ascending();
+
+		if (StringUtils.hasText(searchDTO.getSortedField())) {
+			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
+		}
+
+		if (searchDTO.getCurrentPage() == null) {
+			searchDTO.setCurrentPage(0);
+		}
+
+		if (searchDTO.getSize() == null) {
+			searchDTO.setSize(20);
+		}
+
+		if (searchDTO.getKeyWord() == null) {
+			searchDTO.setKeyWord("");
+		}
+		PageRequest pageRequest = PageRequest.of(searchDTO.getCurrentPage(), searchDTO.getSize(), sortBy);
+		Page<Thuoc> page = chiTietDonHangRepo.findAllThuocBanChay(pageRequest);
+
+		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
+		pageDTO.setTotalElements(page.getTotalElements());
+		pageDTO.setTotalPages(page.getTotalPages());
+
+		List<Thuoc> thuocDTOs = page.getContent();
+
+		pageDTO.setData(thuocDTOs);
+
+		return ResponseDTO.<PageDTO<List<Thuoc>>>builder().status(200).msg("Thanh công").data(pageDTO).build();
+	}
 
 	@Override
 	public ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO) {
