@@ -30,14 +30,43 @@ export class ThongKecComponent implements OnInit {
     private baocaoService: BaoCaoService
   ) {}
 
-  typeDoanhThu = CommonConstant.THANG;
+  typeDoanhThu = CommonConstant.NGAY;
   thangSelected: number = 0;
   namSelected: number = 0;
+  ngaySelected: number = 0;
 
   doanhThuTheoThang: number[] = [];
 
   months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
   nams = ["2022", "2023", "2024"];
+  hours = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+  ];
+
+  daysInMonth: number[] = [];
 
   homnay: any = {
     tongHoaDonHomNay: 0,
@@ -113,15 +142,27 @@ export class ThongKecComponent implements OnInit {
 
     const today = new Date();
 
+    this.ngaySelected = Number.parseInt(today.getDate().toString());
     this.thangSelected = Number.parseInt((today.getMonth() + 1).toString());
     this.namSelected = Number.parseInt(today.getFullYear().toString());
 
+    this.updateDaysInMonth();
     this.getDoanhThuThangNay();
 
+    this.common();
+  }
+
+  common() {
     if (this.typeDoanhThu == CommonConstant.THANG) {
       this.getDoThiThang(this.thangSelected, this.namSelected);
     } else if (this.typeDoanhThu === CommonConstant.NAM) {
       this.getDoThiNam(this.namSelected);
+    } else if (this.typeDoanhThu === CommonConstant.NGAY) {
+      this.getDoThiNgay(
+        this.ngaySelected,
+        this.thangSelected,
+        this.namSelected
+      );
     }
   }
 
@@ -154,6 +195,18 @@ export class ThongKecComponent implements OnInit {
     // Dữ liệu giả định cho doanh thu theo tháng
     this.getDoanhThuNam(nam);
   }
+
+  getDoThiNgay(ngay: number, thang: number, nam: number) {
+    this.chartOptions.xAxis = {
+      categories: this.hours, // Các tháng trong năm
+      title: {
+        text: "Giờ",
+      },
+    };
+    // Dữ liệu giả định cho doanh thu theo tháng
+    this.getDoanhThuNgay(ngay, thang, nam);
+  }
+
   getHoaDonHomNay() {
     const today = new Date().toISOString(); // Chuyển sang định dạng ISO
     this.baocaoService.getDoanhThuTheoNgay(today).subscribe((res) => {
@@ -288,6 +341,61 @@ export class ThongKecComponent implements OnInit {
     });
   }
 
+  getDoanhThuNgay(ngay: number, thang: number, nam: number) {
+    // Tạo biến kiểu năm-tháng-ngày (yyyy-MM-dd)
+    const ngayThangNam = `${nam}-${thang.toString().padStart(2, "0")}-${ngay
+      .toString()
+      .padStart(2, "0")}`;
+
+    this.baocaoService.getDoanhThuTheoNgay(ngayThangNam).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        let data = res.data as BaoCao[];
+
+        this.tongDoanhThu = 0;
+        this.tongHoaDon = 0;
+        this.tongHoaDonTraLai = 0;
+
+        // Mảng doanh thu của tất cả các ngày trong tháng, khởi tạo với giá trị 0
+        const doanhThuTheoNgay = Array(24).fill(0); // Tạo mảng với số ngày trong tháng, giá trị mặc định là 0
+
+        // Duyệt qua dữ liệu từ BE và cập nhật giá trị vào mảng doanhThuTheoNgay
+        data.forEach((element: BaoCao) => {
+          if (element.tongDoanhThu) {
+            this.tongDoanhThu += element.tongDoanhThu;
+          }
+          if (element.tongDonHang) {
+            this.tongHoaDon += element.tongDonHang;
+          }
+          if (element.tongDonHangTraLai) {
+            this.tongHoaDonTraLai += element.tongDonHangTraLai;
+          }
+          // `thoiGian` là ngày trong tháng
+          if (element.thoiGian) {
+            if (element.thoiGian >= 1 && element.thoiGian <= 24) {
+              doanhThuTheoNgay[element.thoiGian - 1] =
+                element.tongDoanhThu || 0;
+            }
+          }
+        });
+
+        this.doanhThuTheoThang = doanhThuTheoNgay;
+        // Cập nhật các thông tin khác nếu cần
+
+        this.chartOptions.series = [
+          {
+            type: "column",
+            name: "Doanh thu",
+            data: doanhThuTheoNgay, // Dữ liệu giả định cho doanh thu
+          },
+        ];
+
+        setTimeout(() => {
+          Highcharts.chart("container", this.chartOptions); // Cập nhật lại chart
+        });
+      }
+    });
+  }
+
   getDoanhThuThangNay() {
     let request = {
       nam: this.namSelected, // Lấy năm hiện tại
@@ -358,7 +466,8 @@ export class ThongKecComponent implements OnInit {
 
     this.thangSelected = Number.parseInt((today.getMonth() + 1).toString());
     this.namSelected = Number.parseInt(today.getFullYear().toString());
-    this.getDoThiThang(this.thangSelected, this.namSelected);
+
+    this.common();
   }
 
   selectNam() {
@@ -367,21 +476,49 @@ export class ThongKecComponent implements OnInit {
     this.typeDoanhThu = CommonConstant.NAM;
     this.chartOptions.series = [];
     this.namSelected = Number.parseInt(today.getFullYear().toString());
-
-    this.getDoThiNam(this.namSelected);
+    this.common();
   }
 
+  selectNgay() {
+    const today = new Date();
+
+    this.typeDoanhThu = CommonConstant.NGAY;
+    this.chartOptions.series = [];
+
+    this.ngaySelected = Number.parseInt(today.getDate().toString());
+    this.thangSelected = Number.parseInt((today.getMonth() + 1).toString());
+    this.namSelected = Number.parseInt(today.getFullYear().toString());
+
+    this.common();
+  }
+
+  selectADay(event: any) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.ngaySelected = Number.parseInt(selectedValue);
+    this.common();
+  }
   selectAMonth(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.thangSelected = Number.parseInt(selectedValue);
-
-    this.getDoThiThang(this.thangSelected, this.namSelected);
+    this.updateDaysInMonth();
+    this.common();
   }
 
   selectAYear(event: any) {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.namSelected = Number.parseInt(selectedValue);
-
-    this.getDoThiNam(this.namSelected);
+    this.updateDaysInMonth();
+    this.common();
+  }
+  updateDaysInMonth() {
+    const daysInCurrentMonth = new Date(
+      this.namSelected,
+      this.thangSelected,
+      0
+    ).getDate();
+    this.daysInMonth = Array.from(
+      { length: daysInCurrentMonth },
+      (_, i) => i + 1
+    );
   }
 }

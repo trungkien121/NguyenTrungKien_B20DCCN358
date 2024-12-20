@@ -254,6 +254,17 @@
                       name="exampleRadios"
                       type="radio"
                       value=""
+                      (click)="selectNgay()"
+                      [checked]="typeDoanhThu == CommonConstant.NGAY"
+                    />
+                    Theo ngày
+                  </label>
+                  <label class="list-group-item">
+                    <input
+                      class="form-check-input me-1"
+                      name="exampleRadios"
+                      type="radio"
+                      value=""
                       (click)="selectThang()"
                       [checked]="typeDoanhThu == CommonConstant.THANG"
                     />
@@ -271,23 +282,27 @@
                     Theo năm
                   </label>
                 </div>
+
                 <select
                   class="form-select form-select-sm"
-                  *ngIf="typeDoanhThu == CommonConstant.NAM"
-                  (change)="selectAYear($event)"
+                  *ngIf="typeDoanhThu == CommonConstant.NGAY"
+                  (change)="selectADay($event)"
                 >
                   <option
-                    *ngFor="let nam of nams"
-                    [value]="nam"
-                    [selected]="nam == namSelected.toString()"
+                    *ngFor="let day of daysInMonth"
+                    [value]="day"
+                    [selected]="day == ngaySelected"
                   >
-                    {{ nam }}
+                    {{ day }}
                   </option>
                 </select>
 
                 <select
                   class="form-select form-select-sm"
-                  *ngIf="typeDoanhThu == CommonConstant.THANG"
+                  *ngIf="
+                    typeDoanhThu == CommonConstant.THANG ||
+                    typeDoanhThu == CommonConstant.NGAY
+                  "
                   (change)="selectAMonth($event)"
                 >
                   <option
@@ -296,6 +311,19 @@
                     [selected]="thang == thangSelected.toString()"
                   >
                     {{ thang }}
+                  </option>
+                </select>
+
+                <select
+                  class="form-select form-select-sm"
+                  (change)="selectAYear($event)"
+                >
+                  <option
+                    *ngFor="let nam of nams"
+                    [value]="nam"
+                    [selected]="nam == namSelected.toString()"
+                  >
+                    {{ nam }}
                   </option>
                 </select>
               </div>

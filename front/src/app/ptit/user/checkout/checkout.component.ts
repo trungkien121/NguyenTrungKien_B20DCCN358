@@ -116,7 +116,7 @@ export class CheckoutComponent implements OnInit {
             if (resp.status == CommonConstant.STATUS_OK_200) {
               // this.toastService.success("Xóa thành công");
               this.getGH();
-              // this.router.navigate(["/user/donmua"]);
+              this.router.navigate(["/user/donmua"]);
             } else {
               this.toastService.error("Xóa thất bại");
             }

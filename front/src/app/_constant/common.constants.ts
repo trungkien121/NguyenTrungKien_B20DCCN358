@@ -34,4 +34,5 @@ export class CommonConstant {
 
   public static readonly THANG = "T";
   public static readonly NAM = "N";
+  public static readonly NGAY = "DAY";
 }
