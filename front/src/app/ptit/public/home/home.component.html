@@ -1,4 +1,4 @@
-<div iv class="main-content">
+  <div iv class="main-content">
   <div class="page-content">
     <div class="container-fluid">
       <!-- start page title -->
@@ -161,82 +161,131 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-xl-2 col-lg-6" *ngFor="let item of paginatedProductLst">
-          <a (click)="showDetail(item)" class="card-link">
-            <div class="card ribbon-box right overflow-hidden">
-              <div class="card-body text-center p-4">
-                <img [src]="item.avatar" alt="" class="responsive-img" />
-                <div class="text-container">
-                  <h5 class="mb-1 mt-4">
-                    <span class="link-primary text-truncate">
-                      {{ item.tenThuoc }}
-                    </span>
-                  </h5>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="col-lg-8">
-                    <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
-                  </div>
-                </div>
-                <div class="row mt-4">
-                  <div class="col-lg-12">
-                    <h5>
-                      {{ item.giaBan | number : "1.0-0" }}đ / {{ item.donVi }}
-                    </h5>
-                  </div>
-                </div>
-                <div class="mt-4">
-                  <button
-                    class="btn btn-custom-primary w-100"
-                    (click)="addProductInCart(item); $event.stopPropagation()"
-                  >
-                    Mua
-                  </button>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="align-items-center mt-2 row g-3 text-center text-sm-start">
-          <div class="col-sm">
-            <div class="text-muted">
-              <!-- Showing<span class="fw-semibold">4</span> of
-              <span class="fw-semibold">125</span> Results -->
-            </div>
+        <div class="bestseller-section">
+          <div class="bestseller-title">
+            <span>Sản phẩm bán chạy</span>
           </div>
-          <div class="col-sm-auto">
-            <ul
-              class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0"
-            >
-              <!-- Previous Page -->
-              <li class="page-item" [class.disabled]="currentPage === 1">
-                <a class="page-link" (click)="changePage(currentPage - 1)">←</a>
-              </li>
-
-              <!-- Page Numbers -->
-              <li
-                class="page-item"
-                *ngFor="let page of pages"
-                [class.active]="page === currentPage"
-              >
-                <a class="page-link" (click)="changePage(page)">{{ page }}</a>
-              </li>
-
-              <!-- Next Page -->
-              <li
-                class="page-item"
-                [class.disabled]="currentPage === totalPage"
-              >
-                <a class="page-link" (click)="changePage(currentPage + 1)">→</a>
-              </li>
-            </ul>
+          <div class="row mb-4">
+            <div class="col-xl-2 col-lg-6" *ngFor="let item of productBS | slice: 0:6">
+              <a (click)="showDetail(item)" class="card-link">
+                <div class="card ribbon-box right overflow-hidden">
+                  <div class="card-body text-center p-4">
+                    <img [src]="item.avatar" alt="" class="responsive-img" />
+                    <div class="text-container">
+                      <h5 class="mb-1 mt-4">
+                        <span class="link-primary text-truncate">
+                          {{ item.tenThuoc }}
+                        </span>
+                      </h5>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-lg-12">
+                        <h5>
+                          {{ item.giaBan | number : "1.0-0" }}đ / {{ item.donVi }}
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <button
+                        class="btn btn-custom-primary w-100"
+                        (click)="addProductInCart(item); $event.stopPropagation()"
+                      >
+                        Mua
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      <!--end row-->
-
+      <div class="row mb-4">
+        <div class="bestseller-section">
+          <div class="bestseller-title">
+            <span>Sản phẩm</span>
+          </div>
+          <div class="row mb-4">
+            <div class="col-xl-2 col-lg-6" *ngFor="let item of paginatedProductLst">
+              <a (click)="showDetail(item)" class="card-link">
+                <div class="card ribbon-box right overflow-hidden">
+                  <div class="card-body text-center p-4">
+                    <img [src]="item.avatar" alt="" class="responsive-img" />
+                    <div class="text-container">
+                      <h5 class="mb-1 mt-4">
+                        <span class="link-primary text-truncate">
+                          {{ item.tenThuoc }}
+                        </span>
+                      </h5>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-lg-12">
+                        <h5>
+                          {{ item.giaBan | number : "1.0-0" }}đ / {{ item.donVi }}
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <button
+                        class="btn btn-custom-primary w-100"
+                        (click)="addProductInCart(item); $event.stopPropagation()"
+                      >
+                        Mua
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="align-items-center mt-2 row g-3 text-center text-sm-start">
+            <div class="col-sm">
+              <div class="text-muted">
+                <!-- Showing<span class="fw-semibold">4</span> of
+                <span class="fw-semibold">125</span> Results -->
+              </div>
+            </div>
+            <div class="col-sm-auto">
+              <ul
+                class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0"
+              >
+                <!-- Previous Page -->
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="changePage(currentPage - 1)">←</a>
+                </li>
+  
+                <!-- Page Numbers -->
+                <li
+                  class="page-item"
+                  *ngFor="let page of pages"
+                  [class.active]="page === currentPage"
+                >
+                  <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+                </li>
+  
+                <!-- Next Page -->
+                <li
+                  class="page-item"
+                  [class.disabled]="currentPage === totalPage"
+                >
+                  <a class="page-link" (click)="changePage(currentPage + 1)">→</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <!--end modal-->
     </div>
     <!-- container-fluid -->

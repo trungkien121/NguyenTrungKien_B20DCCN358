@@ -75,6 +75,47 @@
   color: white;
 }
 
+.bestseller-section {
+  border: 2px solid #add8e6; /* Viền xanh nhạt */
+  border-radius: 8px; /* Bo góc */
+  padding: 16px; /* Khoảng cách bên trong */
+  background-color: #f9f9f9; /* Nền màu xám nhạt */
+}
+
+.bestseller-title {
+  position: relative;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.bestseller-title span {
+  background: linear-gradient(145deg, #e63946, #c5303b); /* Hiệu ứng gradient 3D */
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem; /* Tăng kích thước chữ */
+  padding: 12px 32px; /* Tăng kích thước padding */
+  border-radius: 32px 32px 0 0; /* Tăng bo cong đầu dải băng */
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Tăng bóng đổ */
+}
+
+.bestseller-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 32px; /* Tăng chiều cao nền cong */
+  background: linear-gradient(145deg, #e63946, #c5303b); /* Gradient như span */
+  border-radius: 32px;
+  z-index: 0;
+  transform: translateY(-50%);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Tăng bóng đổ cho nền */
+}
+
+
 .card {
   border-radius: 16px;
   overflow: hidden;

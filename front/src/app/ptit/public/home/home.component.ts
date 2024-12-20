@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   productLst: Thuoc[] = [];
   loaithuocLst: LoaiThuoc[] = [];
   paginatedProductLst: Thuoc[] = [];
+  productBS: Thuoc[] = [];
 
   gioHangId: number = 0;
   userInfo: NguoiDung = {};
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getData();
+    this.getData(); 
   }
 
   search() {
@@ -63,8 +64,8 @@ export class HomeComponent implements OnInit {
   }
   getData() {
     this.getThuoc();
-
     this.getUserInfo();
+    this.bestSale();
   }
 
   async getUserInfo(): Promise<void> {
@@ -87,6 +88,14 @@ export class HomeComponent implements OnInit {
         }
       }
     }
+  }
+
+  bestSale(){
+    this.thuocService.getProductBestsale(this.modelSearch).subscribe((res) => {
+      if( res.status == CommonConstant.STATUS_OK_200){
+        this.productBS = res.data.data; 
+      }
+    }) 
   }
 
   getGH() {
