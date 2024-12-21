@@ -126,16 +126,19 @@ class DonHangServiceImpl implements DonHangService {
 		if (donHang != null) {
 			donHang.setTrangThaiGiaoHang(DonHang.TrangThaiGiaoHang.valueOf(donHangDTO.getTrangThaiGiaoHang()));
 			DonHang updateDonHang = donHangRepo.save(donHang);
+			
+			TrangThaiGiaoHang trangThai = DonHang.TrangThaiGiaoHang.valueOf(donHangDTO.getTrangThaiGiaoHang());
+			System.out.println("Trạng thái giao hàng mới: " + trangThai);
 
-			if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)
-					|| donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_HUY)) {
+			if (updateDonHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)
+					|| updateDonHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_HUY)) {
 				if (updateDonHang.getKhachHang() != null) {
 					ThongBao thongBao = new ThongBao();
 
 					String tieuDe;
 					String noidung;
 
-					if (donHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)) {
+					if (updateDonHang.getTrangThaiGiaoHang().equals(TrangThaiGiaoHang.DA_GIAO)) {
 						tieuDe = "Đơn hàng đã giao thành công";
 						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được giao thành công.";
 
@@ -152,7 +155,7 @@ class DonHangServiceImpl implements DonHangService {
 						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được hủy thành công.";
 					}
 
-					String linkLienKet = "/donhang/get?id=" + updateDonHang.getId();
+					String linkLienKet = "http://localhost:4200/user/donmua-chitiet/" + updateDonHang.getId();
 					LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
 
 					List<NguoiDung> nguoiDungs = new ArrayList<>();
@@ -263,7 +266,7 @@ class DonHangServiceImpl implements DonHangService {
 			LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
 
 			List<NguoiDung> nguoiDungs = new ArrayList<>();
-			nguoiDungs.add(createDonHang.getNguoiDung());
+			nguoiDungs.add(createDonHang.getKhachHang());
 
 			thongBao.setTieuDe(tieuDe);
 			thongBao.setNoiDung(noidung);
