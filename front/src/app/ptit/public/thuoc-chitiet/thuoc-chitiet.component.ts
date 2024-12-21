@@ -36,6 +36,10 @@ export class ThuocChiTietComponent implements OnInit {
 
   showCopyMessage = false;
 
+  thuocTT: Thuoc[] = [];
+  id: string = "";
+  tenLoaiThuoc: string = "";
+
   danhgiaLst: DanhGia[] = [];
   modelSearch: SearchModel = {
     keyWord: "",
@@ -43,6 +47,7 @@ export class ThuocChiTietComponent implements OnInit {
     currentPage: 0,
     size: 100,
     sortedField: "",
+    loaiThuoc: "",
   };
   constructor(
     private thuocService: ThuocService,
@@ -92,6 +97,7 @@ export class ThuocChiTietComponent implements OnInit {
 
   getData() {
     this.getLoaiThuoc();
+    this.getThuocTT();
   }
 
   getLoaiThuoc() {
@@ -101,6 +107,30 @@ export class ThuocChiTietComponent implements OnInit {
       }
     });
   }
+
+  getThuocTT() {
+    this.route.queryParams.subscribe(async (params) => {
+      this.id = this.route.snapshot.paramMap.get("id") || ""; // Lấy id loại thuốc từ tham số URL
+      // console.log(this.id);
+      this.thuocService.getProduct(this.id).subscribe((res) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          this.thuoc = res.data;
+          const modelSearch = { loaiThuoc: this.thuoc.loaiThuoc?.tenLoai }; // Tạo đối tượng modelSearch với tên loại thuốc
+          this.thuocService.getProductLst(modelSearch).subscribe((res) => {
+            if (res.status == "200") {
+              this.thuocTT = res.data.data.filter((thuoc: any) => thuoc.id !== this.thuoc.id);
+              console.log(this.thuocTT);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  showDetail(thuoc: Thuoc) {
+    this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
+  }
+  
 
   addProductInCart() {
     if (Cookie.check(AuthConstant.ACCESS_TOKEN_KEY)) {
@@ -163,18 +193,21 @@ export class ThuocChiTietComponent implements OnInit {
 
   copyToClipboard(value?: string): void {
     if (value) {
-      navigator.clipboard.writeText(value).then(() => {
-        this.showCopyMessage = true;
+      navigator.clipboard
+        .writeText(value)
+        .then(() => {
+          this.showCopyMessage = true;
 
-        // Tự động ẩn thông báo sau 2 giây
-        setTimeout(() => {
-          this.showCopyMessage = false;
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
+          // Tự động ẩn thông báo sau 2 giây
+          setTimeout(() => {
+            this.showCopyMessage = false;
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Failed to copy text: ", err);
+        });
     } else {
-      console.error('No text to copy');
+      console.error("No text to copy");
     }
   }
 }

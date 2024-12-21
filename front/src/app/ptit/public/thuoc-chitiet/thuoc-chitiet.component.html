@@ -197,6 +197,58 @@
 
         <div class="row">
           <div class="col-lg-12">
+            <h4 class="mb-sm-0">Sản phẩm liên quan</h4>
+            <!-- <div class="card">               -->
+              <div class="card-body">
+                <div class="row mb-4">
+                  <div class="bestseller-section">
+                    <div class="row mb-4">
+                      <div class="col-xl-2 col-lg-6" *ngFor="let item of thuocTT | slice: 0:6">
+                        <a (click)="showDetail(item)" class="card-link">
+                          <div class="card ribbon-box right overflow-hidden">
+                            <div class="card-body text-center p-4">
+                              <img [src]="item.avatar" alt="" class="responsive-img" />
+                              <div class="text-container">
+                                <h5 class="mb-1 mt-4">
+                                  <span class="link-primary text-truncate">
+                                    {{ item.tenThuoc }}
+                                  </span>
+                                </h5>
+                              </div>
+                              <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                  <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                                </div>
+                              </div>
+                              <div class="row mt-4">
+                                <div class="col-lg-12">
+                                  <h5>
+                                    {{ item.giaBan | number : "1.0-0" }}đ / {{ item.donVi }}
+                                  </h5>
+                                </div>
+                              </div>
+                              <div class="mt-4">
+                                <button
+                                  class="btn btn-custom-primary w-100"
+                                  (click)="addProductInCart(); $event.stopPropagation()"
+                                >
+                                  Mua
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
                 <div class="">

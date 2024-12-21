@@ -178,3 +178,52 @@ ul {
     opacity: 0;
   }
 }
+
+
+.text-truncate {
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card {
+  border-radius: 16px;
+
+}
+
+.card-link {
+  text-decoration: none; /* Loại bỏ gạch chân mặc định của thẻ <a> */
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.card-link:hover .card {
+  transform: scale(1.02); /* Phóng to nhẹ khi hover */
+  box-shadow: 0px 4px 10px #3964e7; /* Hiệu ứng đổ bóng */
+}
+
+.card-link:active .card {
+  transform: scale(0.98); /* Hiệu ứng bấm xuống */
+}
+
+.responsive-img {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  width: 175px; /* Chiều rộng khung chứa */
+  height: 175px; /* Chiều cao khung chứa */
+}
+
+.text-container {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

@@ -81,7 +81,8 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     this.thuocService.getProductLst(modelSearch).subscribe((res) => {
       if (res.status == '200') {
         this.dsThuoc = res.data.data; // Lưu danh sách thuốc vào biến dsThuoc
-      console.log(res.data.data);}
+      console.log(this.dsThuoc);
+    }
     });
   }
 
