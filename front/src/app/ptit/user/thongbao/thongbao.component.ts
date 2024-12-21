@@ -61,6 +61,7 @@ export class ThongBaoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.modelSearch.id = this.user.id;
     this.thongbaoService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.lstNoti = res.data.data;

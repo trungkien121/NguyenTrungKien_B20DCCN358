@@ -81,16 +81,18 @@ export class ChiTietDonHangComponent implements OnInit {
   }
 
   updateDonHang() {
-    this.donHangService.update(this.donhang).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        this.toastService.success("Cập nhật thành công");
-        this.router.navigate(["/sys/donhang"]);
-      } else if (resp.status == CommonConstant.STATUS_OK_409) {
-        this.toastService.error(resp.msg);
-      } else {
-        this.toastService.error("Cập nhật thất bại");
-      }
-    });
+    this.donHangService
+      .changTrangThaiGiaoHang(this.donhang)
+      .subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          this.toastService.success("Cập nhật thành công");
+          this.router.navigate(["/sys/donhang"]);
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
+        } else {
+          this.toastService.error("Cập nhật thất bại");
+        }
+      });
   }
 
   getDonHangByParam() {

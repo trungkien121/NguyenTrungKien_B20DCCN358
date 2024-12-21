@@ -152,7 +152,7 @@ class DonHangServiceImpl implements DonHangService {
 						noidung = "Đơn hàng ID = " + updateDonHang.getId() + " đã được hủy thành công.";
 					}
 
-					String linkLienKet = "/donhang/get?id=" + updateDonHang.getId();
+					String linkLienKet = "http://localhost:4200/user/donmua-chitiet/" + updateDonHang.getId();
 					LoaiThongBao loaiThongBao = LoaiThongBao.CA_NHAN;
 
 					List<NguoiDung> nguoiDungs = new ArrayList<>();
