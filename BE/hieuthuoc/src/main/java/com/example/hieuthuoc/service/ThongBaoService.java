@@ -50,7 +50,7 @@ class ThongBaoServiceImpl implements ThongBaoService {
 
 	@Override
 	public ResponseDTO<PageDTO<List<ThongBao>>> getByNguoiDungId(SearchDTO searchDTO) {
-		Sort sortBy = Sort.by("id").ascending();
+		Sort sortBy = Sort.by("createdAt").descending();
 
 		if (StringUtils.hasText(searchDTO.getSortedField())) {
 			sortBy = Sort.by(searchDTO.getSortedField()).ascending();
