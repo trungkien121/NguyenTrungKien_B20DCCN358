@@ -61,4 +61,13 @@ export class DonhangService {
       headers: headers,
     });
   }
+
+  changTrangThaiGiaoHang(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/donhang/changTrangThaiGiaoHang`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.post(`${apiUrl}`, request, {
+      headers: headers,
+    });
+  }
 }

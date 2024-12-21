@@ -18,7 +18,7 @@ export class ThongBaoService {
   }
 
   getLst(request: any): Observable<any> {
-    const apiUrl = environment.backApiUrl + `/thongbao/search`;
+    const apiUrl = environment.backApiUrl + `/thongbao/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
 
     return this.http

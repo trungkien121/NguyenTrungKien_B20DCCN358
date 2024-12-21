@@ -25,6 +25,7 @@ export class ThongbaoHeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   subscriptions: Subscription[] = [];
+  userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
 
   lstNoti: ThongBao[] = [];
   countUnRead: number = 0;
@@ -40,6 +41,7 @@ export class ThongbaoHeaderComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
+    this.modelSearch.id = this.userInfo.id;
     this.thongbaoService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.lstNoti = res.data.data;

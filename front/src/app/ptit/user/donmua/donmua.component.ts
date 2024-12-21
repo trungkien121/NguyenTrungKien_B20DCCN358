@@ -225,7 +225,7 @@ export class DonMuaComponent implements OnInit {
   }
 
   updateDonHang(donhang: DonHang) {
-    this.donhangService.update(donhang).subscribe((resp) => {
+    this.donhangService.changTrangThaiGiaoHang(donhang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Cập nhật thành công");
         this.getData();
