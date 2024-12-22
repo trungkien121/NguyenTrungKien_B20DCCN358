@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <ul class="navbar-nav" id="navbar-nav">
       <li class="menu-title"><span>Menu</span></li>
-
       <!-- Lặp qua danh sách danh mục -->
       <li class="nav-item position-relative" *ngFor="let item of loaiThuocLst | slice:0:4" (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave()">
         <a class="nav-link menu-link">
@@ -26,7 +25,6 @@
           </div>
         </div>
       </li>
-      
     </ul>
   </div>
 </div>

@@ -23,49 +23,37 @@
       </div>
 
 
-
-
       <div class="row mt-4">
-        
-          <div class="filter-container">
-            <div class="filter-header">
-              <span><i class="bi bi-funnel"></i> Bộ lọc nâng cao</span>
-            </div>
-            <div class="filter-section">
-              <!-- Đối tượng sử dụng -->
-              <div class="filter-category">
-                <div class="filter-title">
-                  Đối tượng sử dụng
-                </div>
-                <div class="filter-options">
-                  <!-- Tùy chọn "Tất cả" -->
-                  <label>
-                    <input
-                      type="radio"
-                      name="allDT"
-                     [checked]="this.modelSearch.tenDoiTuong == null"
 
-                      (change)="getThuocTheoLoai()"
-                    />
-                    Tất cả
-                  </label>
-              
-                  <!-- Các đối tượng sử dụng khác -->
-                  <label *ngFor="let option of doiTuong">
-                    <input
-                      type="radio"
-                      [value]="option.id"
-                      (click)="getThuocTuDT(option)"
-                      [name]="option.id"
-                     [checked]="option.tenDoiTuong == this.modelSearch.tenDoiTuong"
-                    />
-                    {{ option.tenDoiTuong }}
-                  </label>
-                </div>
+        <div class="filter-container">
+          <div class="filter-header">
+            <span><i class="bi bi-funnel"></i> Bộ lọc nâng cao</span>
+          </div>
+          <div class="filter-section">
+            <!-- Đối tượng sử dụng -->
+            <div class="filter-category">
+              <div class="filter-title">
+                Đối tượng sử dụng
               </div>
-              
-              <!-- Giá bán -->
-              <!-- <div class="filter-category">
+              <div class="filter-options">
+                <!-- Tùy chọn "Tất cả" -->
+                <label>
+                  <input type="radio" name="allDT" [checked]="this.modelSearch.tenDoiTuong == null"
+                    (change)="getThuocTheoLoai()" />
+                  Tất cả
+                </label>
+
+                <!-- Các đối tượng sử dụng khác -->
+                <label *ngFor="let option of doiTuong">
+                  <input type="radio" [value]="option.id" (click)="getThuocTuDT(option)" [name]="option.id"
+                    [checked]="option.tenDoiTuong == this.modelSearch.tenDoiTuong" />
+                  {{ option.tenDoiTuong }}
+                </label>
+              </div>
+            </div>
+
+            <!-- Giá bán -->
+            <!-- <div class="filter-category">
                 <div class="filter-title">
                   Giá bán
                 </div>
@@ -77,8 +65,8 @@
                 </div>
               </div> -->
 
-              <!-- Nhàhà sản xuất -->
-              <!-- <div class="filter-category">
+            <!-- Nhàhà sản xuất -->
+            <!-- <div class="filter-category">
                 <div class="filter-title">
                   Nhà sản xuất
                 </div>
@@ -107,9 +95,9 @@
                   </label>
                 </div>
               </div> -->
-            </div>
           </div>
-       
+        </div>
+
 
         <div class="col-xl-2 col-lg-6" *ngFor="let thuoc of dsThuoc">
           <a (click)="showDetail(thuoc)" class="card-link">

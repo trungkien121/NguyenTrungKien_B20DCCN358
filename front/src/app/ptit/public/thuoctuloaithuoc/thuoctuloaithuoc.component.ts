@@ -85,7 +85,6 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
 
   getThuocTheoLoai() {
     this.modelSearch.tenDoiTuong=null;
-
     this.modelSearch.loaiThuoc=this.loaiThuoc;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
