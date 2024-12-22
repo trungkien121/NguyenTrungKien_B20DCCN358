@@ -68,7 +68,7 @@ export class ThuocChiTietComponent implements OnInit {
   }
 
   getThuocByParam() {
-    this.route.queryParams.subscribe(async (params) => {
+    this.route.paramMap.subscribe(async (params) => {
       this.thuoc.id = this.route.snapshot.paramMap.get("id") || "";
       if (this.thuoc.id) {
         this.getThuocById(this.thuoc.id);

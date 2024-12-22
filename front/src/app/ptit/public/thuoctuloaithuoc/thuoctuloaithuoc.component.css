@@ -120,3 +120,79 @@
     margin-bottom: 12px;
   }
 }
+
+
+.filter-container {
+  width: 300px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.filter-header {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.filter-category {
+  margin-bottom: 16px;
+}
+
+.filter-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.filter-options label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.filter-options input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.filter-options button {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f8f9fa;
+  cursor: pointer;
+}
+
+.filter-options button.active {
+  background: #007bff;
+  color: #fff;
+}
+
+.filter-options input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.filter-options ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 120px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filter-options li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.filter-options li:hover {
+  background: #f8f9fa;
+}

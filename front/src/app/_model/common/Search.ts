@@ -6,4 +6,5 @@ export class SearchModel {
   sortedField?: string;
 
   loaiThuoc?: string;
+  tenDoiTuong?: string | null;
 }

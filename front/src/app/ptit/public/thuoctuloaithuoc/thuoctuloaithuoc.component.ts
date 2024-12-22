@@ -17,6 +17,10 @@ import { jwtDecode } from "jwt-decode";
 import { lastValueFrom } from "rxjs";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
+import { DoiTuong } from "src/app/_model/doituong";
+import { DoituongService } from "src/app/_service/doituong.service";
+import { NhaSanXuat } from "src/app/_model/nsx";
+import { NSXService } from "src/app/_service/nsx.service";
 
 @Component({
   selector: "app-thuoctuloaithuoc",
@@ -25,16 +29,16 @@ import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 })
 export class ThuocTuLoaiThuocComponent implements OnInit {
   loaiThuocLst: LoaiThuoc[] = [];
-  productLst: Thuoc[] = [];
 
-  loaiThuoc: string = ''; // Biến để lưu tên loại thuốc
+  loaiThuoc: string = ""; // Biến để lưu tên loại thuốc
   dsThuoc: Thuoc[] = []; // Biến lưu danh sách thuốc theo loại
 
   selectedItem: DanhMucThuoc | null = null;
 
   gioHangId: number = 0;
   userInfo: NguoiDung = {};
-
+  doiTuong: DoiTuong[] = [];
+  nhaSanXuat: NhaSanXuat[]=[];
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -43,6 +47,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     size: 100,
     sortedField: "",
     loaiThuoc: "",
+    tenDoiTuong: null,
   };
 
   totalRows: number = 0;
@@ -53,7 +58,8 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     private route: ActivatedRoute,
     private gioHangService: GioHangService,
     private nguoidungService: NguoidungService,
-
+    private doiTuongService: DoituongService,
+    private nsxService: NSXService,
     private toastService: ToastrService
   ) {}
 
@@ -63,30 +69,31 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(async (params) => {
-        this.loaiThuoc = this.route.snapshot.paramMap.get('loaiThuoc') || ''; // Lấy tên loại thuốc từ tham số URL
-        this.getThuocTheoLoai(); // Gọi hàm để lấy thuốc theo loại
-        this.getUserInfo();
-      }); 
-      
+      this.loaiThuoc = this.route.snapshot.paramMap.get("loaiThuoc") || ""; // Lấy tên loại thuốc từ tham số URL
+      this.getThuocTheoLoai(); // Gọi hàm để lấy thuốc theo loại
+      this.getUserInfo();
+    });
+    this.getDT();
+    // this.getThuocTuDT();
+    this.getNSX();
   }
- 
+
   
   search() {
     this.getThuocTheoLoai();
   }
 
-  
   getThuocTheoLoai() {
-    const modelSearch = { loaiThuoc: this.loaiThuoc }; // Tạo đối tượng modelSearch với tên loại thuốc
-    this.thuocService.getProductLst(modelSearch).subscribe((res) => {
-      if (res.status == '200') {
+    this.modelSearch.tenDoiTuong=null;
+
+    this.modelSearch.loaiThuoc=this.loaiThuoc;
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
+      if (res.status == "200") {
         this.dsThuoc = res.data.data; // Lưu danh sách thuốc vào biến dsThuoc
-      console.log(this.dsThuoc);
-    }
+      }
     });
   }
 
-  
   async getUserInfo(): Promise<void> {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
@@ -118,7 +125,6 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
       }
     });
   }
-  
 
   showDetail(thuoc: Thuoc) {
     this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
@@ -149,6 +155,32 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
         this.gioHangService.getGHSubject(this.userInfo.id).subscribe();
       } else {
         this.toastService.error("Lưu thất bại");
+      }
+    });
+  }
+
+  getDT() {
+    this.doiTuongService.getDTLst().subscribe((res) => {
+      if (res.status == "200") {
+        this.doiTuong = res.data; // Lưu danh sách thuốc vào biến dsThuoc
+      }
+    });
+  }
+
+  getThuocTuDT(doiTuong : DoiTuong){
+    this.modelSearch.tenDoiTuong = doiTuong.tenDoiTuong;
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
+      if (res.status == "200") {
+        this.dsThuoc = res.data.data; // Lưu danh sách thuốc vào biến dsThuoc
+        console.log(this.dsThuoc);
+      }
+    })
+  }
+
+  getNSX() {
+    this.nsxService.getNSXLst().subscribe((res) => {
+      if (res.status == "200") {
+        this.nhaSanXuat = res.data; // Lưu danh sách thuốc vào biến dsThuoc
       }
     });
   }

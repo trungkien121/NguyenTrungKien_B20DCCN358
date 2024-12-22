@@ -2,16 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
-  OnDestroy,
   OnInit,
-  SimpleChanges,
 } from "@angular/core";
-import { Cookie } from "ng2-cookies";
-import { AuthConstant } from "src/app/_constant/auth.constant";
-import { Quyen } from "src/app/_model/auth/quyen";
-import { lastValueFrom, Subscription } from "rxjs";
-import { jwtDecode } from "jwt-decode";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
 import { CommonConstant } from "src/app/_constant/common.constants";
@@ -23,7 +15,6 @@ import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 import { Thuoc } from "src/app/_model/thuoc";
 import { Router } from "@angular/router";
 import { ThuocService } from "src/app/_service/thuoc.service";
-import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
 import { GioHangService } from "src/app/_service/giohang.service";
 import { ToastrService } from "ngx-toastr";
 
@@ -74,6 +65,7 @@ export class SidebarTopUserComponent implements OnInit {
   
 
   showDetail(thuoc: Thuoc) {
+    console.log("thuoc", thuoc)
     this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
   }
 
