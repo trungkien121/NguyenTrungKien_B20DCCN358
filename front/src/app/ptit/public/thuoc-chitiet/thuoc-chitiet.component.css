@@ -210,10 +210,11 @@ ul {
 }
 
 .responsive-img {
+  object-fit: contain;
   display: flex;
   justify-content: center; /* Căn giữa theo chiều ngang */
   align-items: center; /* Căn giữa theo chiều dọc */
-  width: 175px; /* Chiều rộng khung chứa */
+  width: 100%; /* Chiều rộng khung chứa */
   height: 175px; /* Chiều cao khung chứa */
 }
 

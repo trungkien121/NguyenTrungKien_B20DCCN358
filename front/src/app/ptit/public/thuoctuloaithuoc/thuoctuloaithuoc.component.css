@@ -1,7 +1,10 @@
 .responsive-img {
-  height: 200px;
-  width: auto;
   object-fit: contain;
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  width: 100%; /* Chiều rộng khung chứa */
+  height: 175px; /* Chiều cao khung chứa */
 }
 
 .category-name {
@@ -93,14 +96,6 @@
 
 .card-link:active .card {
   transform: scale(0.98); /* Hiệu ứng bấm xuống */
-}
-
-.responsive-img {
-  display: flex;
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  width: 200px; /* Chiều rộng khung chứa */
-  height: 200px; /* Chiều cao khung chứa */
 }
 
 .text-container {

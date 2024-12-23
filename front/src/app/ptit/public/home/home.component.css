@@ -1,8 +1,3 @@
-.responsive-img {
-  height: 200px;
-  width: auto;
-  object-fit: contain;
-}
 
 .text-truncate {
   display: inline-block;
@@ -138,10 +133,11 @@
 }
 
 .responsive-img {
+  object-fit: contain;
   display: flex;
   justify-content: center; /* Căn giữa theo chiều ngang */
   align-items: center; /* Căn giữa theo chiều dọc */
-  width: 200px; /* Chiều rộng khung chứa */
+  width: 100%; /* Chiều rộng khung chứa */
   height: 200px; /* Chiều cao khung chứa */
 }
 

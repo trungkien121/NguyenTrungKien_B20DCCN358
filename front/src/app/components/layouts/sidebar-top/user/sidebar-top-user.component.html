@@ -13,6 +13,7 @@
             <h4>Bán chạy nhất |</h4>
             <button (click)="showAllItems(item)" class="view-all-button">Xem tất cả ></button>
           </div>          
+          
           <div class="items-container">
             <!-- Hiển thị tối đa 4 item -->
             <div class="item-card" *ngFor="let thuoc of item.dsThuoc | slice:0:4" (click)="showDetail(thuoc)">

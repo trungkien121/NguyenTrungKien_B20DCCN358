@@ -46,7 +46,9 @@ export class SelectThuocComponent implements OnInit {
   doituongNew: DoiTuong = {};
   scoreCardDelete: DoiTuong = {};
 
-  modelSearch: SearchModel = {};
+  modelSearch: SearchModel = {
+    size:1000,
+  };
   @Input()
   thuocSelected: Thuoc[] = [];
 
@@ -55,12 +57,15 @@ export class SelectThuocComponent implements OnInit {
   ngOnInit() {
     this.getThuoc();
   }
+  search() {
+    this.getThuoc();
+  }
 
   getThuoc() {
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       // if (res.status == CommonConstant.STATUS_OK_200) {
       this.thuocLst = res.data.data;
-
+      
       // }
     });
   }

@@ -1,50 +1,29 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-      <div
-        *ngIf="displayDialog"
-        id="layer-popup"
-        [ngClass]="{ active: displayDialog }"
-      >
-        <app-select-thuoc
-          [thuocSelected]="thuocSelected"
-          (cancel)="handleCancel($event)"
-          (save)="handleSaveThuoc($event)"
-        >
+      <div *ngIf="displayDialog" id="layer-popup" [ngClass]="{ active: displayDialog }">
+        <app-select-thuoc [thuocSelected]="thuocSelected" (cancel)="handleCancel($event)"
+          (save)="handleSaveThuoc($event)">
         </app-select-thuoc>
       </div>
 
-      <div
-        *ngIf="displayDialogKH"
-        id="layer-popup"
-        [ngClass]="{ active: displayDialogKH }"
-      >
-        <app-select-khachhang
-          [customerSelected]="donhang.khachHang"
-          (cancel)="handleCancelKH($event)"
-          (save)="handleSaveKH($event)"
-        >
+      <div *ngIf="displayDialogKH" id="layer-popup" [ngClass]="{ active: displayDialogKH }">
+        <app-select-khachhang [customerSelected]="donhang.khachHang" (cancel)="handleCancelKH($event)"
+          (save)="handleSaveKH($event)">
         </app-select-khachhang>
       </div>
 
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">Thêm phiếu nhập</h4>
           </div>
         </div>
       </div>
       <!-- end page title -->
 
-      <form
-        id="createproduct-form"
-        autocomplete="off"
-        class="needs-validation"
-        novalidate
-      >
+      <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
@@ -55,14 +34,8 @@
                       <label class="col-form-label me-3" for="maNCC">
                         Khách hàng <span class="text-danger">*</span>
                       </label>
-                      <input
-                        type="text"
-                        name="maNCC"
-                        class="form-control me-3"
-                        disabled="true"
-                        id="maNCC"
-                        [(ngModel)]="nguoidungHoten"
-                      />
+                      <input type="text" name="maNCC" class="form-control me-3" disabled="true" id="maNCC"
+                        [(ngModel)]="nguoidungHoten" />
                       <button class="btn btn-primary" (click)="openSelectKH()">
                         Tìm khách hàng
                       </button>
@@ -76,38 +49,39 @@
                       </button>
                     </div>
                   </div> -->
-
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="col-form-label" for="tenNhaCungCap"
-                        >Hình thức thanh toán
-                        <span class="text-danger">*</span></label
-                      >
-                      <app-select-common
-                        [optionValue]="'value'"
-                        [optionLabel]="'name'"
-                        [options]="phuongThucThanhToanLst"
-                        [isOptionSelectType]="false"
-                        [selectedOptionValue]="donhang.phuongThucThanhToan"
-                        (selectionChange)="onHinhThucThanhToanChange($event)"
-                      ></app-select-common>
+                      <label class="col-form-label" for="tenKhachHangMoi">Tên khách hàng mới</label>
+                      <input type="text" name="tenKhachHangMoi" class="form-control" id="tenKhachHangMoi"
+                        placeholder="Nhập tên khách hàng mới" [(ngModel)]="donhang.tenKhachHang" />
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="col-form-label" for="diaChi"
-                        >Ngày mua
+                      <label class="col-form-label" for="soDienThoai">Số điện thoại</label>
+                      <input type="text" name="soDienThoai" class="form-control" id="soDienThoai"
+                        placeholder="Nhập số điện thoại" [(ngModel)]="donhang.soDienThoai" />
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="col-form-label" for="tenNhaCungCap">Hình thức thanh toán
+                        <span class="text-danger">*</span></label>
+                      <app-select-common [optionValue]="'value'" [optionLabel]="'name'"
+                        [options]="phuongThucThanhToanLst" [isOptionSelectType]="false"
+                        [selectedOptionValue]="donhang.phuongThucThanhToan"
+                        (selectionChange)="onHinhThucThanhToanChange($event)"></app-select-common>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="col-form-label" for="diaChi">Ngày mua
                       </label>
-                      <input
-                        type="date"
-                        name="diaChi"
-                        class="form-control"
-                        id="diaChi"
-                        #diaChi="ngModel"
-                        placeholder="Nhập địa chỉ nhà cung cấp"
-                        [(ngModel)]="donhang.createdAt"
-                      />
+                      <input type="date" name="diaChi" class="form-control" id="diaChi" #diaChi="ngModel"
+                        placeholder="Nhập địa chỉ nhà cung cấp" [(ngModel)]="donhang.createdAt" />
                     </div>
                   </div>
                 </div>
@@ -132,24 +106,14 @@
                   </div>
                 </div>
 
-                <div
-                  class="row align-items-center"
-                  *ngFor="let item of chiTietDonHangLst; let index = index"
-                >
+                <div class="row align-items-center" *ngFor="let item of chiTietDonHangLst; let index = index">
                   <div class="col-lg-3">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input">
                         Thuốc
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Tên thuốc"
-                        name="nguongCanhBao"
-                        [value]="item.thuoc?.tenThuoc"
-                        disabled
-                      />
+                      <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Tên thuốc"
+                        name="nguongCanhBao" [value]="item.thuoc?.tenThuoc" disabled />
                     </div>
                   </div>
 
@@ -158,15 +122,8 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Số lượng
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập số lượng"
-                        [(ngModel)]="item.soLuong"
-                        [value]="item.soLuong"
-                        name="soLuong-{{ item.id }}"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Nhập số lượng"
+                        [(ngModel)]="item.soLuong" [value]="item.soLuong" name="soLuong-{{ item.id }}" />
                     </div>
                   </div>
 
@@ -175,14 +132,8 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Đơn giá
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        disabled
-                        [value]="item.thuoc?.giaBan"
-                        name="donGia-{{ item.id }}"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-brand-input" disabled
+                        [value]="item.thuoc?.giaBan" name="donGia-{{ item.id }}" />
                     </div>
                   </div>
 
@@ -191,23 +142,14 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Tổng
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        [value]="
+                      <input type="text" class="form-control" id="manufacturer-brand-input" [value]="
                           (item.thuoc?.giaBan || 0) * (item.soLuong || 0)
-                        "
-                        disabled
-                      />
+                        " disabled />
                     </div>
                   </div>
                   <div class="col-lg-1 d-flex justify-content-end">
-                    <i
-                      class="ri-delete-bin-line text-danger cursor-pointer"
-                      style="font-size: 2rem"
-                      (click)="deleteThuoc(index)"
-                    ></i>
+                    <i class="ri-delete-bin-line text-danger cursor-pointer" style="font-size: 2rem"
+                      (click)="deleteThuoc(index)"></i>
                   </div>
                 </div>
 
@@ -255,13 +197,8 @@
                           style, featuring preppy with a twist designs.
                         </p> -->
                         <ul class="list-unstyled">
-                          <li
-                            class="py-1"
-                            *ngFor="let item of listTuongTacThuoc"
-                          >
-                            <i
-                              class="mdi mdi-circle-medium me-1 text-muted align-middle"
-                            >
+                          <li class="py-1" *ngFor="let item of listTuongTacThuoc">
+                            <i class="mdi mdi-circle-medium me-1 text-muted align-middle">
                               Thuốc {{ item.thuoc1?.tenThuoc }} có
                               {{ item.hoatChat1 }} và Thuốc
                               {{ item.thuoc2?.tenThuoc }} có
