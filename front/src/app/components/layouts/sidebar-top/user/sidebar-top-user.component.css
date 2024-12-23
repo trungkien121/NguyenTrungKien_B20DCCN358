@@ -19,13 +19,13 @@
 }
 
 .view-all-button {
-  background: none;
-  color: #007bff;
+  background: none; /* Loại bỏ nền của nút */
+  color: #007bff; /* Màu chữ xanh */
   border: none;
   font-size: 1rem;
   cursor: pointer;
   transition: color 0.3s ease;
-  /* flex-wrap: nowrap; */
+  flex-wrap: nowrap;
 }
 
 .view-all-button:hover {
