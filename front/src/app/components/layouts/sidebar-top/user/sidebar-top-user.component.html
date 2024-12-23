@@ -3,25 +3,49 @@
     <ul class="navbar-nav" id="navbar-nav">
       <li class="menu-title"><span>Menu</span></li>
       <!-- Lặp qua danh sách danh mục -->
-      <li class="nav-item position-relative" *ngFor="let item of loaiThuocLst | slice:0:4" (mouseenter)="onMouseEnter(item)" (mouseleave)="onMouseLeave()">
+      <li
+        class="nav-item position-relative"
+        *ngFor="let item of loaiThuocLst | slice : 0 : 4"
+        (mouseenter)="onMouseEnter(item)"
+        (mouseleave)="onMouseLeave()"
+      >
         <a class="nav-link menu-link">
           <span>{{ item.tenLoai }}</span>
         </a>
-      
-        <div class="popup-large" *ngIf="selectedItem === item">
-          <div class="view-all-btn">
-            <h4>Bán chạy nhất |</h4>
-            <button (click)="showAllItems(item)" class="view-all-button">Xem tất cả ></button>
-          </div>          
-          
-          <div class="items-container">
-            <!-- Hiển thị tối đa 4 item -->
-            <div class="item-card" *ngFor="let thuoc of item.dsThuoc | slice:0:4" (click)="showDetail(thuoc)">
-              <img [src]="thuoc.avatar" alt="Hình ảnh thuốc" class="item-image" />
-              <div class="item-info">
-                <h5 class="item-name">{{ thuoc.tenThuoc }}</h5>
-                <p class="item-price">{{ thuoc.giaBan | number : "1.0-0"  }}đ / {{thuoc.donVi}}</p>
-              </div>
+        <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
+          <div class="row">
+            <div class="col-lg-4">
+              <ul class="nav nav-sm flex-column">
+                <div class="d-flex">
+                  <h4 class="fw-semibold" style="min-width: 40px">
+                    Bán chạy nhất |
+                  </h4>
+                  <button class="btn btn-success" (click)="showAllItems(item)">
+                    Xem tất cả >
+                  </button>
+                </div>
+
+                <div class="items-container d-flex">
+                  <div
+                    class="item-card"
+                    *ngFor="let thuoc of item.dsThuoc | slice : 0 : 4"
+                    (click)="showDetail(thuoc)"
+                  >
+                    <img
+                      [src]="thuoc.avatar"
+                      alt="Hình ảnh thuốc"
+                      class="item-image"
+                    />
+                    <div class="item-info">
+                      <h5 class="item-name">{{ thuoc.tenThuoc }}</h5>
+                      <p class="item-price">
+                        {{ thuoc.giaBan | number : "1.0-0" }}đ /
+                        {{ thuoc.donVi }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ul>
             </div>
           </div>
         </div>

@@ -1,37 +1,36 @@
 .active-link {
-    color: #fff;
-    font-weight: 800;
+  color: #fff;
+  font-weight: 800;
 }
 
-
-.view-all-btn {
-  display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử ngang hàng */
+/* .view-all-btn {
+  display: flex;
   justify-content: flex-start;
-  align-items: center; /* Căn giữa theo chiều dọc */
+  align-items: center; 
   margin-bottom: 10px;
   margin-left: 25px;
   width: 100%;
-}
+} */
 
 .view-all-btn h4 {
-  margin: 0; /* Loại bỏ margin mặc định */
-  font-size: 20px; /* Kích thước chữ */
-  font-weight: bold; /* In đậm chữ */
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .view-all-button {
-  background: none; /* Loại bỏ nền của nút */
-  color: #007bff; /* Màu chữ xanh */
-  border: none; /* Loại bỏ viền của nút */
-  font-size: 1rem; /* Kích thước chữ của nút */
+  background: none;
+  color: #007bff;
+  border: none;
+  font-size: 1rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  /* flex-wrap: nowrap; */
 }
 
 .view-all-button:hover {
   color: #0056b3; /* Đổi màu chữ khi hover */
 }
-
 
 .nav-item {
   position: relative;
@@ -57,75 +56,72 @@
   line-height: 1.2; /* Đảm bảo khoảng cách dòng cố định */
 }
 
-  
+.popup-large {
+  max-width: 90%;
+  max-height: 80vh;
 
-  
-  .popup-large {
-    max-width: 90%;
-    max-height: 80vh;
-   
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .items-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Khoảng cách giữa các thẻ */
-    justify-content: center; /* Căn giữa các item */
-  }
-  
-  .item-card {
-    width: calc(25% - 16px); /* Tối đa 5 item mỗi hàng */
-    min-width: 150px; /* Kích thước tối thiểu cho màn hình nhỏ */
-    max-width: 300px; /* Kích thước tối đa để đồng nhất */
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .item-card:hover {
-    transform: translateY(-6px); /* Hiệu ứng hover nổi nhẹ */
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-  }
-  
-  .item-image {
-    width: 100%;
-    height: 120px;
-    object-fit: cover; /* Giữ hình ảnh vừa khung */
-    border-bottom: 1px solid #eee;
-  }
-  
-  .item-info {
-    padding: 10px;
-  }
-  
-  .item-name {
-    font-size: 1rem; /* Tăng kích thước chữ để dễ đọc */
-    font-weight: bold;
-    color: #333;
-    line-height: 1.4; /* Khoảng cách giữa các dòng */
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Cắt chữ nếu dài */
-    white-space: normal; /* Cho phép xuống dòng */
-    margin-bottom: 6px;
-  }
-  
-  .item-price {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #007bff;
-  }
-  
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center; 
+} */
+
+.item-card {
+  width: calc(25% - 16px); /* Tối đa 5 item mỗi hàng */
+  min-width: 150px; /* Kích thước tối thiểu cho màn hình nhỏ */
+  max-width: 300px; /* Kích thước tối đa để đồng nhất */
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 5px;
+}
+
+.item-card:hover {
+  transform: translateY(-6px); /* Hiệu ứng hover nổi nhẹ */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* Giữ hình ảnh vừa khung */
+  border-bottom: 1px solid #eee;
+}
+
+.item-info {
+  padding: 10px;
+}
+
+.item-name {
+  font-size: 1rem; /* Tăng kích thước chữ để dễ đọc */
+  font-weight: bold;
+  color: #333;
+  line-height: 1.4; /* Khoảng cách giữa các dòng */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Cắt chữ nếu dài */
+  white-space: normal; /* Cho phép xuống dòng */
+  margin-bottom: 6px;
+}
+
+.item-price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #007bff;
+}
