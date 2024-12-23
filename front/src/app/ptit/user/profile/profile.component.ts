@@ -60,20 +60,6 @@ export class ProfileComponent implements OnInit {
   }
 
   async updateUser() {
-    if (this.imageUrl) {
-      this.nguoidungService.changeAvatar(this.userUpdate).subscribe((res) => {
-        if (res.status == CommonConstant.STATUS_OK_200) {
-          this.toastService.success("Update succuess!");
-
-          // Cập nhật lại userInfo trong localStorage
-          localStorage.setItem("userInfo", JSON.stringify(this.userUpdate));
-
-          window.location.reload();
-        } else {
-          this.toastService.error("Update error!");
-        }
-      });
-    }
     this.nguoidungService.update(this.userUpdate).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.toastService.success("Update succuess!");
@@ -155,6 +141,26 @@ export class ProfileComponent implements OnInit {
 
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result; // Cập nhật đường dẫn hình ảnh
+
+        if (this.imageUrl) {
+          this.nguoidungService
+            .changeAvatar(this.userUpdate)
+            .subscribe((res) => {
+              if (res.status == CommonConstant.STATUS_OK_200) {
+                // this.toastService.success("Update succuess!");
+
+                // Cập nhật lại userInfo trong localStorage
+                localStorage.setItem(
+                  "userInfo",
+                  JSON.stringify(this.userUpdate)
+                );
+
+                // window.location.reload();
+              } else {
+                this.toastService.error("Update error!");
+              }
+            });
+        }
       };
 
       reader.readAsDataURL(file); // Đọc tệp hình ảnh
