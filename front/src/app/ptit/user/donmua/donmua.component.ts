@@ -180,10 +180,11 @@ export class DonMuaComponent implements OnInit {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
         this.userUpdate = resp.data;
+
+        this.userInfo = resp.data;
       }
     }
   }
-
   getData() {
     this.donhangService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {

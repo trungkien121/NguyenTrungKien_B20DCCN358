@@ -76,17 +76,12 @@ export class ThongBaoComponent implements OnInit {
     const _token = Cookie.get(AuthConstant.ACCESS_TOKEN_KEY);
 
     const userInfo = jwtDecode(_token) as NguoiDung;
-    console.log("Thông tin token:", userInfo.id);
     if (userInfo.id) {
       const resp = await lastValueFrom(this.nguoidungService.get(userInfo.id));
       if (resp.status == CommonConstant.STATUS_OK_200) {
+        this.userUpdate = resp.data;
+
         this.userInfo = resp.data;
-
-        this.roleUser = this.userInfo.nhomQuyens ?? [];
-
-        this.isAdmin = this.hasRole(AuthConstant.ROLE_ADMIN.toString());
-        if (this.userInfo.id) {
-        }
       }
     }
   }
