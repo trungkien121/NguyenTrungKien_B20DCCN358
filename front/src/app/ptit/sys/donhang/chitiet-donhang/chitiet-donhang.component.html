@@ -409,7 +409,9 @@
                       />
                     </div>
                     <div class="flex-grow-1 ms-3">
-                      <h6 class="fs-14 mb-1">{{ donhang.khachHang?.hoTen }}</h6>
+                      <h6 class="fs-14 mb-1">
+                        {{ donhang.khachHang?.hoTen || donhang.tenKhachHang }}
+                      </h6>
                       <p class="text-muted mb-0">Khách hàng</p>
                     </div>
                   </div>
@@ -424,7 +426,7 @@
                   <i
                     class="ri-phone-line me-2 align-middle text-muted fs-16"
                   ></i
-                  >{{ donhang.khachHang?.soDienThoai }}
+                  >{{ donhang.khachHang?.soDienThoai || donhang.soDienThoai }}
                 </li>
               </ul>
             </div>
@@ -439,8 +441,10 @@
             </div>
             <div class="card-body">
               <ul class="list-unstyled vstack gap-2 fs-13 mb-0">
-                <li class="fw-medium fs-14">{{ donhang.tenKhachHang }}</li>
-                <li>{{ donhang.soDienThoai }}</li>
+                <li class="fw-medium fs-14">
+                  <!-- {{ donhang.tenKhachHang }} -->
+                </li>
+                <!-- <li>{{ donhang.soDienThoai }}</li> -->
                 <li>{{ donhang.diaChi }}</li>
               </ul>
             </div>

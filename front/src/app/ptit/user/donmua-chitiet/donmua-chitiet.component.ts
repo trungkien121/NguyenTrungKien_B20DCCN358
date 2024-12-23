@@ -9,6 +9,9 @@ import { DonhangService } from "src/app/_service/donhang.service";
 import { SearchModel } from "src/app/_model/common/Search";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { ConfirmationService, MessageService } from "primeng/api";
+import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
+import { GioHangService } from "src/app/_service/giohang.service";
+import { NguoiDung } from "src/app/_model/auth/nguoidung";
 
 @Component({
   selector: "app-donmua-chitiet",
@@ -28,6 +31,9 @@ export class DonMuaChiTietComponent implements OnInit {
     sortedField: "",
   };
 
+  gioHangLst: GioHangChiTiet[] = [];
+  gioHangId: number = 0;
+
   statusOptions: any = {
     name: "",
     value: true,
@@ -36,14 +42,20 @@ export class DonMuaChiTietComponent implements OnInit {
   displayDialog: boolean = false;
 
   tongTien: number = 0;
+  userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
 
   constructor(
     private donHangService: DonhangService,
     private toastService: ToastrService,
     private route: ActivatedRoute,
+    private gioHangService: GioHangService,
+
     private router: Router
   ) {}
 
+  showDetail(thuoc: any) {
+    this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
+  }
   handleCancel(displayDialog: boolean) {
     this.displayDialog = displayDialog;
     // this.courseNew = {};
@@ -126,5 +138,24 @@ export class DonMuaChiTietComponent implements OnInit {
     ];
   }
 
-  search() {}
+  clearCart() {
+    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        if (res.data.chiTietGioHangs.length > 0) {
+          this.gioHangId = res.data.id;
+          this.gioHangLst = res.data.chiTietGioHangs;
+
+          this.gioHangLst.forEach((item: GioHangChiTiet) => {
+            this.gioHangService.deleteGH(item.id).subscribe((resp) => {
+              if (resp.status == CommonConstant.STATUS_OK_200) {
+                this.toastService.success("Xóa giỏ hàng thành công");
+              } else {
+                this.toastService.error("Xóa giỏ hàng thất bại");
+              }
+            });
+          });
+        }
+      }
+    });
+  }
 }

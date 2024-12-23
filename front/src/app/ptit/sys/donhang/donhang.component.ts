@@ -48,7 +48,7 @@ export class DonHangComponent implements OnInit {
   getData() {
     this.donhangService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.donhangLst = res.data.data;
+        this.donhangLst = res.data.data.reverse();
         this.totalRow = res.data.totalElements;
       }
     });

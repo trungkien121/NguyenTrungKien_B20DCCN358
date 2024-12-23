@@ -1,14 +1,10 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { jwtDecode } from "jwt-decode";
 import { Cookie } from "ng2-cookies";
 import { ToastrService } from "ngx-toastr";
-import {
-  ConfirmationService,
-  ConfirmEventType,
-  MessageService,
-} from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
 import { lastValueFrom } from "rxjs";
 import { AuthConstant } from "src/app/_constant/auth.constant";
 import { CommonConstant } from "src/app/_constant/common.constants";
@@ -17,12 +13,10 @@ import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant"
 import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { ChiTietDonHang } from "src/app/_model/chitietdonhang";
-import { ChiTietPhieuNhap } from "src/app/_model/chitietphieunhap";
 import { OptionSelect } from "src/app/_model/common/Option";
 import { SearchModel } from "src/app/_model/common/Search";
 import { DonHang } from "src/app/_model/hoadon";
 import { NhaCungCap } from "src/app/_model/ncc";
-import { PhieuNhap } from "src/app/_model/phieunhap";
 import { Thuoc } from "src/app/_model/thuoc";
 import { TuongTacThuoc } from "src/app/_model/tuongTacThuoc";
 import { NguoidungService } from "src/app/_service/auth/nguoidung.service";
@@ -44,11 +38,7 @@ export class DonHangCreateComponent implements OnInit {
     private donhangService: DonhangService,
     private tuongTacThuocService: TuongTacThuocService,
     private toastService: ToastrService,
-    private router: Router,
-    private nccService: NCCService,
-    private route: ActivatedRoute,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private router: Router
   ) {}
   nguoidungHoten: string = "";
 

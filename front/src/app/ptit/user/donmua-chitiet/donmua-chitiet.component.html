@@ -47,7 +47,8 @@
                       <td>
                         <div class="d-flex">
                           <div
-                            class="flex-shrink-0 avatar-md bg-light rounded p-1"
+                            (click)="showDetail(item.thuoc)"
+                            class="flex-shrink-0 avatar-md bg-light rounded p-1 cursor-pointer"
                           >
                             <img
                               [src]="item.thuoc?.avatar"

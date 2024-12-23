@@ -13,7 +13,6 @@ import { jwtDecode } from "jwt-decode";
 import { lastValueFrom } from "rxjs";
 import { DonHang } from "src/app/_model/hoadon";
 import { ChiTietDonHang } from "src/app/_model/chitietdonhang";
-import { Thuoc } from "src/app/_model/thuoc";
 import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
 import { TrangThaiGiaoHang } from "src/app/_constant/trangthaigioahang.constant";
 import { DonhangService } from "src/app/_service/donhang.service";
@@ -102,55 +101,61 @@ export class CheckoutComponent implements OnInit {
       this.donhang.chiTietDonHangs?.push(itemNew);
     });
 
-    this.donhangService.create(this.donhang).subscribe((resp) => {
-      if (resp.status == CommonConstant.STATUS_OK_200) {
-        // this.toastService.success("Lưu thành công");
-        console.log(
-          "dara",
-          this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN
-        );
+    if (this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN) {
+      this.vnPayService.create(this.tongTien).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          const url = resp.data;
+          localStorage.setItem("pendingOrder", JSON.stringify(this.donhang));
 
-        //if success, delete cart
-        this.gioHangLst.forEach((item: GioHangChiTiet) => {
-          this.gioHangService.deleteGH(item.id).subscribe((resp) => {
-            if (resp.status == CommonConstant.STATUS_OK_200) {
-              // this.toastService.success("Xóa thành công");
-              this.getGH();
-              this.router.navigate(["/user/donmua"]);
-            } else {
-              this.toastService.error("Xóa thất bại");
-            }
-          });
-        });
-
-        if (
-          this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN
-        ) {
-          console.log("hehe");
-          this.vnPayService.create(this.tongTien).subscribe((resp) => {
-            if (resp.status == CommonConstant.STATUS_OK_200) {
-              this.toastService.success("Lưu thành công");
-              // this.router.navigate(["/sys/product"]);
-              window.location.href = resp.data;
-            } else if (resp.status == CommonConstant.STATUS_OK_409) {
-              this.toastService.error(resp.msg);
-            } else {
-              this.toastService.error("Lưu thất bại");
-            }
-          });
+          window.location.href = url;
+          // const paymentStatus = params["paymentStatus"];
+          // if (url) {
+          //   this.donhangService.create(this.donhang).subscribe((resp) => {
+          //     if (resp.status == CommonConstant.STATUS_OK_200) {
+          //       this.toastService.success("Lưu thành công");
+          //       //if success, delete cart
+          //       this.gioHangLst.forEach((item: GioHangChiTiet) => {
+          //         this.gioHangService.deleteGH(item.id).subscribe((resp) => {
+          //           if (resp.status == CommonConstant.STATUS_OK_200) {
+          //             // this.toastService.success("Xóa thành công");
+          //             this.getGH();
+          //             this.router.navigate(["/user/donmua"]);
+          //           } else {
+          //             this.toastService.error("Xóa thất bại");
+          //           }
+          //         });
+          //       });
+          //     } else {
+          //       this.toastService.error("Lưu thất bại");
+          //     }
+          //   });
+          // }
+        } else if (resp.status == CommonConstant.STATUS_OK_409) {
+          this.toastService.error(resp.msg);
+        } else {
+          this.toastService.error("Lưu thất bại");
         }
-
-        //rediret hóa đơn
-
-        //delete cart
-
-        //add thông báo
-        // this.addThongBao();
-        // this.getData();
-      } else {
-        this.toastService.error("Lưu thất bại");
-      }
-    });
+      });
+    } else {
+      this.donhangService.create(this.donhang).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          this.toastService.success("Lưu thành công");
+          this.gioHangLst.forEach((item: GioHangChiTiet) => {
+            this.gioHangService.deleteGH(item.id).subscribe((resp) => {
+              if (resp.status == CommonConstant.STATUS_OK_200) {
+                // this.toastService.success("Xóa thành công");
+                this.getGH();
+                this.router.navigate(["/user/donmua"]);
+              } else {
+                this.toastService.error("Xóa thất bại");
+              }
+            });
+          });
+        } else {
+          this.toastService.error("Lưu thất bại");
+        }
+      });
+    }
   }
 
   addThongBao() {

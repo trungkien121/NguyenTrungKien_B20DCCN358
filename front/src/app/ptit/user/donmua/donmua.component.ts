@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { NguoiDung } from "src/app/_model/auth/nguoidung";
 import { ToastrService } from "ngx-toastr";
@@ -22,6 +22,9 @@ import { DonHang } from "src/app/_model/hoadon";
 import { DanhGia } from "src/app/_model/danhgia";
 import { DanhgiaService } from "src/app/_service/danhgia.service";
 import { TrangThaiThanhToan } from "src/app/_constant/trangthaithanhtoan.constant";
+import { Thuoc } from "src/app/_model/thuoc";
+import { GioHangService } from "src/app/_service/giohang.service";
+import { GioHangChiTiet } from "src/app/_model/giohangchitiet";
 
 @Component({
   selector: "app-mua",
@@ -39,6 +42,8 @@ export class DonMuaComponent implements OnInit {
     private messageService: MessageService,
     private donhangService: DonhangService,
     private danhgiaService: DanhgiaService,
+    private route: ActivatedRoute,
+    private gioHangService: GioHangService,
 
     private toastService: ToastrService
   ) {}
@@ -53,6 +58,10 @@ export class DonMuaComponent implements OnInit {
     diemSo: 5,
   };
 
+  userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+  gioHangLst: GioHangChiTiet[] = [];
+  gioHangId: number = 0;
+
   totalRow: number = 0;
 
   modelSearch: SearchModel = {
@@ -64,6 +73,9 @@ export class DonMuaComponent implements OnInit {
   };
 
   tab: number = 0;
+  showDetail(thuoc: any) {
+    this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
+  }
 
   danhGiaDH() {
     this.danhGia.nguoiDungId = this.user.id;
@@ -112,9 +124,52 @@ export class DonMuaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      const paymentStatus = params["paymentStatus"];
+      const pendingOrder = localStorage.getItem("pendingOrder");
+
+      if (paymentStatus == "success") {
+        // Gọi API lưu đơn hàng
+        this.donhangService.create(pendingOrder).subscribe((resp) => {
+          if (resp.status == CommonConstant.STATUS_OK_200) {
+            this.toastService.success("Lưu đơn hàng thành công");
+            // Xóa giỏ hàng nếu cần
+            this.clearCart();
+            // Điều hướng
+            this.router.navigate(["/user/donmua"]);
+          } else {
+            this.toastService.error("Lưu đơn hàng thất bại");
+          }
+        });
+      } else {
+        // this.toastService.error("Thanh toán không thành công");
+      }
+    });
+
     this.getUserInfo();
 
     this.getData();
+  }
+
+  clearCart() {
+    this.gioHangService.getGH(this.userInfo.id).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        if (res.data.chiTietGioHangs.length > 0) {
+          this.gioHangId = res.data.id;
+          this.gioHangLst = res.data.chiTietGioHangs;
+
+          this.gioHangLst.forEach((item: GioHangChiTiet) => {
+            this.gioHangService.deleteGH(item.id).subscribe((resp) => {
+              if (resp.status == CommonConstant.STATUS_OK_200) {
+                // this.toastService.success("Xóa giỏ hàng thành công");
+              } else {
+                this.toastService.error("Xóa giỏ hàng thất bại");
+              }
+            });
+          });
+        }
+      }
+    });
   }
 
   async getUserInfo(): Promise<void> {
@@ -132,7 +187,7 @@ export class DonMuaComponent implements OnInit {
   getData() {
     this.donhangService.getLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
-        this.donhangLst = res.data.data;
+        this.donhangLst = res.data.data.reverse();
         this.totalRow = res.data.totalElements;
         // console.log(this.donhangLst.length);
       }
