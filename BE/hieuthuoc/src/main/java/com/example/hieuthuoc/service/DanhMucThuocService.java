@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,8 @@ import com.example.hieuthuoc.repository.DanhMucThuocRepo;
 
 public interface DanhMucThuocService {
 	ResponseDTO<List<DanhMucThuoc>> getAll();
+
+	ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(String tenDanhMuc);
 
 	ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO);
 
@@ -32,13 +37,25 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
+	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMuc'")
 	public ResponseDTO<List<DanhMucThuoc>> getAll() {
 		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findAll();
 		return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
 	}
 
 	@Override
+	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc'")
+	public ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(String tenDanhMuc) {
+		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findByTenDanhMuc(tenDanhMuc);
+		if (danhMucThuocs != null && !danhMucThuocs.isEmpty()) {
+			return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
+		}
+		return ResponseDTO.<List<DanhMucThuoc>>builder().status(409).msg("Danh mục thuốc không tồn tại").build();
+	}
+
+	@Override
 	@Transactional
+	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
 	public ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO) {
 		DanhMucThuoc danhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
 		if (danhMucThuocRepo.existsByTenDanhMuc(danhMucThuoc.getTenDanhMuc())) {
@@ -51,6 +68,7 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 
 	@Override
 	@Transactional
+	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
 	public ResponseDTO<DanhMucThuoc> update(DanhMucThuocDTO danhMucThuocDTO) {
 		Optional<DanhMucThuoc> existingDanhMucThuoc = danhMucThuocRepo.findById(danhMucThuocDTO.getId());
 		if (existingDanhMucThuoc.isPresent()) {
@@ -64,8 +82,13 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = "danhMucThuocCache", key = "#id")
 	public ResponseDTO<Void> delete(Integer id) {
+		if (!danhMucThuocRepo.existsById(id)) {
+			return ResponseDTO.<Void>builder().status(404).msg("Không tìm thấy danh mục thuốc để xóa").build();
+		}
 		danhMucThuocRepo.deleteById(id);
-		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+		return ResponseDTO.<Void>builder().status(200).msg("Xóa danh mục thuốc thành công").build();
 	}
+
 }

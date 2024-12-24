@@ -29,6 +29,13 @@ public class LoaiThuocController {
 		return loaiThuocService.getAllLoaiThuocs();
 	}
 
+//	Lấy danh mục thuốc theo tên
+	@GetMapping("/get_by_ten_loai")
+	public ResponseDTO<List<LoaiThuoc>> getByTenDanhMuc(@RequestParam("tenLoai") String tenLoai) {
+		return loaiThuocService.getByTenLoai(tenLoai);
+
+	}
+	
 	// Tạo mới loại thuốc
 	@PostMapping("create")
 	public ResponseDTO<LoaiThuoc> create(@RequestBody LoaiThuocDTO loaiThuocDTO) {

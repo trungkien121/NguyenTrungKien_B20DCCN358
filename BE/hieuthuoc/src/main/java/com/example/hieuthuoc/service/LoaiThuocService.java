@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +17,8 @@ import com.example.hieuthuoc.repository.LoaiThuocRepo;
 
 public interface LoaiThuocService {
 	ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs();
+
+	ResponseDTO<List<LoaiThuoc>> getByTenLoai(String tenLoai);
 
 	ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO);
 
@@ -31,38 +36,57 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
+	@Cacheable(value = "loaiThuocCache", key = "'allLoaiThuoc'")
 	public ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs() {
-		return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocRepo.findAll())
-				.build();
+		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.findAll();
+		return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocs).build();
+	}
+
+	@Override
+	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc' + #tenLoai")
+	public ResponseDTO<List<LoaiThuoc>> getByTenLoai(String tenLoai) {
+		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.findByTenLoai(tenLoai);
+		if (loaiThuocs != null && !loaiThuocs.isEmpty()) {
+			return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocs).build();
+		}
+		return ResponseDTO.<List<LoaiThuoc>>builder().status(409).msg("Danh mục thuốc không tồn tại").build();
 	}
 
 	@Override
 	@Transactional
+	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
 	public ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO) {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		if (loaiThuocRepo.existsByTenLoai(loaiThuoc.getTenLoai())) {
 			return ResponseDTO.<LoaiThuoc>builder().status(409).msg("Loại thuốc đã tồn tại").build();
-		}	
-		return ResponseDTO.<LoaiThuoc>builder().status(201).msg("Thành công").data(loaiThuocRepo.save(loaiThuoc))
+		}
+		LoaiThuoc savedLoaiThuoc = loaiThuocRepo.save(loaiThuoc);
+		return ResponseDTO.<LoaiThuoc>builder().status(201).msg("Tạo loại thuốc thành công").data(savedLoaiThuoc)
 				.build();
 	}
 
 	@Override
 	@Transactional
+	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
 	public ResponseDTO<LoaiThuoc> update(LoaiThuocDTO loaiThuocDTO) {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
 		if (currentLoaiThuoc != null) {
-			return ResponseDTO.<LoaiThuoc>builder().status(200).msg("Thành công").data(loaiThuocRepo.save(loaiThuoc))
-					.build();
+			LoaiThuoc updatedLoaiThuoc = loaiThuocRepo.save(loaiThuoc);
+			return ResponseDTO.<LoaiThuoc>builder().status(200).msg("Cập nhật loại thuốc thành công")
+					.data(updatedLoaiThuoc).build();
 		}
 		return ResponseDTO.<LoaiThuoc>builder().status(404).msg("Không tìm thấy loại thuốc").build();
 	}
 
 	@Override
 	@Transactional
+	@CacheEvict(value = "loaiThuocCache", key = "#id")
 	public ResponseDTO<Void> delete(Integer id) {
+		if (!loaiThuocRepo.existsById(id)) {
+			return ResponseDTO.<Void>builder().status(404).msg("Không tìm thấy loại thuốc để xóa").build();
+		}
 		loaiThuocRepo.deleteById(id);
-		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
+		return ResponseDTO.<Void>builder().status(200).msg("Xóa loại thuốc thành công").build();
 	}
 }

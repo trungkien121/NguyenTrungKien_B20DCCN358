@@ -1,14 +1,21 @@
 package com.example.hieuthuoc.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.hieuthuoc.dto.DanhMucThuocDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.entity.DanhMucThuoc;
 import com.example.hieuthuoc.service.DanhMucThuocService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/danhmucthuoc")
@@ -19,9 +26,16 @@ public class DanhMucThuocController {
 
 //	Lấy tất cả danh mục thuốc
 	@GetMapping("/list")
-	public ResponseEntity<ResponseDTO<List<DanhMucThuoc>>> getAll() {
-		ResponseDTO<List<DanhMucThuoc>> response = danhMucThuocService.getAll();
-		return ResponseEntity.status(response.getStatus()).body(response);
+	public ResponseDTO<List<DanhMucThuoc>> getAll() {
+		return danhMucThuocService.getAll();
+
+	}
+	
+//	Lấy danh mục thuốc theo tên
+	@GetMapping("/get_by_ten_danh_muc")
+	public ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(@RequestParam("tenDanhMuc") String tenDanhMuc) {
+		return danhMucThuocService.getByTenDanhMuc(tenDanhMuc);
+
 	}
 
 //	Tạo danh mục thuốc mới
