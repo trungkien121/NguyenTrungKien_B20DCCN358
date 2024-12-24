@@ -29,6 +29,12 @@ public class NhaSanXuatController {
     public ResponseDTO<List<NhaSanXuat>> getAll() {
         return nhaSanXuatService.getAll();
     }
+    
+	@GetMapping("/search_by_ten_nha_san_xuat")
+	public ResponseDTO<List<NhaSanXuat>> searchByTenNhaSanXuat(@RequestParam("tenNhaSanXuat") String tenNhaSanXuat) {
+		return nhaSanXuatService.searchByTenNhaSanXuat(tenNhaSanXuat);
+	}
+
 
     // Tạo mới nhà sản xuất
     @PostMapping("/create")

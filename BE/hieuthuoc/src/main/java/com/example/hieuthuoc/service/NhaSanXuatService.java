@@ -15,6 +15,8 @@ import com.example.hieuthuoc.repository.NhaSanXuatRepo;
 
 public interface NhaSanXuatService {
     ResponseDTO<List<NhaSanXuat>> getAll();
+    
+    ResponseDTO<List<NhaSanXuat>> searchByTenNhaSanXuat(String tenNhaSanXuat);
 
     ResponseDTO<NhaSanXuat> create(NhaSanXuatDTO nhaSanXuatDTO);
 
@@ -36,6 +38,16 @@ class NhaSanXuatServiceImpl implements NhaSanXuatService {
         List<NhaSanXuat> nhaSanXuats = nhaSanXuatRepo.findAll();
         return ResponseDTO.<List<NhaSanXuat>>builder().status(200).msg("Thành công").data(nhaSanXuats).build();
     }
+    
+
+	@Override
+	public ResponseDTO<List<NhaSanXuat>> searchByTenNhaSanXuat(String tenNhaSanXuat) {
+		List<NhaSanXuat> nhaSanXuats = nhaSanXuatRepo.searchByTenNhaSanXuat(tenNhaSanXuat);
+		if (nhaSanXuats != null && !nhaSanXuats.isEmpty()) {
+			return ResponseDTO.<List<NhaSanXuat>>builder().status(200).msg("Thành công").data(nhaSanXuats).build();
+		}
+		return ResponseDTO.<List<NhaSanXuat>>builder().status(409).msg("Nhà sản xuất không tồn tại").build();
+	}
 
     @Override
     @Transactional
@@ -65,4 +77,5 @@ class NhaSanXuatServiceImpl implements NhaSanXuatService {
         nhaSanXuatRepo.deleteById(id);
         return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
     }
+
 }

@@ -18,7 +18,7 @@ import com.example.hieuthuoc.repository.LoaiThuocRepo;
 public interface LoaiThuocService {
 	ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs();
 
-	ResponseDTO<List<LoaiThuoc>> getByTenLoai(String tenLoai);
+	ResponseDTO<List<LoaiThuoc>> searchByTenLoai(String tenLoai);
 
 	ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO);
 
@@ -44,8 +44,8 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
 	@Override
 	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc' + #tenLoai")
-	public ResponseDTO<List<LoaiThuoc>> getByTenLoai(String tenLoai) {
-		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.findByTenLoai(tenLoai);
+	public ResponseDTO<List<LoaiThuoc>> searchByTenLoai(String tenLoai) {
+		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.searchByTenLoai(tenLoai);
 		if (loaiThuocs != null && !loaiThuocs.isEmpty()) {
 			return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocs).build();
 		}

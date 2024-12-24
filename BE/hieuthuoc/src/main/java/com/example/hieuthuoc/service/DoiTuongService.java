@@ -14,6 +14,8 @@ import com.example.hieuthuoc.repository.DoiTuongRepo;
 
 public interface DoiTuongService {
 	ResponseDTO<List<DoiTuong>> getAll();
+	
+    ResponseDTO<List<DoiTuong>> searchByTenDoiTuong(String tenDoiTuong);
 
 	ResponseDTO<DoiTuong> create(DoiTuongDTO doiTuongDTO);
 
@@ -34,6 +36,16 @@ class DoiTuongServiceImpl implements DoiTuongService {
 	public ResponseDTO<List<DoiTuong>> getAll() {
 		List<DoiTuong> doiTuongs = doiTuongRepo.findAll();
 		return ResponseDTO.<List<DoiTuong>>builder().status(200).msg("Thanh công").data(doiTuongs).build();
+	}
+
+	@Override
+	public ResponseDTO<List<DoiTuong>> searchByTenDoiTuong(String tenDoiTuong) {
+		List<DoiTuong> doiTuongs = doiTuongRepo.searchByTenDoiTuong(tenDoiTuong);
+		if (doiTuongs != null && !doiTuongs.isEmpty()) {
+			return ResponseDTO.<List<DoiTuong>>builder().status(200).msg("Thành công").data(doiTuongs).build();
+		}
+		return ResponseDTO.<List<DoiTuong>>builder().status(409).msg("Nhà sản xuất không tồn tại").build();
+
 	}
 
 	@Override
@@ -63,4 +75,5 @@ class DoiTuongServiceImpl implements DoiTuongService {
 		doiTuongRepo.deleteById(id);
 		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
 	}
+
 }

@@ -19,7 +19,9 @@ import com.example.hieuthuoc.repository.DanhMucThuocRepo;
 public interface DanhMucThuocService {
 	ResponseDTO<List<DanhMucThuoc>> getAll();
 
-	ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(String tenDanhMuc);
+	ResponseDTO<List<DanhMucThuoc>> getDanhMucAnhLoaiThuoc();
+
+	ResponseDTO<List<DanhMucThuoc>> searchByTenDanhMuc(String tenDanhMuc);
 
 	ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO);
 
@@ -44,9 +46,16 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 	}
 
 	@Override
+	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMucAndLoaiThuoc'")
+	public ResponseDTO<List<DanhMucThuoc>> getDanhMucAnhLoaiThuoc() {
+		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findAllWithLoaiThuocs();
+		return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
+	}
+
+	@Override
 	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc'")
-	public ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(String tenDanhMuc) {
-		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findByTenDanhMuc(tenDanhMuc);
+	public ResponseDTO<List<DanhMucThuoc>> searchByTenDanhMuc(String tenDanhMuc) {
+		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.searchByTenDanhMuc(tenDanhMuc);
 		if (danhMucThuocs != null && !danhMucThuocs.isEmpty()) {
 			return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
 		}

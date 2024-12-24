@@ -14,5 +14,8 @@ public interface DanhMucThuocRepo extends JpaRepository<DanhMucThuoc, Integer> {
 	boolean existsByTenDanhMuc(String tenDanhMuc);
 
 	@Query("SELECT d FROM DanhMucThuoc d WHERE LOWER(d.tenDanhMuc) LIKE LOWER(CONCAT('%', :tenDanhMuc, '%'))")
-	List<DanhMucThuoc> findByTenDanhMuc(@Param("tenDanhMuc") String tenDanhMuc);
+	List<DanhMucThuoc> searchByTenDanhMuc(@Param("tenDanhMuc") String tenDanhMuc);
+
+    @Query("SELECT dm FROM DanhMucThuoc dm JOIN FETCH dm.loaiThuocs")
+    List<DanhMucThuoc> findAllWithLoaiThuocs();
 }

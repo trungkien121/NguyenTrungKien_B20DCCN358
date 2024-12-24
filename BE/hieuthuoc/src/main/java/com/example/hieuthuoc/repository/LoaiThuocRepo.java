@@ -15,6 +15,6 @@ public interface LoaiThuocRepo extends JpaRepository<LoaiThuoc, Integer> {
 	Boolean existsByTenLoai(String tenLoai);
 	
 	@Query("SELECT l FROM LoaiThuoc l WHERE LOWER(l.tenLoai) LIKE LOWER(CONCAT('%', :tenLoai, '%'))")
-	List<LoaiThuoc> findByTenLoai(@Param("tenLoai") String tenLoai);
+	List<LoaiThuoc> searchByTenLoai(@Param("tenLoai") String tenLoai);
 
 }

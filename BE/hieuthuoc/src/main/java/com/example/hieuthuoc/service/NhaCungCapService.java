@@ -16,6 +16,8 @@ import com.example.hieuthuoc.repository.NhaCungCapRepo;
 public interface NhaCungCapService {
 	ResponseDTO<List<NhaCungCap>> getAll();
 
+	ResponseDTO<List<NhaCungCap>> searchByTenNhaCungCap(String tenNhaCungcap);
+
 	ResponseDTO<NhaCungCap> create(NhaCungCapDTO nhaCungCapDTO);
 
 	ResponseDTO<NhaCungCap> update(NhaCungCapDTO nhaCungCapDTO);
@@ -37,6 +39,17 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 		return ResponseDTO.<List<NhaCungCap>>builder().status(200).msg("Thành công").data(nhaCungCaps).build();
 	}
 
+
+	@Override
+	public ResponseDTO<List<NhaCungCap>> searchByTenNhaCungCap(String tenNhaCungcap) {
+		List<NhaCungCap> nhaCungCaps = nhaCungCapRepo.searchByTenNhaCungCap(tenNhaCungcap);
+		if (nhaCungCaps != null && !nhaCungCaps.isEmpty()) {
+			return ResponseDTO.<List<NhaCungCap>>builder().status(200).msg("Thành công").data(nhaCungCaps).build();
+		}
+		return ResponseDTO.<List<NhaCungCap>>builder().status(409).msg("Nhà sản xuất không tồn tại").build();
+
+	}
+	
 	@Override
 	@Transactional
 	public ResponseDTO<NhaCungCap> create(NhaCungCapDTO nhaCungCapDTO) {
@@ -72,4 +85,5 @@ class NhaCungCapServiceImpl implements NhaCungCapService {
 		return ResponseDTO.<Void>builder().status(200).msg("Thành công").build();
 
 	}
+
 }

@@ -30,6 +30,12 @@ public class NhaCungCapController {
 		return nhaCungCapService.getAll();
 	}
 
+	@GetMapping("/search_by_ten_nha_cung_cap")
+	public ResponseDTO<List<NhaCungCap>> searchByTenNhaCungCap(@RequestParam("tenNhaCungCap") String tenNhaCungCap) {
+		return nhaCungCapService.searchByTenNhaCungCap(tenNhaCungCap);
+	}
+
+	
 	// Tạo mới nhà cung cấp
 	@PostMapping("/create")
 	public ResponseDTO<NhaCungCap> create(@RequestBody NhaCungCapDTO nhaCungCapDTO) {
@@ -44,7 +50,7 @@ public class NhaCungCapController {
 
 	// Xóa nhà cung cấp theo ID
 	@DeleteMapping("/delete")
-	public ResponseDTO<Void> delete(@RequestParam Integer id) {
+	public ResponseDTO<Void> delete(@RequestParam("id") Integer id) {
 		return nhaCungCapService.delete(id);
 	}
 }

@@ -31,10 +31,16 @@ public class DanhMucThuocController {
 
 	}
 	
+	@GetMapping("/get_danh_muc_and_loai_thuoc")
+	public ResponseDTO<List<DanhMucThuoc>> getDanhMucAnhLoaiThuoc() {
+		return danhMucThuocService.getDanhMucAnhLoaiThuoc();
+
+	}
+	
 //	Lấy danh mục thuốc theo tên
-	@GetMapping("/get_by_ten_danh_muc")
-	public ResponseDTO<List<DanhMucThuoc>> getByTenDanhMuc(@RequestParam("tenDanhMuc") String tenDanhMuc) {
-		return danhMucThuocService.getByTenDanhMuc(tenDanhMuc);
+	@GetMapping("/search_by_ten_danh_muc")
+	public ResponseDTO<List<DanhMucThuoc>> searchByTenDanhMuc(@RequestParam("tenDanhMuc") String tenDanhMuc) {
+		return danhMucThuocService.searchByTenDanhMuc(tenDanhMuc);
 
 	}
 

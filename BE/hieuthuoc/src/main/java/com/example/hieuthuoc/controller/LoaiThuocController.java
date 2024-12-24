@@ -30,9 +30,9 @@ public class LoaiThuocController {
 	}
 
 //	Lấy danh mục thuốc theo tên
-	@GetMapping("/get_by_ten_loai")
-	public ResponseDTO<List<LoaiThuoc>> getByTenDanhMuc(@RequestParam("tenLoai") String tenLoai) {
-		return loaiThuocService.getByTenLoai(tenLoai);
+	@GetMapping("/search_by_ten_loai")
+	public ResponseDTO<List<LoaiThuoc>> searchByTenLoai(@RequestParam("tenLoai") String tenLoai) {
+		return loaiThuocService.searchByTenLoai(tenLoai);
 
 	}
 	
