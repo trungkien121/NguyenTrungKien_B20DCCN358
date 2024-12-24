@@ -10,19 +10,14 @@
         (mouseleave)="onMouseLeave()"
       >
         <a class="nav-link menu-link">
-          <span>{{ item.tenLoai }}</span>
+          <span button (click)="showAllItems(item)">{{ item.tenLoai }}</span>
         </a>
         <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
           <div class="row">
             <div class="col-lg-4">
               <ul class="nav nav-sm flex-column">
-                <div class="d-flex">
-                  <h4 class="fw-semibold" style="min-width: 140px">
-                    Bán chạy nhất |
-                  </h4>
-                  <button (click)="showAllItems(item)" class="view-all-button">
-                    Xem tất cả >
-                  </button>
+                <div class="d-flex justify-content-sm-start">
+                  <h4 class="bestseller-text">Bán chạy nhất</h4>
                 </div>
 
                 <div class="items-container d-flex">
@@ -44,6 +39,11 @@
                       </p>
                     </div>
                   </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button (click)="showAllItems(item)" class="view-all-button">
+                    Xem tất cả -->
+                  </button>
                 </div>
               </ul>
             </div>

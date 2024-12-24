@@ -32,7 +32,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
 
   loaiThuoc: string = ""; // Biến để lưu tên loại thuốc
   dsThuoc: Thuoc[] = []; // Biến lưu danh sách thuốc theo loại
-
+  // dsThuoc1: Thuoc[]=[];
   selectedItem: DanhMucThuoc | null = null;
 
   gioHangId: number = 0;
@@ -48,6 +48,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     sortedField: "",
     loaiThuoc: "",
     tenDoiTuong: null,
+    tenNSX: null,
   };
 
   totalRows: number = 0;
@@ -145,8 +146,6 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
       donGia: item.giaBan,
     };
 
-    // console.log(gioHang)
-
     this.gioHangService.createGH(gioHang).subscribe((resp) => {
       if (resp.status == CommonConstant.STATUS_OK_200) {
         // this.toastService.success("Lưu thành công");
@@ -161,26 +160,34 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   getDT() {
     this.doiTuongService.getDTLst().subscribe((res) => {
       if (res.status == "200") {
-        this.doiTuong = res.data; // Lưu danh sách thuốc vào biến dsThuoc
+        this.doiTuong = res.data; 
       }
     });
+  }
+
+  getNSX(){
+    this.nsxService.getNSXLst(this.modelSearch).subscribe((res) =>{
+      if (res.status == "200") {
+        this.nhaSanXuat = res.data; 
+      }
+    })
   }
 
   getThuocTuDT(doiTuong : DoiTuong){
     this.modelSearch.tenDoiTuong = doiTuong.tenDoiTuong;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
       if (res.status == "200") {
-        this.dsThuoc = res.data.data; // Lưu danh sách thuốc vào biến dsThuoc
-        console.log(this.dsThuoc);
+        this.dsThuoc = res.data.data; 
       }
     })
   }
 
-  getNSX() {
-    this.nsxService.getNSXLst().subscribe((res) => {
+  getThuocTuNSX(nhaSanXuat: NhaSanXuat) {
+    this.modelSearch.tenNSX = nhaSanXuat.tenNhaSanXuat;
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
       if (res.status == "200") {
-        this.nhaSanXuat = res.data; // Lưu danh sách thuốc vào biến dsThuoc
+        this.dsThuoc = res.data.data; 
       }
-    });
+    })
   }
 }

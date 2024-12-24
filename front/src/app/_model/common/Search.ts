@@ -7,4 +7,5 @@ export class SearchModel {
 
   loaiThuoc?: string;
   tenDoiTuong?: string | null;
+  tenNSX?: string | null;
 }
