@@ -47,8 +47,8 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     size: 100,
     sortedField: "",
     loaiThuoc: "",
-    tenDoiTuong: null,
-    tenNSX: null,
+    tenDoiTuong:null,
+    nhaSanXuat: null,
   };
 
   totalRows: number = 0;
@@ -86,6 +86,8 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
 
   getThuocTheoLoai() {
     this.modelSearch.tenDoiTuong=null;
+    this.modelSearch.nhaSanXuat=null;
+    
     this.modelSearch.loaiThuoc=this.loaiThuoc;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
@@ -183,7 +185,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   }
 
   getThuocTuNSX(nhaSanXuat: NhaSanXuat) {
-    this.modelSearch.tenNSX = nhaSanXuat.tenNhaSanXuat;
+    this.modelSearch.nhaSanXuat = nhaSanXuat.tenNhaSanXuat;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
       if (res.status == "200") {
         this.dsThuoc = res.data.data; 

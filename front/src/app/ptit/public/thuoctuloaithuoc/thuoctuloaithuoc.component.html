@@ -76,7 +76,7 @@
                 <!-- Các đối tượng sử dụng khác -->
                 <label *ngFor="let option of nhaSanXuat">
                   <input type="radio" [value]="option.id" (click)="getThuocTuNSX(option)" [name]="option.id"
-                    [checked]="option.tenNhaSanXuat == this.modelSearch.tenNSX" />
+                    [checked]="option.tenNhaSanXuat == this.modelSearch.nhaSanXuat" />
                   {{ option.tenNhaSanXuat }}
                 </label>
               </div>
