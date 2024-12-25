@@ -20,6 +20,18 @@ export class DoituongService {
     });
   }
 
+  getDTLst2(request?: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/doituong/search_by_ten_doi_tuong`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+    let params = new HttpParams().set("tenDoiTuong", request?.toString() || "");
+
+    return this.http.get(`${apiUrl}`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+
   createDT(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/doituong/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

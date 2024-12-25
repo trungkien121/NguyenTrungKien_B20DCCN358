@@ -11,12 +11,25 @@ import { Observable } from "rxjs";
 export class LoaithuocService {
   constructor(private http: HttpClient) {}
 
-  getLoaiThuocLst(request?: any): Observable<any> {
+  getLoaiThuocLst(id: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/loaithuoc/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
+    // let params = new HttpParams().set("id", id?.toString() || "");
 
     return this.http.get(`${apiUrl}`, {
       headers: headers,
+      // params: params,
+    });
+  }
+
+  getLoaiThuocLst2(model: string): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/loaithuoc/search_by_ten_loai`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+    let params = new HttpParams().set("tenLoai", model?.toString() || "");
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+      params: params,
     });
   }
 

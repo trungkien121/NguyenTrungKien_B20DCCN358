@@ -20,6 +20,19 @@ export class NCCService {
     });
   }
 
+  getNCCLst2(model?: string): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhacungcap/search_by_ten_nha_cung_cap`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+    let params = new HttpParams().set("tenNhaCungCap", model?.toString() || "");
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+      params: params,
+
+    });
+  }
+
+
   createNCC(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/nhacungcap/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

@@ -155,6 +155,7 @@ export class DonHangCreateComponent implements OnInit {
   }
 
   getTuongTacThuocApi() {
+    let data: TuongTacThuoc[] = []
     this.listTuongTacThuoc.forEach((item: TuongTacThuoc) => {
       this.tuongTacThuocService.get(item).subscribe((res) => {
         if (res.status == CommonConstant.STATUS_OK_200) {
@@ -164,10 +165,15 @@ export class DonHangCreateComponent implements OnInit {
           item.coChe = res.data.coChe;
           item.hauQua = res.data.hauQua;
           item.xuTri = res.data.xuTri;
+
+          data.push(item)
         } else if (res.status == CommonConstant.STATUS_OK_404) {
+
         }
       });
     });
+
+    this.listTuongTacThuoc = data;
   }
 
   handleSaveKH(customerSelected: NguoiDung) {

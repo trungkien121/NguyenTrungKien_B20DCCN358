@@ -20,6 +20,18 @@ export class DanhmucThuocService {
     });
   }
 
+  
+  getDMTLst2(request?: string): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/search_by_ten_danh_muc`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+    let params = new HttpParams().set("tenDanhMuc", request?.toString() || "");
+
+    return this.http.get(`${apiUrl}`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
   createDMT(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/danhmucthuoc/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();
