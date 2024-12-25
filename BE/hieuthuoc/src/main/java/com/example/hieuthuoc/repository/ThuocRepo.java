@@ -23,7 +23,7 @@ public interface ThuocRepo extends JpaRepository<Thuoc, Integer> {
 	@Query("SELECT t FROM Thuoc t " +
 		       "LEFT JOIN t.loaiThuoc lt " +
 		       "LEFT JOIN t.nhaSanXuat nsx " +
-		       "LEFT JOIN t.danhMucThuoc dmt " +
+		       "LEFT JOIN lt.danhMucThuoc dmt " +
 		       "LEFT JOIN t.doiTuongs dt " +
 		       "WHERE (:keyWord IS NULL OR (LOWER(t.tenThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')) " +
 		       "OR LOWER(t.maThuoc) LIKE LOWER(CONCAT('%', :keyWord, '%')))) " +

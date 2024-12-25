@@ -16,7 +16,6 @@ public class ThuocDTO {
 
 	private Integer loaiThuocId; // Chỉ lưu trữ ID thay vì toàn bộ đối tượng LoaiThuoc
 	private Integer nhaSanXuatId; // Chỉ lưu trữ ID thay vì toàn bộ đối tượng NhaSanXuat
-	private Integer danhMucThuocId; // Chỉ lưu trữ ID thay vì toàn bộ đối tượng DanhMucThuoc
 
 	private String donVi;
 	private String cheBao;

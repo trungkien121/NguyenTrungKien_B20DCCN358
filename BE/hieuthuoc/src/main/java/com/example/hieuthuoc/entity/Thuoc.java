@@ -38,10 +38,6 @@ public class Thuoc {
 	@JoinColumn(name = "nha_san_xuat_id")
 	private NhaSanXuat nhaSanXuat;
 
-	@ManyToOne
-	@JoinColumn(name = "danh_muc_thuoc_id")
-	private DanhMucThuoc danhMucThuoc;
-
 	private String donVi;
 	private String cheBao;
 	private String quyCach;

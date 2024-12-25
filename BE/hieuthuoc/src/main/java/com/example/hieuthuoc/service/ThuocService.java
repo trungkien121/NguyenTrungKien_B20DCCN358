@@ -18,14 +18,12 @@ import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.dto.SearchDTO;
 import com.example.hieuthuoc.dto.SearchThuocDTO;
 import com.example.hieuthuoc.dto.ThuocDTO;
-import com.example.hieuthuoc.entity.DanhMucThuoc;
 import com.example.hieuthuoc.entity.DoiTuong;
 import com.example.hieuthuoc.entity.LoaiThuoc;
 import com.example.hieuthuoc.entity.NhaSanXuat;
 import com.example.hieuthuoc.entity.ThanhPhanThuoc;
 import com.example.hieuthuoc.entity.Thuoc;
 import com.example.hieuthuoc.repository.ChiTietDonHangRepo;
-import com.example.hieuthuoc.repository.DanhMucThuocRepo;
 import com.example.hieuthuoc.repository.DoiTuongRepo;
 import com.example.hieuthuoc.repository.DoiTuongSdThuocRepo;
 import com.example.hieuthuoc.repository.LoaiThuocRepo;
@@ -59,9 +57,6 @@ class ThuocServiceImpl implements ThuocService {
 
 	@Autowired
 	NhaSanXuatRepo nhaSanXuatRepo;
-
-	@Autowired
-	DanhMucThuocRepo danhMucThuocRepo;
 
 	@Autowired
 	DoiTuongRepo doiTuongRepo;
@@ -176,12 +171,9 @@ class ThuocServiceImpl implements ThuocService {
 				.orElseThrow(() -> new RuntimeException("Loại thuốc không tồn tại"));
 		NhaSanXuat nhaSanXuat = nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId())
 				.orElseThrow(() -> new RuntimeException("Nhà sản xuất không tồn tại"));
-		DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId())
-				.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
 
 		thuoc.setLoaiThuoc(loaiThuoc);
 		thuoc.setNhaSanXuat(nhaSanXuat);
-		thuoc.setDanhMucThuoc(danhMucThuoc);
 
 		// lưu ảnh vài cloudinary
 //		if (thuocDTO.getFile() != null && Base64ToMultipartFileConverter.isBase64(thuocDTO.getFile())) {
@@ -238,12 +230,9 @@ class ThuocServiceImpl implements ThuocService {
 					.orElseThrow(() -> new RuntimeException("Loại thuốc không tồn tại"));
 			NhaSanXuat nhaSanXuat = nhaSanXuatRepo.findById(thuocDTO.getNhaSanXuatId())
 					.orElseThrow(() -> new RuntimeException("Nhà sản xuất không tồn tại"));
-			DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(thuocDTO.getDanhMucThuocId())
-					.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
 
 			thuoc.setLoaiThuoc(loaiThuoc);
 			thuoc.setNhaSanXuat(nhaSanXuat);
-			thuoc.setDanhMucThuoc(danhMucThuoc);
 
 			// Xoá đi ảnh trước đó trong cloudinary
 //			if (thuocDTO.getFile().length() > 0) {
