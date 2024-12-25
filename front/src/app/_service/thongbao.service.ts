@@ -17,6 +17,15 @@ export class ThongBaoService {
     return this.tbSubject.asObservable();
   }
 
+  getLstAdmin(request: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/thongbao/search`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.post(`${apiUrl}`, request, {
+      headers: headers,
+    });
+  }
+
   getLst(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/thongbao/list`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

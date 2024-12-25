@@ -47,6 +47,7 @@ import { ThongKecComponent } from "./thongke/thongke.component";
 import { DonHangCreateComponent } from "./donhang-create/donhang-create.component";
 import { SelectKhachHangComponent } from "./donhang-create/select-khachhang/select-khachhang.component";
 import { HighchartsChartModule } from "highcharts-angular";
+import { ThongBaoComponent } from "./thongbao/thongbao.component";
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { HighchartsChartModule } from "highcharts-angular";
     ThongKecComponent,
     DonHangCreateComponent,
     SelectKhachHangComponent,
+    ThongBaoComponent
   ],
   imports: [
     CommonModule,
