@@ -52,7 +52,20 @@ export class NSXComponent implements OnInit {
   }
 
   search() {
-    this.getData();
+    if(this.modelSearch.keyWord){
+      this.nsxService.getNSXLst2(this.modelSearch.keyWord).subscribe((res) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          this.nsxLst = res.data;
+        }
+        else{
+          this.nsxLst  = []
+        }
+      });
+    }
+
+    else{
+     this.getData()
+    }
   }
 
   preAdd() {

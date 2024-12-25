@@ -56,7 +56,23 @@ export class DoituongComponent implements OnInit {
   }
 
   search() {
-    this.getData();
+    if(this.modelSearch.keyWord){
+      this.doituongService.getDTLst2(this.modelSearch.keyWord).subscribe((res: any) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          this.doituongLst = res.data;
+          this.totalRow = res.data.totalElements;
+        }     else{
+          this.doituongLst  = []
+          this.totalRow = 0;
+
+
+        }
+      });
+    }
+
+    else{
+      this.getData()
+    }
   }
 
   preAdd() {

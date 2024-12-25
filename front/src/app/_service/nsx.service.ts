@@ -20,6 +20,18 @@ export class NSXService {
     });
   }
 
+  getNSXLst2(model?: any): Observable<any> {
+    const apiUrl = environment.backApiUrl + `/nhasanxuat/search_by_ten_nha_san_xuat`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+    let params = new HttpParams().set("tenNhaSanXuat", model?.toString() || "");
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+      params: params,
+
+    });
+  }
+
   createNSX(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/nhasanxuat/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

@@ -54,7 +54,20 @@ export class DanhmucThuocComponent implements OnInit {
   }
 
   search() {
-    this.getData();
+    if(this.modelSearch.keyWord){
+      this.dmThuocService.getDMTLst2(this.modelSearch.keyWord).subscribe((res) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          this.dmThuocLst = res.data;
+        }
+        else{
+          this.dmThuocLst  = []
+        }
+      });
+    }
+
+    else{
+     this.getData()
+    }
   }
 
   preAdd() {

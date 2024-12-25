@@ -51,7 +51,21 @@ export class NCCComponent implements OnInit {
   }
 
   search() {
-    this.getData();
+    if(this.modelSearch.keyWord){
+
+      this.nccService.getNCCLst2(this.modelSearch.keyWord).subscribe((res) => {
+        if (res.status == CommonConstant.STATUS_OK_200) {
+          this.nccLst = res.data;
+        }
+        else{
+          this.nccLst  = []
+        }
+      });
+    }
+    else{
+      this.getData();
+
+    }
   }
 
   preAdd() {

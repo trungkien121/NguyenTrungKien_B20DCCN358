@@ -94,7 +94,7 @@ export class ThuocComponent implements OnInit {
   }
 
   getLoaiThuoc() {
-    this.loaithuocService.getLoaiThuocLst().subscribe((res) => {
+    this.loaithuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {
       if (res.status == CommonConstant.STATUS_OK_200) {
         this.loaithuocLst = res.data;
       }
