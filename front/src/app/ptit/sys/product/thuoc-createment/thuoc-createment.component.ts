@@ -115,7 +115,7 @@ export class ThuocCreatementComponent implements OnInit {
     this.getThuocByParam();
     this.getLoaiThuoc();
     this.getNSX();
-    this.getDanhMucThuoc();
+    // this.getDanhMucThuoc();
 
     this.statusOptions = [
       {
@@ -145,13 +145,13 @@ export class ThuocCreatementComponent implements OnInit {
     });
   }
 
-  getDanhMucThuoc() {
-    this.dmThuocService.getDMTLst().subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        this.danhmucLst = res.data;
-      }
-    });
-  }
+  // getDanhMucThuoc() {
+  //   this.dmThuocService.getDMTLst().subscribe((res) => {
+  //     if (res.status == CommonConstant.STATUS_OK_200) {
+  //       this.danhmucLst = res.data;
+  //     }
+  //   });
+  // }
 
   getThuoc(id: string) {
     this.thuocService.getProduct(id).subscribe((res) => {

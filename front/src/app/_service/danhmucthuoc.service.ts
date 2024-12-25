@@ -32,6 +32,15 @@ export class DanhmucThuocService {
     });
   }
 
+  getDanhMucAndLoaiThuoc(): Observable<any>{
+    const apiUrl = environment.backApiUrl + `/danhmucthuoc/get_danh_muc_and_loai_thuoc`;
+    const headers: HttpHeaders = HeadersUtil.getHeaders();
+
+    return this.http.get(`${apiUrl}`, {
+      headers: headers,
+    });
+  }
+
   createDMT(request: any): Observable<any> {
     const apiUrl = environment.backApiUrl + `/danhmucthuoc/create`;
     const headers: HttpHeaders = HeadersUtil.getHeaders();

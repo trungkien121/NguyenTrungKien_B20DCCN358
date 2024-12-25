@@ -1,55 +1,36 @@
 <div class="app-menu navbar-menu">
-  <div class="container-fluid">
-    <ul class="navbar-nav" id="navbar-nav">
-      <li class="menu-title"><span>Menu</span></li>
-      <!-- Lặp qua danh sách danh mục -->
-      <li
-        class="nav-item position-relative"
-        *ngFor="let item of loaiThuocLst | slice : 0 : 4"
-        (mouseenter)="onMouseEnter(item)"
-        (mouseleave)="onMouseLeave()"
-      >
-        <a class="nav-link menu-link">
-          <span button (click)="showAllItems(item)">{{ item.tenLoai }}</span>
-        </a>
-        <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
-          <div class="row">
-            <div class="col-lg-4">
-              <ul class="nav nav-sm flex-column">
-                <div class="d-flex justify-content-sm-start">
-                  <h4 class="bestseller-text">Bán chạy nhất</h4>
-                </div>
+  <div id="scrollbar">
+    <div class="container-fluid">
+      <div id="two-column-menu"></div>
 
-                <div class="items-container d-flex">
-                  <div
-                    class="item-card"
-                    *ngFor="let thuoc of item.dsThuoc | slice : 0 : 4"
-                    (click)="showDetail(thuoc)"
-                  >
-                    <img
-                      [src]="thuoc.avatar"
-                      alt="Hình ảnh thuốc"
-                      class="item-image"
-                    />
-                    <div class="item-info">
-                      <h5 class="item-name">{{ thuoc.tenThuoc }}</h5>
-                      <p class="item-price">
-                        {{ thuoc.giaBan | number : "1.0-0" }}đ /
-                        {{ thuoc.donVi }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <button (click)="showAllItems(item)" class="view-all-button">
-                    Xem tất cả -->
-                  </button>
-                </div>
-              </ul>
-            </div>
+      <ul class="navbar-nav" id="navbar-nav" *ngIf="dmThuocLst && dmThuocLst.length">
+        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+        <li class="nav-item" *ngFor="let dm of dmThuocLst; let i = index">
+          <a
+            class="nav-link menu-link"
+            data-bs-toggle="collapse"
+            [attr.aria-controls]="'sidebarUI-' + i"
+            [attr.data-bs-target]="'#sidebarUI-' + i"
+          >
+            <span data-key="t-base-ui">{{ dm.tenDanhMuc }}</span>
+          </a>
+          <div class="collapse menu-dropdown" [id]="'sidebarUI-' + i">
+            <ul class="nav nav-sm flex-column">
+              <li
+                
+                class="nav-item"
+                style="cursor: pointer;"
+                *ngFor="let lt of dm.loaiThuocs"
+              >
+                <a [routerLink]="['/user/thuoctuloaithuoc', lt.tenLoai]" class="nav-link" data-key="t-alerts">{{ lt.tenLoai }}</a>
+              </li>
+            </ul>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+      
+      
+    </div>
   </div>
+ 
 </div>

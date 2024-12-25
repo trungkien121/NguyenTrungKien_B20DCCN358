@@ -1,4 +1,4 @@
-.active-link {
+/* .active-link {
   color: #fff;
   font-weight: 800;
 }
@@ -8,7 +8,7 @@
   font-weight: bold;
   color: red;
   position: relative;
-  display: inline-block; /* Để ánh sáng chỉ bao quanh chữ */
+  display: inline-block; 
   overflow: hidden;
 }
 
@@ -16,12 +16,12 @@
   content: "";
   position: absolute;
   top: 0;
-  left: -100%; /* Bắt đầu từ ngoài bên trái */
+  left: -100%; 
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
   animation: shine 2s infinite;
-  pointer-events: none; /* Vô hiệu hóa tương tác */
+  pointer-events: none; 
   z-index: 1;
 }
 
@@ -38,14 +38,6 @@
 }
 
 
-/* .view-all-btn {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center; 
-  margin-bottom: 10px;
-  margin-left: 25px;
-  width: 100%;
-} */
 
 .view-all-btn h4 {
   margin: 0;
@@ -54,8 +46,8 @@
 }
 
 .view-all-button {
-  background: none; /* Loại bỏ nền của nút */
-  color: #007bff; /* Màu chữ xanh */
+  background: none; 
+  color: #007bff; 
   border: none;
   font-size: 1rem;
   cursor: pointer;
@@ -64,7 +56,7 @@
 }
 
 .view-all-button:hover {
-  color: #0056b3; /* Đổi màu chữ khi hover */
+  color: #0056b3; 
 }
 
 .nav-item {
@@ -73,22 +65,21 @@
 
 .nav-item .menu-link {
   display: inline-block;
-  color: #000; /* Màu mặc định */
+  color: #000; 
   text-decoration: none;
-  font-weight: 500; /* Đảm bảo font-weight cố định */
-  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt mà */
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease; 
 }
 
 .nav-item .menu-link:hover {
-  color: #007bff; /* Màu chữ khi hover */
-  text-decoration: underline; /* Chỉ thay đổi giao diện, không thay đổi kích thước */
-  transform: none; /* Không phóng to */
+  color: #007bff; 
+  text-decoration: underline; 
+  transform: none; 
 }
-
 .nav-item span {
   display: inline-block;
-  width: 100%; /* Chiều rộng cố định */
-  line-height: 1.2; /* Đảm bảo khoảng cách dòng cố định */
+  width: 100%; 
+  line-height: 1.2; 
 }
 
 .popup-large {
@@ -104,17 +95,12 @@
   align-items: center;
 }
 
-/* .items-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center; 
-} */
+
 
 .item-card {
-  width: calc(25% - 16px); /* Tối đa 5 item mỗi hàng */
-  min-width: 150px; /* Kích thước tối thiểu cho màn hình nhỏ */
-  max-width: 300px; /* Kích thước tối đa để đồng nhất */
+  width: calc(25% - 16px);
+  min-width: 150px; 
+  max-width: 300px; 
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -126,14 +112,14 @@
 }
 
 .item-card:hover {
-  transform: translateY(-6px); /* Hiệu ứng hover nổi nhẹ */
+  transform: translateY(-6px); 
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 .item-image {
   width: 100%;
   height: 120px;
-  object-fit: cover; /* Giữ hình ảnh vừa khung */
+  object-fit: cover; 
   border-bottom: 1px solid #eee;
 }
 
@@ -142,16 +128,16 @@
 }
 
 .item-name {
-  font-size: 1rem; /* Tăng kích thước chữ để dễ đọc */
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
-  line-height: 1.4; /* Khoảng cách giữa các dòng */
+  line-height: 1.4; 
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis; /* Cắt chữ nếu dài */
-  white-space: normal; /* Cho phép xuống dòng */
+  text-overflow: ellipsis; 
+  white-space: normal; 
   margin-bottom: 6px;
 }
 
@@ -159,4 +145,4 @@
   font-size: 1rem;
   font-weight: 500;
   color: #007bff;
-}
+} */

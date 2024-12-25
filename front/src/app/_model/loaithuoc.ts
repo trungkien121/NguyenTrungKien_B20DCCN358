@@ -5,6 +5,7 @@ export class LoaiThuoc {
   moTa?: string;
   tenLoai?: string;
 
+  danhMucThuocId?: string;
 
   dsThuoc?: Thuoc[]
 }

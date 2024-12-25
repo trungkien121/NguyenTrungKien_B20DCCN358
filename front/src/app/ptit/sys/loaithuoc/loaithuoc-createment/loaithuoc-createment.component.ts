@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { PrimeNGConfig } from "primeng/api";
+import { CommonConstant } from "src/app/_constant/common.constants";
+import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 
 declare var $: any;
 
@@ -10,7 +13,13 @@ declare var $: any;
   templateUrl: "./loaithuoc-createment.component.html",
 })
 export class LoaiThuocCreatementComponent implements OnInit {
-  constructor(public translate: TranslateService) {}
+  constructor(
+    public translate: TranslateService,
+    private cdr: ChangeDetectorRef,
+    private dmThuocService: DanhmucThuocService
+  ) {}
+
+  dmThuocLst: DanhMucThuoc[] = [];
 
   @Input()
   loaithuoc: LoaiThuoc = {};
@@ -23,7 +32,22 @@ export class LoaiThuocCreatementComponent implements OnInit {
 
   displayModal: boolean = true;
 
-  ngOnInit() {}
+  getDmThuocLst() {
+    this.dmThuocService.getDMTLst().subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.dmThuocLst = res.data;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  ngOnInit() {
+    this.getDmThuocLst();
+  }
+
+  onDMChange(value: string){
+    // console.log("hehe", value)
+    this.loaithuoc.danhMucThuocId = value
+  }
 
   onCancel() {
     this.cancel.emit(false);

@@ -7,7 +7,9 @@ import {
 } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { SearchModel } from "src/app/_model/common/Search";
+import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
 import { LoaithuocService } from "src/app/_service/loaithuoc.service";
 
 @Component({
@@ -20,8 +22,11 @@ export class LoaiThuocComponent implements OnInit {
     private loaithuocService: LoaithuocService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    
   ) {}
+  
+    
   loaithuocLst: LoaiThuoc[] = [];
   loaithuocNew: LoaiThuoc = {};
   loaithuocDelete: LoaiThuoc = {};
@@ -42,6 +47,8 @@ export class LoaiThuocComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
   }
+
+
 
   getData() {
       this.loaithuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {

@@ -36,7 +36,7 @@ export class SidebarTopUserComponent implements OnInit {
     private toastService: ToastrService
   ) {}
 
-  // dmThuocLst: DanhMucThuoc[] = [];
+  dmThuocLst: DanhMucThuoc[] = [];
   loaiThuocLst: LoaiThuoc[]=[];
 
   selectedItem: DanhMucThuoc | null = null;
@@ -55,11 +55,12 @@ export class SidebarTopUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-
+    this.getDanhMucAndLoaiThuoc()
   }
 
 
   showAllItems(loaiThuoc: LoaiThuoc) {
+    console.log("lt", loaiThuoc)
     this.router.navigate([`user/thuoctuloaithuoc/${loaiThuoc.tenLoai}`]);
   }
   
@@ -67,6 +68,14 @@ export class SidebarTopUserComponent implements OnInit {
   showDetail(thuoc: Thuoc) {
     console.log("thuoc", thuoc)
     this.router.navigate([`/thuoc-chitiet/${thuoc.id}`]);
+  }
+
+  getDanhMucAndLoaiThuoc(){
+    this.dmThuocService.getDanhMucAndLoaiThuoc().subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.dmThuocLst = res.data;
+      }
+    });
   }
 
   getData() {
