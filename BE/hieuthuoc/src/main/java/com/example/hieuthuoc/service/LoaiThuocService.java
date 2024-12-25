@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hieuthuoc.dto.LoaiThuocDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
+import com.example.hieuthuoc.entity.DanhMucThuoc;
 import com.example.hieuthuoc.entity.LoaiThuoc;
+import com.example.hieuthuoc.repository.DanhMucThuocRepo;
 import com.example.hieuthuoc.repository.LoaiThuocRepo;
 
 public interface LoaiThuocService {
@@ -32,6 +34,9 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
 	@Autowired
 	private LoaiThuocRepo loaiThuocRepo;
+
+	@Autowired
+	private DanhMucThuocRepo danhMucThuocRepo;
 
 	ModelMapper modelMapper = new ModelMapper();
 
@@ -60,6 +65,10 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 		if (loaiThuocRepo.existsByTenLoai(loaiThuoc.getTenLoai())) {
 			return ResponseDTO.<LoaiThuoc>builder().status(409).msg("Loại thuốc đã tồn tại").build();
 		}
+		DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(loaiThuocDTO.getDanhMucThuocId())
+				.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
+
+		loaiThuoc.setDanhMucThuoc(danhMucThuoc);
 		LoaiThuoc savedLoaiThuoc = loaiThuocRepo.save(loaiThuoc);
 		return ResponseDTO.<LoaiThuoc>builder().status(201).msg("Tạo loại thuốc thành công").data(savedLoaiThuoc)
 				.build();
@@ -72,6 +81,9 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
 		if (currentLoaiThuoc != null) {
+			DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(loaiThuocDTO.getDanhMucThuocId())
+					.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
+			loaiThuoc.setDanhMucThuoc(danhMucThuoc);
 			LoaiThuoc updatedLoaiThuoc = loaiThuocRepo.save(loaiThuoc);
 			return ResponseDTO.<LoaiThuoc>builder().status(200).msg("Cập nhật loại thuốc thành công")
 					.data(updatedLoaiThuoc).build();

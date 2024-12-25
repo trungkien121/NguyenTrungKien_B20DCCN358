@@ -58,5 +58,4 @@ public class ThongBao extends TimeAuditable {
 		CANH_BAO, // Thông báo cảnh báo
 		TAI_KHOAN // Thông báo liên quan tài khoản
 	}
-
 }
