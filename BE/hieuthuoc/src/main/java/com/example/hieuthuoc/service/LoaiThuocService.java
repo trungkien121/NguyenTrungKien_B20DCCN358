@@ -41,7 +41,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 	ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	@Cacheable(value = "loaiThuocCache", key = "'allLoaiThuoc'")
+//	@Cacheable(value = "loaiThuocCache", key = "'allLoaiThuoc'")
 	public ResponseDTO<List<LoaiThuoc>> getAllLoaiThuocs() {
 		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.findAll();
 		return ResponseDTO.<List<LoaiThuoc>>builder().status(200).msg("Thành công").data(loaiThuocs).build();

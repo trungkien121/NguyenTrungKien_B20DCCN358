@@ -39,7 +39,7 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 	private final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
-	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMuc'")
+//	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMuc'")
 	public ResponseDTO<List<DanhMucThuoc>> getAll() {
 		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findAll();
 		return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
