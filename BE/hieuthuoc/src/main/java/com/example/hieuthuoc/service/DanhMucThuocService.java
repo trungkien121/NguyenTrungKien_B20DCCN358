@@ -15,6 +15,7 @@ import com.example.hieuthuoc.dto.DanhMucThuocDTO;
 import com.example.hieuthuoc.dto.ResponseDTO;
 import com.example.hieuthuoc.entity.DanhMucThuoc;
 import com.example.hieuthuoc.repository.DanhMucThuocRepo;
+import com.example.hieuthuoc.repository.LoaiThuocRepo;
 
 public interface DanhMucThuocService {
 	ResponseDTO<List<DanhMucThuoc>> getAll();
@@ -46,14 +47,14 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 	}
 
 	@Override
-	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMucAndLoaiThuoc'")
+//	@Cacheable(value = "danhMucThuocCache", key = "'allDanhMucAndLoaiThuoc'")
 	public ResponseDTO<List<DanhMucThuoc>> getDanhMucAnhLoaiThuoc() {
 		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.findAllWithLoaiThuocs();
 		return ResponseDTO.<List<DanhMucThuoc>>builder().status(200).msg("Thành công").data(danhMucThuocs).build();
 	}
 
 	@Override
-	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc'")
+//	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc'")
 	public ResponseDTO<List<DanhMucThuoc>> searchByTenDanhMuc(String tenDanhMuc) {
 		List<DanhMucThuoc> danhMucThuocs = danhMucThuocRepo.searchByTenDanhMuc(tenDanhMuc);
 		if (danhMucThuocs != null && !danhMucThuocs.isEmpty()) {
@@ -64,7 +65,7 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 
 	@Override
 	@Transactional
-	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
+//	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
 	public ResponseDTO<DanhMucThuoc> create(DanhMucThuocDTO danhMucThuocDTO) {
 		DanhMucThuoc danhMucThuoc = modelMapper.map(danhMucThuocDTO, DanhMucThuoc.class);
 		if (danhMucThuocRepo.existsByTenDanhMuc(danhMucThuoc.getTenDanhMuc())) {
@@ -77,7 +78,7 @@ class DanhMucThuocServiceImpl implements DanhMucThuocService {
 
 	@Override
 	@Transactional
-	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
+//	@CachePut(value = "danhMucThuocCache", key = "#result.data.id")
 	public ResponseDTO<DanhMucThuoc> update(DanhMucThuocDTO danhMucThuocDTO) {
 		Optional<DanhMucThuoc> existingDanhMucThuoc = danhMucThuocRepo.findById(danhMucThuocDTO.getId());
 		if (existingDanhMucThuoc.isPresent()) {

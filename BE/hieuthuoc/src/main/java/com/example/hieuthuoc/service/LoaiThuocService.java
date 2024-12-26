@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,7 +45,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 	}
 
 	@Override
-	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc' + #tenLoai")
+//	@Cacheable(value = "danhMucThuocCache", key = "'tenDanhMuc' + #tenLoai")
 	public ResponseDTO<List<LoaiThuoc>> searchByTenLoai(String tenLoai) {
 		List<LoaiThuoc> loaiThuocs = loaiThuocRepo.searchByTenLoai(tenLoai);
 		if (loaiThuocs != null && !loaiThuocs.isEmpty()) {
@@ -59,7 +56,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
 	@Override
 	@Transactional
-	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
+//	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
 	public ResponseDTO<LoaiThuoc> create(LoaiThuocDTO loaiThuocDTO) {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		if (loaiThuocRepo.existsByTenLoai(loaiThuoc.getTenLoai())) {
@@ -76,7 +73,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
 	@Override
 	@Transactional
-	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
+//	@CachePut(value = "loaiThuocCache", key = "#result.data.id")
 	public ResponseDTO<LoaiThuoc> update(LoaiThuocDTO loaiThuocDTO) {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
@@ -95,7 +92,7 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = "loaiThuocCache", key = "#id")
+//	@CacheEvict(value = "loaiThuocCache", key = "#id")
 	public ResponseDTO<Void> delete(Integer id) {
 		if (!loaiThuocRepo.existsById(id)) {
 			return ResponseDTO.<Void>builder().status(404).msg("Không tìm thấy loại thuốc để xóa").build();
