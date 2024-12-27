@@ -14,6 +14,7 @@ import { NCCService } from "src/app/_service/ncc.service";
 @Component({
   selector: "app-sys-thongbao",
   templateUrl: "./thongbao.component.html",
+  styleUrls: ["./thongbao.component.css"],
   providers: [ConfirmationService, MessageService],
 })
 export class ThongBaoComponent implements OnInit {
@@ -23,6 +24,7 @@ export class ThongBaoComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
+  
     ngOnInit(): void {
         throw new Error("Method not implemented.");
     }

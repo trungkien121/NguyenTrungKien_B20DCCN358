@@ -146,3 +146,10 @@
   font-weight: 500;
   color: #007bff;
 } */
+
+.menu-dropdown{
+  overflow-y: scroll; /* Hiển thị thanh cuộn dọc */
+  max-height: calc(50px * 5); /* Chiều cao tối đa để hiển thị 6 thành phần */
+  border: 1px solid #ccc; /* Tùy chọn: thêm viền để phân biệt */
+  padding: 5px; /* Tùy chọn: tạo khoảng cách bên trong */
+}

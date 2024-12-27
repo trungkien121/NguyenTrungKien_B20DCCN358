@@ -1,53 +1,31 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-      <div
-        *ngIf="displayDialog"
-        id="layer-popup"
-        [ngClass]="{ active: displayDialog }"
-      >
-        <app-select-doituong
-          [doituongSelected]="doituongSelected"
-          (cancel)="handleCancel($event)"
-          (save)="handleSaveDoiTuong($event)"
-        >
+      <div *ngIf="displayDialog" id="layer-popup" [ngClass]="{ active: displayDialog }">
+        <app-select-doituong [doituongSelected]="doituongSelected" (cancel)="handleCancel($event)"
+          (save)="handleSaveDoiTuong($event)">
         </app-select-doituong>
       </div>
 
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">Thêm Sản Phẩm</h4>
           </div>
         </div>
       </div>
       <!-- end page title -->
 
-      <form
-        id="createproduct-form"
-        autocomplete="off"
-        class="needs-validation"
-        novalidate
-      >
+      <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-lg-8">
             <div class="card">
               <div class="card-body">
                 <div class="mb-3">
                   <label class="form-label" for="product-id-input">ID</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="product-id-input"
-                    required
-                    [(ngModel)]="thuoc.id"
-                    [disabled]="true"
-                    name="id"
-                    value="thuoc.id"
-                  />
+                  <input type="text" class="form-control" id="product-id-input" required [(ngModel)]="thuoc.id"
+                    [disabled]="true" name="id" value="thuoc.id" />
                 </div>
 
                 <div class="row">
@@ -56,21 +34,10 @@
                       <label class="form-label" for="product-title-input">
                         Tên Thuốc <span class="text-danger">*</span>
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="product-title-input"
-                        placeholder="Enter product title"
-                        required
-                        [(ngModel)]="thuoc.tenThuoc"
-                        name="tenThuoc"
-                        #tenThuoc="ngModel"
-                      />
+                      <input type="text" class="form-control" id="product-title-input" placeholder="Enter product title"
+                        required [(ngModel)]="thuoc.tenThuoc" name="tenThuoc" #tenThuoc="ngModel" />
                       <!-- Hiển thị lỗi khi trường invalid và đã touched -->
-                      <div
-                        *ngIf="tenThuoc.invalid && tenThuoc.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="tenThuoc.invalid && tenThuoc.touched" class="text-danger">
                         Vui lòng nhập tên thuốc.
                       </div>
                     </div>
@@ -81,21 +48,11 @@
                       <label class="form-label" for="manufacturer-name-input">
                         Số Đăng Ký
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập số đăng ký"
-                        [(ngModel)]="thuoc.soDangKy"
-                        name="soDangKy"
-                        #soDangKy="ngModel"
-                        pattern="^[a-zA-Z0-9]{5,15}$"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Nhập số đăng ký"
+                        [(ngModel)]="thuoc.soDangKy" name="soDangKy" #soDangKy="ngModel"
+                        pattern="^[a-zA-Z0-9]{5,15}$" />
                       <!-- Hiển thị lỗi nếu không khớp pattern -->
-                      <div
-                        *ngIf="soDangKy.invalid && soDangKy.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="soDangKy.invalid && soDangKy.touched" class="text-danger">
                         Số đăng ký phải chứa 5-15 ký tự (chữ hoặc số).
                       </div>
                     </div>
@@ -108,21 +65,10 @@
                       <label class="form-label" for="product-code-input">
                         Mã Thuốc <span class="text-danger">*</span>
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="product-code-input"
-                        placeholder="Enter product code"
-                        required
-                        [(ngModel)]="thuoc.maThuoc"
-                        name="maThuoc"
-                        #maThuoc="ngModel"
-                      />
+                      <input type="text" class="form-control" id="product-code-input" placeholder="Enter product code"
+                        required [(ngModel)]="thuoc.maThuoc" name="maThuoc" #maThuoc="ngModel" />
                       <!-- Hiển thị lỗi khi trường invalid và đã touched -->
-                      <div
-                        *ngIf="maThuoc.invalid && maThuoc.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="maThuoc.invalid && maThuoc.touched" class="text-danger">
                         Vui lòng nhập mã thuốc.
                       </div>
                     </div>
@@ -134,21 +80,10 @@
                         <!-- Mã Vạch <span class="text-danger">*</span> -->
                         Mã Vạch
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="product-barcode-input"
-                        placeholder="Enter barcode"
-                        required
-                        [(ngModel)]="thuoc.maVach"
-                        name="maVach"
-                        #maVach="ngModel"
-                      />
+                      <input type="text" class="form-control" id="product-barcode-input" placeholder="Enter barcode"
+                        required [(ngModel)]="thuoc.maVach" name="maVach" #maVach="ngModel" />
                       <!-- Hiển thị lỗi nếu người dùng không nhập -->
-                      <div
-                        *ngIf="maVach.invalid && maVach.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="maVach.invalid && maVach.touched" class="text-danger">
                         Vui lòng nhập mã vạch.
                       </div>
                     </div>
@@ -157,35 +92,19 @@
 
                 <div class="row">
                   <div class="col-lg-6">
-                    <div class="mb-3">
-                      <label class="form-label" for="product-type-select"
-                        >Loại Thuốc</label
-                      >
-                      <app-select-common
-                        [optionValue]="'id'"
-                        [optionLabel]="'tenLoai'"
-                        [options]="loaithuocLst"
-                        [isOptionSelectType]="false"
-                        [selectedOptionValue]="thuoc.loaiThuocId"
-                        (selectionChange)="onLoaiThuocChange($event)"
-                      ></app-select-common>
+                    <div class="mb-3 ">
+                      <label class="form-label" for="product-type-select">Loại Thuốc</label>
+                      <app-select-common [optionValue]="'id'" [optionLabel]="'tenLoai'" [options]="loaithuocLst"
+                        [isOptionSelectType]="false" [selectedOptionValue]="thuoc.loaiThuocId"
+                        (selectionChange)="onLoaiThuocChange($event)"></app-select-common>
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label
-                        class="form-label"
-                        for="product-manufacturer-select"
-                        >Nhà Sản Xuất</label
-                      >
-                      <app-select-common
-                        [optionValue]="'id'"
-                        [optionLabel]="'tenNhaSanXuat'"
-                        [options]="nsxLst"
-                        [isOptionSelectType]="false"
-                        [selectedOptionValue]="thuoc.nhaSanXuatId"
-                        (selectionChange)="onNSXChange($event)"
-                      ></app-select-common>
+                      <label class="form-label" for="product-manufacturer-select">Nhà Sản Xuất</label>
+                      <app-select-common [optionValue]="'id'" [optionLabel]="'tenNhaSanXuat'" [options]="nsxLst"
+                        [isOptionSelectType]="false" [selectedOptionValue]="thuoc.nhaSanXuatId"
+                        (selectionChange)="onNSXChange($event)"></app-select-common>
                     </div>
                   </div>
                 </div>
@@ -208,16 +127,10 @@
                   </div> -->
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="product-category-select"
-                        >Trạng thái</label
-                      >
-                      <app-select-common
-                        [optionValue]="'value'"
-                        [options]="statusOptions"
-                        [selectedOptionValue]="thuoc.trangThai"
-                        [isOptionSelectType]="true"
-                        (selectionChange)="onStatusChange($event)"
-                      ></app-select-common>
+                      <label class="form-label" for="product-category-select">Trạng thái</label>
+                      <app-select-common [optionValue]="'value'" [options]="statusOptions"
+                        [selectedOptionValue]="thuoc.trangThai" [isOptionSelectType]="true"
+                        (selectionChange)="onStatusChange($event)"></app-select-common>
                     </div>
                   </div>
                 </div>
@@ -232,33 +145,17 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Chỉ định</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập chỉ định"
-                        [(ngModel)]="thuoc.chiDinh"
-                        name="chiDinh"
-                      />
+                      <label class="form-label" for="manufacturer-name-input">Chỉ định</label>
+                      <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Nhập chỉ định"
+                        [(ngModel)]="thuoc.chiDinh" name="chiDinh" />
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-brand-input"
-                        >Chống chỉ định</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập chống chỉ định"
-                        [(ngModel)]="thuoc.chongChiDinh"
-                        name="chongChiDinh"
-                      />
+                      <label class="form-label" for="manufacturer-brand-input">Chống chỉ định</label>
+                      <input type="text" class="form-control" id="manufacturer-brand-input"
+                        placeholder="Nhập chống chỉ định" [(ngModel)]="thuoc.chongChiDinh" name="chongChiDinh" />
                     </div>
                   </div>
                 </div>
@@ -267,16 +164,10 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Đơn vị</label
-                      >
+                      <label class="form-label" for="manufacturer-name-input">Đơn vị</label>
                       <div class="position-relative">
-                        <select
-                          class="form-control custom-select"
-                          id="manufacturer-name-input"
-                          [(ngModel)]="thuoc.donVi"
-                          name="donVi"
-                        >
+                        <select class="form-control custom-select" id="manufacturer-name-input"
+                          [(ngModel)]="thuoc.donVi" name="donVi">
                           <option [value]="'Hộp'">Hộp</option>
                           <option [value]="'Viên'">Viên</option>
                           <option [value]="'Vỉ'">Vỉ</option>
@@ -289,17 +180,9 @@
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-brand-input"
-                        >Chế bào</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập chế bào"
-                        [(ngModel)]="thuoc.cheBao"
-                        name="cheBao"
-                      />
+                      <label class="form-label" for="manufacturer-brand-input">Chế bào</label>
+                      <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Nhập chế bào"
+                        [(ngModel)]="thuoc.cheBao" name="cheBao" />
                     </div>
                   </div>
                 </div>
@@ -312,28 +195,13 @@
                         Giá Nhập <span class="text-danger">*</span>
                       </label>
                       <div class="input-group has-validation mb-3">
-                        <span class="input-group-text" id="product-price-addon"
-                          >VND</span
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="product-price-input"
-                          placeholder="Nhập giá nhập"
-                          aria-label="Price"
-                          aria-describedby="product-price-addon"
-                          required
-                          [(ngModel)]="thuoc.giaNhap"
-                          name="giaNhap"
-                          #giaNhap="ngModel"
-                          min="0"
-                        />
+                        <span class="input-group-text" id="product-price-addon">VND</span>
+                        <input type="number" class="form-control" id="product-price-input" placeholder="Nhập giá nhập"
+                          aria-label="Price" aria-describedby="product-price-addon" required [(ngModel)]="thuoc.giaNhap"
+                          name="giaNhap" #giaNhap="ngModel" min="0" />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div
-                        *ngIf="giaNhap.invalid && giaNhap.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="giaNhap.invalid && giaNhap.touched" class="text-danger">
                         Vui lòng nhập giá hợp lệ .
                       </div>
                     </div>
@@ -346,30 +214,13 @@
                         Giá Bán <span class="text-danger">*</span>
                       </label>
                       <div class="input-group has-validation mb-3">
-                        <span
-                          class="input-group-text"
-                          id="product-sale-price-addon"
-                          >VND</span
-                        >
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="product-sale-price-input"
-                          placeholder="Nhập giá bán"
-                          aria-label="Price"
-                          aria-describedby="product-sale-price-addon"
-                          required
-                          [(ngModel)]="thuoc.giaBan"
-                          name="giaBan"
-                          #giaBan="ngModel"
-                          min="0"
-                        />
+                        <span class="input-group-text" id="product-sale-price-addon">VND</span>
+                        <input type="number" class="form-control" id="product-sale-price-input"
+                          placeholder="Nhập giá bán" aria-label="Price" aria-describedby="product-sale-price-addon"
+                          required [(ngModel)]="thuoc.giaBan" name="giaBan" #giaBan="ngModel" min="0" />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div
-                        *ngIf="giaBan.invalid && giaBan.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="giaBan.invalid && giaBan.touched" class="text-danger">
                         Vui lòng nhập giá hợp lệ .
                       </div>
                     </div>
@@ -382,25 +233,13 @@
                         Số lượng tồn <span class="text-danger">*</span>
                       </label>
                       <div class="input-group mb-3">
-                        <input
-                          type="number"
-                          class="form-control"
-                          id="product-quantity-input"
-                          placeholder="Nhập số lượng tồn"
-                          aria-label="Quantity"
-                          aria-describedby="product-quantity-addon"
-                          required
-                          [(ngModel)]="thuoc.soLuongTon"
-                          name="soLuongTon"
-                          #soLuongTon="ngModel"
-                          min="0"
-                        />
+                        <input type="number" class="form-control" id="product-quantity-input"
+                          placeholder="Nhập số lượng tồn" aria-label="Quantity"
+                          aria-describedby="product-quantity-addon" required [(ngModel)]="thuoc.soLuongTon"
+                          name="soLuongTon" #soLuongTon="ngModel" min="0" />
                       </div>
                       <!-- Hiển thị lỗi nếu trường không hợp lệ và đã được tương tác -->
-                      <div
-                        *ngIf="soLuongTon.invalid && soLuongTon.touched"
-                        class="text-danger"
-                      >
+                      <div *ngIf="soLuongTon.invalid && soLuongTon.touched" class="text-danger">
                         Vui lòng nhập số lượng hợp lệ .
                       </div>
                     </div>
@@ -415,33 +254,17 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Ngưỡng cảnh báo</label
-                      >
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập ngưỡng cảnh báo"
-                        [(ngModel)]="thuoc.nguongCanhBao"
-                        name="nguongCanhBao"
-                      />
+                      <label class="form-label" for="manufacturer-name-input">Ngưỡng cảnh báo</label>
+                      <input type="number" class="form-control" id="manufacturer-name-input"
+                        placeholder="Nhập ngưỡng cảnh báo" [(ngModel)]="thuoc.nguongCanhBao" name="nguongCanhBao" />
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-brand-input"
-                        >Quy cách</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập quy cách"
-                        [(ngModel)]="thuoc.quyCach"
-                        name="quyCach"
-                      />
+                      <label class="form-label" for="manufacturer-brand-input">Quy cách</label>
+                      <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Nhập quy cách"
+                        [(ngModel)]="thuoc.quyCach" name="quyCach" />
                     </div>
                   </div>
                 </div>
@@ -450,34 +273,16 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-name-input"
-                        >Công dụng</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập công dụng"
-                        [(ngModel)]="thuoc.congDung"
-                        name="congDung"
-                      />
+                      <label class="form-label" for="manufacturer-name-input">Công dụng</label>
+                      <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Nhập công dụng"
+                        [(ngModel)]="thuoc.congDung" name="congDung" />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-brand-input"
-                        >Hạn sử dụng</label
-                      >
-                      <input
-                        type="date"
-                        id="date-field"
-                        class="form-control"
-                        data-provider="flatpickr"
-                        data-date-format="d M, Y"
-                        data-enable-time
-                        [(ngModel)]="thuoc.hanSuDung"
-                        name="hanSuDung"
-                      />
+                      <label class="form-label" for="manufacturer-brand-input">Hạn sử dụng</label>
+                      <input type="date" id="date-field" class="form-control" data-provider="flatpickr"
+                        data-date-format="d M, Y" data-enable-time [(ngModel)]="thuoc.hanSuDung" name="hanSuDung" />
                     </div>
                   </div>
                 </div>
@@ -492,28 +297,15 @@
                 <div class="row align-items-end">
                   <div class="col-lg-12">
                     <div class="mb-3">
-                      <label class="form-label" for="manufacturer-brand-input"
-                        >Đối tượng sử dụng</label
-                      >
-                      <a
-                        class="float-end text-decoration-underline cursor-pointer"
-                        (click)="displayDialog = true"
-                        >Thêm đối tượng</a
-                      >
+                      <label class="form-label" for="manufacturer-brand-input">Đối tượng sử dụng</label>
+                      <a class="float-end text-decoration-underline cursor-pointer" (click)="displayDialog = true">Thêm
+                        đối tượng</a>
                     </div>
 
                     <div>
-                      <button
-                        type="button"
-                        class="btn btn-dark me-2"
-                        *ngFor="let item of doituongSelected"
-                      >
+                      <button type="button" class="btn btn-dark me-2" *ngFor="let item of doituongSelected">
                         {{ item.tenDoiTuong }}
-                        <span
-                          class="badge bg-danger ms-1"
-                          (click)="deleteDoiTuongSelected(item)"
-                          >x</span
-                        >
+                        <span class="badge bg-danger ms-1" (click)="deleteDoiTuongSelected(item)">x</span>
                       </button>
                     </div>
                   </div>
@@ -533,33 +325,21 @@
                   </div>
 
                   <div class="col-lg-6 d-flex justify-content-end">
-                    <button
-                      class="btn btn-primary"
-                      (click)="addThanhPhanThuoc()"
-                    >
+                    <button class="btn btn-primary" (click)="addThanhPhanThuoc()">
                       <i class="ri-add-box-line"></i> Thêm
                     </button>
                   </div>
                 </div>
 
-                <div
-                  class="row align-items-center"
-                  *ngFor="let item of thanhPhanThuocLSt; let index = index"
-                >
+                <div class="row align-items-center" *ngFor="let item of thanhPhanThuocLSt; let index = index">
                   <div class="col-lg-4">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input">
                         Tên thành phần thuốc
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Nhập ngưỡng cảnh báo"
-                        [(ngModel)]="item.tenThanhPhan"
-                        name="nguongCanhBao"
-                        name="ten-{{ item.id }}"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-name-input"
+                        placeholder="Nhập ngưỡng cảnh báo" [(ngModel)]="item.tenThanhPhan" name="nguongCanhBao"
+                        name="ten-{{ item.id }}" />
                     </div>
                   </div>
 
@@ -568,15 +348,8 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Hàm lượng
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập quy cách"
-                        [(ngModel)]="item.hamLuong"
-                        name="quyCach"
-                        name="hamLuong-{{ item.id }}"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Nhập quy cách"
+                        [(ngModel)]="item.hamLuong" name="quyCach" name="hamLuong-{{ item.id }}" />
                     </div>
                   </div>
 
@@ -585,24 +358,14 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Đơn vị
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        placeholder="Nhập quy cách"
-                        [(ngModel)]="item.donVi"
-                        name="quyCach"
-                        name="donVi-{{ item.id }}"
-                      />
+                      <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Nhập quy cách"
+                        [(ngModel)]="item.donVi" name="quyCach" name="donVi-{{ item.id }}" />
                     </div>
                   </div>
 
                   <div class="col-lg-1 d-flex justify-content-end">
-                    <i
-                      (click)="deleteThanhPhanThuoc(index)"
-                      class="ri-delete-bin-line text-danger cursor-pointer"
-                      style="font-size: 2rem"
-                    ></i>
+                    <i (click)="deleteThanhPhanThuoc(index)" class="ri-delete-bin-line text-danger cursor-pointer"
+                      style="font-size: 2rem"></i>
                   </div>
                 </div>
               </div>
@@ -619,54 +382,27 @@
                   <div class="mb-4">
                     <div class="text-center">
                       <div class="position-relative d-inline-block">
-                        <div
-                          class="position-absolute top-100 start-100 translate-middle"
-                        >
-                          <label
-                            for="product-image-input"
-                            class="mb-0"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="right"
-                            title="Chọn hình ảnh"
-                          >
+                        <div class="position-absolute top-100 start-100 translate-middle">
+                          <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip"
+                            data-bs-placement="right" title="Chọn hình ảnh">
                             <div class="avatar-xs">
-                              <div
-                                class="avatar-title bg-light border rounded-circle text-muted cursor-pointer"
-                              >
+                              <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
                                 <i class="ri-image-fill"></i>
                               </div>
                             </div>
                           </label>
-                          <input
-                            class="form-control d-none"
-                            id="product-image-input"
-                            type="file"
-                            accept="image/png, image/gif, image/jpeg"
-                            (change)="onImageSelected($event)"
-                          />
+                          <input class="form-control d-none" id="product-image-input" type="file"
+                            accept="image/png, image/gif, image/jpeg" (change)="onImageSelected($event)" />
                         </div>
 
                         <div class="avatar-lg">
                           <div class="avatar-title bg-light rounded">
-                            <img
-                              [src]="imageUrl"
-                              id="product-img"
-                              class="avatar-md h-auto"
-                              *ngIf="imageUrl"
-                              alt="Product Image"
-                            />
+                            <img [src]="imageUrl" id="product-img" class="avatar-md h-auto" *ngIf="imageUrl"
+                              alt="Product Image" />
 
-                            <img
-                              [src]="thuoc.avatar"
-                              id="product-img"
-                              class="avatar-md h-auto"
-                              *ngIf="thuoc.avatar && !imageUrl"
-                              alt="Product Image"
-                            />
-                            <p
-                              *ngIf="!imageUrl && !thuoc.avatar"
-                              class="text-muted"
-                            >
+                            <img [src]="thuoc.avatar" id="product-img" class="avatar-md h-auto"
+                              *ngIf="thuoc.avatar && !imageUrl" alt="Product Image" />
+                            <p *ngIf="!imageUrl && !thuoc.avatar" class="text-muted">
                               Chưa có hình ảnh
                             </p>
                           </div>
@@ -687,13 +423,8 @@
                 <h5 class="card-title mb-0">Ghi Chú</h5>
               </div>
               <div class="card-body">
-                <textarea
-                  class="form-control"
-                  placeholder="Nhập ghi chú"
-                  rows="3"
-                  [(ngModel)]="thuoc.ghiChu"
-                  name="ghiChu"
-                ></textarea>
+                <textarea class="form-control" placeholder="Nhập ghi chú" rows="3" [(ngModel)]="thuoc.ghiChu"
+                  name="ghiChu"></textarea>
               </div>
               <!-- end card body -->
             </div>
@@ -703,13 +434,8 @@
                 <h5 class="card-title mb-0">Hướng dẫn sử dụng</h5>
               </div>
               <div class="card-body">
-                <textarea
-                  class="form-control"
-                  placeholder="Nhập hướng dẫn sử dụng"
-                  rows="3"
-                  [(ngModel)]="thuoc.huongDanSuDung"
-                  name="huongDanSuDung"
-                ></textarea>
+                <textarea class="form-control" placeholder="Nhập hướng dẫn sử dụng" rows="3"
+                  [(ngModel)]="thuoc.huongDanSuDung" name="huongDanSuDung"></textarea>
               </div>
               <!-- end card body -->
             </div>
@@ -719,13 +445,8 @@
                 <h5 class="card-title mb-0">Mô tả ngắn</h5>
               </div>
               <div class="card-body">
-                <textarea
-                  class="form-control"
-                  placeholder="Nhập mô tả ngắn"
-                  rows="3"
-                  [(ngModel)]="thuoc.moTaNgan"
-                  name="moTaNgan"
-                ></textarea>
+                <textarea class="form-control" placeholder="Nhập mô tả ngắn" rows="3" [(ngModel)]="thuoc.moTaNgan"
+                  name="moTaNgan"></textarea>
               </div>
               <!-- end card body -->
             </div>
@@ -736,11 +457,7 @@
         </div>
 
         <div class="text-end mb-3">
-          <button
-            type="submit"
-            class="btn btn-success w-sm"
-            (click)="handeSave()"
-          >
+          <button type="submit" class="btn btn-success w-sm" (click)="handeSave()">
             Thêm
           </button>
         </div>
