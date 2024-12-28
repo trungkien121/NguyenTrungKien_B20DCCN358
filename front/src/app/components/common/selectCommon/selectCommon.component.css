@@ -1,0 +1,8 @@
+/* :host ::ng-deep .p-dropdown {
+  width: 14rem;
+} */
+
+.p-dropdown-items-wrapper {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}

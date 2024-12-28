@@ -6,5 +6,6 @@
   (ngModelChange)="onOptionChange($event)"
   [optionLabel]="optionLabel"
   [optionValue]="optionValue"
-  [scrollHeight]="'300'"
+  [virtualScroll]="true"
+  [itemSize]="options.length"
 ></p-dropdown>
