@@ -78,11 +78,11 @@ class LoaiThuocServiceImpl implements LoaiThuocService {
 		LoaiThuoc loaiThuoc = modelMapper.map(loaiThuocDTO, LoaiThuoc.class);
 		LoaiThuoc currentLoaiThuoc = loaiThuocRepo.findById(loaiThuoc.getId()).orElse(null);
 		if (currentLoaiThuoc != null) {
-			if (loaiThuocDTO.getDanhMucThuocId() != currentLoaiThuoc.getDanhMucThuoc().getId()) {
-				DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(loaiThuocDTO.getDanhMucThuocId())
-						.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
-				loaiThuoc.setDanhMucThuoc(danhMucThuoc);
-			}
+//			if (loaiThuocDTO.getDanhMucThuocId() != null && loaiThuocDTO.getDanhMucThuocId() != currentLoaiThuoc.getDanhMucThuoc().getId()) {
+//				DanhMucThuoc danhMucThuoc = danhMucThuocRepo.findById(loaiThuocDTO.getDanhMucThuocId())
+//						.orElseThrow(() -> new RuntimeException("Danh mục thuốc không tồn tại"));
+//				loaiThuoc.setDanhMucThuoc(danhMucThuoc);
+//			}
 			LoaiThuoc updatedLoaiThuoc = loaiThuocRepo.save(loaiThuoc);
 			return ResponseDTO.<LoaiThuoc>builder().status(200).msg("Cập nhật loại thuốc thành công")
 					.data(updatedLoaiThuoc).build();

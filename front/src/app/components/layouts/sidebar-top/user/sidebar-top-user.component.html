@@ -1,9 +1,9 @@
 <div class="app-menu navbar-menu">
   <div id="scrollbar">
     <div class="container-fluid">
-      <div id="two-column-menu"></div>
+      <!-- <div id="two-column-menu"></div> -->
 
-      <ul class="navbar-nav" id="navbar-nav" *ngIf="dmThuocLst && dmThuocLst.length">
+      <ul class="navbar-nav" id="navbar-nav" *ngIf="dmThuocLst.length > 0">
         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
         <li class="nav-item" *ngFor="let dm of dmThuocLst; let i = index">
           <a
@@ -12,25 +12,25 @@
             [attr.aria-controls]="'sidebarUI-' + i"
             [attr.data-bs-target]="'#sidebarUI-' + i"
           >
-            <span data-key="t-base-ui">{{ dm.tenDanhMuc }}</span>
+            <span>{{ dm.tenDanhMuc }}</span>
           </a>
           <div class="collapse menu-dropdown" [id]="'sidebarUI-' + i">
             <ul class="nav nav-sm flex-column">
               <li
-                
                 class="nav-item"
-                style="cursor: pointer;"
+                style="cursor: pointer"
                 *ngFor="let lt of dm.loaiThuocs"
               >
-                <a [routerLink]="['/user/thuoctuloaithuoc', lt.tenLoai]" class="nav-link" data-key="t-alerts">{{ lt.tenLoai }}</a>
+                <a
+                  [routerLink]="['/user/thuoctuloaithuoc', lt.tenLoai]"
+                  class="nav-link"
+                  >{{ lt.tenLoai }}</a
+                >
               </li>
             </ul>
           </div>
         </li>
       </ul>
-      
-      
     </div>
   </div>
- 
 </div>
