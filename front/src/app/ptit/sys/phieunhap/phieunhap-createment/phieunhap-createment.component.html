@@ -136,11 +136,11 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="manufacturer-brand-input"
+                        id="soLuong-{{ item.thuocId }}"
                         placeholder="Nhập số lượng"
                         [(ngModel)]="item.soLuong"
                         [value]="item.soLuong"
-                        name="soLuong-{{ item.id }}"
+                        name="soLuong-{{ item.thuocId }}"
                       />
                     </div>
                   </div>
@@ -153,11 +153,11 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="manufacturer-brand-input"
+                        id="donGia-{{ item.thuocId }}"
                         placeholder="Nhập đơn giá"
                         [(ngModel)]="item.donGia"
                         [value]="item.donGia"
-                        name="donGia-{{ item.id }}"
+                        name="donGia-{{ item.thuocId }}"
                       />
                     </div>
                   </div>

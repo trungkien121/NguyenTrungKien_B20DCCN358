@@ -80,7 +80,7 @@ export class PhieuNhapCreatementComponent implements OnInit {
     this.thuocSelected.forEach((item) => {
       this.chiTietPhieuNhapLst.push({
         thuoc: item,
-        donGia: 0,
+        donGia: item.giaNhap,
         soLuong: 0,
         thuocId: item.id,
       });
