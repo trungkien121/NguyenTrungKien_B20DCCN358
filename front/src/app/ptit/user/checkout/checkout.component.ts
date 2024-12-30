@@ -41,6 +41,8 @@ export class CheckoutComponent implements OnInit {
   gioHangId: number = 0;
   gioHangLst: GioHangChiTiet[] = [];
 
+  disabled: boolean = false;
+
   tongTien: number = 0;
   donhang: DonHang = {};
 
@@ -102,6 +104,7 @@ export class CheckoutComponent implements OnInit {
     });
 
     if (this.donhang.phuongThucThanhToan == PhuongThucThanhToan.CHUYEN_KHOAN) {
+      this.disabled = true;
       this.vnPayService.create(this.tongTien).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           const url = resp.data;
@@ -137,9 +140,12 @@ export class CheckoutComponent implements OnInit {
         }
       });
     } else {
+      this.disabled = true;
+
       this.donhangService.create(this.donhang).subscribe((resp) => {
         if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Lưu thành công");
+          this.disabled = false;
           this.gioHangLst.forEach((item: GioHangChiTiet) => {
             this.gioHangService.deleteGH(item.id).subscribe((resp) => {
               if (resp.status == CommonConstant.STATUS_OK_200) {
@@ -153,6 +159,7 @@ export class CheckoutComponent implements OnInit {
           });
         } else {
           this.toastService.error("Lưu thất bại");
+          this.disabled = false;
         }
       });
     }
