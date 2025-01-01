@@ -22,11 +22,9 @@ export class LoaiThuocComponent implements OnInit {
     private loaithuocService: LoaithuocService,
     private toastService: ToastrService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    
+    private messageService: MessageService
   ) {}
-  
-    
+
   loaithuocLst: LoaiThuoc[] = [];
   loaithuocNew: LoaiThuoc = {};
   loaithuocDelete: LoaiThuoc = {};
@@ -37,7 +35,7 @@ export class LoaiThuocComponent implements OnInit {
     currentPage: 0,
     size: 100,
     sortedField: "",
-    tenLoai: ''
+    tenLoai: "",
   };
 
   totalRow: number = 0;
@@ -48,41 +46,33 @@ export class LoaiThuocComponent implements OnInit {
     this.getData();
   }
 
-
-
   getData() {
-      this.loaithuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {
-        if (res.status == CommonConstant.STATUS_OK_200) {
-          this.loaithuocLst = res.data;
-          this.totalRow = res.data.totalElements;
-        }
-      });
-   
+    this.loaithuocService.getLoaiThuocLst(this.modelSearch).subscribe((res) => {
+      if (res.status == CommonConstant.STATUS_OK_200) {
+        this.loaithuocLst = res.data;
+        this.totalRow = res.data.totalElements;
+      }
+    });
   }
 
   search() {
-    if(this.modelSearch.tenLoai){
-      this.loaithuocService.getLoaiThuocLst2(this.modelSearch.tenLoai).subscribe((res) => {
-        if (res.status == CommonConstant.STATUS_OK_200) {
-          this.loaithuocLst = res.data;
-          this.totalRow = res.data.totalElements;
-        }     else{
-          this.loaithuocLst  = []
-          this.totalRow = 0;
-
-
-        }
-      });
+    if (this.modelSearch.tenLoai) {
+      this.loaithuocService
+        .getLoaiThuocLst2(this.modelSearch.tenLoai)
+        .subscribe((res) => {
+          if (res.status == CommonConstant.STATUS_OK_200) {
+            this.loaithuocLst = res.data;
+            this.totalRow = res.data.totalElements;
+          } else {
+            this.loaithuocLst = [];
+            this.totalRow = 0;
+          }
+        });
+    } else {
+      this.getData();
     }
-
-    else{
-      this.getData()
-    }
-  
   }
 
-
-   
   preAdd() {
     this.displayDialog = true;
   }

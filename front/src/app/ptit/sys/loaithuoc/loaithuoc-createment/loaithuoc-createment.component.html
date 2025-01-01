@@ -14,9 +14,10 @@
     </div>
 
     <div class="mb-3">
-      <label class="col-form-label" for="title">Trạng Thái</label>
+      <label class="col-form-label" for="title">Danh mục</label>
       <app-select-common [optionValue]="'id'" [optionLabel]="'tenDanhMuc'" [options]="dmThuocLst"
-        [isOptionSelectType]="false" [selectedOptionValue]="loaithuoc.danhMucThuocId" (selectionChange)="onDMChange($event)"></app-select-common>
+        [isOptionSelectType]="false" [selectedOptionValue]="loaithuoc.danhMucThuocId"
+        (selectionChange)="onDMChange($event)"></app-select-common>
     </div>
 
     <div class="mb-3">

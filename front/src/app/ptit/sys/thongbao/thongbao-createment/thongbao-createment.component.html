@@ -1,0 +1,38 @@
+<p-dialog header="Thêm thông báo" [(visible)]="displayModal" [modal]="true" [style]="{ width: '50vw' }"
+    [baseZIndex]="10000" [draggable]="true" [resizable]="false" [modal]="true" (onHide)="onCancel()">
+    <div>
+
+        <div class="mb-3">
+            <label class="col-form-label" for="title">Thông báo</label>
+            <app-select-common [optionValue]="'value'" [optionLabel]="'label'" [options]="loaiThongBaoList"
+                [isOptionSelectType]="false" [selectedOptionValue]="selectedLoaiThongBao"
+                (selectionChange)="onThongBaoChange($event)"></app-select-common>
+        </div>
+
+        <div class="mb-3">
+            <label class="col-form-label" for="title"> Nội dung <span class="text-danger">*</span></label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Nhập nội dung" #title="ngModel"
+                [(ngModel)]="thongbao.noiDung" required />
+        </div>
+        <div class="text-danger" *ngIf="
+        thongbao.noiDung == '' ||
+        (title.invalid && (title.dirty || title.touched))
+      ">
+            Hãy nhập nội dung cần thông báo
+        </div>
+
+        <div class="mb-3">
+            <label class="col-form-label" for="title"> Tiêu đề</label>
+            <textarea type="text" name="mota" class="form-control" id="mota" placeholder="Nhập tiêu đề"
+                [(ngModel)]="thongbao.tieuDe">
+      </textarea>
+        </div>
+
+
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="displayModal = false" label="Hủy" styleClass="btn btn-danger"></p-button>
+        <p-button icon="pi pi-check" label="Lưu" (click)="onSave()" styleClass="btn btn-success"></p-button>
+    </ng-template>
+</p-dialog>

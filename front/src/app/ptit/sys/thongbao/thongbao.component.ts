@@ -20,8 +20,7 @@ import { ThongBaoService } from "src/app/_service/thongbao.service";
   providers: [ConfirmationService, MessageService],
 })
 export class ThongBaoComponent implements OnInit {
-  
-  thongBao: ThongBao[]=[];
+  thongBao: ThongBao[] = [];
 
   constructor(
     private nccService: NCCService,
@@ -38,19 +37,56 @@ export class ThongBaoComponent implements OnInit {
     size: 100,
     sortedField: "",
   };
+
+  displayDialog: boolean = false;
+  thongbaoNew: ThongBao = {};
+
   ngOnInit(): void {
     this.getThongBao();
   }
-  getThongBao(){
-    this.thongBaoService.getLstAdmin(this.modelSearch).subscribe((res) =>{
+
+  getThongBao() {
+    this.thongBaoService.getLstAdmin(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
-        this.thongBao = res.data.data; 
+        this.thongBao = res.data.data;
         console.log(this.thongBao);
-        
       }
-    })
+    });
   }
-  search(){
-    
+
+  preAdd() {
+    this.displayDialog = true;
+  }
+  preUpdate(thongBao: ThongBao) {
+    this.displayDialog = true;
+    this.thongbaoNew = thongBao;
+  }
+
+  handleCancel(displayDialog: boolean) {
+    this.displayDialog = displayDialog;
+    this.thongbaoNew = {};
+    this.getThongBao();
+  }
+
+  handeSave(thongbao: ThongBao) {
+    if (!thongbao.id) {
+      this.thongBaoService.create(thongbao).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_201) {
+          this.toastService.success("Lưu thành công");
+          this.getThongBao();
+        } else {
+          this.toastService.error("Lưu thất bại");
+        }
+      });
+    } else {
+      this.thongBaoService.update(thongbao).subscribe((resp) => {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
+          this.toastService.success("Cập nhật thành công");
+          this.getThongBao();
+        } else {
+          this.toastService.error("Cập nhật thất bại");
+        }
+      });
+    }
   }
 }

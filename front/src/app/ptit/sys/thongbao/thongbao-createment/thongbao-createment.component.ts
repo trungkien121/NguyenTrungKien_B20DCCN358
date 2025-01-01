@@ -11,25 +11,28 @@ import { PrimeNGConfig } from "primeng/api";
 import { CommonConstant } from "src/app/_constant/common.constants";
 import { DanhMucThuoc } from "src/app/_model/danhmucthuoc";
 import { LoaiThuoc } from "src/app/_model/loaithuoc";
+import { ThongBao } from "src/app/_model/thongbao";
 import { DanhmucThuocService } from "src/app/_service/danhmucthuoc.service";
+import { ThongBaoService } from "src/app/_service/thongbao.service";
 
 declare var $: any;
 
 @Component({
-  selector: "app-loaithuoc-createment",
-  templateUrl: "./loaithuoc-createment.component.html",
+  selector: "app-thongbao-createment",
+  templateUrl: "./thongbao-createment.component.html",
 })
-export class LoaiThuocCreatementComponent implements OnInit {
+export class ThongBaoCreatementComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private cdr: ChangeDetectorRef,
-    private dmThuocService: DanhmucThuocService
+    private dmThuocService: DanhmucThuocService,
+    private thongBaoService: ThongBaoService
   ) {}
 
   dmThuocLst: DanhMucThuoc[] = [];
 
   @Input()
-  loaithuoc: LoaiThuoc = {};
+  thongbao: ThongBao = {};
 
   @Output()
   save: EventEmitter<any> = new EventEmitter();
@@ -38,6 +41,22 @@ export class LoaiThuocCreatementComponent implements OnInit {
   cancel: EventEmitter<any> = new EventEmitter();
 
   displayModal: boolean = true;
+  loaiThongBaoList = [
+    { value: "CA_NHAN", label: "Cá Nhân" },
+    { value: "CANH_BAO", label: "Cảnh Báo" },
+    { value: "GIAO_DICH", label: "Giao Dịch" },
+    { value: "HE_THONG", label: "Hệ Thống" },
+    { value: "KHUYEN_MAI", label: "Khuyến Mãi" },
+    { value: "SU_KIEN", label: "Sự Kiện" },
+    { value: "TAI_KHOAN", label: "Tài Khoản" },
+  ];
+
+  selectedLoaiThongBao: string = ""; // Lựa chọn hiện tại
+
+  onThongBaoChange(newOption: string): void {
+    this.selectedLoaiThongBao = newOption;
+    console.log("Loại thông báo được chọn:", this.selectedLoaiThongBao);
+  }
 
   getDmThuocLst() {
     this.dmThuocService.getDMTLst().subscribe((res) => {
@@ -47,13 +66,9 @@ export class LoaiThuocCreatementComponent implements OnInit {
       }
     });
   }
+
   ngOnInit() {
     this.getDmThuocLst();
-  }
-
-  onDMChange(value: string) {
-    // console.log("hehe", value)
-    this.loaithuoc.danhMucThuocId = value;
   }
 
   onCancel() {
@@ -62,24 +77,20 @@ export class LoaiThuocCreatementComponent implements OnInit {
 
   check(loaithuoc: LoaiThuoc) {
     let check = true;
-    // if (loaithuoc.moTa == undefined || loaithuoc.moTa.trim().length == 0) {
-    //   check = false;
-    //   this.loaithuoc.moTa = "";
-    // }
     if (
-      loaithuoc.tenLoai == undefined ||
-      loaithuoc.tenLoai.trim().length == 0
+      this.thongbao.loaiThongBao == undefined ||
+      this.thongbao.loaiThongBao.trim().length == 0
     ) {
       check = false;
-      this.loaithuoc.tenLoai = "";
+      this.thongbao.loaiThongBao = "";
     }
     return check;
   }
 
   onSave() {
-    if (this.check(this.loaithuoc)) {
+    if (this.check(this.thongbao)) {
       this.displayModal = false;
-      this.save.emit(this.loaithuoc);
+      this.save.emit(this.thongbao);
     }
   }
 }
