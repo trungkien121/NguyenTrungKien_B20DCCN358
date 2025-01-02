@@ -58,28 +58,17 @@ export class ThongBaoCreatementComponent implements OnInit {
     console.log("Loại thông báo được chọn:", this.selectedLoaiThongBao);
   }
 
-  getDmThuocLst() {
-    this.dmThuocService.getDMTLst().subscribe((res) => {
-      if (res.status == CommonConstant.STATUS_OK_200) {
-        this.dmThuocLst = res.data;
-        this.cdr.detectChanges();
-      }
-    });
-  }
-
-  ngOnInit() {
-    this.getDmThuocLst();
-  }
+  ngOnInit() {}
 
   onCancel() {
     this.cancel.emit(false);
   }
 
-  check(loaithuoc: LoaiThuoc) {
+  check(thongbao: ThongBao) {
     let check = true;
     if (
-      this.thongbao.loaiThongBao == undefined ||
-      this.thongbao.loaiThongBao.trim().length == 0
+      thongbao.loaiThongBao == undefined ||
+      thongbao.loaiThongBao.trim().length == 0
     ) {
       check = false;
       this.thongbao.loaiThongBao = "";
