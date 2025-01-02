@@ -77,9 +77,11 @@ export class ThongBaoCreatementComponent implements OnInit {
   }
 
   onSave() {
-    if (this.check(this.thongbao)) {
-      this.displayModal = false;
-      this.save.emit(this.thongbao);
-    }
+    // if (this.check(this.thongbao)) {
+    //   this.displayModal = false;
+    //   this.save.emit(this.thongbao);
+    // }
+    this.displayModal = false;
+    this.save.emit(this.thongbao);
   }
 }
