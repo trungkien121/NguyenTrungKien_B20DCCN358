@@ -43,11 +43,11 @@ export class ThongBaoCreatementComponent implements OnInit {
   displayModal: boolean = true;
   loaiThongBaoList = [
     { value: "CANH_BAO", label: "Cảnh Báo" },
-    { value: "GIAO_DICH", label: "Giao Dịch" },
+    // { value: "GIAO_DICH", label: "Giao Dịch" },
     { value: "HE_THONG", label: "Hệ Thống" },
     { value: "KHUYEN_MAI", label: "Khuyến Mãi" },
     { value: "SU_KIEN", label: "Sự Kiện" },
-    { value: "TAI_KHOAN", label: "Tài Khoản" },
+    // { value: "TAI_KHOAN", label: "Tài Khoản" },
   ];
 
   selectedLoaiThongBao: string = ""; // Lựa chọn hiện tại
