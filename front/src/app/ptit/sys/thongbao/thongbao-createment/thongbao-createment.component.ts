@@ -42,7 +42,6 @@ export class ThongBaoCreatementComponent implements OnInit {
 
   displayModal: boolean = true;
   loaiThongBaoList = [
-    { value: "CA_NHAN", label: "Cá Nhân" },
     { value: "CANH_BAO", label: "Cảnh Báo" },
     { value: "GIAO_DICH", label: "Giao Dịch" },
     { value: "HE_THONG", label: "Hệ Thống" },
@@ -81,6 +80,7 @@ export class ThongBaoCreatementComponent implements OnInit {
     //   this.displayModal = false;
     //   this.save.emit(this.thongbao);
     // }
+    this.thongbao.loaiThongBao = this.selectedLoaiThongBao;
     this.displayModal = false;
     this.save.emit(this.thongbao);
   }

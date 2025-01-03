@@ -48,7 +48,7 @@ export class ThongBaoComponent implements OnInit {
   getThongBao() {
     this.thongBaoService.getLstAdmin(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
-        this.thongBao = res.data.data;
+        this.thongBao = res.data.data.reverse();
         console.log(this.thongBao);
       }
     });
@@ -71,7 +71,7 @@ export class ThongBaoComponent implements OnInit {
   handeSave(thongbao: ThongBao) {
     if (!thongbao.id) {
       this.thongBaoService.create(thongbao).subscribe((resp) => {
-        if (resp.status == CommonConstant.STATUS_OK_201) {
+        if (resp.status == CommonConstant.STATUS_OK_200) {
           this.toastService.success("Lưu thành công");
           this.getThongBao();
         } else {
