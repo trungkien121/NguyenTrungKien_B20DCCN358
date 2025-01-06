@@ -1,37 +1,23 @@
 <div class="main-content">
   <div class="page-content">
     <div class="container-fluid">
-      <div
-        *ngIf="displayDialog"
-        id="layer-popup"
-        [ngClass]="{ active: displayDialog }"
-      >
-        <app-select-thuoc
-          [thuocSelected]="thuocSelected"
-          (cancel)="handleCancel($event)"
-          (save)="handleSaveThuoc($event)"
-        >
+      <div *ngIf="displayDialog" id="layer-popup" [ngClass]="{ active: displayDialog }">
+        <app-select-thuoc [thuocSelected]="thuocSelected" (cancel)="handleCancel($event)"
+          (save)="handleSaveThuoc($event)">
         </app-select-thuoc>
       </div>
 
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">Thêm phiếu nhập</h4>
           </div>
         </div>
       </div>
       <!-- end page title -->
 
-      <form
-        id="createproduct-form"
-        autocomplete="off"
-        class="needs-validation"
-        novalidate
-      >
+      <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
@@ -42,47 +28,27 @@
                       <label class="col-form-label" for="maNCC">
                         Người nhập <span class="text-danger">*</span>
                       </label>
-                      <input
-                        type="text"
-                        name="maNCC"
-                        class="form-control"
-                        id="maNCC"
-                        [(ngModel)]="nguoidungHoten"
-                        disabled="true"
-                      />
+                      <input type="text" name="maNCC" class="form-control" id="maNCC" [(ngModel)]="nguoidungHoten"
+                        disabled="true" />
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="col-form-label" for="tenNhaCungCap"
-                        >Nhà cung cấp <span class="text-danger">*</span></label
-                      >
-                      <app-select-common
-                        [optionValue]="'id'"
-                        [optionLabel]="'tenNhaCungCap'"
-                        [options]="nccLst"
-                        [isOptionSelectType]="false"
-                        [selectedOptionValue]="phieunhap.nhaCungCapId"
-                        (selectionChange)="onNCChange($event)"
-                      ></app-select-common>
+                      <label class="col-form-label" for="tenNhaCungCap">Nhà cung cấp <span
+                          class="text-danger">*</span></label>
+                      <app-select-common [optionValue]="'id'" [optionLabel]="'tenNhaCungCap'" [options]="nccLst"
+                        [isOptionSelectType]="false" [selectedOptionValue]="phieunhap.nhaCungCapId"
+                        (selectionChange)="onNCChange($event)"></app-select-common>
                     </div>
                   </div>
 
                   <div class="col-lg-6">
                     <div class="mb-3">
-                      <label class="col-form-label" for="diaChi"
-                        >Ngày nhập
+                      <label class="col-form-label" for="diaChi">Ngày nhập
                       </label>
-                      <input
-                        type="date"
-                        name="diaChi"
-                        class="form-control"
-                        id="diaChi"
-                        #diaChi="ngModel"
-                        placeholder="Nhập địa chỉ nhà cung cấp"
-                        [(ngModel)]="phieunhap.createdAt"
-                      />
+                      <input type="date" name="diaChi" class="form-control" id="diaChi" #diaChi="ngModel"
+                        placeholder="Nhập địa chỉ nhà cung cấp" [(ngModel)]="phieunhap.createdAt" />
                     </div>
                   </div>
                 </div>
@@ -107,24 +73,14 @@
                   </div>
                 </div>
 
-                <div
-                  class="row align-items-center"
-                  *ngFor="let item of chiTietPhieuNhapLst; let index = index"
-                >
-                  <div class="col-lg-3">
+                <div class="row align-items-center" *ngFor="let item of chiTietPhieuNhapLst; let index = index">
+                  <div class="col-lg-2">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-name-input">
                         Thuốc
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-name-input"
-                        placeholder="Tên thuốc"
-                        name="nguongCanhBao"
-                        [value]="item.thuoc?.tenThuoc"
-                        disabled
-                      />
+                      <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Tên thuốc"
+                        name="nguongCanhBao" [value]="item.thuoc?.tenThuoc" disabled />
                     </div>
                   </div>
 
@@ -133,55 +89,44 @@
                       <label class="form-label" for="manufacturer-brand-input">
                         Số lượng
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="soLuong-{{ item.thuocId }}"
-                        placeholder="Nhập số lượng"
-                        [(ngModel)]="item.soLuong"
-                        [value]="item.soLuong"
-                        name="soLuong-{{ item.thuocId }}"
-                      />
+                      <input type="text" class="form-control" id="soLuong-{{ item.thuocId }}"
+                        placeholder="Nhập số lượng" [(ngModel)]="item.soLuong" [value]="item.soLuong"
+                        name="soLuong-{{ item.thuocId }}" />
                     </div>
                   </div>
 
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input">
                         Đơn giá
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="donGia-{{ item.thuocId }}"
-                        placeholder="Nhập đơn giá"
-                        [(ngModel)]="item.donGia"
-                        [value]="item.donGia"
-                        name="donGia-{{ item.thuocId }}"
-                      />
+                      <input type="text" class="form-control" id="donGia-{{ item.thuocId }}" placeholder="Nhập đơn giá"
+                        [(ngModel)]="item.donGia" [value]="item.donGia" name="donGia-{{ item.thuocId }}" />
                     </div>
                   </div>
 
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input">
                         Tổng
                       </label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="manufacturer-brand-input"
-                        [value]="(item.donGia || 0) * (item.soLuong || 0)"
-                        disabled
-                      />
+                      <input type="text" class="form-control" id="manufacturer-brand-input"
+                        [value]="(item.donGia || 0) * (item.soLuong || 0)" disabled />
                     </div>
                   </div>
+
+                  <div class="col-lg-2">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">Hạn sử dụng
+                      </label>
+                      <input type="date" name="diaChi" class="form-control" id="diaChi" #diaChi="ngModel"
+                        placeholder="Nhập địa chỉ nhà cung cấp" [(ngModel)]="phieunhap.createdAt" />
+                    </div>
+                  </div>
+
                   <div class="col-lg-1 d-flex justify-content-end">
-                    <i
-                      class="ri-delete-bin-line text-danger cursor-pointer"
-                      style="font-size: 2rem"
-                      (click)="deleteThuoc(index)"
-                    ></i>
+                    <i class="ri-delete-bin-line text-danger cursor-pointer" style="font-size: 2rem"
+                      (click)="deleteThuoc(index)"></i>
                   </div>
                 </div>
 

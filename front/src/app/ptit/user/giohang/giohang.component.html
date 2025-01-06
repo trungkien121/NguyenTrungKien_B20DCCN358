@@ -4,9 +4,7 @@
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div
-            class="page-title-box d-sm-flex align-items-center justify-content-between"
-          >
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0">Giỏ hàng</h4>
           </div>
         </div>
@@ -24,11 +22,7 @@
               </div>
             </div>
             <div class="col-sm-auto">
-              <a
-                [routerLink]="['/user/home']"
-                class="link-primary text-decoration-underline"
-                >Thêm thuốc</a
-              >
+              <a [routerLink]="['/user/home']" class="link-primary text-decoration-underline">Thêm thuốc</a>
             </div>
           </div>
 
@@ -37,28 +31,21 @@
               <div class="row gy-3">
                 <div class="col-sm-auto">
                   <div class="avatar-lg bg-light rounded p-1">
-                    <img
-                      [src]="item.thuoc?.avatar"
-                      alt=""
-                      class="img-fluid d-block"
-                    />
+                    <img [src]="item.thuoc?.avatar" alt="" class="img-fluid d-block" />
                   </div>
                 </div>
 
                 <div class="col-sm">
                   <h5 class="fs-14 text-truncate">
-                    <a
-                      [routerLink]="['/thuoc-chitiet/', item.thuoc?.id]"
-                      class="text-dark"
-                      >{{ item.thuoc?.tenThuoc }}</a
-                    >
+                    <a [routerLink]="['/thuoc-chitiet/', item.thuoc?.id]" class="text-dark">{{ item.thuoc?.tenThuoc
+                      }}</a>
                   </h5>
                   <ul class="list-inline text-muted">
                     <li class="list-inline-item">
                       Số lượng còn lại :
                       <span class="fw-medium">{{
                         item.thuoc?.soLuongTon
-                      }}</span>
+                        }}</span>
                     </li>
                     <!-- <li class="list-inline-item">
                       Size : <span class="fw-medium">M</span>
@@ -66,25 +53,11 @@
                   </ul>
 
                   <div class="input-step light">
-                    <button
-                      type="button"
-                      class="minus shadow"
-                      (click)="minusQuantity(item)"
-                    >
+                    <button type="button" class="minus shadow" (click)="minusQuantity(item)">
                       –
                     </button>
-                    <input
-                      type="number"
-                      class="product-quantity"
-                      [value]="item.soLuong"
-                      min="0"
-                      max="100"
-                    />
-                    <button
-                      type="button"
-                      class="plus shadow"
-                      (click)="addQuantity(item)"
-                    >
+                    <input type="number" class="product-quantity" [value]="item.soLuong" min="0" max="100" />
+                    <button type="button" class="plus shadow" (click)="addQuantity(item)">
                       +
                     </button>
                   </div>
@@ -94,9 +67,8 @@
                   <div class="text-lg-end">
                     <p class="text-muted mb-1">Giá:</p>
                     <h5 class="fs-14">
-                      <span id="ticket_price" class="product-price"
-                        >{{ item.thuoc?.giaBan | number : "1.0-0" }} VNĐ</span
-                      >
+                      <span id="ticket_price" class="product-price">{{ item.thuoc?.giaBan | number : "1.0-0" }}
+                        VNĐ</span>
                     </h5>
                   </div>
                 </div>
@@ -108,16 +80,10 @@
                 <div class="col-sm">
                   <div class="d-flex flex-wrap my-n1">
                     <div>
-                      <a
-                        (click)="deleteGioHang(item)"
-                        class="d-block text-body p-1 px-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#removeItemModal"
-                        ><i
-                          class="ri-delete-bin-fill text-danger align-bottom me-1"
-                        ></i>
-                        Xoá</a
-                      >
+                      <a (click)="deleteGioHang(item)" class="d-block text-body p-1 px-2" data-bs-toggle="modal"
+                        data-bs-target="#removeItemModal"><i
+                          class="ri-delete-bin-fill text-danger align-bottom me-1"></i>
+                        Xoá</a>
                     </div>
                     <!-- <div>
                       <a href="#" class="d-block text-body p-1 px-2"
@@ -135,8 +101,8 @@
                     <h5 class="fs-14 mb-0">
                       <span class="product-line-price">
                         {{
-                          (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
-                            | number : "1.0-0"
+                        (item.soLuong || 0) * (item.thuoc?.giaBan || 0)
+                        | number : "1.0-0"
                         }}
                         VNĐ
                       </span>
@@ -152,17 +118,10 @@
           <div *ngIf="gioHangLst.length == 0" id="pills-finish">
             <div class="card">
               <div class="card-body">
-                <div
-                  class="text-center py-5 cursor-pointer"
-                  [routerLink]="['/user/home']"
-                >
+                <div class="text-center py-5 cursor-pointer" [routerLink]="['/user/home']">
                   <div class="mb-4">
-                    <lord-icon
-                      src="https://cdn.lordicon.com/lupuorrc.json"
-                      trigger="loop"
-                      colors="primary:#0ab39c,secondary:#405189"
-                      style="width: 120px; height: 120px"
-                    ></lord-icon>
+                    <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
+                      colors="primary:#0ab39c,secondary:#405189" style="width: 120px; height: 120px"></lord-icon>
                   </div>
                   <h5>Hiện tại giỏ hàng của bạn đang trống!</h5>
                   <p class="text-muted">Hãy cùng đi thêm thuốc vào giỏ hàng</p>
@@ -181,15 +140,10 @@
           </div>
 
           <div class="text-end mb-4">
-            <a
-              *ngIf="gioHangLst.length > 0"
-              [routerLink]="['/user/checkout']"
-              class="btn btn-success btn-label right ms-auto"
-              ><i
-                class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"
-              ></i>
-              Mua</a
-            >
+            <a *ngIf="gioHangLst.length > 0" [routerLink]="['/user/checkout']"
+              class="btn btn-success btn-label right ms-auto"><i
+                class="ri-arrow-right-line label-icon align-bottom fs-16 ms-2"></i>
+              Mua</a>
           </div>
         </div>
         <!-- end col -->
@@ -225,7 +179,7 @@
                       <tr>
                         <td>Tổng:</td>
                         <td class="text-end" id="cart-subtotal">
-                          {{ tongTien + ".000" }} VNĐ
+                          {{ tongTien | number : "1.0-0"}} VNĐ
                         </td>
                       </tr>
                       <tr>
@@ -241,7 +195,7 @@
                         <th>Total (USD) :</th>
                         <td class="text-end">
                           <span class="fw-semibold" id="cart-total">
-                            {{ tongTien + ".000" }} VNĐ
+                            {{ tongTien | number : "1.0-0" }} VNĐ
                           </span>
                         </td>
                       </tr>
