@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(["/login"]);
       }
       if (res.status == CommonConstant.STATUS_OK_400) {
-        this.toastService.success("Email đã tồn tại");
+        this.toastService.success(res.msg);
       }
     });
   }
