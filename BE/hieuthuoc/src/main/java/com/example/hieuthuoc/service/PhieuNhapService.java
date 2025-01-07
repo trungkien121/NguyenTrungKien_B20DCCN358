@@ -202,6 +202,11 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 			tonKho.setSoLo(soLo);
 
 			tonKhoRepo.save(tonKho);
+			
+			Thuoc thuoc = chiTiet.getThuoc();
+			int soLuongTon = thuoc.getSoLuongTon() + chiTiet.getSoLuong();
+			thuoc.setSoLuongTon(soLuongTon);
+			thuocRepo.save(thuoc);
 		}
 	}
 
