@@ -177,6 +177,8 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 			}
 			phieuNhap.setTongTien(tongTien);
 			phieuNhap.setChiTietPhieuNhaps(chiTietPhieuNhaps);
+			
+			createTonKhoFromPhieuNhap(phieuNhap);
 
 			return ResponseDTO.<PhieuNhap>builder().status(200).msg("Thành công").data(phieuNhapRepo.save(phieuNhap))
 					.build();
