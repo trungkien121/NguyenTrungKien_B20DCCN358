@@ -68,6 +68,9 @@ export class SignupComponent implements OnInit {
         this.toastService.success("Đăng ký thành công");
         this.router.navigate(["/login"]);
       }
+      if (res.status == CommonConstant.STATUS_OK_400) {
+        this.toastService.success("Email đã tồn tại");
+      }
     });
   }
 
@@ -83,6 +86,4 @@ export class SignupComponent implements OnInit {
     const phoneRegex = /^[0-9]+$/;
     return phoneRegex.test(phone);
   }
-  
-  
 }
