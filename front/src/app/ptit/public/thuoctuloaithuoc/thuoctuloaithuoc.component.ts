@@ -115,7 +115,9 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   }
 
   selectPriceRange(price: any) {
-    this.selectedPriceRange = price.value;
+    this.selectedPriceRange =
+      this.selectedPriceRange === price.value ? null : price.value;
+
     this.modelSearch.maxGiaBan = price.maxGiaBan;
     this.modelSearch.minGiaBan = price.minGiaBan;
 

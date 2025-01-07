@@ -184,3 +184,71 @@
 .filter-options li:hover {
   background: #f8f9fa;
 }
+
+/* Kiểu chung cho bộ lọc */
+.filter-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* padding: 15px; */
+  background-color: #fff;
+}
+
+/* Tiêu đề của mỗi phần */
+.filter-title {
+  font-size: 16px;
+  font-weight: bold;
+  /* margin-bottom: 10px; */
+}
+
+/* Tùy chọn bên trong mỗi phần */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* margin-bottom: 15px;  */
+  /* Khoảng cách bên dưới các tùy chọn */
+}
+
+/* Gạch chân ngăn cách mỗi phần */
+.filter-category {
+  /* padding-bottom: 15px; */
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd; /* Dòng gạch chân */
+}
+
+/* Xóa dòng gạch chân ở phần cuối cùng */
+.filter-category:last-child {
+  border-bottom: none;
+}
+
+/* Nút lọc giá bán */
+.filter-options button {
+  /* padding: 10px 15px; */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.filter-options button:hover {
+  background-color: #f5f5f5;
+}
+
+.filter-options button.active {
+  border-color: #007bff;
+  background-color: #e9f3ff;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Label cho radio */
+.filter-options label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filter-options label input[type="radio"] {
+  margin-right: 8px;
+}

@@ -38,7 +38,7 @@ export class ThongKecComponent implements OnInit {
   doanhThuTheoThang: number[] = [];
 
   months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-  nams = ["2022", "2023", "2024"];
+  nams = ["2022", "2023", "2024", "2025"];
   hours = [
     "1",
     "2",
