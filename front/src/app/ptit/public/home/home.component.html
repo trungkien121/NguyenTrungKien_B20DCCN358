@@ -1,4 +1,4 @@
-  <div iv class="main-content">
+<div iv class="main-content">
   <div class="page-content">
     <div class="container-fluid">
       <!-- start page title -->
@@ -18,13 +18,8 @@
         <div class="card">
           <div class="card-header border-0 rounded">
             <div class="search-box-custom">
-              <input
-                type="text"
-                class="form-control search-input"
-                placeholder="Tìm tên thuốc, thực phẩm chức năng..."
-                [(ngModel)]="modelSearch.keyWord"
-                (keydown.enter)="search()"
-              />
+              <input type="text" class="form-control search-input" placeholder="Tìm tên thuốc, thực phẩm chức năng..."
+                [(ngModel)]="modelSearch.keyWord" (keydown.enter)="search()" />
               <button type="button" class="search-button" (click)="search()">
                 <i class="ri-search-line"></i>
               </button>
@@ -37,125 +32,57 @@
         <div class="row">
           <!-- Slider (2/3 chiều rộng) -->
           <div class="col-lg-8 col-md-8 col-sm-12">
-            <div
-              id="carouselExample"
-              class="carousel slide"
-              data-bs-ride="carousel"
-            >
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide-to="0"
-                  class="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide-to="3"
-                  aria-label="Slide 4"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide-to="44"
-                  aria-label="Slide 5"
-                ></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                  aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3"
+                  aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="44"
+                  aria-label="Slide 5"></button>
               </div>
 
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img
-                    src="assets/images/slide home/4.webp"
-                    class="d-block w-100"
-                    alt="Slide 1"
-                  />
+                  <img src="assets/images/slide home/4.webp" class="d-block w-100" alt="Slide 1" />
                 </div>
                 <div class="carousel-item">
-                  <img
-                    src="assets/images/slide home/2.webp"
-                    class="d-block w-100"
-                    alt="Slide 2"
-                  />
+                  <a [routerLink]="['/thuoc-chitiet', 31]">
+                    <img src="assets/images/slide home/2.webp" class="d-block w-100" alt="Slide 2" />
+                  </a>
                 </div>
                 <div class="carousel-item">
-                  <img
-                    src="assets/images/slide home/1.webp"
-                    class="d-block w-100"
-                    alt="Slide 3"
-                  />
+                  <img src="assets/images/slide home/1.webp" class="d-block w-100" alt="Slide 3" />
                 </div>
                 <div class="carousel-item">
-                  <img
-                    src="assets/images/slide home/3.webp"
-                    class="d-block w-100"
-                    alt="Slide 4"
-                  />
+                  <img src="assets/images/slide home/3.webp" class="d-block w-100" alt="Slide 4" />
                 </div>
                 <div class="carousel-item">
-                  <img
-                    src="assets/images/slide home/5.webp"
-                    class="d-block w-100"
-                    alt="Slide 5"
-                  />
+                  <img src="assets/images/slide home/5.webp" class="d-block w-100" alt="Slide 5" />
                 </div>
               </div>
 
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExample"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
           </div>
 
           <!-- Hình ảnh bên phải (1/3 chiều rộng) -->
-          <div
-            class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-between"
-          >
-            <img
-              src="assets/images/slide home/benh&suckhoe.webp"
-              alt="Right Image 1"
-              class="right-image"
-            />
-            <img
-              src="assets/images/slide home/sinhluc.jpg"
-              alt="Right Image 2"
-              class="right-image"
-            />
+          <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-between">
+            <img src="assets/images/slide home/benh&suckhoe.webp" alt="Right Image 1" class="right-image" />
+            <img src="assets/images/slide home/sinhluc.jpg" alt="Right Image 2" class="right-image" />
           </div>
         </div>
       </div>
@@ -191,10 +118,8 @@
                       </div>
                     </div>
                     <div class="mt-4">
-                      <button
-                        class="btn btn-custom-primary w-100"
-                        (click)="addProductInCart(item); $event.stopPropagation()"
-                      >
+                      <button class="btn btn-custom-primary w-100"
+                        (click)="addProductInCart(item); $event.stopPropagation()">
                         Mua
                       </button>
                     </div>
@@ -237,10 +162,8 @@
                       </div>
                     </div>
                     <div class="mt-4">
-                      <button
-                        class="btn btn-custom-primary w-100"
-                        (click)="addProductInCart(item); $event.stopPropagation()"
-                      >
+                      <button class="btn btn-custom-primary w-100"
+                        (click)="addProductInCart(item); $event.stopPropagation()">
                         Mua
                       </button>
                     </div>
@@ -258,27 +181,19 @@
             </div>
             <div class="col-sm-auto">
               <ul
-                class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0"
-              >
+                class="pagination pagination-separated pagination-sm justify-content-center justify-content-sm-start mb-0">
                 <!-- Previous Page -->
                 <li class="page-item" [class.disabled]="currentPage === 1">
                   <a class="page-link" (click)="changePage(currentPage - 1)">←</a>
                 </li>
-  
+
                 <!-- Page Numbers -->
-                <li
-                  class="page-item"
-                  *ngFor="let page of pages"
-                  [class.active]="page === currentPage"
-                >
+                <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
                   <a class="page-link" (click)="changePage(page)">{{ page }}</a>
                 </li>
-  
+
                 <!-- Next Page -->
-                <li
-                  class="page-item"
-                  [class.disabled]="currentPage === totalPage"
-                >
+                <li class="page-item" [class.disabled]="currentPage === totalPage">
                   <a class="page-link" (click)="changePage(currentPage + 1)">→</a>
                 </li>
               </ul>
