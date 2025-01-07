@@ -80,7 +80,7 @@
                         {{ model.nguoiDung.hoTen }}
                       </td>
                       <td (click)="preUpdate(model)">
-                        {{ model.createdAt | date }}
+                        {{ model.createdAt | date: 'dd-MM-yyyy' }}
                       </td>
                       <td (click)="preUpdate(model)">
                         {{ model.tongTien }}
