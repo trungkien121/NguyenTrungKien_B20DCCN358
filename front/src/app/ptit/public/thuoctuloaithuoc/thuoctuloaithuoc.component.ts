@@ -76,7 +76,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     {
       label: "Trên 500.000đ",
       value: "above500",
-      maxGiaBan: null,
+      maxGiaBan: 10000000,
       minGiaBan: 500000,
     },
   ];
