@@ -11,7 +11,6 @@
   margin-bottom: 20px; /* Khoảng cách dưới tên loại thuốc */
   font-size: 24px; /* Kích thước chữ */
   font-weight: bold; /* Làm đậm tên loại thuốc */
-  
 }
 .text-truncate {
   display: inline-block;
@@ -115,7 +114,6 @@
     margin-bottom: 12px;
   }
 }
-
 
 .filter-container {
   width: 300px;
