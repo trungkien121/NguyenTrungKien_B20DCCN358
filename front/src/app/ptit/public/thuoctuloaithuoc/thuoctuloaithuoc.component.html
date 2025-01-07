@@ -53,19 +53,20 @@
               </div>
 
               <!-- Giá bán -->
-              <!-- <div class="filter-category">
-                  <div class="filter-title">
-                    Giá bán
-                  </div>
-                  <div class="filter-options">
-                    <button *ngFor="let price of giaBan" [class.active]="price.value === selectedPriceRange"
-                      (click)="selectPriceRange(price.value)">
-                      {{ price.label }}
-                    </button>
-                  </div>
-                </div> -->
+              <div class="filter-category">
+                <div class="filter-title">
+                  Giá bán
+                </div>
+                <div class="filter-options">
+                  <button *ngFor="let price of giaBan" [class.active]="price.value === selectedPriceRange"
+                    (click)="selectPriceRange(price)">
+                    {{ price.label }}
+                  </button>
+                </div>
+              </div>
 
-              <!-- Nhàhà sản xuất -->
+
+              <!-- Nhà sản xuất -->
               <div class="filter-category">
                 <div class="filter-title">
                   Nhà sản xuất

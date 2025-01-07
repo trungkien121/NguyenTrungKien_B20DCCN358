@@ -49,9 +49,39 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     loaiThuoc: "",
     tenDoiTuong: null,
     nhaSanXuat: null,
+    maxGiaBan: 0,
+    minGiaBan: 0,
   };
 
   totalRows: number = 0;
+  giaBan = [
+    {
+      label: "Dưới 100.000đ",
+      value: "under100",
+      maxGiaBan: 100000,
+      minGiaBan: 0,
+    },
+    {
+      label: "100.000đ đến 300.000đ",
+      value: "100to300",
+      maxGiaBan: 300000,
+      minGiaBan: 100000,
+    },
+    {
+      label: "300.000đ đến 500.000đ",
+      value: "300to500",
+      maxGiaBan: 500000,
+      minGiaBan: 300000,
+    },
+    {
+      label: "Trên 500.000đ",
+      value: "above500",
+      maxGiaBan: null,
+      minGiaBan: 500000,
+    },
+  ];
+
+  selectedPriceRange: string = "";
 
   constructor(
     private thuocService: ThuocService,
@@ -77,15 +107,26 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     this.getDT();
     // this.getThuocTuDT();
     this.getNSX();
+    // this.getThuoc();
   }
 
   search() {
     this.getThuocTheoLoai();
   }
 
+  selectPriceRange(price: any) {
+    this.selectedPriceRange = price.value;
+    this.modelSearch.maxGiaBan = price.maxGiaBan;
+    this.modelSearch.minGiaBan = price.minGiaBan;
+
+    this.getThuocTuGia();
+  }
+
   getThuocTheoLoai() {
     this.modelSearch.tenDoiTuong = null;
     this.modelSearch.nhaSanXuat = null;
+    this.modelSearch.maxGiaBan = null;
+    this.modelSearch.minGiaBan = null;
 
     this.modelSearch.loaiThuoc = this.loaiThuoc;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
@@ -185,6 +226,23 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
 
   getThuocTuNSX(nhaSanXuat: NhaSanXuat) {
     this.modelSearch.nhaSanXuat = nhaSanXuat.tenNhaSanXuat;
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
+      if (res.status == "200") {
+        this.dsThuoc = res.data.data;
+      }
+    });
+  }
+
+  // getThuoc() {
+  //   this.thuocService.getProduct(this.modelSearch).subscribe((res) => {
+  //     if (res.status == "200") {
+  //       this.thuoc = res.data;
+  //       console.log(res);
+  //     }
+  //   });
+  // }
+  getThuocTuGia() {
+    // this.modelSearch.maxGiaBan = this.thuocService
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
         this.dsThuoc = res.data.data;

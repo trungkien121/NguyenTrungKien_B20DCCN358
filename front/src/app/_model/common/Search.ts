@@ -4,9 +4,11 @@ export class SearchModel {
   size?: number;
   id?: number;
   sortedField?: string;
-  tenLoai?: string  = '';
-  
+  tenLoai?: string = "";
+
   loaiThuoc?: string;
   tenDoiTuong?: string | null;
   nhaSanXuat?: string | null;
+  maxGiaBan?: number | null;
+  minGiaBan?: number | null;
 }
