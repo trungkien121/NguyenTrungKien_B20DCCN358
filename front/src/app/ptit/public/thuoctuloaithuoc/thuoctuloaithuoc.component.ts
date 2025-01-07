@@ -38,7 +38,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   gioHangId: number = 0;
   userInfo: NguoiDung = {};
   doiTuong: DoiTuong[] = [];
-  nhaSanXuat: NhaSanXuat[]=[];
+  nhaSanXuat: NhaSanXuat[] = [];
 
   modelSearch: SearchModel = {
     keyWord: "",
@@ -47,7 +47,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     size: 100,
     sortedField: "",
     loaiThuoc: "",
-    tenDoiTuong:null,
+    tenDoiTuong: null,
     nhaSanXuat: null,
   };
 
@@ -69,7 +69,7 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(async (params) => {
+    this.route.paramMap.subscribe(async (params) => {
       this.loaiThuoc = this.route.snapshot.paramMap.get("loaiThuoc") || ""; // Lấy tên loại thuốc từ tham số URL
       this.getThuocTheoLoai(); // Gọi hàm để lấy thuốc theo loại
       this.getUserInfo();
@@ -79,16 +79,15 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
     this.getNSX();
   }
 
-  
   search() {
     this.getThuocTheoLoai();
   }
 
   getThuocTheoLoai() {
-    this.modelSearch.tenDoiTuong=null;
-    this.modelSearch.nhaSanXuat=null;
-    
-    this.modelSearch.loaiThuoc=this.loaiThuoc;
+    this.modelSearch.tenDoiTuong = null;
+    this.modelSearch.nhaSanXuat = null;
+
+    this.modelSearch.loaiThuoc = this.loaiThuoc;
     this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
         this.dsThuoc = res.data.data; // Lưu danh sách thuốc vào biến dsThuoc
@@ -162,34 +161,34 @@ export class ThuocTuLoaiThuocComponent implements OnInit {
   getDT() {
     this.doiTuongService.getDTLst().subscribe((res) => {
       if (res.status == "200") {
-        this.doiTuong = res.data; 
+        this.doiTuong = res.data;
       }
     });
   }
 
-  getNSX(){
-    this.nsxService.getNSXLst(this.modelSearch).subscribe((res) =>{
+  getNSX() {
+    this.nsxService.getNSXLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
-        this.nhaSanXuat = res.data; 
+        this.nhaSanXuat = res.data;
       }
-    })
+    });
   }
 
-  getThuocTuDT(doiTuong : DoiTuong){
+  getThuocTuDT(doiTuong: DoiTuong) {
     this.modelSearch.tenDoiTuong = doiTuong.tenDoiTuong;
-    this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
-        this.dsThuoc = res.data.data; 
+        this.dsThuoc = res.data.data;
       }
-    })
+    });
   }
 
   getThuocTuNSX(nhaSanXuat: NhaSanXuat) {
     this.modelSearch.nhaSanXuat = nhaSanXuat.tenNhaSanXuat;
-    this.thuocService.getProductLst(this.modelSearch).subscribe((res) =>{
+    this.thuocService.getProductLst(this.modelSearch).subscribe((res) => {
       if (res.status == "200") {
-        this.dsThuoc = res.data.data; 
+        this.dsThuoc = res.data.data;
       }
-    })
+    });
   }
 }

@@ -24,100 +24,111 @@
 
 
       <div class="row mt-2">
-        <div class="filter-container">
-          <div class="filter-header">
-            <span><i class="bi bi-funnel"></i> Bộ lọc nâng cao</span>
-          </div>
-          <div class="filter-section">
-            <!-- Đối tượng sử dụng -->
-            <div class="filter-category">
-              <div class="filter-title">
-                Đối tượng sử dụng
-              </div>
-              <div class="filter-options">
-                <!-- Tùy chọn "Tất cả" -->
-                <label>
-                  <input type="radio" name="allDT" [checked]="this.modelSearch.tenDoiTuong == null"
-                    (change)="getThuocTheoLoai()" />
-                  Tất cả
-                </label>
-
-                <!-- Các đối tượng sử dụng khác -->
-                <label *ngFor="let option of doiTuong">
-                  <input type="radio" [value]="option.id" (click)="getThuocTuDT(option)" [name]="option.id"
-                    [checked]="option.tenDoiTuong == this.modelSearch.tenDoiTuong" />
-                  {{ option.tenDoiTuong }}
-                </label>
-              </div>
+        <div class="col-2">
+          <div class="filter-container">
+            <div class="filter-header">
+              <span><i class="bi bi-funnel"></i> Bộ lọc nâng cao</span>
             </div>
-
-            <!-- Giá bán -->
-            <!-- <div class="filter-category">
+            <div class="filter-section">
+              <!-- Đối tượng sử dụng -->
+              <div class="filter-category">
                 <div class="filter-title">
-                  Giá bán
+                  Đối tượng sử dụng
                 </div>
                 <div class="filter-options">
-                  <button *ngFor="let price of giaBan" [class.active]="price.value === selectedPriceRange"
-                    (click)="selectPriceRange(price.value)">
-                    {{ price.label }}
-                  </button>
+                  <!-- Tùy chọn "Tất cả" -->
+                  <label>
+                    <input type="radio" name="allDT" [checked]="this.modelSearch.tenDoiTuong == null"
+                      (change)="getThuocTheoLoai()" />
+                    Tất cả
+                  </label>
+
+                  <!-- Các đối tượng sử dụng khác -->
+                  <label *ngFor="let option of doiTuong">
+                    <input type="radio" [value]="option.id" (click)="getThuocTuDT(option)" [name]="option.id"
+                      [checked]="option.tenDoiTuong == this.modelSearch.tenDoiTuong" />
+                    {{ option.tenDoiTuong }}
+                  </label>
                 </div>
-              </div> -->
-
-            <!-- Nhàhà sản xuất -->
-            <div class="filter-category">
-              <div class="filter-title">
-                Nhà sản xuất
               </div>
-              <div class="filter-options">
+
+              <!-- Giá bán -->
+              <!-- <div class="filter-category">
+                  <div class="filter-title">
+                    Giá bán
+                  </div>
+                  <div class="filter-options">
+                    <button *ngFor="let price of giaBan" [class.active]="price.value === selectedPriceRange"
+                      (click)="selectPriceRange(price.value)">
+                      {{ price.label }}
+                    </button>
+                  </div>
+                </div> -->
+
+              <!-- Nhàhà sản xuất -->
+              <div class="filter-category">
+                <div class="filter-title">
+                  Nhà sản xuất
+                </div>
+                <div class="filter-options">
 
 
-                <!-- Các đối tượng sử dụng khác -->
-                <label *ngFor="let option of nhaSanXuat">
-                  <input type="radio" [value]="option.id" (click)="getThuocTuNSX(option)" [name]="option.id"
-                    [checked]="option.tenNhaSanXuat == this.modelSearch.nhaSanXuat" />
-                  {{ option.tenNhaSanXuat }}
-                </label>
+                  <!-- Các đối tượng sử dụng khác -->
+                  <label *ngFor="let option of nhaSanXuat">
+                    <input type="radio" [value]="option.id" (click)="getThuocTuNSX(option)" [name]="option.id"
+                      [checked]="option.tenNhaSanXuat == this.modelSearch.nhaSanXuat" />
+                    {{ option.tenNhaSanXuat }}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-
-        <div class="col-xl-2 col-lg-6" *ngFor="let thuoc of dsThuoc">
-          <a (click)="showDetail(thuoc)" class="card-link">
-            <div class="card ribbon-box right overflow-hidden">
-              <div class="card-body text-center p-4">
-                <img [src]="thuoc.avatar" alt="" class="responsive-img" />
-                <div class="text-container">
-                  <h5 class="mb-1 mt-4">
-                    <span class="link-primary text-truncate">
-                      {{ thuoc.tenThuoc }}
-                    </span>
-                  </h5>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="col-lg-8">
-                    <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+        <div class="col-10">
+          <div class="row">
+            <div class="col-3" *ngFor="let thuoc of dsThuoc">
+              <a (click)="showDetail(thuoc)" class="card-link">
+                <div class="card ribbon-box right overflow-hidden">
+                  <div class="card-body text-center p-4">
+                    <img [src]="thuoc.avatar" alt="" class="responsive-img" />
+                    <div class="text-container">
+                      <h5 class="mb-1 mt-4">
+                        <span class="link-primary text-truncate">
+                          {{ thuoc.tenThuoc }}
+                        </span>
+                      </h5>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                        <div id="chart-seller1" data-colors='["--vz-danger"]'></div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-lg-12">
+                        <h5>{{ thuoc.giaBan | number : "1.0-0" }}đ / {{thuoc.donVi}}</h5>
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <button class="btn btn-custom-primary w-100"
+                        (click)="addProductInCart(thuoc); $event.stopPropagation()">
+                        Mua
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div class="row mt-4">
-                  <div class="col-lg-12">
-                    <h5>{{ thuoc.giaBan | number : "1.0-0" }}đ / {{thuoc.donVi}}</h5>
-                  </div>
-                </div>
-                <div class="mt-4">
-                  <button class="btn btn-custom-primary w-100"
-                    (click)="addProductInCart(thuoc); $event.stopPropagation()">
-                    Mua
-                  </button>
-                </div>
-              </div>
+              </a>
             </div>
-          </a>
+          </div>
+
         </div>
+
       </div>
 
+
+
+
     </div>
+
   </div>
 </div>

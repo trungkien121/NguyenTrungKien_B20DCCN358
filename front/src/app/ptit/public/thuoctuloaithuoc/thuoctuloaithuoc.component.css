@@ -103,20 +103,15 @@
   align-items: center; /* Căn giữa theo chiều dọc */
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 /* Responsive cho thiết bị nhỏ */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .right-image {
     margin-bottom: 12px;
   }
-}
+} */
 
 .filter-container {
-  width: 300px;
+  /* width: 300px; */
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
