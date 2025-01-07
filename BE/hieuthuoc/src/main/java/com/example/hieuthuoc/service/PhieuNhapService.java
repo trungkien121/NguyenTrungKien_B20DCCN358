@@ -66,7 +66,7 @@ class PhieuNhapServiceImpl implements PhieuNhapService {
 
 	@Override
 	public ResponseDTO<PageDTO<List<PhieuNhap>>> search(SearchDTO searchDTO) {
-		Sort sortBy = Sort.by("createdAt").ascending();
+		Sort sortBy = Sort.by("createdAt").descending();
 
 		if (StringUtils.hasText(searchDTO.getSortedField())) {
 			sortBy = Sort.by(searchDTO.getSortedField()).ascending();

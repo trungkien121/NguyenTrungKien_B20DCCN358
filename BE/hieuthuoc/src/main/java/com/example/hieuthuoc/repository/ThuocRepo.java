@@ -30,7 +30,7 @@ public interface ThuocRepo extends JpaRepository<Thuoc, Integer> {
 		       "AND (:loaiThuoc IS NULL OR LOWER(lt.tenLoai) LIKE LOWER(CONCAT('%', :loaiThuoc, '%'))) " +
 		       "AND (:nhaSanXuat IS NULL OR LOWER(nsx.tenNhaSanXuat) LIKE LOWER(CONCAT('%', :nhaSanXuat, '%'))) " +
 		       "AND (:danhMucThuoc IS NULL OR LOWER(dmt.tenDanhMuc) LIKE LOWER(CONCAT('%', :danhMucThuoc, '%'))) " +
-		       "AND ((:minGiaBan IS NULL AND :maxGiaBan IS NULL) OR (t.giaBan >= :minGiaBan AND t.giaBan <= :maxGiaBan)) " +
+		       "AND ((:minGiaBan IS NULL AND :maxGiaBan IS NULL) OR (t.giaBan >= COALESCE(:minGiaBan, 0) AND t.giaBan <= COALESCE(:maxGiaBan, 9999999))) " +
 		       "AND (:tenDoiTuong IS NULL OR (dt IS NOT NULL AND LOWER(dt.tenDoiTuong) LIKE LOWER(CONCAT('%', :tenDoiTuong, '%')))) " +
 		       "AND (:trangThai IS NULL OR t.trangThai = :trangThai)")
 		Page<Thuoc> search(@Param("keyWord") String keyWord,
@@ -42,6 +42,7 @@ public interface ThuocRepo extends JpaRepository<Thuoc, Integer> {
 		                   @Param("tenDoiTuong") String tenDoiTuong, 
 		                   @Param("trangThai") Boolean trangThai, 
 		                   Pageable pageable);
+
 
 
 

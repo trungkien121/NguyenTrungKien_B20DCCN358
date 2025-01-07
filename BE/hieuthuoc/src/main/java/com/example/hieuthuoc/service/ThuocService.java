@@ -110,7 +110,10 @@ class ThuocServiceImpl implements ThuocService {
 
 	@Override
 	public ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO) {
-		Sort sortBy = Sort.by("tenThuoc").ascending();
+		
+		System.out.println(searchThuocDTO);
+		
+		Sort sortBy = Sort.by("id").ascending();
 
 		if (StringUtils.hasText(searchThuocDTO.getSortedField())) {
 			sortBy = Sort.by(searchThuocDTO.getSortedField()).ascending();
