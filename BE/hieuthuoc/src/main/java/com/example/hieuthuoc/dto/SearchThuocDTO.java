@@ -8,6 +8,7 @@ public class SearchThuocDTO {
     private String loaiThuoc;
     private String nhaSanXuat;
     private String danhMucThuoc;
+    private Double minGiaBan;
     private Double maxGiaBan;
     private String tenDoiTuong;
     private Boolean trangThai;

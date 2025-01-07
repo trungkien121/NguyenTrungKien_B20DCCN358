@@ -30,17 +30,19 @@ public interface ThuocRepo extends JpaRepository<Thuoc, Integer> {
 		       "AND (:loaiThuoc IS NULL OR LOWER(lt.tenLoai) LIKE LOWER(CONCAT('%', :loaiThuoc, '%'))) " +
 		       "AND (:nhaSanXuat IS NULL OR LOWER(nsx.tenNhaSanXuat) LIKE LOWER(CONCAT('%', :nhaSanXuat, '%'))) " +
 		       "AND (:danhMucThuoc IS NULL OR LOWER(dmt.tenDanhMuc) LIKE LOWER(CONCAT('%', :danhMucThuoc, '%'))) " +
-		       "AND (:maxGiaBan IS NULL OR t.giaBan <= :maxGiaBan) " +
-		       "AND (:tenDoiTuong IS NULL OR LOWER(dt.tenDoiTuong) LIKE LOWER(CONCAT('%', :tenDoiTuong, '%'))) " +
+		       "AND ((:minGiaBan IS NULL AND :maxGiaBan IS NULL) OR (t.giaBan >= :minGiaBan AND t.giaBan <= :maxGiaBan)) " +
+		       "AND (:tenDoiTuong IS NULL OR (dt IS NOT NULL AND LOWER(dt.tenDoiTuong) LIKE LOWER(CONCAT('%', :tenDoiTuong, '%')))) " +
 		       "AND (:trangThai IS NULL OR t.trangThai = :trangThai)")
 		Page<Thuoc> search(@Param("keyWord") String keyWord,
 		                   @Param("loaiThuoc") String loaiThuoc,
 		                   @Param("nhaSanXuat") String nhaSanXuat,
 		                   @Param("danhMucThuoc") String danhMucThuoc,
+		                   @Param("minGiaBan") Double minGiaBan,
 		                   @Param("maxGiaBan") Double maxGiaBan,
 		                   @Param("tenDoiTuong") String tenDoiTuong, 
 		                   @Param("trangThai") Boolean trangThai, 
 		                   Pageable pageable);
+
 
 
 

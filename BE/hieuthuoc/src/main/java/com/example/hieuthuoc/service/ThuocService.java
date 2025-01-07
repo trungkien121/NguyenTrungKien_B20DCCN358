@@ -41,7 +41,7 @@ public interface ThuocService {
 	ResponseDTO<Thuoc> getById(Integer id);
 
 	ResponseDTO<PageDTO<List<Thuoc>>> search(SearchThuocDTO searchThuocDTO);
-	
+
 	ResponseDTO<PageDTO<List<Thuoc>>> getThuocBanChay(SearchDTO searchDTO);
 
 }
@@ -66,7 +66,7 @@ class ThuocServiceImpl implements ThuocService {
 
 	@Autowired
 	ThanhPhanThuocRepo thanhPhanThuocRepo;
-	
+
 	@Autowired
 	ChiTietDonHangRepo chiTietDonHangRepo;
 
@@ -74,7 +74,6 @@ class ThuocServiceImpl implements ThuocService {
 	UploadImageService uploadImageService;
 
 	ModelMapper modelMapper = new ModelMapper();
-	
 
 	@Override
 	public ResponseDTO<PageDTO<List<Thuoc>>> getThuocBanChay(SearchDTO searchDTO) {
@@ -130,8 +129,9 @@ class ThuocServiceImpl implements ThuocService {
 		}
 		PageRequest pageRequest = PageRequest.of(searchThuocDTO.getCurrentPage(), searchThuocDTO.getSize(), sortBy);
 		Page<Thuoc> page = thuocRepo.search(searchThuocDTO.getKeyWord(), searchThuocDTO.getLoaiThuoc(),
-				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getMaxGiaBan(),
-				searchThuocDTO.getTenDoiTuong(), searchThuocDTO.getTrangThai(), pageRequest);
+				searchThuocDTO.getNhaSanXuat(), searchThuocDTO.getDanhMucThuoc(), searchThuocDTO.getMinGiaBan(),
+				searchThuocDTO.getMaxGiaBan(), searchThuocDTO.getTenDoiTuong(), searchThuocDTO.getTrangThai(),
+				pageRequest);
 
 		PageDTO<List<Thuoc>> pageDTO = new PageDTO<>();
 		pageDTO.setTotalElements(page.getTotalElements());
@@ -216,15 +216,17 @@ class ThuocServiceImpl implements ThuocService {
 		Thuoc thuoc = modelMapper.map(thuocDTO, Thuoc.class);
 		Thuoc curentThuoc = thuocRepo.findById(thuoc.getId()).orElse(null);
 		if (curentThuoc != null) {
-			
-			if (thuocDTO.getMaThuoc().equals(curentThuoc.getMaThuoc()) == false && thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
+
+			if (thuocDTO.getMaThuoc().equals(curentThuoc.getMaThuoc()) == false
+					&& thuocRepo.existsByMaThuoc(thuoc.getMaThuoc())) {
 				return ResponseDTO.<Thuoc>builder().status(409).msg("Mã thuốc đã tồn tại").build();
 			}
 
-			if (thuocDTO.getTenThuoc().equals(curentThuoc.getTenThuoc()) == false && thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
+			if (thuocDTO.getTenThuoc().equals(curentThuoc.getTenThuoc()) == false
+					&& thuocRepo.existsByTenThuoc(thuoc.getTenThuoc())) {
 				return ResponseDTO.<Thuoc>builder().status(409).msg("Tên thuốc đã tồn tại").build();
 			}
-			
+
 			// Lấy các thực thể liên quan từ cơ sở dữ liệu
 			LoaiThuoc loaiThuoc = loaiThuocRepo.findById(thuocDTO.getLoaiThuocId())
 					.orElseThrow(() -> new RuntimeException("Loại thuốc không tồn tại"));
@@ -249,7 +251,7 @@ class ThuocServiceImpl implements ThuocService {
 			if (thuocDTO.getFile() != null && !thuocDTO.getFile().isEmpty()) {
 				// Xoá đi ảnh trước đó trong cloudinary
 				if (thuoc.getAvatar() != null) {
-				    uploadImageService.deleteImage(thuoc.getAvatar());
+					uploadImageService.deleteImage(thuoc.getAvatar());
 				}
 
 				String name = "Thuoc_" + thuocDTO.getId();
@@ -258,7 +260,7 @@ class ThuocServiceImpl implements ThuocService {
 			}
 
 			// Xử lý danh sách Thanh Phần Thuốc
-			if (thuocDTO.getThanhPhanThuocs() != null &&  !thuocDTO.getThanhPhanThuocs().isEmpty()) {
+			if (thuocDTO.getThanhPhanThuocs() != null && !thuocDTO.getThanhPhanThuocs().isEmpty()) {
 				List<ThanhPhanThuoc> thanhPhanThuocs = thuocDTO.getThanhPhanThuocs().stream().map(t -> {
 					ThanhPhanThuoc thanhPhanThuoc = modelMapper.map(t, ThanhPhanThuoc.class);
 					thanhPhanThuoc.setThuoc(thuoc);
