@@ -124,6 +124,7 @@ export class DonMuaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.modelSearch.id = this.user.id;
     this.route.queryParams.subscribe((params) => {
       const paymentStatus = params["paymentStatus"];
       const pendingOrder = localStorage.getItem("pendingOrder");
