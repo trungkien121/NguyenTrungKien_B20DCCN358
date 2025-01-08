@@ -37,6 +37,7 @@ public class DonHangController {
 	public ResponseDTO<PageDTO<List<DonHang>>> getByTrangThaiGiaoHang(@RequestBody @Valid SearchDTO searchDTO)
 			throws Exception {
 
+		System.out.println(searchDTO);
 		return donHangService.getByTrangThaiGiaoHang(searchDTO);
 	}
 

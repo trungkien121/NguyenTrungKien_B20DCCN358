@@ -91,12 +91,12 @@ class DonHangServiceImpl implements DonHangService {
 		Page<DonHang> page;
 
 		if (searchDTO.getKeyWord() == null || searchDTO.getKeyWord().equals("")) {
-			page = donHangRepo.findAll(pageRequest);
+			page = donHangRepo.findByNguoiDungId(searchDTO.getId(), pageRequest);
 		} else {
 
 			TrangThaiGiaoHang trangThaiGiaoHang = TrangThaiGiaoHang.valueOf(searchDTO.getKeyWord());
 
-			page = donHangRepo.findByTrangThaiGiaoHang(trangThaiGiaoHang, pageRequest);
+			page = donHangRepo.findByTrangThaiGiaoHang(trangThaiGiaoHang,searchDTO.getId(), pageRequest);
 
 		}
 
