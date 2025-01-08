@@ -21,6 +21,8 @@ public interface DonHangRepo extends JpaRepository<DonHang, Integer> {
     Page<DonHang> findByTrangThaiGiaoHang(@Param("trangThaiGiaoHang") TrangThaiGiaoHang trangThaiGiaoHang,
                                           @Param("khachHangId") int khachHangId, Pageable pageable);
 
+    Page<DonHang> findAll(Pageable pageable);
+    
     @Query("SELECT d FROM DonHang d WHERE d.khachHang.id = :khachHangId")
     Page<DonHang> findByNguoiDungId(@Param("khachHangId") int khachHangId, Pageable pageable);
 
