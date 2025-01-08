@@ -5,6 +5,9 @@ export class SearchModel {
   id?: number;
   sortedField?: string;
   tenLoai?: string = "";
+  tenThuoc?: string | null;
+  soLo?: String | null;
+  tenNhaSanXuat?: String | null;
 
   loaiThuoc?: string;
   tenDoiTuong?: string | null;

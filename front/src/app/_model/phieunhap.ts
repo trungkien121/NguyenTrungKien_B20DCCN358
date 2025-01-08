@@ -12,6 +12,7 @@ export class PhieuNhap {
   nhaCungCap?: NhaCungCap;
   createdAt?: string;
   updatedAt?: string;
+  hanSuDung?: string;
 
   chiTietPhieuNhaps?: ChiTietPhieuNhap[];
 }

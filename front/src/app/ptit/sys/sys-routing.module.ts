@@ -19,6 +19,7 @@ import { ChiTietDonHangComponent } from "./donhang/chitiet-donhang/chitiet-donha
 import { ThongKecComponent } from "./thongke/thongke.component";
 import { DonHangCreateComponent } from "./donhang-create/donhang-create.component";
 import { ThongBaoComponent } from "./thongbao/thongbao.component";
+import { TonKhoComponent } from "./tonkho/tonkho.component";
 
 const routes: Routes = [
   // { path: "", redirectTo: "menu-manage", pathMatch: "full" },
@@ -167,6 +168,14 @@ const routes: Routes = [
       {
         path: "thongbao",
         component: ThongBaoComponent,
+        canActivate: [RoleGuard],
+        data: {
+          guards: [AuthConstant.ROLE_ADMIN],
+        },
+      },
+      {
+        path: "tonkho",
+        component: TonKhoComponent,
         canActivate: [RoleGuard],
         data: {
           guards: [AuthConstant.ROLE_ADMIN],

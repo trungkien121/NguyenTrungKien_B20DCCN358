@@ -115,12 +115,22 @@
                     </div>
                   </div>
 
-                  <div class="col-lg-2">
+                  <!-- <div class="col-lg-2">
                     <div class="mb-3">
                       <label class="form-label" for="manufacturer-brand-input">Hạn sử dụng
                       </label>
                       <input type="date" name="diaChi" class="form-control" id="diaChi" #diaChi="ngModel"
                         placeholder="Nhập địa chỉ nhà cung cấp" [(ngModel)]="phieunhap.createdAt" />
+                    </div>
+                  </div> -->
+
+                  <div class="col-lg-2">
+                    <div class="mb-3">
+                      <label class="form-label" for="manufacturer-brand-input">
+                        Hạn sử dụng
+                      </label>
+                      <input type="date" class="form-control" id="manufacturer-name-input" [(ngModel)]="item.hanSuDung"
+                        [value]="item.hanSuDung" />
                     </div>
                   </div>
 

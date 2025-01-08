@@ -5,6 +5,7 @@ export class ChiTietPhieuNhap {
   donGia?: number;
   soLuong?: number;
   phieuNhapId?: string;
+  hanSuDung?: string;
 
   thuocId?: string;
 
