@@ -5,5 +5,5 @@
   <app-sidebar-top-user *ngIf="isAdmin == false"></app-sidebar-top-user>
 
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  <app-footer *ngIf="isAdmin == false"></app-footer>
 </div>
